@@ -1,0 +1,124 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
+  <Design.PreviewWith>
+    <Panel d:DesignWidth="100" d:DesignHeight="50">
+      <Panel.Resources>
+        <ResourceDictionary>
+          <ResourceDictionary.MergedDictionaries>
+            <ResourceInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Colors/BaseLight.xaml"/>
+          </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+      </Panel.Resources>
+      <Button>Yes</Button>
+      <!--BorderBrush="#FFC5C5C5" Background="#FFE1E1E1"-->
+    </Panel>
+  </Design.PreviewWith>
+  <Style Selector="mectrl|ThemeControlDecorator">
+    <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="mecore:AttachedIcon.AttachedIcon" Value="{Binding Path=(mecore:AttachedIcon.AttachedIcon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="IsVisuallyPointerOver" Value="{Binding IsPointerOver, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="IsVisuallyPressed" Value="{Binding IsPressed, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="IsVisuallyEnabled" Value="{Binding IsEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
+    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
+    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
+    <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=5}" />
+    <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Center}"/>
+    <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Center}"/>
+    <Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="mecore:BorderPresence.BorderPresence" Value="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="Focusable" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border x:Name="IdleBackground" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+            <Border.CornerRadius>
+              <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+                <Binding.Converter>
+                  <mecore:CornerCurvesToCornerRadiiConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.CornerRadius>
+            <Border.BorderThickness>
+              <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                <Binding.Converter>
+                  <mecore:BorderPresenceToThicknessesConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.BorderThickness>
+          </Border>
+          <Panel Margin="{Binding BorderThickness, ElementName=IdleBackground}">
+            <Border x:Name="HoverBackground" BorderThickness="2" IsVisible="{Binding IsVisuallyPointerOver, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+              <Border.CornerRadius>
+                <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                  <Binding.Converter>
+                    <mecore:CornerCurvesToCornerRadiiConverter/>
+                  </Binding.Converter>
+                </Binding>
+              </Border.CornerRadius>
+              <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource ButtonHoverBorderGradientStops}"/>
+              </Border.BorderBrush>
+            </Border>
+            <Border x:Name="PressedBackground" CornerRadius="{Binding CornerRadius, ElementName=HoverBackground}" IsVisible="{Binding IsVisuallyPressed, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0%,100%" EndPoint="0%,0%" GradientStops="{DynamicResource ButtonIdleBackgroundGradientStops}"/>
+              </Border.Background>
+              <Border x:Name="PressedInnerBackground" BorderBrush="{DynamicResource ButtonPressedInnerBorderBrush}" BorderThickness="1">
+                <Border.CornerRadius>
+                  <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                    <Binding.Converter>
+                      <mecore:CornerCurvesToCornerRadiiConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Border.CornerRadius>
+              </Border>
+            </Border>
+            <Border BorderThickness="1" CornerRadius="{Binding CornerRadius, ElementName=PressedInnerBackground}">
+              <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource ButtonShineBorderGradientStops}"/>
+              </Border.BorderBrush>
+            </Border>
+          </Panel>
+          <Border x:Name="DisabledBackground" Background="{DynamicResource ButtonDisabledBackground}" BorderBrush="{DynamicResource ButtonDisabledBorderBrush}" CornerRadius="{Binding CornerRadius, ElementName=IdleBackground}" BorderThickness="{Binding BorderThickness, ElementName=IdleBackground}" IsVisible="{Binding !IsVisuallyEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+          <DockPanel Grid.RowSpan="3" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+            <ContentPresenter x:Name="PART_AttachedIconPresenter" Content="{Binding Path=(mecore:AttachedIcon.AttachedIcon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}" DockPanel.Dock="Left"/>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
+          </DockPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=PaneFrame]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+          <Border.BorderThickness>
+            <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+              <Binding.Converter>
+                <mecore:BorderPresenceToThicknessesConverter/>
+              </Binding.Converter>
+            </Binding>
+          </Border.BorderThickness>
+          <ContentPresenter Content="{TemplateBinding Content}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <!--Style Selector="mectrl|ThemeControlDecorator:not(:pointerover) /template/ :is(Control)#HoverBackground">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator:not(:pressed) /template/ :is(Control)#PressedBackground">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[IsEnabled=True] /template/ :is(Control)#DisabledBackground">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style-->
+</Styles>

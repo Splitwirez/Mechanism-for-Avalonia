@@ -1,0 +1,287 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI">
+  <Design.PreviewWith>
+    <mewin:DecoratableWindow Width="500"/>
+  </Design.PreviewWith>
+  <Style Selector="mewin|DecoratableWindow">
+    <Setter Property="Background" Value="{DynamicResource WindowBackground}"/>
+    <Setter Property="BorderThickness" Value="4"/>
+    <Setter Property="TitlebarHeight" Value="20"/>
+    <Setter Property="Padding" Value="4,24,4,4"/>
+    <!--Setter Property="ClipByAlpha" Value="True"/-->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel x:Name="RootPanel">
+          <Border x:Name="InactiveBorder" BorderBrush="{DynamicResource InactiveWindowOuterBorderBrush}" BorderThickness="1" CornerRadius="5,0" IsVisible="{Binding !IsActive, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+            <Border BorderBrush="{DynamicResource InactiveWindowMainInnerBorderBrush}" BorderThickness="1" CornerRadius="4,0">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource InactiveTitlebarGradientStops}"/>
+              </Border.Background>
+              <Border BorderThickness="1,1,1,0" CornerRadius="3,0" Margin="-1,-1,-1,0" Height="23" VerticalAlignment="Top">
+                <Border.BorderBrush>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource InactiveWindowTopInnerBorderGradientStops}"/>
+                </Border.BorderBrush>
+                <Border.OpacityMask>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                    <GradientStop Offset="0" Color="#FF000000"/>
+                    <GradientStop Offset="1" Color="#00000000"/>
+                  </LinearGradientBrush>
+                </Border.OpacityMask>
+              </Border>
+            </Border>
+          </Border>
+          <Border x:Name="ActiveBorder" BorderBrush="{DynamicResource ActiveWindowOuterBorderBrush}" BorderThickness="1" CornerRadius="5,0" IsVisible="{TemplateBinding IsActive}">
+            <Border BorderBrush="{DynamicResource ActiveWindowMainInnerBorderBrush}" BorderThickness="1" CornerRadius="4,0">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource ActiveTitlebarGradientStops}"/>
+              </Border.Background>
+              <Border BorderThickness="1,1,1,0" CornerRadius="3,0" Margin="-1,-1,-1,0" Height="23" VerticalAlignment="Top">
+                <Border.BorderBrush>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource ActiveWindowTopInnerBorderGradientStops}"/>
+                </Border.BorderBrush>
+                <Border.OpacityMask>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                    <GradientStop Offset="0" Color="#FF000000"/>
+                    <GradientStop Offset="1" Color="#00000000"/>
+                  </LinearGradientBrush>
+                </Border.OpacityMask>
+              </Border>
+            </Border>
+          </Border>
+          <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="6,0,0,0" Height="{TemplateBinding TitlebarHeight}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24">
+              <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center"/>
+              <TextBlock Text="{TemplateBinding Title}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
+            </StackPanel>
+          </Panel>
+          <DockPanel Margin="{TemplateBinding BorderThickness}">
+            <Rectangle Height="{TemplateBinding TitlebarHeight}" DockPanel.Dock="Top"/>
+            <Rectangle Fill="{TemplateBinding Background}"/>
+          </DockPanel>
+          <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+          <Grid Name="ResizeGrid" ColumnDefinitions="8,*,8" RowDefinitions="8,*,8">
+            <Border x:Name="PART_TopLeftEdge" Grid.Row="0" Grid.Column="0"/>
+            <Border x:Name="PART_TopCenterEdge" Grid.Row="0" Grid.Column="1"/>
+            <Border x:Name="PART_TopRightEdge" Grid.Row="0" Grid.Column="2"/>
+            <Border x:Name="PART_MiddleRightEdge" Grid.Row="1" Grid.Column="2"/>
+            <Border x:Name="PART_BottomRightEdge" Grid.Row="2" Grid.Column="2"/>
+            <Border x:Name="PART_BottomCenterEdge" Grid.Row="2" Grid.Column="1"/>
+            <Border x:Name="PART_BottomLeftEdge" Grid.Row="2" Grid.Column="0"/>
+            <Border x:Name="PART_MiddleLeftEdge" Grid.Row="1" Grid.Column="0"/>
+          </Grid>
+          <Border x:Name="CaptionButtonsBorder" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+              <Button x:Name="PART_MinimizeButton" Classes="CaptionButton" mecore:CornerCurves.CornerCurves="False,False,False,True" mecore:BorderPresence.BorderPresence="True,False,False,True" Focusable="False">
+                <Panel Width="7" Height="5">
+                  <Rectangle Width="5" Height="2" Fill="#FF626469" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,1"/>
+                  <Rectangle Width="5" Height="2" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                </Panel>
+              </Button>
+              <Button x:Name="PART_MaximizeButton" Classes="CaptionButton" mecore:CornerCurves.CornerCurves="False" mecore:BorderPresence.BorderPresence="True,False,False,True" Focusable="False">
+                <Panel>
+                  <Panel x:Name="MaximizeGlyph" Width="7" Height="8">
+                    <Border BorderBrush="#FF626469" BorderThickness="1,2,1,1" Margin="0,0,0,1"/>
+                    <Border BorderBrush="White" BorderThickness="1,2,1,1" Margin="0,1,0,0"/>
+                  </Panel>
+                </Panel>
+              </Button>
+              <Button x:Name="PART_CloseButton" Classes="CaptionButton CloseButton" mecore:CornerCurves.CornerCurves="False,False,True,False" mecore:BorderPresence.BorderPresence="True,False,True,True" Focusable="False">
+                <Panel Width="7" Height="8" ClipToBounds="true">
+                  <Path Width="7" Height="7" VerticalAlignment="Top" Data="M 0 0 L 7 7 M 0 7 L 7 0" Stroke="#FF461E1A" StrokeThickness="2"/>
+                  <Path Width="7" Height="7" VerticalAlignment="Bottom" Data="M 0 0 L 7 7 M 0 7 L 7 0" Stroke="White" StrokeThickness="2"/>
+                </Panel>
+              </Button>
+            </StackPanel>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[CanResize=False] /template/ Grid#ResizeGrid">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[WindowState=Maximized] /template/ Panel#RootPanel">
+    <Setter Property="Margin" Value="-4"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[WindowState=Maximized] /template/ Grid#ResizeGrid">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Grid#ResizeGrid Border">
+    <Setter Property="Background" Value="#01000000"/>
+  </Style>
+  <Style Selector="Button.CaptionButton">
+    <Setter Property="Width" Value="17"/>
+    <Setter Property="Height" Value="21"/>
+    <Setter Property="Padding" Value="0,6,2,0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="#01000000" Padding="{TemplateBinding Padding}">
+          <Panel>
+            <Border x:Name="IdleBackground" BorderThickness="1" CornerRadius="2">
+              <Border BorderThickness="1" CornerRadius="2">
+                <Rectangle Height="6" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+              </Border>
+            </Border>
+            <Border x:Name="HoverBackground" BorderThickness="1" CornerRadius="2" IsVisible="{TemplateBinding IsPointerOver}">
+              <Border BorderThickness="1" CornerRadius="2">
+                <Rectangle Height="6" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+              </Border>
+            </Border>
+            <Border x:Name="PressedBackground" BorderThickness="1" CornerRadius="2" IsVisible="{TemplateBinding IsPressed}">
+              <Border BorderThickness="1" CornerRadius="2">
+                <Rectangle Height="6" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+              </Border>
+            </Border>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" Background="Transparent"/>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=True] /template/ Button.CaptionButton /template/ Border#IdleBackground">
+    <Setter Property="BorderBrush" Value="#6D3A4143"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=True] /template/ Button.CaptionButton /template/ Border#IdleBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFA8AFB1"/>
+        <GradientStop Offset="1" Color="#FF757C7E"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFB1B8BA"/>
+        <GradientStop Offset="0.125" Color="#FF949B9D"/>
+        <GradientStop Offset="0.875" Color="#FF7E8587"/>
+        <GradientStop Offset="1" Color="#FF5F6668"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=False] /template/ Button.CaptionButton /template/ Border#IdleBackground">
+    <Setter Property="BorderBrush" Value="#6D3A4143"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=False] /template/ Button.CaptionButton /template/ Border#IdleBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFB1B8BA"/>
+        <GradientStop Offset="1" Color="#FF8F9698"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFB1B8BA"/>
+        <GradientStop Offset="0.125" Color="#FF91989A"/>
+        <GradientStop Offset="0.875" Color="#FF81888A"/>
+        <GradientStop Offset="1" Color="#FF71787A"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CaptionButton /template/ Border#HoverBackground">
+    <Setter Property="BorderBrush" Value="#D9394042"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CaptionButton /template/ Border#HoverBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFB1B8BA"/>
+        <GradientStop Offset="1" Color="#FF7C8385"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFB1B8BA"/>
+        <GradientStop Offset="0.125" Color="#FFA4ABAD"/>
+        <GradientStop Offset="0.875" Color="#FF888F91"/>
+        <GradientStop Offset="1" Color="#FF5F6668"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CaptionButton /template/ Border#PressedBackground">
+    <Setter Property="BorderBrush" Value="#D9394042"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CaptionButton /template/ Border#PressedBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FF646B6D"/>
+        <GradientStop Offset="1" Color="#FFAFB6B8"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFA3AAAC"/>
+        <GradientStop Offset="0.125" Color="#FF5D6466"/>
+        <GradientStop Offset="0.875" Color="#FF99A0A2"/>
+        <GradientStop Offset="1" Color="#FFB1B8BA"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CaptionButton:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  
+  <Style Selector="Button.CloseButton">
+    <Setter Property="Width" Value="21"/>
+    <Setter Property="Padding" Value="0,6,6,0"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow /template/ Button.CloseButton /template/ Border#IdleBackground">
+    <Setter Property="BorderBrush" Value="#6D803138"/>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=True] /template/ Button.CloseButton /template/ Border#IdleBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFE97E78"/>
+        <GradientStop Offset="1" Color="#FFCD595E"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFFF9F8D"/>
+        <GradientStop Offset="0.125" Color="#FFF18075"/>
+        <GradientStop Offset="0.875" Color="#FFCD595E"/>
+        <GradientStop Offset="1" Color="#FFAA3C55"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=True] /template/ Button.CloseButton /template/ Border#IdleBackground > Border > Rectangle">
+    <Setter Property="Fill">
+      <RadialGradientBrush Center="50%,0%" GradientOrigin="50%,0%">
+        <GradientStop Offset="0" Color="#FFFAE9B6"/>
+        <GradientStop Offset="0.25" Color="#7FFAE9B6"/>
+        <GradientStop Offset="0.875" Color="#7FFAE9B6"/>
+        <GradientStop Offset="1" Color="#00FAE9B6"/>
+      </RadialGradientBrush>
+    </Setter>
+  </Style>
+
+  <Style Selector="mewin|DecoratableWindow[IsActive=False] /template/ Button.CloseButton /template/ Border#IdleBackground > Border">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFF0C2BE"/>
+        <GradientStop Offset="1" Color="#FFD8A4A6"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Offset="0" Color="#FFF6CBC3"/>
+        <GradientStop Offset="0.125" Color="#FFEDBAB5"/>
+        <GradientStop Offset="0.875" Color="#FFD8A4A6"/>
+        <GradientStop Offset="1" Color="#FFC3929D"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[IsActive=False] /template/ Button.CloseButton /template/ Border#IdleBackground > Border > Rectangle">
+    <Setter Property="Fill">
+      <RadialGradientBrush Center="50%,0%" GradientOrigin="50%,0%">
+        <GradientStop Offset="0" Color="#FFF6EFD8"/>
+        <GradientStop Offset="0.25" Color="#7FF6EFD8"/>
+        <GradientStop Offset="0.875" Color="#7FF6EFD8"/>
+        <GradientStop Offset="1" Color="#00F6EFD8"/>
+      </RadialGradientBrush>
+    </Setter>
+  </Style>
+</Styles>
