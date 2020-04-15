@@ -1,4 +1,4 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+﻿<mewin:DecoratableWindow xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -121,10 +121,6 @@
           <TextBox>http://avaloniaui.net/</TextBox>
       </metb:ToolBar>
     </metb:ToolBarTray>
-    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-      <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
-      <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
-    </StackPanel>
     <mecb:CommandBar DockPanel.Dock="Top">
       <mecb:CommandBar.Layers>
         <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
@@ -206,8 +202,22 @@
       </TreeViewItem>
     </TreeView>
     <TabControl>
-      <TabItem Header="ToolBarTray Properties">
-        <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+      <TabItem Header="Properties">
+        <StackPanel Orientation="Vertical">
+          <StackPanel IsVisible="False">
+            <TextBlock Text="DecoratableWindow"/>
+            <CheckBox Content="HasSystemDecorations" IsChecked="{Binding $parent[mewin:DecoratableWindow].HasSystemDecorations}"/>
+          </StackPanel>
+          <StackPanel>
+            <TextBlock Text="ToolBarTray"/>
+            <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+          </StackPanel>
+          <StackPanel>
+              <TextBlock Text="CommandBar"/>
+              <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
+              <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
+          </StackPanel>
+        </StackPanel>
       </TabItem>
       <TabItem Header="Attached Properties">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
@@ -266,7 +276,7 @@
           </UniformGrid>
         </StackPanel>
       </TabItem>
-      <TabItem Header="Buttons">
+      <TabItem Header="Buttons" IsEnabled="False">
         <StackPanel Orientation="Horizontal">
           <Button x:Name="FileListmakerDialogButton">Show FileListmakerDialog</Button>
         </StackPanel>
@@ -281,4 +291,4 @@
       </TabItem>
     </TabControl>
   </DockPanel>
-</Window>
+</mewin:DecoratableWindow>

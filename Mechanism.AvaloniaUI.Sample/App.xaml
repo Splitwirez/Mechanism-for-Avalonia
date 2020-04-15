@@ -6,6 +6,6 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Generic.xaml"/>
         <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero4074/Themes/Aero4074.xaml"/-->
-      <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml"/-->
+        <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml"/-->
     </Application.Styles>
 </Application>

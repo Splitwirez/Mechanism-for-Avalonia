@@ -9,6 +9,15 @@ namespace Mechanism.AvaloniaUI.Core
     public static class NativeMethodsWindows
     {
         [DllImport("dwmapi.dll")]
+        private static extern int DwmIsCompositionEnabled(out bool enabled);
+
+        public static bool DwmIsCompositionEnabled()
+        {
+            DwmIsCompositionEnabled(out bool enabled);
+            return enabled;
+        }
+
+        [DllImport("dwmapi.dll")]
         public static extern void DwmEnableBlurBehindWindow(IntPtr hwnd, ref DWM_BLURBEHIND blurBehind);
 
         [StructLayout(LayoutKind.Sequential)]

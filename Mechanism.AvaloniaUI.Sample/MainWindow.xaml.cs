@@ -5,7 +5,7 @@ using Mechanism.AvaloniaUI.Controls.Windows;
 
 namespace Mechanism.AvaloniaUI.Sample
 {
-    public class MainWindow : Window
+    public class MainWindow : DecoratableWindow
     {
         public MainWindow()
         {
@@ -14,6 +14,7 @@ namespace Mechanism.AvaloniaUI.Sample
             this.AttachDevTools();
 #endif
             //Closing += MainWindow_Closing;
+            HasSystemDecorations = true;
         }
 
         /*private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

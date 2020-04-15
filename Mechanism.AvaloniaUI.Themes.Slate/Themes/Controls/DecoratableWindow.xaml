@@ -9,8 +9,17 @@
   <Design.PreviewWith>
     <mewin:DecoratableWindow Width="500"/>
   </Design.PreviewWith>
-  <Style Selector="mewin|DecoratableWindow">
+  <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=True]">
     <Setter Property="Background" Value="{DynamicResource WindowBackground}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}">
+          <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=False]">
     <Setter Property="BorderThickness" Value="4"/>
     <Setter Property="TitlebarHeight" Value="20"/>
     <Setter Property="Padding" Value="4,24,4,4"/>
