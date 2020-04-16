@@ -153,7 +153,9 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             //Debug.WriteLine("DragDelta: " + e.Vector.ToString() + "; " + localX + ", " + localY);
             ToolBar mouseOverBar = null;
             var parent = Parent as ToolBarTray;
-            PixelPoint cursorPoint = _gripThumb.PointToScreen(new Point(localX, localY))/*.ToPoint(VisualRoot.RenderScaling)*/;
+            //PixelPoint cursorPoint = _gripThumb.PointToScreen(new Point(localX, localY))/*.ToPoint(VisualRoot.RenderScaling)*/;
+            Debug.WriteLine("VisualRoot.RenderScaling: " + VisualRoot.RenderScaling);
+            var cursorPoint = _gripThumb.PointToScreen(new Point(localX, localY)).ToPoint(VisualRoot.RenderScaling);
             var items = parent.Items.OfType<ToolBar>();
             /*bool swapLeft = false;
             bool swapRight = false;*/
@@ -161,22 +163,22 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             foreach (ToolBar bar in items)
             {
                 Debug.WriteLine("INDEX: " + items.ToList().IndexOf(bar));
-                /*var clientPoint = _gripThumb.TranslatePoint(, VisualRoot);
-                if (clientPoint.HasValue)
-                {
-                    Debug.WriteLine("clientPoint: " + clientPoint.Value.ToString());*/
-                //VisualRoot.Renderer.HitTest(/*clientPoint.Value*/new Point(localX, localY), VisualRoot, null);
-                //var thisBarPoint = this.PointToScreen(new Point(0, 0)) + ;
-                var barPoint = bar.PointToScreen(new Point(0, 0));
+
+                /*var barPoint = bar.PointToScreen(new Point(0, 0));
                 Debug.WriteLine("points: " + cursorPoint.ToString() + "; " + barPoint.ToString());
                 bool left = barPoint.X <= cursorPoint.X;
                 bool top = barPoint.Y <= cursorPoint.Y;
                 bool right = (barPoint.X + (bar.Bounds.Width / VisualRoot.RenderScaling)) >= cursorPoint.X;
                 bool bottom = (barPoint.Y + (bar.Bounds.Height / VisualRoot.RenderScaling)) >= cursorPoint.Y;
-                leftHalf = (barPoint.X + ((bar.Bounds.Width / VisualRoot.RenderScaling) / 2)) >= cursorPoint.X;
+                leftHalf = (barPoint.X + ((bar.Bounds.Width / VisualRoot.RenderScaling) / 2)) >= cursorPoint.X;*/
+                var barPoint = bar.PointToScreen(new Point(0, 0)).ToPoint(VisualRoot.RenderScaling);
+                bool left = barPoint.X <= cursorPoint.X;
+                bool top = barPoint.Y <= cursorPoint.Y;
+                bool right = (barPoint.X + bar.Bounds.Width) >= cursorPoint.X;
+                bool bottom = (barPoint.Y + bar.Bounds.Height) >= cursorPoint.Y;
+                leftHalf = (barPoint.X + (bar.Bounds.Width / 2)) >= cursorPoint.X;
+
                 Debug.WriteLine("Bounds comparison: " + left + ", " + top + ", " + right + ", " + bottom);
-                //Debug.WriteLine("result.Count: " + result.Count());
-                //if (result.Contains(bar)) //if (bar.IsPointerOver)
                 if (left && top && right && bottom)
                 {
                     mouseOverBar = bar;
