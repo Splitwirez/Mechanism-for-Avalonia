@@ -124,7 +124,7 @@
           </DockPanel>
           <Border x:Name="DisabledBackground" Background="{DynamicResource ButtonDisabledBackground}" BorderBrush="{DynamicResource ButtonDisabledBorderBrush}" CornerRadius="{Binding CornerRadius, ElementName=IdleBackground}" BorderThickness="{Binding BorderThickness, ElementName=IdleBackground}" IsVisible="{Binding !IsVisuallyEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
           <DockPanel Grid.RowSpan="3" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-            <ContentPresenter x:Name="PART_AttachedIconPresenter" Content="{Binding Path=(mecore:AttachedIcon.AttachedIcon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}" DockPanel.Dock="Left"/>
+            <ContentPresenter x:Name="PART_AttachedIconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}" DockPanel.Dock="Left"/>
             <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
           </DockPanel>
         </Panel>

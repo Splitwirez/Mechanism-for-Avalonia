@@ -5,7 +5,11 @@
         xmlns:local="clr-namespace:Avalonia.Themes.Aero.NormalColor.Sample"
         mc:Ignorable="d" d:DesignWidth="398" d:DesignHeight="482"
         x:Class="Mechanism.AvaloniaUI.Sample.ThemeDemoWindow"
-        Title="Mechanism.AvaloniaUI %THEMENAME% Sample" Width="398" Height="482" CanResize="False">
+        Title="Mechanism.AvaloniaUI %THEMENAME% Theme Sample" Width="398" Height="482" CanResize="False">
+  <Window.Styles>
+    <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/-->
+    <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml"/-->
+  </Window.Styles>
   <DockPanel>
     <DockPanel Margin="7,0,7,8" DockPanel.Dock="Bottom">
       <Grid ColumnDefinitions="73,8,73,8,73" HorizontalAlignment="Right" DockPanel.Dock="Right">

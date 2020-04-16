@@ -7,6 +7,7 @@ using Avalonia.Styling;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
 using Mechanism.AvaloniaUI.Controls.Windows;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Mechanism.AvaloniaUI.Sample
@@ -36,34 +37,42 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
 
             this.Find<Button>("FileListmakerDialogButton").Click += FileListmakerDialogButton_Click;
-            this.Find<Button>("AeroThemeButton").Click += (sneder, args) => ShowThemeWindow("Mechanism.AvaloniaUI.Themes.Aero.NormalColor", $"avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
-            this.Find<Button>("SlateThemeButton").Click += (sneder, args) => ShowThemeWindow("Mechanism.AvaloniaUI.Themes.Slate", $"avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
-            this.Find<Button>("JadeThemeButton").Click += (sneder, args) => ShowThemeWindow("Mechanism.AvaloniaUI.Themes.Jade", $"avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
+            this.Find<Button>("AeroThemeButton").Click += (sneder, args) => ShowThemeWindow("Windows Aero", "avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
+            this.Find<Button>("SlateThemeButton").Click += (sneder, args) => ShowThemeWindow("Slate", "avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
+            this.Find<Button>("JadeThemeButton").Click += (sneder, args) => ShowThemeWindow("Jade", "avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
             //new ThemeDemoWindow().Show();
         }
 
-        void ShowThemeWindow(string space, string styleIncludeUri)
+        void ShowThemeWindow(string name, string styleIncludeUri)
         {
-            var win = new ThemeDemoWindow();
-            //(assets.Open(new Uri(uri)));
-            //assets.op
-            //System.IO.Stream stream = assets.Open(new System.Uri(styleIncludeUri));
-            //win.Styles.Add(new StyleInclude(new Uri(styleIncludeUri), );
-            //AvaloniaXamlLoader loader = new AvaloniaXamlLoader();
+            /*var win = new ThemeDemoWindow();
+            win.Title = win.Title.Replace("%THEMENAME%", name);
+            if (win.Styles.Count > 0)
+                win.Styles.RemoveAt(0);
 
-
-            /*var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            using (var stream = new StreamReader(assets.Open(new Uri(styleIncludeUri))))
+            win.Styles.Add(new StyleInclude(uri)
             {
-                var xaml = stream.ReadToEnd();
-                var style = AvaloniaXamlLoader.Parse<IStyle>(xaml);
-                win.Styles.Add(style);
-            }*/
-            win.Styles.Add(new StyleInclude(new Uri("Mechanism.AvaloniaUI.Themes.Aero.NormalColor", UriKind.Absolute))
-            {
-                Source = new Uri("avares://Themes/Aero.NormalColor.xaml", UriKind.Relative)
+                Source = uri
             });
-            win.Show();
+            win.Show();*/
+            var uri = new Uri(styleIncludeUri);
+            if (Application.Current.Styles.Count == 4)
+                (Application.Current.Styles[3] as StyleInclude).Source = uri;
+            else
+                Application.Current.Styles.Add(new StyleInclude(uri)
+                {
+                    Source = uri
+                });
+
+            List<IStyle> styles = new List<IStyle>();
+            //foreach (IStyle style in Application.Current.Styles)
+            for (int i = 0; i < Application.Current.Styles.Count; i++)
+            {
+                styles.Add(Application.Current.Styles[0]);
+                //Styles.RemoveAt(0);
+            }
+            Application.Current.Styles.Clear();
+            Application.Current.Styles.AddRange(styles);
         }
 
         private void FileListmakerDialogButton_Click(object sender, global::Avalonia.Interactivity.RoutedEventArgs e)
