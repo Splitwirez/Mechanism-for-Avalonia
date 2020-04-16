@@ -7,9 +7,9 @@
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
-        mc:Ignorable="d" d:DesignWidth="683" d:DesignHeight="384"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="480"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
-        Title="Mechanism.AvaloniaUI Sample" Width="683" Height="384">
+        Title="Mechanism for Avalonia Sample App" Width="800" Height="480">
   <DockPanel>
     <TabControl TabStripPlacement="Bottom" DockPanel.Dock="Top">
       <TabItem Header="CommandBar">
@@ -218,8 +218,8 @@
         <TreeViewItem Header="Sample text 3"/>
       </TreeViewItem>
     </TreeView>
-    <TabControl>
-      <TabItem Header="Properties">
+    <TabControl SelectedIndex="1">
+      <TabItem Header="Properties" IsVisible="False">
         <StackPanel Orientation="Vertical">
           <StackPanel IsVisible="False">
             <TextBlock Text="DecoratableWindow"/>
