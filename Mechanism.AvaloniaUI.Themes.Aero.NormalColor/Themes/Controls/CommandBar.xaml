@@ -1,0 +1,95 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="mecb|CommandBar">
+    <Setter Property="Background" Value="{DynamicResource AeroCommandBarBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroCommandBarOuterBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="Height" Value="32"/>
+    <Setter Property="BaseWidth" Value="25"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBar">
+          <Panel Name="RootPanel">
+            <Panel.RenderTransform>
+              <TranslateTransform Y="1"/>
+            </Panel.RenderTransform>
+            <DockPanel Margin="{TemplateBinding Padding}">
+              <!--ContentPresenter x:Name="PART_FarEndContentPresenter" Content="{TemplateBinding FarEndContent}" DockPanel.Dock="Right"/-->
+              <ItemsPresenter x:Name="PART_CommandBarEndItemsPresenter" Items="{TemplateBinding EndItems}" ItemTemplate="{TemplateBinding EndItemTemplate}" ItemsPanel="{TemplateBinding EndItemsPanel}" Margin="3,0,0,0" DockPanel.Dock="Right"/>
+              <Panel Width="25" DockPanel.Dock="Right">
+                <ToggleButton x:Name="PART_FlyoutToggleButton" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
+                  <Path Data="M 0.5 0 L 2.5 0 L 5.5 3 L 2.5 6 L 0.5 6 L 3.5 3 Z
+                                    M 4.5 0 L 6.5 0 L 9.5 3 L 6.5 6 L 4.5 6 L 7.5 3 Z" Fill="{Binding $parent[ToggleButton].Foreground}"/>
+                  <!--StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True">
+                    <StackPanel.RenderTransform>
+                      <TranslateTransform X="-1"/>
+                    </StackPanel.RenderTransform>
+                    <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.5" ClipToBounds="True"/>
+                    <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.5" ClipToBounds="True"/>
+                  </StackPanel-->
+                </ToggleButton>
+              </Panel>
+              <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" VerticalAlignment="Stretch">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mectrl:OverflowFlyoutItemsControl].HorizontalItemsAlignment}" VerticalAlignment="Stretch" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </DockPanel>
+            <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
+              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+              </Border>
+            </Popup>
+          </Panel>
+        </mectrl:ThemeControlDecorator>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecb|CommandBar /template/ ToggleButton#PART_FlyoutToggleButton">
+    <Setter Property="Padding" Value="8,4"/>
+    <Setter Property="Foreground" Value="{DynamicResource AeroCommandBarFlyoutButtonForeground}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBarButton" Classes="ButtonCheckable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecb|CommandBar > :is(Button)">
+    <Setter Property="Padding" Value="12,4"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBarButton"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecb|CommandBar > ToggleButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBarButton" Classes="ButtonCheckable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ItemsPresenter#PART_CommandBarEndItemsPresenter > :is(Panel) > :is(Button)">
+    <Setter Property="Padding" Value="7,4"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBarButton"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ItemsPresenter#PART_CommandBarEndItemsPresenter > :is(Panel) > ToggleButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CommandBarButton" Classes="ButtonCheckable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

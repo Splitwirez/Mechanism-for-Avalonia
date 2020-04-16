@@ -17,6 +17,15 @@ namespace Mechanism.AvaloniaUI.Controls
     }
     public class OverflowFlyoutItemsControl : ItemsControl
     {
+        public static readonly StyledProperty<ChildrenHorizontalAlignment> HorizontalItemsAlignmentProperty =
+            AvaloniaProperty.Register<OverflowFlyoutItemsControl, ChildrenHorizontalAlignment>(nameof(HorizontalItemsAlignment), defaultValue: ChildrenHorizontalAlignment.Left);
+
+        public ChildrenHorizontalAlignment HorizontalItemsAlignment
+        {
+            get => GetValue(HorizontalItemsAlignmentProperty);
+            set => SetValue(HorizontalItemsAlignmentProperty, value);
+        }
+
         public static readonly DirectProperty<OverflowFlyoutItemsControl, AvaloniaList<object>> VisibleItemsProperty = AvaloniaProperty.RegisterDirect<OverflowFlyoutItemsControl, AvaloniaList<object>>(nameof(VisibleItems), o => o.VisibleItems, (o, v) => o.VisibleItems = v);
         private AvaloniaList<object> _visibleItems = new AvaloniaList<object>();
         public AvaloniaList<object> VisibleItems
@@ -80,9 +89,40 @@ namespace Mechanism.AvaloniaUI.Controls
             set { SetValue(BaseWidthProperty, value); }
         }
 
+        public static readonly StyledProperty<bool> ForceDesiredSizeProperty =
+            AvaloniaProperty.Register<OverflowFlyoutItemsControl, bool>(nameof(ForceDesiredSize), defaultValue: false);
+
+        public bool ForceDesiredSize
+        {
+            get => GetValue(ForceDesiredSizeProperty);
+            set => SetValue(ForceDesiredSizeProperty, value);
+        }
+
+        protected virtual double GetBaseWidth()
+        {
+            return BaseWidth;
+        }
+
         static OverflowFlyoutItemsControl()
         {
-            BoundsProperty.Changed.AddClassHandler<OverflowFlyoutItemsControl>(new Action<OverflowFlyoutItemsControl, AvaloniaPropertyChangedEventArgs>((sneder, args) => sneder.SortControls()));
+            AffectsMeasure<OverflowFlyoutItemsControl>(ItemsProperty);
+            AffectsArrange<OverflowFlyoutItemsControl>(ItemsProperty);
+            AffectsRender<OverflowFlyoutItemsControl>(ItemsProperty);
+
+            AffectsMeasure<OverflowFlyoutItemsControl>(HorizontalItemsAlignmentProperty);
+            AffectsArrange<OverflowFlyoutItemsControl>(HorizontalItemsAlignmentProperty);
+            AffectsRender<OverflowFlyoutItemsControl>(HorizontalItemsAlignmentProperty);
+
+            AffectsMeasure<AlignableStackPanel>(ForceDesiredSizeProperty);
+            AffectsArrange<AlignableStackPanel>(ForceDesiredSizeProperty);
+            AffectsRender<AlignableStackPanel>(ForceDesiredSizeProperty);
+
+            BoundsProperty.Changed.AddClassHandler<OverflowFlyoutItemsControl>(new Action<OverflowFlyoutItemsControl, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
+            {
+                //sneder.InvalidateArrange();
+                //sneder.InvalidateMeasure();
+                sneder.SortControls();
+            }));
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -95,7 +135,7 @@ namespace Mechanism.AvaloniaUI.Controls
         {
             //MinWidth = CalcSizeWithFirstControlOnly();
             Size baseSize = base.MeasureCore(availableSize);
-            if (Items != null)
+            if (ForceDesiredSize && (Items != null))
             {
                 double realWidth = SortControls();
                 var items = Items.OfType<Control>();
@@ -106,14 +146,14 @@ namespace Mechanism.AvaloniaUI.Controls
                     {
                         //MinWidth = BaseWidth + visibleItems.ElementAt(0).DesiredSize.Width;
                         if (OverflowDirection == Direction.Left)
-                            MinWidth = BaseWidth + visibleItems.Last().DesiredSize.Width;
+                            MinWidth = GetBaseWidth() + visibleItems.Last().DesiredSize.Width;
                         else
-                            MinWidth = BaseWidth + visibleItems.First().DesiredSize.Width;
+                            MinWidth = GetBaseWidth() + visibleItems.First().DesiredSize.Width;
                     }
                     else
-                        MinWidth = BaseWidth;
+                        MinWidth = GetBaseWidth();
                 }
-                return new Size(realWidth + BaseWidth, baseSize.Height);
+                return new Size(realWidth + GetBaseWidth(), baseSize.Height);
             }
             else
                 return baseSize;

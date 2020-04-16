@@ -10,6 +10,9 @@ using Avalonia.Layout;
 using Avalonia.Controls.Templates;
 using System.Collections;
 using Avalonia.Collections;
+using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Presenters;
+using System.Diagnostics;
 
 namespace Mechanism.AvaloniaUI.Controls.CommandBar
 {
@@ -91,6 +94,7 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
             Orientation = Orientation.Vertical
         });
 
+        static string _endItemsClass = "EndItem";
         static CommandBar()
         {
             LayersProperty.Changed.AddClassHandler<CommandBar>(new Action<CommandBar, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
@@ -102,6 +106,48 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
                 sneder.UpdateChildrenVisibity();
             }));
             FlyoutItemsPanelProperty.OverrideDefaultValue<CommandBar>(FlyoutDefaultPanel);
+
+            /*EndItemsProperty.Changed.AddClassHandler<CommandBar>(new Action<CommandBar, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
+            {
+                Debug.WriteLine("END ITEMS CHANGED!");
+                if (args.OldValue != null)// && (args.OldValue is AvaloniaList<object> old))
+                {
+                    foreach (StyledElement el in (args.OldValue as IEnumerable<object>).OfType<StyledElement>())
+                    {
+                        if (el.Classes.Contains(_endItemsClass))
+                            el.Classes.Remove(_endItemsClass);
+                    }
+                }
+
+                if (args.NewValue != null)// && (args.NewValue is AvaloniaList<object> newlist))
+                {
+                    sneder.UpdateEndItems();
+                }
+            }));*/
+        }
+
+        void UpdateEndItems()
+        {
+            //Debug.WriteLine("EndItems.OfType<object>() count: " + EndItems.OfType<object>().Count());
+            var enumerator = EndItems.GetEnumerator();
+            //foreach (StyledElement el in EndItems.OfType<StyledElement>())
+            while (enumerator.MoveNext())
+            {
+                if (enumerator.Current is StyledElement el)
+                {
+                    string adding = "Adding _endItemsClass? ";
+                    if (!el.Classes.Contains(_endItemsClass))
+                    {
+                        el.Classes.Add(_endItemsClass);
+                        adding += "Yes";
+                    }
+                    else
+                        adding += "No";
+                    Debug.WriteLine(adding);
+                }
+                else
+                    Debug.WriteLine("Not a StyledElement!");
+            }
         }
 
         public CommandBar()
@@ -111,6 +157,7 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
                 if (Layers.Contains(sneder))
                     UpdateChildrenVisibity();
             };
+            //UpdateEndItems();
         }
 
         protected override void ItemsChanged(AvaloniaPropertyChangedEventArgs e)
@@ -146,5 +193,39 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
                 }
             }
         }
+
+        ItemsPresenter _endItemsPresenter = null;
+        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        {
+            base.OnTemplateApplied(e);
+            _endItemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_CommandBarEndItemsPresenter");
+        }
+
+        protected override double GetBaseWidth()
+        {
+            return base.GetBaseWidth() + _endItemsPresenter.DesiredSize.Width;
+        }
+
+        /*protected override void LogicalChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            base.LogicalChildrenCollectionChanged(sender, e);
+            if (e.OldItems != null)
+            {
+                foreach (StyledElement el in e.OldItems.OfType<StyledElement>())
+                {
+                    if (el.Classes.Contains(_endItemsClass))
+                        el.Classes.Remove(_endItemsClass);
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (StyledElement el in e.NewItems.OfType<StyledElement>())
+                {
+                    if (!el.Classes.Contains(_endItemsClass))
+                        el.Classes.Add(_endItemsClass);
+                }
+            }
+        }*/
     }
 }

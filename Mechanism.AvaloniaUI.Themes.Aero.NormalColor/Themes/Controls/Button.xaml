@@ -13,7 +13,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Padding" Value="3"/>
     <Setter Property="FontSize" Value="{DynamicResource AeroFontSizeNormal}"/>
-    <Setter Property="mecore:AttachedIcon.IconGap" Value="2"/>
+    <Setter Property="mecore:AttachedIcon.IconGap" Value="4"/>
   </Style>
   <Style Selector="RepeatButton">
     <Setter Property="Background" Value="{DynamicResource AeroButtonIdleBackground}"/>

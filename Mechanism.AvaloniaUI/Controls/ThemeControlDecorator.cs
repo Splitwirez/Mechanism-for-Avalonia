@@ -27,7 +27,9 @@ namespace Mechanism.AvaloniaUI.Controls
         TabItem,
         ToolBarTray,
         ToolBar,
-        ToolBarButton
+        ToolBarButton,
+        CommandBar,
+        CommandBarButton
     }
 
     public class ThemeControlDecorator : ContentControl

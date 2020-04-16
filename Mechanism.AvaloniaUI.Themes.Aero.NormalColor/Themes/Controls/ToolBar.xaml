@@ -46,26 +46,30 @@
           <DockPanel>
             <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left"/>
             <Panel>
-              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}">
+              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True">
                 <mectrl:OverflowFlyoutItemsControl.Template>
                   <ControlTemplate>
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                       <Panel Name="RootPanel">
                         <DockPanel>
                           <Panel Width="15" DockPanel.Dock="Right">
-                            <ToggleButton x:Name="PART_FlyoutToggleButton" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
+                            <ToggleButton x:Name="PART_FlyoutToggleButton" Foreground="{DynamicResource AeroToolBarFlyoutButtonForeground}" VerticalContentAlignment="Top" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
                               <ToggleButton.Template>
                                 <ControlTemplate>
                                   <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton"/>
                                 </ControlTemplate>
                               </ToggleButton.Template>
-                              <StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                              <Path Data="M 0.5 0 L 2.5 0 L 5.5 3 L 2.5 6 L 0.5 6 L 3.5 3 Z
+                                    M 4.5 0 L 6.5 0 L 9.5 3 L 6.5 6 L 4.5 6 L 7.5 3 Z" Fill="{Binding $parent[ToggleButton].Foreground}"/>
+                              <!--M 0 0 L 2 0 L 5 3 L 2 6 L 0 6 L 3 3 Z
+                                    M 4 0 L 6 0 L 9 3 L 6 6 L 4 6 L 7 3 Z-->
+                              <!--StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                                 <StackPanel.RenderTransform>
                                   <TranslateTransform X="-1"/>
                                 </StackPanel.RenderTransform>
-                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{DynamicResource AeroToolBarButtonHoverOuterBorderBrush}" StrokeThickness="1.5" VerticalAlignment="Top"/>
-                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{DynamicResource AeroToolBarButtonHoverOuterBorderBrush}" StrokeThickness="1.5" VerticalAlignment="Top"/>
-                              </StackPanel>
+                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.25"/>
+                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.25"/>
+                              </StackPanel-->
                             </ToggleButton>
                           </Panel>
                           <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" ItemsPanel="{TemplateBinding ItemsPanel}" Margin="{TemplateBinding Padding}"/>

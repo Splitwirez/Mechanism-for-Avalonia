@@ -240,6 +240,7 @@
     <GradientStop Offset="1" Color="#FFE5EAF5"/>
   </GradientStops>
   <SolidColorBrush x:Key="AeroToolBarTrayBorderBrush" Color="#40FFFFFF"/>
+  <SolidColorBrush x:Key="AeroToolBarFlyoutButtonForeground" Color="#FF1E395B"/>
 
   <SolidColorBrush x:Key="AeroToolBarButtonHoverOuterBorderBrush" Color="#40000000"/>
   <SolidColorBrush x:Key="AeroToolBarButtonHoverInnerBorderBrush" Color="#C0FFFFFF"/>
@@ -265,4 +266,50 @@
 
   <SolidColorBrush x:Key="AeroToolBarOuterBorderBrush" Color="#FFB6BCCC"/>
   <SolidColorBrush x:Key="AeroToolBarInnerBorderBrush" Color="#FFF4F7FC"/>
+
+
+  <GradientStops x:Key="AeroCommandBarBackgroundGradientStops">
+    <GradientStop Offset="0" Color="White"/>
+    <GradientStop Offset="0.5" Color="#FFE6F0FA"/>
+    <GradientStop Offset="0.5" Color="#FFDCE6F4"/>
+    <GradientStop Offset="0.75" Color="#FFDCE6F5"/>
+    <GradientStop Offset="1" Color="#FFDDE9F7"/>
+  </GradientStops>
+  <LinearGradientBrush x:Key="AeroCommandBarBackground" StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroCommandBarBackgroundGradientStops}"/>
+  
+  <GradientStops x:Key="AeroCommandBarOuterBorderGradientStops">
+    <GradientStop Offset="0" Color="#FFB6BCCC"/>
+    <GradientStop Offset="1" Color="#FFB6BCCC"/>
+  </GradientStops>
+  <LinearGradientBrush x:Key="AeroCommandBarOuterBorderBrush" StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroCommandBarOuterBorderGradientStops}"/>
+  <SolidColorBrush x:Key="AeroCommandBarMiddleBorderBrush" Color="#FFCDDAEA"/>
+  <GradientStops x:Key="AeroCommandBarInnerBorderGradientStops">
+    <GradientStop Offset="0" Color="White"/>
+    <GradientStop Offset="0.5" Color="#FFF3F8FD"/>
+    <GradientStop Offset="0.5" Color="#FFEEF3FA"/>
+    <GradientStop Offset="0.9" Color="#FFEEF4FB"/>
+    <GradientStop Offset="1" Color="#FFE4EFFB"/>
+  </GradientStops>
+  <SolidColorBrush x:Key="AeroCommandBarFlyoutButtonForeground" Color="#FF1E395B"/>
+
+  <SolidColorBrush x:Key="AeroCommandBarButtonHoverOuterBorderBrush">#C0ADBFD5</SolidColorBrush>
+  <SolidColorBrush x:Key="AeroCommandBarButtonHoverInnerBorderBrush">#C0F6F9FC</SolidColorBrush>
+  <GradientStops x:Key="AeroCommandBarButtonHoverBackgroundGradientStops">
+    <GradientStop Offset="0" Color="#40FFFFFF"/>
+    <GradientStop Offset="0.5" Color="#20FFFFFF"/>
+    <GradientStop Offset="0.5" Color="#06000000"/>
+    <GradientStop Offset="1" Color="#10000000"/>
+  </GradientStops>
+  
+  <SolidColorBrush x:Key="AeroCommandBarButtonPressedOuterBorderBrush">#C0ADBFD5</SolidColorBrush>
+  <GradientStops x:Key="AeroCommandBarButtonPressedBackgroundGradientStops">
+    <GradientStop Offset="0" Color="#10FFFFFF"/>
+    <GradientStop Offset="0.4" Color="#06FFFFFF"/>
+    <GradientStop Offset="0.4" Color="#06000000"/>
+    <GradientStop Offset="1" Color="#10000000"/>
+  </GradientStops>
+  <GradientStops x:Key="AeroCommandBarButtonPressedShadowGradientStops">
+    <GradientStop Offset="0" Color="#60ADBFD5"/>
+    <GradientStop Offset="1" Color="#00ADBFD5"/>
+  </GradientStops>
 </ResourceDictionary>
