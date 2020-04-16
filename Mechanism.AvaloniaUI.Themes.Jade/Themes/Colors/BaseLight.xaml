@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
+  <SolidColorBrush x:Key="WindowBackground">#FFFFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowBorderBrush">#FF2EEDED</SolidColorBrush>
+  
+  
+  
+  <SolidColorBrush x:Key="ButtonIdleBackground">#FFC5C5C5</SolidColorBrush>
+  <SolidColorBrush x:Key="ButtonIdleBorderBrush">#FFE1E1E1</SolidColorBrush>
+  
+  <SolidColorBrush x:Key="ButtonHoverBackground">#FF7BD2FF</SolidColorBrush>
+  <SolidColorBrush x:Key="ButtonHoverBorderBrush">#FF7E93FF</SolidColorBrush>
+
+  <SolidColorBrush x:Key="ButtonPressedBackground">#FF3274BC</SolidColorBrush>
+  <SolidColorBrush x:Key="ButtonPressedBorderBrush">#FF3E4A89</SolidColorBrush>
+
+  <SolidColorBrush x:Key="ButtonDisabledBackground">#FFFDFDFD</SolidColorBrush>
+  <SolidColorBrush x:Key="ButtonDisabledBorderBrush">#FF777777</SolidColorBrush>
+
+  <GradientStops x:Key="ButtonTopShineGradientStops">
+    <GradientStop Offset="0" Color="#C0FFFFFF"/>
+    <GradientStop Offset="0.5" Color="#FFFFFFFF"/>
+    <GradientStop Offset="1" Color="#C0FFFFFF"/>
+  </GradientStops>
+
+  <GradientStops x:Key="ButtonBottomShineGradientStops">
+    <GradientStop Offset="0" Color="#7FFFFFFF"/>
+    <GradientStop Offset="1" Color="#C0FFFFFF"/>
+  </GradientStops>
+
+
+  <GradientStops x:Key="NavigationButtonFrameFillGradientStops">
+    <GradientStop Offset="0" Color="#2D161616"/>
+    <GradientStop Offset="0.5" Color="#8DE8E8E8"/>
+    <GradientStop Offset="1" Color="#BAF5F5F5"/>
+  </GradientStops>
+  <GradientStops x:Key="NavigationButtonFrameStrokeGradientStops">
+    <GradientStop Offset="0" Color="#2E161616"/>
+    <GradientStop Offset="1" Color="#00161616"/>
+  </GradientStops>
+
+  <SolidColorBrush x:Key="NavigationButtonIconStroke">#7F000000</SolidColorBrush>
+  <GradientStops x:Key="NavigationButtonIconFillGradientStops">
+    <GradientStop Offset="0.25" Color="#FFFFFFFF"/>
+    <GradientStop Offset="1" Color="#FFCCD4DE"/>
+  </GradientStops>
+
+  <SolidColorBrush x:Key="TreeViewExpanderIdleStroke">#FFBABABA</SolidColorBrush>
+  <GradientStops x:Key="TreeViewExpanderIdleFillGradientStops">
+    <GradientStop Offset="0" Color="#FFF0F0F0"/>
+    <GradientStop Offset="1" Color="#FFE1E1E1"/>
+  </GradientStops>
+
+  <SolidColorBrush x:Key="PaneBorderBrush">#FFB4B4B4</SolidColorBrush>
+</ResourceDictionary>

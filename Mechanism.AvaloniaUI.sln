@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI", "Mec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Sample", "Mechanism.AvaloniaUI.Sample\Mechanism.AvaloniaUI.Sample.csproj", "{FDB86001-EE31-4ABB-ADA4-C7E86476589B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Aero4074", "Mechanism.AvaloniaUI.Themes.Aero4074\Mechanism.AvaloniaUI.Themes.Aero4074.csproj", "{B0C5BDEE-49F4-4335-B26B-B0B879F82587}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Slate", "Mechanism.AvaloniaUI.Themes.Slate\Mechanism.AvaloniaUI.Themes.Slate.csproj", "{38E6ABCA-5A7C-4091-81DB-E21C3D219C38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Aero.NormalColor", "Mechanism.AvaloniaUI.Themes.Aero.NormalColor\Mechanism.AvaloniaUI.Themes.Aero.NormalColor.csproj", "{F133D458-40DC-466B-90D6-72A53BB9A833}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Jade", "Mechanism.AvaloniaUI.Themes.Jade\Mechanism.AvaloniaUI.Themes.Jade.csproj", "{2F8ED117-6DCA-469C-8D2B-7D4198D47EF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +27,18 @@ Global
 		{FDB86001-EE31-4ABB-ADA4-C7E86476589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB86001-EE31-4ABB-ADA4-C7E86476589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB86001-EE31-4ABB-ADA4-C7E86476589B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0C5BDEE-49F4-4335-B26B-B0B879F82587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0C5BDEE-49F4-4335-B26B-B0B879F82587}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0C5BDEE-49F4-4335-B26B-B0B879F82587}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0C5BDEE-49F4-4335-B26B-B0B879F82587}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38E6ABCA-5A7C-4091-81DB-E21C3D219C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38E6ABCA-5A7C-4091-81DB-E21C3D219C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E6ABCA-5A7C-4091-81DB-E21C3D219C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E6ABCA-5A7C-4091-81DB-E21C3D219C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F133D458-40DC-466B-90D6-72A53BB9A833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F133D458-40DC-466B-90D6-72A53BB9A833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F133D458-40DC-466B-90D6-72A53BB9A833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F133D458-40DC-466B-90D6-72A53BB9A833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8ED117-6DCA-469C-8D2B-7D4198D47EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8ED117-6DCA-469C-8D2B-7D4198D47EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8ED117-6DCA-469C-8D2B-7D4198D47EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8ED117-6DCA-469C-8D2B-7D4198D47EF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

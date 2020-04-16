@@ -1,0 +1,130 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI">
+  <Design.PreviewWith>
+    <Panel Width="200" Height="200">
+      <Panel.Styles>
+        <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/>
+      </Panel.Styles>
+      <metb:ToolBarTray VerticalAlignment="Top">
+        <metb:ToolBar>
+          <Button Content="AAAAA">
+            <mecore:AttachedIcon.Icon>
+              <Rectangle Width="24" Height="24" Fill="Red"/>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+        </metb:ToolBar>
+        <metb:ToolBar>
+          <Button Content="AAAAA">
+            <mecore:AttachedIcon.Icon>
+              <Rectangle Width="24" Height="24" Fill="Red"/>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+        </metb:ToolBar>
+        <metb:ToolBar Band="1">
+          <Button Content="AAAAA">
+            <mecore:AttachedIcon.Icon>
+              <Rectangle Width="24" Height="24" Fill="Red"/>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+        </metb:ToolBar>
+      </metb:ToolBarTray>
+    </Panel>
+  </Design.PreviewWith>
+  <Style Selector="metb|ToolBar">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroToolBarInnerBorderBrush}" />
+    <Setter Property="MinWidth" Value="75"/>
+    <Setter Property="BaseWidth" Value="16"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="ToolBar">
+          <DockPanel>
+            <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" DockPanel.Dock="Left"/>
+            <Panel>
+              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}">
+                <mectrl:OverflowFlyoutItemsControl.Template>
+                  <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                      <Panel Name="RootPanel">
+                        <DockPanel>
+                          <Panel Width="15" DockPanel.Dock="Right">
+                            <ToggleButton x:Name="PART_FlyoutToggleButton" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
+                              <ToggleButton.Template>
+                                <ControlTemplate>
+                                  <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton"/>
+                                </ControlTemplate>
+                              </ToggleButton.Template>
+                              <StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                                <StackPanel.RenderTransform>
+                                  <TranslateTransform X="-1"/>
+                                </StackPanel.RenderTransform>
+                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{DynamicResource AeroToolBarButtonHoverOuterBorderBrush}" StrokeThickness="1.5" VerticalAlignment="Top"/>
+                                <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{DynamicResource AeroToolBarButtonHoverOuterBorderBrush}" StrokeThickness="1.5" VerticalAlignment="Top"/>
+                              </StackPanel>
+                            </ToggleButton>
+                          </Panel>
+                          <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" ItemsPanel="{TemplateBinding ItemsPanel}" Margin="{TemplateBinding Padding}"/>
+                        </DockPanel>
+                        <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
+                          <Border Background="{DynamicResource AeroToolBarTrayBackground}" BorderBrush="{DynamicResource AeroToolBarOuterBorderBrush}" BorderThickness="1">
+                            <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+                          </Border>
+                        </Popup>
+                      </Panel>
+                    </Border>
+                  </ControlTemplate>
+                </mectrl:OverflowFlyoutItemsControl.Template>
+              </mectrl:OverflowFlyoutItemsControl>
+              <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+            </Panel>
+          </DockPanel>
+        </mectrl:ThemeControlDecorator>
+      </ControlTemplate>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal"/>
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="metb|ToolBar > :is(Button)">
+    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="metb|ToolBar > ToggleButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton" Classes="ButtonCheckable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="metb|ToolBarTray">
+    <Setter Property="Background" Value="{DynamicResource AeroToolBarTrayBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroToolBarTrayBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1,0,0,0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <mectrl:ThemeControlDecorator ControlStyle="ToolBarTray">
+            <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" HorizontalAlignment="Stretch" ClipToBounds="True">
+              <ItemsPresenter.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <metb:ToolBarTrayPanel HorizontalAlignment="Stretch" Margin="0,0,-1,0"/>
+                </ItemsPanelTemplate>
+              </ItemsPresenter.ItemsPanel>
+            </ItemsPresenter>
+          </mectrl:ThemeControlDecorator>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</Styles>

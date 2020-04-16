@@ -1,0 +1,94 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+             xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
+             xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="Button"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="RepeatButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="Button"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ToggleButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="ButtonCheckable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="CheckBox">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="CheckBox" Classes="Checkable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="RadioButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="RadioButton" Classes="Checkable"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TextBox">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <mectrl:ThemeControlDecorator ControlStyle="TextBox">
+          <DockPanel Margin="{TemplateBinding Padding}">
+            
+            <TextBlock Name="floatingWatermark"
+                       FontSize="{DynamicResource FontSizeSmall}"
+                       Text="{TemplateBinding Watermark}"
+                       DockPanel.Dock="Top">
+              <TextBlock.IsVisible>
+                <MultiBinding Converter="{x:Static BoolConverters.And}">
+                  <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                           Path="UseFloatingWatermark"/>
+                  <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                           Path="Text"
+                           Converter="{x:Static StringConverters.IsNotNullOrEmpty}"/>
+                </MultiBinding>
+              </TextBlock.IsVisible>
+            </TextBlock>
+
+            <DataValidationErrors>
+              <ScrollViewer HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                            VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+
+                <Panel>
+                  <TextBlock Name="watermark"
+                             Opacity="0.5"
+                             Text="{TemplateBinding Watermark}"
+                             IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"/>
+                  <TextPresenter Name="PART_TextPresenter"
+                                 Text="{TemplateBinding Text, Mode=TwoWay}"
+                                 CaretIndex="{TemplateBinding CaretIndex}"
+                                 SelectionStart="{TemplateBinding SelectionStart}"
+                                 SelectionEnd="{TemplateBinding SelectionEnd}"
+                                 TextAlignment="{TemplateBinding TextAlignment}"
+                                 TextWrapping="{TemplateBinding TextWrapping}"
+                                 PasswordChar="{TemplateBinding PasswordChar}"
+                                 SelectionBrush="{TemplateBinding SelectionBrush}"
+                                 SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                 CaretBrush="{TemplateBinding CaretBrush}"/>
+                </Panel>
+              </ScrollViewer>
+            </DataValidationErrors>
+          </DockPanel>
+        </mectrl:ThemeControlDecorator>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

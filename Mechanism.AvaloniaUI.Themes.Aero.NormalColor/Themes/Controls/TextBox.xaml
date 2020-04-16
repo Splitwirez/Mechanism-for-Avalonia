@@ -1,0 +1,20 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="TextBox">
+    <Setter Property="Background" Value="{DynamicResource AeroTextBoxIdleBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroTextBoxIdleBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{DynamicResource AeroForeground}"/>
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="FontSize" Value="{DynamicResource AeroFontSizeNormal}"/>
+    <Setter Property="Cursor" Value="IBeam" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource HighlightBrush}"/>
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource HighlightForegroundBrush}"/>
+    <Setter Property="mecore:AttachedIcon.IconGap" Value="2"/>
+    <Setter Property="TextAlignment" Value="Left"/>
+  </Style>
+</Styles>

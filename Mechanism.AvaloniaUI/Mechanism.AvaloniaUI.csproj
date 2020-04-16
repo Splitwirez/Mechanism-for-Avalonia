@@ -14,9 +14,12 @@
     <PackageReference Include="Avalonia" Version="0.9.7" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
-  <ItemGroup>
+  <!--ItemGroup>
+    <EmbeddedResource Include="Themes\ThemeableDefaultControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-  </ItemGroup>
+  </ItemGroup-->
 </Project>

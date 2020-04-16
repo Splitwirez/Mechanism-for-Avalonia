@@ -1,0 +1,18 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Colors/BaseLight.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/Button.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/DecoratableWindow.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/Menu.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/ThemeControlDecorator.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/TreeView.xaml"/>
+</Styles>

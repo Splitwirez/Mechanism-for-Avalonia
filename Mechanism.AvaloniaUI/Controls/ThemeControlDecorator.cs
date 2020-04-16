@@ -24,7 +24,10 @@ namespace Mechanism.AvaloniaUI.Controls
         PaneFrame,
         ScrollBarTrack,
         TabBody,
-        TabItem
+        TabItem,
+        ToolBarTray,
+        ToolBar,
+        ToolBarButton
     }
 
     public class ThemeControlDecorator : ContentControl
@@ -65,13 +68,28 @@ namespace Mechanism.AvaloniaUI.Controls
             set { SetValue(IsVisuallyEnabledProperty, value); }
         }
 
-        public static readonly StyledProperty<bool> IsVisuallyCheckedProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyChecked));
+        public static readonly StyledProperty<bool?> IsVisuallyCheckedProperty =
+        AvaloniaProperty.Register<ThemeControlDecorator, bool?>(nameof(IsVisuallyChecked));
 
-        public bool IsVisuallyChecked
+        public bool? IsVisuallyChecked
         {
             get { return GetValue(IsVisuallyCheckedProperty); }
             set { SetValue(IsVisuallyCheckedProperty, value); }
+        }
+
+        static ThemeControlDecorator()
+        {
+            IsVisuallyCheckedProperty.Changed.AddClassHandler<ThemeControlDecorator>(new Action<ThemeControlDecorator, AvaloniaPropertyChangedEventArgs>((sender, args) => sender.UpdatePseudoClasses((bool?)args.NewValue)));
+        }
+
+        public ThemeControlDecorator()
+        {
+            UpdatePseudoClasses(IsVisuallyChecked);
+        }
+
+        void UpdatePseudoClasses(bool? isVisuallyChecked)
+        {
+            PseudoClasses.Set(":indeterminate", isVisuallyChecked == null);
         }
     }
 }

@@ -19,7 +19,7 @@
   </Design.PreviewWith>
   <Style Selector="mectrl|ThemeControlDecorator">
     <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
-    <Setter Property="mecore:AttachedIcon.AttachedIcon" Value="{Binding Path=(mecore:AttachedIcon.AttachedIcon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <Setter Property="mecore:AttachedIcon.Icon" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="IsVisuallyPointerOver" Value="{Binding IsPointerOver, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="IsVisuallyPressed" Value="{Binding IsPressed, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="IsVisuallyEnabled" Value="{Binding IsEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>

@@ -41,73 +41,73 @@
       </metb:ToolBar>
       <metb:ToolBar Width="202" Band="1">
         <Button Content="Back">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
         <Button Content="Forward">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
         <Button Content="Cancel">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
       </metb:ToolBar>
       <metb:ToolBar Band="1" Width="279">
         <Button Content="Button">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
         <ToggleButton Content="ToggleButton">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <!--Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/-->
               <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </ToggleButton>
         <RepeatButton Content="RepeatButton">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </RepeatButton>
       </metb:ToolBar>
       <metb:ToolBar Band="1">
         <Button Content="Button1">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
         <Button Content="Button2">
-          <mecore:AttachedIcon.AttachedIcon>
+          <mecore:AttachedIcon.Icon>
             <Panel Width="24" Height="24">
               <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
               <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
-          </mecore:AttachedIcon.AttachedIcon>
+          </mecore:AttachedIcon.Icon>
         </Button>
       </metb:ToolBar>
       <metb:ToolBar Band="2" UseOverflow="False">
@@ -121,70 +121,70 @@
           <TextBox>http://avaloniaui.net/</TextBox>
       </metb:ToolBar>
     </metb:ToolBarTray>
-    <mecb:CommandBar DockPanel.Dock="Top">
+    <mecb:CommandBar DockPanel.Dock="Top" BorderBrush="Red" mecore:BorderPresence.BorderPresence="False,True,False,True">
       <mecb:CommandBar.Layers>
         <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
         <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
       </mecb:CommandBar.Layers>
       <Button Content="Always visible">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </Button>
       <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </Button>
       <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </Button>
       <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </Button>
       <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 1">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </ToggleButton>
       <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 1">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </RepeatButton>
       <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 2">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </ToggleButton>
       <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 2">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </RepeatButton>
       <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 3">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </ToggleButton>
       <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 3">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </RepeatButton>
       <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 4">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </ToggleButton>
       <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 4">
-        <mecore:AttachedIcon.AttachedIcon>
+        <mecore:AttachedIcon.Icon>
           <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-        </mecore:AttachedIcon.AttachedIcon>
+        </mecore:AttachedIcon.Icon>
       </RepeatButton>
       <mecb:CommandBar.EndItems>
         <Button>
@@ -220,65 +220,79 @@
         </StackPanel>
       </TabItem>
       <TabItem Header="Attached Properties">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-          <StackPanel.Styles>
-            <Style Selector="Button">
-              <Setter Property="Content">
-                <!--Value="{Binding (mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=Self}}"/-->
-                <MultiBinding>
-                  <MultiBinding.Converter>
-                    <local:SampleConverter/>
-                  </MultiBinding.Converter>
-                  <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=Self}"/>
-                  <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=Self}"/>
-                </MultiBinding>
-              </Setter>
-              <!--Setter Property="Template">
-                <ControlTemplate>
-                  <Border BorderBrush="Red" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}">
-                    <DockPanel Margin="{TemplateBinding Padding}">
-                      <ContentPresenter x:Name="PART_AttachedIconPresenter" Content="{Binding Path=(mecore:AttachedIcon.AttachedIcon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}" DockPanel.Dock="Left"/>
-                      <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
-                    </DockPanel>
-                  </Border>
-                </ControlTemplate>
-              </Setter-->
-            </Style>
-          </StackPanel.Styles>
-          <Button HorizontalAlignment="Center">
-            <mecore:AttachedIcon.AttachedIcon>
-              <Rectangle Fill="Green" Width="16" Height="16"/>
-            </mecore:AttachedIcon.AttachedIcon>
-          </Button>
-          <UniformGrid Columns="2" HorizontalAlignment="Center">
-            <Button mecore:CornerCurves.CornerCurves="True,False,False,True"/>
-            <Button mecore:CornerCurves.CornerCurves="False,True,True,False" mecore:BorderPresence.BorderPresence="False,True,True,True"/>
-          </UniformGrid>
-          <UniformGrid Columns="1" HorizontalAlignment="Center">
-            <Button mecore:CornerCurves.CornerCurves="True,False"/>
-            <Button mecore:CornerCurves.CornerCurves="False,True" mecore:BorderPresence.BorderPresence="True,False,True,True"/>
-          </UniformGrid>
-          <UniformGrid Columns="2" HorizontalAlignment="Center">
-            <Button mecore:CornerCurves.CornerCurves="True,False,False,False"/>
-            <Button mecore:CornerCurves.CornerCurves="False,True,False,False" mecore:BorderPresence.BorderPresence="False,True,True,True"/>
-            <Button mecore:CornerCurves.CornerCurves="False,False,False,True" mecore:BorderPresence.BorderPresence="True,False,True,True"/>
-            <Button mecore:CornerCurves.CornerCurves="False,False,True,False" mecore:BorderPresence.BorderPresence="False,False,True,True"/>
-          </UniformGrid>
-          <UniformGrid Columns="2" HorizontalAlignment="Center">
-            <Rectangle/>
-            <Button mecore:CornerCurves.CornerCurves="True,True,False,False" mecore:BorderPresence.BorderPresence="True,True,True,False"/>
-            <Button mecore:CornerCurves.CornerCurves="True,False,False,True" mecore:BorderPresence.BorderPresence="True,True,False,True"/>
-            <Button mecore:CornerCurves.CornerCurves="False,False,True,False"/>
-          </UniformGrid>
-          <UniformGrid Columns="2" HorizontalAlignment="Center">
-            <Button HorizontalAlignment="Center" mecore:CornerCurves.CornerCurves="True,False,True,False" mecore:BorderPresence.BorderPresence="True,False,True,False"/>
-            <TextBlock Text="   &lt;-- probably a bad idea lol" VerticalAlignment="Center"/>
-          </UniformGrid>
-        </StackPanel>
+        <ScrollViewer>
+          <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+            <StackPanel.Styles>
+              <Style Selector="Button">
+                <Setter Property="Content">
+                  <!--Value="{Binding (mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=Self}}"/-->
+                  <MultiBinding>
+                    <MultiBinding.Converter>
+                      <local:SampleConverter/>
+                    </MultiBinding.Converter>
+                    <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=Self}"/>
+                    <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=Self}"/>
+                  </MultiBinding>
+                </Setter>
+                <!--Setter Property="Template">
+                  <ControlTemplate>
+                    <Border BorderBrush="Red" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}">
+                      <DockPanel Margin="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="PART_AttachedIconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}" DockPanel.Dock="Left"/>
+                        <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
+                      </DockPanel>
+                    </Border>
+                  </ControlTemplate>
+                </Setter-->
+              </Style>
+            </StackPanel.Styles>
+            <Button HorizontalAlignment="Center">
+              <mecore:AttachedIcon.Icon>
+                <Rectangle Fill="Green" Width="16" Height="16"/>
+              </mecore:AttachedIcon.Icon>
+            </Button>
+            <UniformGrid Columns="2" HorizontalAlignment="Center">
+              <Button mecore:CornerCurves.CornerCurves="True,False,False,True"/>
+              <Button mecore:CornerCurves.CornerCurves="False,True,True,False" mecore:BorderPresence.BorderPresence="False,True,True,True"/>
+            </UniformGrid>
+            <UniformGrid Columns="1" HorizontalAlignment="Center">
+              <Button mecore:CornerCurves.CornerCurves="True,False"/>
+              <Button mecore:CornerCurves.CornerCurves="False,True" mecore:BorderPresence.BorderPresence="True,False,True,True"/>
+            </UniformGrid>
+            <UniformGrid Columns="2" HorizontalAlignment="Center">
+              <Button mecore:CornerCurves.CornerCurves="True,False,False,False"/>
+              <Button mecore:CornerCurves.CornerCurves="False,True,False,False" mecore:BorderPresence.BorderPresence="False,True,True,True"/>
+              <Button mecore:CornerCurves.CornerCurves="False,False,False,True" mecore:BorderPresence.BorderPresence="True,False,True,True"/>
+              <Button mecore:CornerCurves.CornerCurves="False,False,True,False" mecore:BorderPresence.BorderPresence="False,False,True,True"/>
+            </UniformGrid>
+            <UniformGrid Columns="2" HorizontalAlignment="Center">
+              <Rectangle/>
+              <Button mecore:CornerCurves.CornerCurves="True,True,False,False" mecore:BorderPresence.BorderPresence="True,True,True,False"/>
+              <Button mecore:CornerCurves.CornerCurves="True,False,False,True" mecore:BorderPresence.BorderPresence="True,True,False,True"/>
+              <Button mecore:CornerCurves.CornerCurves="False,False,True,False"/>
+            </UniformGrid>
+            <UniformGrid Columns="2" HorizontalAlignment="Center">
+              <Button HorizontalAlignment="Center" mecore:CornerCurves.CornerCurves="True,False,True,False" mecore:BorderPresence.BorderPresence="True,False,True,False"/>
+              <TextBlock Text="   &lt;-- probably a bad idea lol" VerticalAlignment="Center"/>
+            </UniformGrid>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+      <TabItem Header="Themes" IsEnabled="False">
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Button x:Name="AeroThemeButton" Content="Windows Aero Theme"/>
+          <Button x:Name="SlateThemeButton" Content="Slate Theme"/>
+          <Button x:Name="JadeThemeButton" Content="Jade Theme"/>
+          <Button x:Name="LunaThemeButton" Content="Luna Theme (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="PlexThemeButton" Content="Plex Theme (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="MetroThemeButton" Content="Metro Theme (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="ShaleThemeButton" Content="Shale Theme (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="AquaThemeButton" Content="Aqua Theme (Planned, NYI)" IsVisible="False"/>
+        </WrapPanel>
       </TabItem>
       <TabItem Header="Buttons" IsEnabled="False">
         <StackPanel Orientation="Horizontal">
-          <Button x:Name="FileListmakerDialogButton">Show FileListmakerDialog</Button>
+          <Button x:Name="FileListmakerDialogButton" IsEnabled="False">Show FileListmakerDialog (NYI)</Button>
         </StackPanel>
         <!--Rectangle>
           <Rectangle.Fill>
