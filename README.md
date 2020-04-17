@@ -33,14 +33,14 @@ If you wish to contribute to Mechanism yourself, it is best if you contact me be
 When submitting a Pull Request, please include whatever alias(es) you wish to be listed under in the Mechanism credits, should your PR be merged, as well as any website links or whatever you'd like me to include along with your chosen alias(es). Additionally, please be aware that if needed, I will not hesitate to suggest changes to your contributions for any number of reasons.
 
 ### Planned Controls
-# (Note that these planned features are subject to change, and are not guaranteed to be implemented)
+##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
 - `ActionBox`
 - `ToggleSwitch`
 - `BreadcrumbsBar` and `BreadcrumbItem`
 - `Rearranger` and `RearrangeablePane`
 
 ### Planned Themes
-# (Note that these planned features are subject to change, and are not guaranteed to be implemented)
+##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
 - Windows XP Luna
 - Metro (e.g. Windows 8, Windows 10 pre-Fluent)
 - Fluent (waiting on drop shadows)
@@ -52,5 +52,5 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - Shale (waiting on drop shadows)
 
 ### Planned Tools
-# (Note that these planned features are subject to change, and are not guaranteed to be implemented)
+##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
 - Compiled XAML skin loading system, with optional support for sideloading user-provided skins
