@@ -11,7 +11,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `DecoratableWindow` (still under construction)
 
 ### Currently-available Themes
-(Note that all of these themes are currently very incomplete)
+##### (Note that all of these themes are currently very incomplete)
 - Windows Aero
 - Jade
 - Slate
