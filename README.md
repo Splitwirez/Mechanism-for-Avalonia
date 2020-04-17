@@ -6,7 +6,7 @@ Mechanism is a collection of Controls, Themes, and other such tools, intended fo
 At this early stage, I cannot promise that all of Mechanism for Avalonia is production-ready. That's not to say it necessarily isn't, more just that I don't know, and could use some help finding out.
 
 ### Currently-available Controls
-- `ToolBarTray` and `ToolBar` (nearly feature-complete)
+- `ToolBarTray` and `ToolBar` (nearly feature-complete) ![ToolBar and ToolBarTray](/ReadmeImages/ToolBar-ToolBarTray.gif)
 - `CommandBar` (feature-complete, in need of testing)
 - `DecoratableWindow` (still under construction)
 
