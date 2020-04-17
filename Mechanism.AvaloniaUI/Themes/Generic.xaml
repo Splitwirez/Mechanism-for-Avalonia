@@ -332,26 +332,21 @@
                   </MultiBinding>
                 </Rectangle.IsVisible>
               </Rectangle>
+              <Path Data="M 0 0 L 4 4 L 8 0 Z" Margin="2,0,0,0" Fill="{TemplateBinding Foreground}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
               <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </DockPanel>
           </Border>
-          <Popup x:Name="PART_Popup" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundBorder}">
-          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1"
-                            ContentTemplate="{TemplateBinding FlyoutContentTemplate}"
-                            Content="{TemplateBinding FlyoutContent}"
-                            TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"/>
-            
+          <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundBorder}">
+            <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1" ContentTemplate="{TemplateBinding FlyoutContentTemplate}" Content="{TemplateBinding FlyoutContent}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
           </Popup>
         </Panel>
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mectrl|FlyoutButton:checked /template/ Border#BackgroundBorder">
+  <!--Style Selector="mectrl|FlyoutButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
-  </Style>
+  </Style-->
   <Style Selector="mectrl|FlyoutButton:pointerover /template/ Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
   </Style>

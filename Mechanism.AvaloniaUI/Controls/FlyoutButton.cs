@@ -1,4 +1,6 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Input;
@@ -61,6 +63,14 @@ namespace Mechanism.AvaloniaUI.Controls
                         sender.Focus();
                 }
             }));
+        }
+
+        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        {
+            base.OnTemplateApplied(e);
+            ContentPresenter flCnPresenter = e.NameScope.Get<ContentPresenter>("PART_FlyoutContentPresenter");
+            if (flCnPresenter != null)
+                flCnPresenter.PointerPressed += (sender, args) => args.Handled = true;
         }
     }
 }
