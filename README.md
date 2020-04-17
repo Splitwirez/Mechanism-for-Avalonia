@@ -8,6 +8,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 ### Currently-available Controls
 - `ToolBarTray` and `ToolBar` (nearly feature-complete) ![ToolBar and ToolBarTray in action](/ReadmeImages/ToolBar-ToolBarTray.gif)
 - `CommandBar` (feature-complete, in need of testing) ![CommandBar in action](/ReadmeImages/CommandBar.gif)
+- `FlyoutButton` (feature-complete, in need of testing)
 - `DecoratableWindow` (still under construction)
 
 ### Currently-available Themes
@@ -34,7 +35,6 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 
 ### Planned Controls
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
-- `FlyoutButton`
 - `SplitButton`
 - `ActionBox`
 - `ToggleSwitch`
