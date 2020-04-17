@@ -37,42 +37,22 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
 
             this.Find<Button>("FileListmakerDialogButton").Click += FileListmakerDialogButton_Click;
-            this.Find<Button>("AeroThemeButton").Click += (sneder, args) => ShowThemeWindow("Windows Aero", "avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
-            this.Find<Button>("SlateThemeButton").Click += (sneder, args) => ShowThemeWindow("Slate", "avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
-            this.Find<Button>("JadeThemeButton").Click += (sneder, args) => ShowThemeWindow("Jade", "avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
+            this.Find<Button>("DefaultThemeButton").Click += (sneder, args) => SetTheme(null);
+            this.Find<Button>("AeroThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
+            this.Find<Button>("SlateThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
+            this.Find<Button>("JadeThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
             //new ThemeDemoWindow().Show();
         }
 
-        void ShowThemeWindow(string name, string styleIncludeUri)
+        void SetTheme(string styleIncludeUri)
         {
-            /*var win = new ThemeDemoWindow();
-            win.Title = win.Title.Replace("%THEMENAME%", name);
-            if (win.Styles.Count > 0)
-                win.Styles.RemoveAt(0);
-
-            win.Styles.Add(new StyleInclude(uri)
+            if (styleIncludeUri != null)
             {
-                Source = uri
-            });
-            win.Show();*/
-            var uri = new Uri(styleIncludeUri);
-            if (Application.Current.Styles.Count == 4)
-                (Application.Current.Styles[3] as StyleInclude).Source = uri;
-            else
-                Application.Current.Styles.Add(new StyleInclude(uri)
-                {
-                    Source = uri
-                });
-
-            List<IStyle> styles = new List<IStyle>();
-            //foreach (IStyle style in Application.Current.Styles)
-            for (int i = 0; i < Application.Current.Styles.Count; i++)
-            {
-                styles.Add(Application.Current.Styles[0]);
-                //Styles.RemoveAt(0);
+                var uri = new Uri(styleIncludeUri);
+                (App.Current as App).SetTheme(uri);
             }
-            Application.Current.Styles.Clear();
-            Application.Current.Styles.AddRange(styles);
+            else
+                (App.Current as App).SetTheme(null);
         }
 
         private void FileListmakerDialogButton_Click(object sender, global::Avalonia.Interactivity.RoutedEventArgs e)

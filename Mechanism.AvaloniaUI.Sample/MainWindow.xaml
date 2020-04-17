@@ -218,8 +218,34 @@
         <TreeViewItem Header="Sample text 3"/>
       </TreeViewItem>
     </TreeView>
-    <TabControl SelectedIndex="1">
-      <TabItem Header="Properties" IsVisible="False">
+    <TabControl>
+      <TabItem Header="Themes">
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Button x:Name="DefaultThemeButton" Content="Avalonia Default"/>
+          <Button x:Name="AeroThemeButton" Content="Windows Aero"/>
+          <Button x:Name="SlateThemeButton" Content="Slate"/>
+          <Button x:Name="JadeThemeButton" Content="Jade"/>
+          <Button x:Name="LunaThemeButton" Content="Luna (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="PlexThemeButton" Content="Plex (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="MetroThemeButton" Content="Metro (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="ShaleThemeButton" Content="Shale (Planned, NYI)" IsVisible="False"/>
+          <Button x:Name="AquaThemeButton" Content="Aqua (Planned, NYI)" IsVisible="False"/>
+        </WrapPanel>
+      </TabItem>
+      <TabItem Header="Buttons" IsEnabled="False" IsVisible="False">
+        <StackPanel Orientation="Horizontal">
+          <Button x:Name="FileListmakerDialogButton" IsEnabled="False">Show FileListmakerDialog (NYI)</Button>
+        </StackPanel>
+        <!--Rectangle>
+          <Rectangle.Fill>
+            <RadialGradientBrush Center="50%,50%" GradientOrigin="50%,50%" Radius="0.5">
+              <GradientStop Offset="0" Color="White"/>
+              <GradientStop Offset="1" Color="Black"/>
+            </RadialGradientBrush>
+          </Rectangle.Fill>
+        </Rectangle-->
+      </TabItem>
+      <TabItem Header="Properties" IsEnabled="False" IsVisible="False">
         <StackPanel Orientation="Vertical">
           <StackPanel IsVisible="False">
             <TextBlock Text="DecoratableWindow"/>
@@ -388,31 +414,6 @@
             Duis maximus eget ante at blandit. Aenean vel nibh gravida, consequat turpis quis, pellentesque metus. Quisque varius, urna eget auctor iaculis, sem quam convallis sapien, sed laoreet ex turpis vel massa. Nullam imperdiet magna varius imperdiet placerat. Morbi convallis arcu lorem, eu sollicitudin felis ultricies id. Duis rutrum, sem in consectetur tincidunt, sapien tortor tristique dui, venenatis auctor mauris orci a nisl. Vestibulum sit amet erat semper, consectetur nulla pharetra, condimentum risus. Phasellus porta, lacus nec malesuada imperdiet, nibh sapien condimentum arcu, pretium laoreet orci arcu sit amet diam. Nullam vitae mauris purus.
           </TextBlock>
         </ScrollViewer>
-      </TabItem>
-      <TabItem Header="Themes" IsEnabled="False" IsVisible="False">
-        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-          <Button x:Name="AeroThemeButton" Content="Windows Aero Theme"/>
-          <Button x:Name="SlateThemeButton" Content="Slate Theme"/>
-          <Button x:Name="JadeThemeButton" Content="Jade Theme"/>
-          <Button x:Name="LunaThemeButton" Content="Luna Theme (Planned, NYI)" IsVisible="False"/>
-          <Button x:Name="PlexThemeButton" Content="Plex Theme (Planned, NYI)" IsVisible="False"/>
-          <Button x:Name="MetroThemeButton" Content="Metro Theme (Planned, NYI)" IsVisible="False"/>
-          <Button x:Name="ShaleThemeButton" Content="Shale Theme (Planned, NYI)" IsVisible="False"/>
-          <Button x:Name="AquaThemeButton" Content="Aqua Theme (Planned, NYI)" IsVisible="False"/>
-        </WrapPanel>
-      </TabItem>
-      <TabItem Header="Buttons" IsEnabled="False" IsVisible="False">
-        <StackPanel Orientation="Horizontal">
-          <Button x:Name="FileListmakerDialogButton" IsEnabled="False">Show FileListmakerDialog (NYI)</Button>
-        </StackPanel>
-        <!--Rectangle>
-          <Rectangle.Fill>
-            <RadialGradientBrush Center="50%,50%" GradientOrigin="50%,50%" Radius="0.5">
-              <GradientStop Offset="0" Color="White"/>
-              <GradientStop Offset="1" Color="Black"/>
-            </RadialGradientBrush>
-          </Rectangle.Fill>
-        </Rectangle-->
       </TabItem>
     </TabControl>
   </DockPanel>

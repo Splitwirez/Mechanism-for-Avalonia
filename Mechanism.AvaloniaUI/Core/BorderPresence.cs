@@ -1,14 +1,21 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
+using Avalonia.Layout;
 using System;
 using System.Globalization;
 
 namespace Mechanism.AvaloniaUI.Core
 {
-    public class BorderPresence : AvaloniaObject, IEquatable<BorderPresence>
+    public class BorderPresence : Layoutable, IEquatable<BorderPresence>
     {
-        public static readonly AttachedProperty<BorderPresence> BorderPresenceProperty = AvaloniaProperty.RegisterAttached<BorderPresence, Control, BorderPresence>("BorderPresence", new BorderPresence());
+        public static readonly AttachedProperty<BorderPresence> BorderPresenceProperty = AvaloniaProperty.RegisterAttached<BorderPresence, Control, BorderPresence>("BorderPresence", new BorderPresence(), defaultBindingMode: BindingMode.TwoWay);
+
+        /*static BorderPresence()
+        {
+            Layoutable.AffectsMeasure<Control>(BorderPresenceProperty);
+        }*/
 
         public static BorderPresence GetBorderPresence(IAvaloniaObject obj)
         {

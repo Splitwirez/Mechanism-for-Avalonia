@@ -22,7 +22,10 @@ namespace Mechanism.AvaloniaUI.Sample
                 //.UseManagedSystemDialogs()
                 //.UseManagedDialogs()
                 //.With(new AvaloniaNativePlatformOptions() { UseDeferredRendering = false })
-                /*.LogToDebug()*/;
+#if DEBUG
+                .LogToDebug()
+#endif
+                ;
             ManagedFileDialogExtensions.UseManagedSystemDialogs(builder);
             return builder;
         }

@@ -1,14 +1,16 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
+using Avalonia.Layout;
 using System;
 using System.Globalization;
 
 namespace Mechanism.AvaloniaUI.Core
 {
-    public class CornerCurves : AvaloniaObject, IEquatable<CornerCurves>
+    public class CornerCurves : Layoutable, IEquatable<CornerCurves>
     {
-        public static readonly AttachedProperty<CornerCurves> CornerCurvesProperty = AvaloniaProperty.RegisterAttached<CornerCurves, Control, CornerCurves>("CornerCurves", new CornerCurves());
+        public static readonly AttachedProperty<CornerCurves> CornerCurvesProperty = AvaloniaProperty.RegisterAttached<CornerCurves, Control, CornerCurves>(name: "CornerCurves", defaultValue: new CornerCurves(), defaultBindingMode: BindingMode.TwoWay);
 
         public static CornerCurves GetCornerCurves(IAvaloniaObject obj)
         {
