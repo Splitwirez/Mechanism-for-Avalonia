@@ -34,6 +34,8 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 
 ### Planned Controls
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
+- `FlyoutButton`
+- `SplitButton`
 - `ActionBox`
 - `ToggleSwitch`
 - `BreadcrumbsBar` and `BreadcrumbItem`
