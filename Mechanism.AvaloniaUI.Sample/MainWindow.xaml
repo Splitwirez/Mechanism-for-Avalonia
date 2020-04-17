@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample;assembly=Mechanism.AvaloniaUI.Sample"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
@@ -314,7 +315,7 @@
       </TabItem>
       <TabItem Header="Buttons">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
-          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*" HorizontalAlignment="Left">
+          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" HorizontalAlignment="Left">
             <Grid.Styles>
               <Style Selector=":is(Button):disabled">
                 <Setter Property="Grid.Column" Value="2"/>
@@ -325,6 +326,9 @@
               <Style Selector="ToggleButton">
                 <Setter Property="Grid.Row" Value="4"/>
               </Style>
+              <Style Selector="mectrl|FlyoutButton">
+                <Setter Property="Grid.Row" Value="6"/>
+              </Style>
             </Grid.Styles>
             <Button Content="Button"/>
             <Button Content="Disabled Button" IsEnabled="False"/>
@@ -332,6 +336,16 @@
             <RepeatButton Content="Disabled RepeatButton" IsEnabled="False"/>
             <ToggleButton Content="ToggleButton"/>
             <ToggleButton Content="Disabled ToggleButton" IsEnabled="False"/>
+            <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}">
+              <mectrl:FlyoutButton.FlyoutContent>
+                <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
+                  <TextBlock Text="Flyout content" FontWeight="Bold"/>
+                  <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
+                  <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
+                </StackPanel>
+              </mectrl:FlyoutButton.FlyoutContent>
+            </mectrl:FlyoutButton>
+            <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
           </Grid>
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 1"/>
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 2" IsChecked="True"/>
