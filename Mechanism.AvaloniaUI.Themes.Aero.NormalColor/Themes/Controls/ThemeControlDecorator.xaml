@@ -201,8 +201,8 @@
               </Border.BorderThickness>
             </Border>
             <Panel>
-              <Path Name="checkMark" Data="M 0 4 L 3 7 L 6 0" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-              <Rectangle Name="indeterminateMark" Width="5" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Path Name="CheckMark" Data="M 0 4 L 3 7 L 6 0" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Rectangle Name="IndeterminateMark" Width="5" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Panel>
           </Panel>
           <!--StackPanel x:Name="ContentIconPanel" Orientation="Horizontal" Grid.Column="1">
@@ -247,9 +247,9 @@
             <Border Classes="AeroStyledDisabledBackground">
               <Ellipse Fill="{DynamicResource AeroCheckBoxDisabledBackground}" Stroke="{DynamicResource AeroCheckBoxDisabledBorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
             </Border>
-            <Panel Width="6" Height="6" HorizontalAlignment="Center" VerticalAlignment="Center">
-              <Ellipse Name="checkMark" Width="6" Height="6" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
-              <Ellipse Name="indeterminateMark" Width="6" Height="6" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+            <Panel Width="5" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Ellipse Name="CheckMark" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform"/>
+              <Rectangle Name="IndeterminateMark" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Panel>
           </Panel>
           <DockPanel x:Name="ContentIconPanel" Grid.Column="1">
@@ -672,20 +672,20 @@
   <Style Selector="mectrl|ThemeControlDecorator /template/ Border.AeroStyledCheckedBackground">
     <Setter Property="Opacity" Value="0"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator /template/ Path#CheckMark">
     <Setter Property="Opacity" Value="0"/>
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxIdleCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Path#CheckMark">
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxHoverCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Path#CheckMark">
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxPressedCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ Path#CheckMark">
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxDisabledCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=False] /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator.Checkable:indeterminate /template/ :is(Shape)#CheckMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -694,7 +694,16 @@
       </Animation>
     </Style.Animations>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=True] /template/ Path#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=False] /template/ :is(Shape)#CheckMark">
+    <Style.Animations>
+      <Animation FillMode="Both" Duration="0:0:0.125">
+        <KeyFrame Cue="100%">
+          <Setter Property="Opacity" Value="0.0"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=True]:not(:indeterminate) /template/ :is(Shape)#CheckMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -704,24 +713,24 @@
     </Style.Animations>
   </Style>
 
-  <Style Selector="mectrl|ThemeControlDecorator /template/ Ellipse#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator /template/ Ellipse#CheckMark">
     <Setter Property="Opacity" Value="0"/>
     <Setter Property="Fill" Value="{DynamicResource AeroRadioButtonIdleCircleFill}"/>
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxIdleCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Ellipse#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Ellipse#CheckMark">
     <Setter Property="Fill" Value="{DynamicResource AeroRadioButtonHoverCircleFill}"/>
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxHoverCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Ellipse#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Ellipse#CheckMark">
     <Setter Property="Fill" Value="{DynamicResource AeroRadioButtonPressedCircleFill}"/>
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxPressedCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ Ellipse#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ Ellipse#CheckMark">
     <Setter Property="Fill" Value="{DynamicResource AeroRadioButtonDisabledCircleFill}"/>
     <Setter Property="Stroke" Value="{DynamicResource AeroCheckBoxDisabledCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=False] /template/ Ellipse#checkMark">
+  <!--Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=False] /template/ Ellipse#CheckMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -730,7 +739,7 @@
       </Animation>
     </Style.Animations>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=True] /template/ Ellipse#checkMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=True] /template/ Ellipse#CheckMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -738,24 +747,27 @@
         </KeyFrame>
       </Animation>
     </Style.Animations>
-  </Style>
+  </Style-->
   
-  <Style Selector="mectrl|ThemeControlDecorator /template/ :is(Shape)#indeterminateMark">
-    <Setter Property="Opacity" Value="0"/>
+  <Style Selector="mectrl|ThemeControlDecorator /template/ Rectangle#IndeterminateMark">
     <Setter Property="Fill" Value="{DynamicResource AeroCheckBoxIdleCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ :is(Shape)#indeterminateMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Rectangle#IndeterminateMark">
     <Setter Property="Fill" Value="{DynamicResource AeroCheckBoxHoverCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ :is(Shape)#indeterminateMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Rectangle#IndeterminateMark">
     <Setter Property="Fill" Value="{DynamicResource AeroCheckBoxPressedCheckMarkBrush}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ :is(Shape)#indeterminateMark">
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ Rectangle#IndeterminateMark">
     <Setter Property="Fill" Value="{DynamicResource AeroCheckBoxDisabledCheckMarkBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator:not(:indeterminate) /template/ Rectangle#IndeterminateMark">
+    <Setter Property="Opacity" Value="0"/>
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=False] /template/ Border.AeroStyledHoverBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.375">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.375-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="0.0"/>
         </KeyFrame>
@@ -764,7 +776,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPointerOver=True] /template/ Border.AeroStyledHoverBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.125">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.125-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="1.0"/>
         </KeyFrame>
@@ -773,7 +786,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Border.AeroStyledHoverBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.125">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.125-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="0.0"/>
         </KeyFrame>
@@ -782,7 +796,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=False][IsVisuallyPointerOver=True] /template/ Border.AeroStyledHoverBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.375">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.375-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="1.0"/>
         </KeyFrame>
@@ -791,7 +806,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=False]:not(.ButtonCheckable) /template/ Border.AeroStyledPressedBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.375">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.375-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="0.0"/>
         </KeyFrame>
@@ -800,7 +816,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=False][IsVisuallyChecked=False].ButtonCheckable /template/ Border.AeroStyledPressedBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.375">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.375-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="0.0"/>
         </KeyFrame>
@@ -809,7 +826,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyPressed=True] /template/ Border.AeroStyledPressedBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.125">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.125-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="1.0"/>
         </KeyFrame>
@@ -818,7 +836,8 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=False].ButtonCheckable /template/ Border.AeroStyledPressedBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.375">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.375-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="0.0"/>
         </KeyFrame>
@@ -827,14 +846,15 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyChecked=True].ButtonCheckable /template/ Border.AeroStyledPressedBackground">
     <Style.Animations>
-      <Animation FillMode="Both" Duration="0:0:0.125">
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <!--0:0:0.125-->
         <KeyFrame Cue="100%">
           <Setter Property="Opacity" Value="1.0"/>
         </KeyFrame>
       </Animation>
     </Style.Animations>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable:indeterminate /template/ :is(Shape)#indeterminateMark">
+  <!--Style Selector="mectrl|ThemeControlDecorator.Checkable:indeterminate /template/ Rectangle#IndeterminateMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -843,7 +863,7 @@
       </Animation>
     </Style.Animations>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=True]:not(:indeterminate) /template/ :is(Shape)#indeterminateMark">
+  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=True]:not(:indeterminate) /template/ Rectangle#IndeterminateMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -852,7 +872,7 @@
       </Animation>
     </Style.Animations>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=False]:not(:indeterminate) /template/ :is(Shape)#indeterminateMark">
+  <Style Selector="mectrl|ThemeControlDecorator.Checkable[IsVisuallyChecked=False]:not(:indeterminate) /template/ Rectangle#IndeterminateMark">
     <Style.Animations>
       <Animation FillMode="Both" Duration="0:0:0.125">
         <KeyFrame Cue="100%">
@@ -860,7 +880,7 @@
         </KeyFrame>
       </Animation>
     </Style.Animations>
-  </Style>
+  </Style-->
 
   <!--Style Selector=":not(:checked) /template/ Border.AeroStyledCheckedBackground">
     <Style.Animations>

@@ -72,7 +72,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         public static readonly StyledProperty<bool?> IsVisuallyCheckedProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool?>(nameof(IsVisuallyChecked), defaultValue: false);
+        AvaloniaProperty.Register<ThemeControlDecorator, bool?>(nameof(IsVisuallyChecked)/*, defaultValue: false*/);
 
         public bool? IsVisuallyChecked
         {
@@ -92,7 +92,7 @@ namespace Mechanism.AvaloniaUI.Controls
 
         void UpdatePseudoClasses(bool? isVisuallyChecked)
         {
-            PseudoClasses.Set(":indeterminate", isVisuallyChecked == null);
+            PseudoClasses.Set(":indeterminate", !isVisuallyChecked.HasValue);
         }
     }
 }

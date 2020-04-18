@@ -314,8 +314,8 @@
         </ScrollViewer>
       </TabItem>
       <TabItem Header="Buttons">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
-          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
+          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
             <Grid.Styles>
               <Style Selector=":is(Button):disabled">
                 <Setter Property="Grid.Column" Value="2"/>
@@ -347,14 +347,18 @@
             </mectrl:FlyoutButton>
             <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
           </Grid>
+        <StackPanel Orientation="Vertical" Spacing="10">
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 1"/>
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 2" IsChecked="True"/>
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 3"/>
           <RadioButton GroupName="RadiosGroup" Content="RadioButton 4 but it's a disabled RadioButton" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Spacing="10">
           <CheckBox Content="CheckBox"/>
           <CheckBox Content="CheckBox but IsChecked == true" IsChecked="True"/>
           <CheckBox Content="Checked CheckBox IsChecked == null" IsChecked="{x:Null}" IsThreeState="True"/>
           <CheckBox Content="CheckBox but it's a disabled CheckBox" IsEnabled="False"/>
+        </StackPanel>
         </StackPanel>
       </TabItem>
       <TabItem Header="Boxes">

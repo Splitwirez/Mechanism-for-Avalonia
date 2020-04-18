@@ -92,10 +92,10 @@
   </Style>
 
   <Style Selector="mectrl|ThemeControlDecorator.Checkable">
-    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator.ButtonCheckable">
-    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
   </Style>
   
   

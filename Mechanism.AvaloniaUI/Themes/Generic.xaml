@@ -343,17 +343,17 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <!--Style Selector="mectrl|FlyoutButton:checked /template/ Border#BackgroundBorder">
+  <Style Selector="mectrl|FlyoutButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
-  </Style-->
-  <Style Selector="mectrl|FlyoutButton:pointerover /template/ Border#BackgroundBorder">
+  </Style>
+  <Style Selector="mectrl|FlyoutButton:pointerover Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
   </Style>
-  <Style Selector="mectrl|FlyoutButton:pressed  /template/ Border#BackgroundBorder">
+  <Style Selector="mectrl|FlyoutButton:pressed  Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
-  <Style Selector="mectrl|FlyoutButton:disabled /template/ Border#BackgroundBorder">
+  <Style Selector="mectrl|FlyoutButton:disabled Border#BackgroundBorder">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
   </Style>
 </Styles>

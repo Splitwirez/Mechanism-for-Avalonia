@@ -90,6 +90,9 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="mectrl|FlyoutButton:disabled /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource AeroDisabledForeground}"/>
+  </Style>
   <!--Style Selector="mectrl|FlyoutButton:not(:checked) /template/ mectrl|ThemeControlDecorator#BackgroundDecorator">
     <!-Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/->
   </Style-->
