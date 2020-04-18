@@ -330,7 +330,7 @@
                 <Setter Property="Grid.Row" Value="6"/>
               </Style>
             </Grid.Styles>
-            <Button Content="FlyoutButton"/>
+            <Button Content="Button"/>
             <Button Content="Disabled Button" IsEnabled="False"/>
             <RepeatButton Content="RepeatButton"/>
             <RepeatButton Content="Disabled RepeatButton" IsEnabled="False"/>
