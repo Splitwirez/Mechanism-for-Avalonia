@@ -57,4 +57,5 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 
 ### Planned Tools
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
-- Compiled XAML skin loading system, with optional support for sideloading user-provided skins
+- Platform-matching theme loader
+- Compiled XAML skin loader, with optional support for sideloading user-provided skins
