@@ -6,9 +6,9 @@ Mechanism is a collection of Controls, Themes, and other such tools, intended fo
 At this early stage, I cannot promise that all of Mechanism for Avalonia is production-ready. That's not to say it necessarily isn't, more just that I don't know, and could use some help finding out.
 
 ### Currently-available Controls
-- `ToolBarTray` and `ToolBar` (nearly feature-complete) ![ToolBar and ToolBarTray in action](/ReadmeImages/ToolBar-ToolBarTray.gif)
-- `CommandBar` (feature-complete, in need of testing) ![CommandBar in action](/ReadmeImages/CommandBar.gif)
-- `FlyoutButton` (feature-complete, in need of testing)
+- `ToolBarTray` and `ToolBar` (nearly feature-complete)<br/>![ToolBar and ToolBarTray in action](/ReadmeImages/ToolBar-ToolBarTray.gif)
+- `CommandBar` (feature-complete, in need of testing)<br/>![CommandBar in action](/ReadmeImages/CommandBar.gif)
+- `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
 - `DecoratableWindow` (still under construction)
 
 ### Currently-available Themes
@@ -49,10 +49,13 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - Windows Classic
 - Mac OS X Aqua
 - macOS Human(?)
-- Possibly some popular Linux themes (open to suggestions)
+- Ubuntu Ambiance and/or Communitheme(?)
+- Elementary OS
+- Possibly some other popular Linux themes (open to suggestions)
 - Plex
 - Shale (waiting on drop shadows)
 
 ### Planned Tools
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
-- Compiled XAML skin loading system, with optional support for sideloading user-provided skins
+- Platform-matching theme loader
+- Compiled XAML skin loader, with optional support for sideloading user-provided skins
