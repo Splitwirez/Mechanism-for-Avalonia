@@ -49,7 +49,9 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - Windows Classic
 - Mac OS X Aqua
 - macOS Human(?)
-- Possibly some popular Linux themes (open to suggestions)
+- Ubuntu Ambiance and/or Communitheme(?)
+- Elementary OS
+- Possibly some other popular Linux themes (open to suggestions)
 - Plex
 - Shale (waiting on drop shadows)
 
