@@ -6,11 +6,12 @@
 
 
 
-  <LinearGradientBrush x:Key="AeroToolTipBackground" StartPoint="0%,0%" EndPoint="0%,100%">
+  <GradientStops x:Key="AeroToolTipBackgroundGradientStops">
     <GradientStop Offset="0" Color="#FFFFFFFF"/>
     <GradientStop Offset="1" Color="#FFE4E5F0"/>
-  </LinearGradientBrush>
+  </GradientStops>
   <SolidColorBrush x:Key="AeroToolTipBorderBrush" Color="#FF767676"/>
+  <SolidColorBrush x:Key="AeroToolTipForeground" Color="#FF000000"/>
 
 
 

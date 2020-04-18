@@ -28,20 +28,6 @@
     </StackPanel>
   </Design.PreviewWith>
   <Style Selector="mectrl|ThemeControlDecorator">
-    <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
-    <Setter Property="mecore:AttachedIcon.Icon" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue={x:Null}}"/>
-    <Setter Property="mecore:AttachedIcon.IconGap" Value="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=0.0}"/>
-    <Setter Property="IsVisuallyPointerOver" Value="{Binding IsPointerOver, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=False}"/>
-    <Setter Property="IsVisuallyPressed" Value="{Binding IsPressed, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=False}"/>
-    <Setter Property="IsVisuallyEnabled" Value="{Binding IsEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=False}"/>
-    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
-    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
-    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
-    <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=5}" />
-    <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Center}"/>
-    <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Center}"/>
-    <Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
-    <Setter Property="mecore:BorderPresence.BorderPresence" Value="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="Focusable" Value="False"/>
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
@@ -272,6 +258,28 @@
             <ContentPresenter Name="PART_ContentPresenter"/>
           </DockPanel>
         </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=ToolTip]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+          <Border.CornerRadius>
+            <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+              <Binding.Converter>
+                <mecore:CornerCurvesToCornerRadiiConverter/>
+              </Binding.Converter>
+            </Binding>
+          </Border.CornerRadius>
+          <Border.BorderThickness>
+            <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+              <Binding.Converter>
+                <mecore:BorderPresenceToThicknessesConverter/>
+              </Binding.Converter>
+            </Binding>
+          </Border.BorderThickness>
+        </Border>
       </ControlTemplate>
     </Setter>
   </Style>
@@ -649,64 +657,6 @@
         </Panel>
       </ControlTemplate>
     </Setter>
-  </Style>
-  
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoContentTemplate) /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoContent) /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="IsVisible" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon) /template/ ContentPresenter#IconPresenter">
-    <Setter Property="Content" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="IsVisible" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon):not(.NoContent) /template/ Rectangle#IconGapRect">
-    <Setter Property="Fill" Value="#01000000"/>
-    <Setter Property="IsVisible">
-      <MultiBinding ConverterParameter="All">
-        <MultiBinding.Converter>
-          <meconv:BoolsToBoolConverter/>
-        </MultiBinding.Converter>
-        <MultiBinding.Bindings>
-          <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-          <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-        </MultiBinding.Bindings>
-      </MultiBinding>
-      <!--Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}"/-->
-    </Setter>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon):not(.NoContent) /template/ Rectangle#IconGapRect:not(.Vertical)">
-    <Setter Property="Width" Value="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="Height" Value="1"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon):not(.NoContent) /template/ Rectangle#IconGapRect.Vertical">
-    <Setter Property="Width" Value="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="Height" Value="1"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator /template/ :is(Panel)#ContentIconPanel">
-    <Setter Property="Margin" Value="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <!--Style Selector="mectrl|ThemeControlDecorator.NoIcon /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Margin" Value="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style-->
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoAutoAlignment) /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="VerticalAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoAutoAlignment) /template/ :is(Panel)#ContentIconPanel">
-    <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-    <Setter Property="VerticalAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  
-  <Style Selector="mectrl|ThemeControlDecorator.Checkable">
-    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.ButtonCheckable">
-    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>
   
     

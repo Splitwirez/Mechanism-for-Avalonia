@@ -315,7 +315,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel>
+        <Panel x:Name="PART_ButtonArea">
           <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
             <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
               <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>

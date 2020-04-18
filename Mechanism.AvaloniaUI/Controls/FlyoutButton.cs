@@ -65,12 +65,20 @@ namespace Mechanism.AvaloniaUI.Controls
             }));
         }
 
+        InputElement _buttonArea = null;
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
-            ContentPresenter flCnPresenter = e.NameScope.Get<ContentPresenter>("PART_FlyoutContentPresenter");
+            /*ContentPresenter flCnPresenter = e.NameScope.Get<ContentPresenter>("PART_FlyoutContentPresenter");
             if (flCnPresenter != null)
-                flCnPresenter.PointerPressed += (sender, args) => args.Handled = true;
+                flCnPresenter.PointerPressed += (sender, args) => args.Handled = true;*/
+            _buttonArea = e.NameScope.Get<InputElement>("PART_ButtonArea");
+        }
+
+        protected override void Toggle()
+        {
+            if ((_buttonArea != null) && _buttonArea.IsPointerOver)
+                base.Toggle();
         }
     }
 }

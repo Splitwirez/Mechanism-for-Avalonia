@@ -13,6 +13,7 @@ namespace Mechanism.AvaloniaUI.Controls
         NavigationButton,
         CheckBox,
         RadioButton,
+        ToolTip,
         MenuBar,
         ContextMenu,
         MenuItem,
@@ -35,7 +36,7 @@ namespace Mechanism.AvaloniaUI.Controls
     public class ThemeControlDecorator : ContentControl
     {
         public static readonly StyledProperty<ThemeControlStyle> ControlStyleProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, ThemeControlStyle>(nameof(ControlStyle));
+        AvaloniaProperty.Register<ThemeControlDecorator, ThemeControlStyle>(nameof(ControlStyle), defaultValue: ThemeControlStyle.NavigationButton);
 
         public ThemeControlStyle ControlStyle
         {
@@ -44,7 +45,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         public static readonly StyledProperty<bool> IsVisuallyPointerOverProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyPointerOver));
+        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyPointerOver), defaultValue: false);
 
         public bool IsVisuallyPointerOver
         {
@@ -53,7 +54,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         public static readonly StyledProperty<bool> IsVisuallyPressedProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyPressed));
+        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyPressed), defaultValue: false);
 
         public bool IsVisuallyPressed
         {
@@ -62,7 +63,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         public static readonly StyledProperty<bool> IsVisuallyEnabledProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyEnabled));
+        AvaloniaProperty.Register<ThemeControlDecorator, bool>(nameof(IsVisuallyEnabled), defaultValue: true);
 
         public bool IsVisuallyEnabled
         {
@@ -71,7 +72,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         public static readonly StyledProperty<bool?> IsVisuallyCheckedProperty =
-        AvaloniaProperty.Register<ThemeControlDecorator, bool?>(nameof(IsVisuallyChecked));
+        AvaloniaProperty.Register<ThemeControlDecorator, bool?>(nameof(IsVisuallyChecked), defaultValue: false);
 
         public bool? IsVisuallyChecked
         {
