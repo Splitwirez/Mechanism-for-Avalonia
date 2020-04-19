@@ -58,23 +58,25 @@
               <!--{Binding Path=(mecore:CornerCurves.CornerCurves).BottomRight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, FallbackValue=True}-->
             </mecore:CornerCurves.CornerCurves>
           </mectrl:ThemeControlDecorator>
-          <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
-            <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
-            <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
-              <Rectangle.IsVisible>
-                <MultiBinding ConverterParameter="All">
-                  <MultiBinding.Converter>
-                    <meconv:BoolsToBoolConverter/>
-                  </MultiBinding.Converter>
-                  <MultiBinding.Bindings>
-                    <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                    <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                  </MultiBinding.Bindings>
-                </MultiBinding>
-              </Rectangle.IsVisible>
-            </Rectangle>
-            <Path Data="M 0 0 L 4 4 L 8 0 Z" Margin="2,0,0,0" Fill="{TemplateBinding Foreground}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
-            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+          <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Path Data="M 0 0 L 4 4 L 8 0 Z" Margin="3,0" Fill="{TemplateBinding Foreground}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+            <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+              <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+              <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
+                <Rectangle.IsVisible>
+                  <MultiBinding ConverterParameter="All">
+                    <MultiBinding.Converter>
+                      <meconv:BoolsToBoolConverter/>
+                    </MultiBinding.Converter>
+                    <MultiBinding.Bindings>
+                      <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                      <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                    </MultiBinding.Bindings>
+                  </MultiBinding>
+                </Rectangle.IsVisible>
+              </Rectangle>
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+            </DockPanel>
           </DockPanel>
           <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundDecorator}">
             <Panel>
@@ -93,6 +95,9 @@
   <Style Selector="mectrl|FlyoutButton:disabled /template/ ContentPresenter">
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource AeroDisabledForeground}"/>
   </Style>
+  <Style Selector="mectrl|FlyoutButton:disabled /template/ Path">
+    <Setter Property="Fill" Value="{DynamicResource AeroDisabledForeground}"/>
+  </Style>
   <!--Style Selector="mectrl|FlyoutButton:not(:checked) /template/ mectrl|ThemeControlDecorator#BackgroundDecorator">
     <!-Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/->
   </Style-->
@@ -101,5 +106,104 @@
     <Setter Property="mecore:CornerCurves.CornerCurves">
       <mecore:CornerCurves TopLeft="{Binding Path=(mecore:CornerCurves.CornerCurves).TopLeft, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=True}" TopRight="{Binding Path=(mecore:CornerCurves.CornerCurves).TopRight, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=True}" BottomRight="{Binding Path=(mecore:CornerCurves.CornerCurves).BottomRight, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=True}" BottomLeft="False"/>
     </Setter>
+  </Style-->
+
+  <Style Selector="mectrl|SplitButton">
+    <Setter Property="Background" Value="{DynamicResource AeroButtonIdleBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroButtonIdleOuterBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{DynamicResource AeroForeground}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="FontSize" Value="{DynamicResource AeroFontSizeNormal}"/>
+    <Setter Property="mecore:AttachedIcon.IconGap" Value="2"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <mectrl:FlyoutButton mecore:CornerCurves.CornerCurves="False,True,True,False" mecore:BorderPresence.BorderPresence="False,True,True,True" Padding="4,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" FlyoutContent="{TemplateBinding FlyoutContent}" FlyoutContentTemplate="{TemplateBinding FlyoutContentTemplate}" IsChecked="{TemplateBinding IsFlyoutOpen}" IsEnabled="{TemplateBinding IsFlyoutSegmentEnabled}" IsVisible="{TemplateBinding IsFlyoutSegmentVisible}" FocusOnOpenElement="{TemplateBinding FocusOnOpenElement}" AutoCloseFlyout="{TemplateBinding AutoCloseFlyout}" Template="{DynamicResource AeroEmbeddedFlyoutButtonTemplate}" DockPanel.Dock="Right">
+            <mectrl:FlyoutButton.Template>
+              <ControlTemplate>
+                <Panel x:Name="PART_ButtonArea">
+                  <mectrl:ThemeControlDecorator x:Name="BackgroundDecorator" ControlStyle="Button" Classes="ButtonCheckable NoContent NoIcon"/>
+                  <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="NoContent NoIcon NoAutoState NoAutoCornerCurves" IsVisible="{TemplateBinding IsChecked}" IsVisuallyPressed="{TemplateBinding IsChecked}" mecore:CornerCurves.CornerCurves="False"/>
+                  <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundDecorator}">
+                    <Panel>
+                      <mectrl:ThemeControlDecorator ControlStyle="ToolTip" Classes="NoAutoState NoContent NoIcon NoAutoCornerCurves NoAutoBorderPresence" mecore:CornerCurves.CornerCurves="False,True,True,True" BorderBrush="{DynamicResource AeroToolTipBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                        <mectrl:ThemeControlDecorator.Background>
+                          <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolTipBackgroundGradientStops}"/>
+                        </mectrl:ThemeControlDecorator.Background>
+                      </mectrl:ThemeControlDecorator>
+                      <ContentPresenter Name="PART_FlyoutContentPresenter" ContentTemplate="{TemplateBinding FlyoutContentTemplate}" Content="{TemplateBinding FlyoutContent}" TextBlock.Foreground="{DynamicResource AeroToolTipForeground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                    </Panel>
+                  </Popup>
+                </Panel>
+              </ControlTemplate>
+            </mectrl:FlyoutButton.Template>
+          </mectrl:FlyoutButton>
+          <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="NoAutoCornerCurves">
+            <mecore:CornerCurves.CornerCurves>
+              <mecore:CornerCurves TopLeft="{Binding Path=(mecore:CornerCurves.CornerCurves).TopLeft, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, FallbackValue=True}" TopRight="False" BottomRight="False" BottomLeft="{Binding Path=(mecore:CornerCurves.CornerCurves).BottomLeft, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, FallbackValue=True}"/>
+            </mecore:CornerCurves.CornerCurves>
+          </mectrl:ThemeControlDecorator>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="mectrl|SplitToggleButton">
+    <Setter Property="Background" Value="{DynamicResource AeroButtonIdleBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource AeroButtonIdleOuterBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{DynamicResource AeroForeground}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="FontSize" Value="{DynamicResource AeroFontSizeNormal}"/>
+    <Setter Property="mecore:AttachedIcon.IconGap" Value="2"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <mectrl:FlyoutButton mecore:CornerCurves.CornerCurves="False,True,True,False" mecore:BorderPresence.BorderPresence="False,True,True,True" Padding="4,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" FlyoutContent="{TemplateBinding FlyoutContent}" FlyoutContentTemplate="{TemplateBinding FlyoutContentTemplate}" IsChecked="{TemplateBinding IsFlyoutOpen}" IsEnabled="{TemplateBinding IsFlyoutSegmentEnabled}" IsVisible="{TemplateBinding IsFlyoutSegmentVisible}" FocusOnOpenElement="{TemplateBinding FocusOnOpenElement}" AutoCloseFlyout="{TemplateBinding AutoCloseFlyout}" Template="{DynamicResource AeroEmbeddedFlyoutButtonTemplate}" DockPanel.Dock="Right">
+            <mectrl:FlyoutButton.Template>
+              <ControlTemplate>
+                <Panel x:Name="PART_ButtonArea">
+                  <mectrl:ThemeControlDecorator x:Name="BackgroundDecorator" ControlStyle="Button" Classes="ButtonCheckable NoContent NoIcon"/>
+                  <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="NoContent NoIcon NoAutoState NoAutoCornerCurves" IsVisible="{TemplateBinding IsChecked}" IsVisuallyPressed="{TemplateBinding IsChecked}" mecore:CornerCurves.CornerCurves="False"/>
+                  <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundDecorator}">
+                    <Panel>
+                      <mectrl:ThemeControlDecorator ControlStyle="ToolTip" Classes="NoAutoState NoContent NoIcon NoAutoCornerCurves NoAutoBorderPresence" mecore:CornerCurves.CornerCurves="False,True,True,True" BorderBrush="{DynamicResource AeroToolTipBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                        <mectrl:ThemeControlDecorator.Background>
+                          <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolTipBackgroundGradientStops}"/>
+                        </mectrl:ThemeControlDecorator.Background>
+                      </mectrl:ThemeControlDecorator>
+                      <ContentPresenter Name="PART_FlyoutContentPresenter" ContentTemplate="{TemplateBinding FlyoutContentTemplate}" Content="{TemplateBinding FlyoutContent}" TextBlock.Foreground="{DynamicResource AeroToolTipForeground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                    </Panel>
+                  </Popup>
+                </Panel>
+              </ControlTemplate>
+            </mectrl:FlyoutButton.Template>
+          </mectrl:FlyoutButton>
+          <mectrl:ThemeControlDecorator x:Name="PART_ButtonArea" ControlStyle="Button" Classes="ButtonCheckable NoAutoCornerCurves">
+            <mecore:CornerCurves.CornerCurves>
+              <mecore:CornerCurves TopLeft="{Binding Path=(mecore:CornerCurves.CornerCurves).TopLeft, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, FallbackValue=True}" TopRight="False" BottomRight="False" BottomLeft="{Binding Path=(mecore:CornerCurves.CornerCurves).BottomLeft, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, FallbackValue=True}"/>
+            </mecore:CornerCurves.CornerCurves>
+          </mectrl:ThemeControlDecorator>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  
+  
+  <Style Selector=":is(Button):disabled">
+    <Setter Property="Opacity" Value="1"/>
+  </Style>
+  <!--Style Selector=":is(Button):disabled /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource AeroDisabledForeground}"/>
+  </Style>
+  <Style Selector=":is(Button):disabled /template/ mectrl|ThemeControlDecorator /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource AeroDisabledForeground}"/>
   </Style-->
 </Styles>

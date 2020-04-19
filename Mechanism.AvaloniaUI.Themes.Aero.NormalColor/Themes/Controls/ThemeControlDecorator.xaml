@@ -660,6 +660,9 @@
   </Style>
   
     
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource AeroDisabledForeground}"/>
+  </Style>
   <Style Selector="mectrl|ThemeControlDecorator /template/ Border.AeroStyledDisabledBackground">
     <Setter Property="IsVisible" Value="{Binding !IsVisuallyEnabled, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>

@@ -11,7 +11,7 @@
   <Styles.Resources>
     <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
       <Panel x:Name="PART_ButtonArea">
-        <Border x:Name="BackgroundBorder" Background="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}" BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+        <Border x:Name="BackgroundBorder" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}">
           <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
         </Border>
         <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundBorder}">
@@ -329,23 +329,25 @@
       <ControlTemplate>
         <Panel x:Name="PART_ButtonArea">
           <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-            <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
-              <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-              <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
-                <Rectangle.IsVisible>
-                  <MultiBinding ConverterParameter="All">
-                    <MultiBinding.Converter>
-                      <meconv:BoolsToBoolConverter/>
-                    </MultiBinding.Converter>
-                    <MultiBinding.Bindings>
-                      <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                      <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                    </MultiBinding.Bindings>
-                  </MultiBinding>
-                </Rectangle.IsVisible>
-              </Rectangle>
-              <Path Data="M 0 0 L 4 4 L 8 0 Z" Margin="2,0,0,0" Fill="{TemplateBinding Foreground}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
-              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              <Path Data="M 0 0 L 4 4 L 8 0 Z" Margin="4,0" Fill="{TemplateBinding Foreground}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+              <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+                <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
+                  <Rectangle.IsVisible>
+                    <MultiBinding ConverterParameter="All">
+                      <MultiBinding.Converter>
+                        <meconv:BoolsToBoolConverter/>
+                      </MultiBinding.Converter>
+                      <MultiBinding.Bindings>
+                        <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                        <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                      </MultiBinding.Bindings>
+                    </MultiBinding>
+                  </Rectangle.IsVisible>
+                </Rectangle>
+                <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+              </DockPanel>
             </DockPanel>
           </Border>
           <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundBorder}">
@@ -354,6 +356,12 @@
         </Panel>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="mectrl|FlyoutButton /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style>
+  <Style Selector="mectrl|FlyoutButton:not(:pointerover):not(:pressed):not(:checked) /template/ Border#BackgroundBorder">
+    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>
   <Style Selector="mectrl|FlyoutButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>

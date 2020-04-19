@@ -33,6 +33,9 @@
   <Style Selector="mectrl|ThemeControlDecorator:not(.NoContent)">
     <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
   </Style>
+  <Style Selector="mectrl|ThemeControlDecorator:not(.NoAutoBrushes) /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Transparent}"/>
+  </Style>
   <Style Selector="mectrl|ThemeControlDecorator:not(.NoContent) /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
     <Setter Property="IsVisible" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}"/>
