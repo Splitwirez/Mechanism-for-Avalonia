@@ -128,7 +128,7 @@
                   <mectrl:ThemeControlDecorator x:Name="BackgroundDecorator" ControlStyle="Button" Classes="ButtonCheckable NoContent NoIcon"/>
                   <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="NoContent NoIcon NoAutoState NoAutoCornerCurves" IsVisible="{TemplateBinding IsChecked}" IsVisuallyPressed="{TemplateBinding IsChecked}" mecore:CornerCurves.CornerCurves="False"/>
                   <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundDecorator}">
+                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundDecorator}">
                     <Panel>
                       <mectrl:ThemeControlDecorator ControlStyle="ToolTip" Classes="NoAutoState NoContent NoIcon NoAutoCornerCurves NoAutoBorderPresence" mecore:CornerCurves.CornerCurves="False,True,True,True" BorderBrush="{DynamicResource AeroToolTipBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <mectrl:ThemeControlDecorator.Background>
@@ -172,7 +172,7 @@
                   <mectrl:ThemeControlDecorator x:Name="BackgroundDecorator" ControlStyle="Button" Classes="ButtonCheckable NoContent NoIcon"/>
                   <mectrl:ThemeControlDecorator ControlStyle="Button" Classes="NoContent NoIcon NoAutoState NoAutoCornerCurves" IsVisible="{TemplateBinding IsChecked}" IsVisuallyPressed="{TemplateBinding IsChecked}" mecore:CornerCurves.CornerCurves="False"/>
                   <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundDecorator}">
+                  <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundDecorator}">
                     <Panel>
                       <mectrl:ThemeControlDecorator ControlStyle="ToolTip" Classes="NoAutoState NoContent NoIcon NoAutoCornerCurves NoAutoBorderPresence" mecore:CornerCurves.CornerCurves="False,True,True,True" BorderBrush="{DynamicResource AeroToolTipBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <mectrl:ThemeControlDecorator.Background>

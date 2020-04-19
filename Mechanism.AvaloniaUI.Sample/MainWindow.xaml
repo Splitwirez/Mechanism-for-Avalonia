@@ -363,7 +363,7 @@
                 
               <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox1}">
                 <mectrl:SplitButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox1">
+                  <ListBox x:Name="FlyoutListBox1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -372,7 +372,7 @@
               </mectrl:SplitButton>
               <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
                 <mectrl:SplitButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox2">
+                  <ListBox x:Name="FlyoutListBox2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -385,7 +385,7 @@
                 
               <mectrl:SplitToggleButton Content="SplitToggleButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
                 <mectrl:SplitToggleButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox3">
+                  <ListBox x:Name="FlyoutListBox3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -394,7 +394,7 @@
               </mectrl:SplitToggleButton>
               <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
                 <mectrl:SplitToggleButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox4">
+                  <ListBox x:Name="FlyoutListBox4" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
