@@ -359,18 +359,18 @@
                 </mectrl:FlyoutButton.FlyoutContent>
               </mectrl:FlyoutButton>
               <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
-              <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox}">
+              
+                
+              <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox1}">
                 <mectrl:SplitButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox">
+                  <ListBox x:Name="FlyoutListBox1">
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                     <ListBoxItem>Flyout content here</ListBoxItem>
                   </ListBox>
                 </mectrl:SplitButton.FlyoutContent>
               </mectrl:SplitButton>
-              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False"/>
-              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
-              <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
                 <mectrl:SplitButton.FlyoutContent>
                   <ListBox x:Name="FlyoutListBox2">
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -379,7 +379,11 @@
                   </ListBox>
                 </mectrl:SplitButton.FlyoutContent>
               </mectrl:SplitButton>
-              <mectrl:SplitToggleButton Content="SplitToggleButton" IsVisible="False" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
+              <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+              
+                
+              <mectrl:SplitToggleButton Content="SplitToggleButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
                 <mectrl:SplitToggleButton.FlyoutContent>
                   <ListBox x:Name="FlyoutListBox3">
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -388,9 +392,7 @@
                   </ListBox>
                 </mectrl:SplitToggleButton.FlyoutContent>
               </mectrl:SplitToggleButton>
-              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False"/>
-              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
-              <mectrl:SplitToggleButton Content="SplitToggleButton" IsVisible="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
                 <mectrl:SplitToggleButton.FlyoutContent>
                   <ListBox x:Name="FlyoutListBox4">
                     <ListBoxItem>Flyout content here</ListBoxItem>
@@ -399,6 +401,8 @@
                   </ListBox>
                 </mectrl:SplitToggleButton.FlyoutContent>
               </mectrl:SplitToggleButton>
+              <mectrl:SplitToggleButton Content="SplitToggleButton" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
             </Grid>
             <StackPanel Orientation="Vertical" Spacing="10">
               <RadioButton GroupName="RadiosGroup" Content="RadioButton"/>
