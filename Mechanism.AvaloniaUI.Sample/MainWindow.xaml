@@ -14,7 +14,7 @@
   <DockPanel>
     <TabControl TabStripPlacement="Bottom" DockPanel.Dock="Top">
       <TabItem Header="CommandBar">
-        <StackPanel Orientation="Vertical" Width="{Binding $parent[DockPanel].Width}">
+        <StackPanel Orientation="Vertical" Width="{Binding $parent[DockPanel].Width}" Spacing="10">
           <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <mecb:CommandBar.Layers>
               <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
@@ -98,7 +98,7 @@
         </StackPanel>
       </TabItem>
       <TabItem Header="ToolBarTray">
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Spacing="10">
         <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
           <metb:ToolBar UseOverflow="False">
             <Menu>
@@ -233,7 +233,7 @@
           <Button x:Name="AquaThemeButton" Content="Aqua (Planned, NYI)" IsVisible="False"/>
         </WrapPanel>
       </TabItem>
-      <TabItem Header="Buttons" IsEnabled="False" IsVisible="False">
+      <TabItem Header="Dialogs" IsEnabled="False" IsVisible="False">
         <StackPanel Orientation="Horizontal">
           <Button x:Name="FileListmakerDialogButton" IsEnabled="False">Show FileListmakerDialog (NYI)</Button>
         </StackPanel>
@@ -314,52 +314,106 @@
         </ScrollViewer>
       </TabItem>
       <TabItem Header="Buttons">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
-          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
-            <Grid.Styles>
-              <Style Selector=":is(Button):disabled">
-                <Setter Property="Grid.Column" Value="2"/>
-              </Style>
-              <Style Selector="RepeatButton">
-                <Setter Property="Grid.Row" Value="2"/>
-              </Style>
-              <Style Selector="ToggleButton">
-                <Setter Property="Grid.Row" Value="4"/>
-              </Style>
-              <Style Selector="mectrl|FlyoutButton">
-                <Setter Property="Grid.Row" Value="6"/>
-              </Style>
-            </Grid.Styles>
-            <Button Content="Button"/>
-            <Button Content="Disabled Button" IsEnabled="False"/>
-            <RepeatButton Content="RepeatButton"/>
-            <RepeatButton Content="Disabled RepeatButton" IsEnabled="False"/>
-            <ToggleButton Content="ToggleButton"/>
-            <ToggleButton Content="Disabled ToggleButton" IsEnabled="False"/>
-            <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}">
-              <mectrl:FlyoutButton.FlyoutContent>
-                <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
-                  <TextBlock Text="Flyout content" FontWeight="Bold"/>
-                  <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
-                  <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
-                </StackPanel>
-              </mectrl:FlyoutButton.FlyoutContent>
-            </mectrl:FlyoutButton>
-            <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
-          </Grid>
-        <StackPanel Orientation="Vertical" Spacing="10">
-          <RadioButton GroupName="RadiosGroup" Content="RadioButton 1"/>
-          <RadioButton GroupName="RadiosGroup" Content="RadioButton 2" IsChecked="True"/>
-          <RadioButton GroupName="RadiosGroup" Content="RadioButton 3"/>
-          <RadioButton GroupName="RadiosGroup" Content="RadioButton 4 but it's a disabled RadioButton" IsEnabled="False"/>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Spacing="10">
-          <CheckBox Content="CheckBox"/>
-          <CheckBox Content="CheckBox but IsChecked == true" IsChecked="True"/>
-          <CheckBox Content="Checked CheckBox IsChecked == null" IsChecked="{x:Null}" IsThreeState="True"/>
-          <CheckBox Content="CheckBox but it's a disabled CheckBox" IsEnabled="False"/>
-        </StackPanel>
-        </StackPanel>
+        <ScrollViewer>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
+            <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
+              <Grid.Styles>
+                <Style Selector=":is(Button):disabled">
+                  <Setter Property="Grid.Column" Value="2"/>
+                </Style>
+                <Style Selector="RepeatButton">
+                  <Setter Property="Grid.Row" Value="2"/>
+                </Style>
+                <Style Selector="ToggleButton">
+                  <Setter Property="Grid.Row" Value="4"/>
+                </Style>
+                <Style Selector="mectrl|FlyoutButton">
+                  <Setter Property="Grid.Row" Value="6"/>
+                </Style>
+                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=True]">
+                  <Setter Property="Grid.Row" Value="8"/>
+                </Style>
+                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=False]">
+                  <Setter Property="Grid.Row" Value="10"/>
+                </Style>
+                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=True]">
+                  <Setter Property="Grid.Row" Value="12"/>
+                </Style>
+                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=False]">
+                  <Setter Property="Grid.Row" Value="14"/>
+                </Style>
+              </Grid.Styles>
+              <Button Content="Button"/>
+              <Button Content="Disabled Button" IsEnabled="False"/>
+              <RepeatButton Content="RepeatButton"/>
+              <RepeatButton Content="Disabled RepeatButton" IsEnabled="False"/>
+              <ToggleButton Content="ToggleButton"/>
+              <ToggleButton Content="Disabled ToggleButton" IsEnabled="False"/>
+              <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}" AutoCloseFlyout="False">
+                <mectrl:FlyoutButton.FlyoutContent>
+                  <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
+                    <TextBlock Text="Flyout content" FontWeight="Bold"/>
+                    <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
+                    <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
+                  </StackPanel>
+                </mectrl:FlyoutButton.FlyoutContent>
+              </mectrl:FlyoutButton>
+              <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
+              <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox}">
+                <mectrl:SplitButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitButton.FlyoutContent>
+              </mectrl:SplitButton>
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False"/>
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
+                <mectrl:SplitButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox2">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitButton.FlyoutContent>
+              </mectrl:SplitButton>
+              <mectrl:SplitToggleButton Content="SplitToggleButton" IsVisible="False" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
+                <mectrl:SplitToggleButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox3">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitToggleButton.FlyoutContent>
+              </mectrl:SplitToggleButton>
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False"/>
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitToggleButton Content="SplitToggleButton" IsVisible="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
+                <mectrl:SplitToggleButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox4">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitToggleButton.FlyoutContent>
+              </mectrl:SplitToggleButton>
+            </Grid>
+            <StackPanel Orientation="Vertical" Spacing="10">
+              <RadioButton GroupName="RadiosGroup" Content="RadioButton"/>
+              <RadioButton GroupName="RadiosGroup" Content="RadioButton but IsChecked == True" IsChecked="True"/>
+              <RadioButton GroupName="RadiosGroup" Content="RadioButton but IsChecked == null" IsThreeState="True" IsChecked="{x:Null}"/>
+              <RadioButton GroupName="RadiosGroup" Content="RadioButton but it's a disabled RadioButton" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Spacing="10">
+              <CheckBox Content="CheckBox"/>
+              <CheckBox Content="CheckBox but IsChecked == true" IsChecked="True"/>
+              <CheckBox Content="Checked CheckBox IsChecked == null" IsThreeState="True" IsChecked="{x:Null}"/>
+              <CheckBox Content="CheckBox but it's a disabled CheckBox" IsEnabled="False"/>
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
       </TabItem>
       <TabItem Header="Boxes">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">

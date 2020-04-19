@@ -8,6 +8,18 @@
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Styles.Resources>
+    <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
+      <Panel x:Name="PART_ButtonArea">
+        <Border x:Name="BackgroundBorder" Background="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}" BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+          <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+        </Border>
+        <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundBorder}">
+          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Popup>
+      </Panel>
+    </ControlTemplate>
+  </Styles.Resources>
   <Style Selector="mewin|DecoratableWindow">
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
@@ -40,7 +52,7 @@
                 </ToggleButton>
               </Panel>
               <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" ItemsPanel="{TemplateBinding ItemsPanel}" Margin="{TemplateBinding Padding}"/>
-                <!--ItemsControl.ItemsPanel>
+              <!--ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <mectrl:NoSizeStackPanel Orientation="Horizontal" ClipToBounds="True"/>
                   </ItemsPanelTemplate>
@@ -61,7 +73,7 @@
   <Style Selector="mectrl|OverflowFlyoutItemsControl /template/ ToggleButton#PART_FlyoutToggleButton:not(:pointerover):not(:pressed)">
     <Setter Property="Background" Value="Transparent"/>
   </Style>
-    
+
   <Style Selector="metb|ToolBar">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
@@ -101,10 +113,10 @@
         <Border Background="#01000000" Padding="3">
           <Border>
             <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,7" SpreadMethod="Repeat">
-              <GradientStop Offset="0.42857142857142857142857142857143" Color="{DynamicResource ThemeBorderLowColor}"/>
-              <GradientStop Offset="0.42857142857142857142857142857143" Color="#01000000"/>
-            </LinearGradientBrush>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="0,7" SpreadMethod="Repeat">
+                <GradientStop Offset="0.42857142857142857142857142857143" Color="{DynamicResource ThemeBorderLowColor}"/>
+                <GradientStop Offset="0.42857142857142857142857142857143" Color="#01000000"/>
+              </LinearGradientBrush>
             </Border.Background>
           </Border>
         </Border>
@@ -127,10 +139,10 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
-            <StackPanel Orientation="Vertical" Spacing="2">
-              <ContentPresenter x:Name="PART_IconPresenter" Content="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-              <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            </StackPanel>
+          <StackPanel Orientation="Vertical" Spacing="2">
+            <ContentPresenter x:Name="PART_IconPresenter" Content="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          </StackPanel>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -150,7 +162,7 @@
   <Style Selector="metb|ToolBar > ToggleButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
-    
+
   <Style Selector="metb|ToolBarTray">
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
@@ -350,10 +362,104 @@
   <Style Selector="mectrl|FlyoutButton:pointerover Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
   </Style>
-  <Style Selector="mectrl|FlyoutButton:pressed  Border#BackgroundBorder">
+  <Style Selector="mectrl|FlyoutButton:pressed Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
   <Style Selector="mectrl|FlyoutButton:disabled Border#BackgroundBorder">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="mectrl|SplitButton">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="Padding" Value="4"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <mectrl:FlyoutButton Padding="4,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" FlyoutContent="{TemplateBinding FlyoutContent}" FlyoutContentTemplate="{TemplateBinding FlyoutContentTemplate}" IsChecked="{TemplateBinding IsFlyoutOpen}" IsEnabled="{TemplateBinding IsFlyoutSegmentEnabled}" IsVisible="{TemplateBinding IsFlyoutSegmentVisible}" FocusOnOpenElement="{TemplateBinding FocusOnOpenElement}" AutoCloseFlyout="{TemplateBinding AutoCloseFlyout}" Template="{DynamicResource EmbeddedFlyoutButtonTemplate}" Margin="-1,0,0,0" DockPanel.Dock="Right"/>
+          <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+              <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+              <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
+                <Rectangle.IsVisible>
+                  <MultiBinding ConverterParameter="All">
+                    <MultiBinding.Converter>
+                      <meconv:BoolsToBoolConverter/>
+                    </MultiBinding.Converter>
+                    <MultiBinding.Bindings>
+                      <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                      <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                    </MultiBinding.Bindings>
+                  </MultiBinding>
+                </Rectangle.IsVisible>
+              </Rectangle>
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </DockPanel>
+          </Border>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|SplitButton:pointerover Border#BackgroundBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="mectrl|SplitButton:pressed Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+  </Style>
+  <Style Selector="mectrl|SplitButton:disabled Border#BackgroundBorder">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="mectrl|SplitToggleButton">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="Padding" Value="4"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <mectrl:FlyoutButton Padding="4,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" FlyoutContent="{TemplateBinding FlyoutContent}" FlyoutContentTemplate="{TemplateBinding FlyoutContentTemplate}" IsChecked="{TemplateBinding IsFlyoutOpen}" IsEnabled="{TemplateBinding IsFlyoutSegmentEnabled}" IsVisible="{TemplateBinding IsFlyoutSegmentVisible}" FocusOnOpenElement="{TemplateBinding FocusOnOpenElement}" AutoCloseFlyout="{TemplateBinding AutoCloseFlyout}" Template="{DynamicResource EmbeddedFlyoutButtonTemplate}" Margin="-1,0,0,0" DockPanel.Dock="Right"/>
+          <Border x:Name="PART_ButtonArea" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+              <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+              <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
+                <Rectangle.IsVisible>
+                  <MultiBinding ConverterParameter="All">
+                    <MultiBinding.Converter>
+                      <meconv:BoolsToBoolConverter/>
+                    </MultiBinding.Converter>
+                    <MultiBinding.Bindings>
+                      <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                      <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                    </MultiBinding.Bindings>
+                  </MultiBinding>
+                </Rectangle.IsVisible>
+              </Rectangle>
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </DockPanel>
+          </Border>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|SplitToggleButton:checked /template/ Border#PART_ButtonArea">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="mectrl|SplitToggleButton:pointerover Border#PART_ButtonArea">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="mectrl|SplitToggleButton:pressed Border#PART_ButtonArea">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+  </Style>
+  <Style Selector="mectrl|SplitToggleButton:disabled Border#PART_ButtonArea">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
   </Style>
 </Styles>

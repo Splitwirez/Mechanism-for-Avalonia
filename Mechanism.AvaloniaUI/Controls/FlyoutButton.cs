@@ -51,6 +51,15 @@ namespace Mechanism.AvaloniaUI.Controls
             set => SetValue(FocusOnOpenElementProperty, value);
         }
 
+        public static readonly StyledProperty<bool> AutoCloseFlyoutProperty =
+        AvaloniaProperty.Register<FlyoutButton, bool>(nameof(AutoCloseFlyout), defaultValue: true);
+
+        public bool AutoCloseFlyout
+        {
+            get => GetValue(AutoCloseFlyoutProperty);
+            set => SetValue(AutoCloseFlyoutProperty, value);
+        }
+
         static FlyoutButton()
         {
             IsCheckedProperty.Changed.AddClassHandler<FlyoutButton>(new Action<FlyoutButton, AvaloniaPropertyChangedEventArgs>((sender, e) =>
@@ -66,6 +75,7 @@ namespace Mechanism.AvaloniaUI.Controls
         }
 
         InputElement _buttonArea = null;
+        Popup _flyout = null;
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
@@ -73,11 +83,19 @@ namespace Mechanism.AvaloniaUI.Controls
             if (flCnPresenter != null)
                 flCnPresenter.PointerPressed += (sender, args) => args.Handled = true;*/
             _buttonArea = e.NameScope.Get<InputElement>("PART_ButtonArea");
+            _flyout = e.NameScope.Get<Popup>("PART_Flyout");
+            _flyout.PointerReleased += (sneder, args) =>
+            {
+                if (AutoCloseFlyout)
+                    Toggle();
+            };
         }
 
         protected override void Toggle()
         {
-            if ((_buttonArea != null) && _buttonArea.IsPointerOver)
+            if (_buttonArea.IsPointerOver)
+                base.Toggle();
+            else if (IsChecked.HasValue && IsChecked.Value && AutoCloseFlyout)
                 base.Toggle();
         }
     }
