@@ -10,6 +10,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `CommandBar` (feature-complete, in need of testing)<br/>![CommandBar in action](/ReadmeImages/CommandBar.gif)
 - `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
 - `SplitButton`
+- `SplitToggleButton`
 - `DecoratableWindow` (still under construction)
 
 ### Currently-available Themes
