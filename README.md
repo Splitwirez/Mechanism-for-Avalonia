@@ -9,6 +9,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `ToolBarTray` and `ToolBar` (nearly feature-complete)<br/>![ToolBar and ToolBarTray in action](/ReadmeImages/ToolBar-ToolBarTray.gif)
 - `CommandBar` (feature-complete, in need of testing)<br/>![CommandBar in action](/ReadmeImages/CommandBar.gif)
 - `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
+- `SplitButton`
 - `DecoratableWindow` (still under construction)
 
 ### Currently-available Themes
@@ -35,7 +36,7 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 
 ### Planned Controls
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
-- `SplitButton`
+- Some kind of equivalent to the UWP `ContentDialog`
 - `ActionBox`
 - `ToggleSwitch`
 - `BreadcrumbsBar` and `BreadcrumbItem`
