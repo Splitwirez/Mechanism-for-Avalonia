@@ -12,7 +12,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `SplitButton` (feature-complete, in need of testing)
 - `SplitToggleButton` (feature-complete, in need of testing)
 - `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
-- `DecoratableWindow` (under construction)
+- `DecoratableWindow` (under construction)<br/>![DecoratableWindow](/ReadmeImages/DecoratableWindow.png)
 
 ### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
