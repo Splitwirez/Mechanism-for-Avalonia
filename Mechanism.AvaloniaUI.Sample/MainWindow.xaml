@@ -233,10 +233,12 @@
           <Button x:Name="AquaThemeButton" Content="Aqua (Planned, NYI)" IsVisible="False"/>
         </WrapPanel>
       </TabItem>
-      <TabItem Header="Dialogs" IsEnabled="False" IsVisible="False">
-        <StackPanel Orientation="Horizontal">
-          <Button x:Name="FileListmakerDialogButton" IsEnabled="False">Show FileListmakerDialog (NYI)</Button>
-        </StackPanel>
+      <TabItem Header="Dialogs">
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
+          <Button x:Name="ShowContentDialog2Button">Show ContentDialog, and then show another one after one second</Button>
+          <Button x:Name="ShowFileListmakerDialogButton" IsEnabled="False" IsVisible="False">Show FileListmakerDialog (NYI)</Button>
+        </WrapPanel>
         <!--Rectangle>
           <Rectangle.Fill>
             <RadialGradientBrush Center="50%,50%" GradientOrigin="50%,50%" Radius="0.5">

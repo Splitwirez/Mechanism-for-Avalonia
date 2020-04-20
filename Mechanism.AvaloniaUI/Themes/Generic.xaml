@@ -7,6 +7,7 @@
              xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
   <Styles.Resources>
     <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
@@ -15,18 +16,23 @@
           <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
         </Border>
         <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundBorder}">
-          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
         </Popup>
       </Panel>
     </ControlTemplate>
   </Styles.Resources>
+  <Style Selector=":is(TopLevel)">
+    <Setter Property="mecd:ContentDialog.MonitorActive" Value="True"/>
+  </Style>
   <Style Selector="mewin|DecoratableWindow">
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="{TemplateBinding Background}">
-          <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          <VisualLayerManager>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </VisualLayerManager>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -61,7 +67,7 @@
             </DockPanel>
             <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <!--IsOpen="{Binding Path=IsChecked, ElementName=PART_FlyoutToggleButton, Mode=TwoWay}"-->
-              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
                 <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
               </Border>
             </Popup>
@@ -243,7 +249,7 @@
             </DockPanel>
             <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <!--IsOpen="{Binding Path=IsChecked, ElementName=PART_FlyoutToggleButton, Mode=TwoWay}"-->
-              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
                 <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
               </Border>
             </Popup>
@@ -351,7 +357,7 @@
             </DockPanel>
           </Border>
           <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Bottom" PlacementTarget="{Binding #BackgroundBorder}">
-            <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1" ContentTemplate="{TemplateBinding FlyoutContentTemplate}" Content="{TemplateBinding FlyoutContent}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" ContentTemplate="{TemplateBinding FlyoutContentTemplate}" Content="{TemplateBinding FlyoutContent}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
           </Popup>
         </Panel>
       </ControlTemplate>
@@ -469,5 +475,31 @@
   </Style>
   <Style Selector="mectrl|SplitToggleButton:disabled Border#PART_ButtonArea">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+  <Style Selector="mecd|ContentDialogFrame">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Background="Black" Opacity="0.75"/>
+          <Border Width="475" MinHeight="175" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <ContentPresenter Content="{TemplateBinding Content}"/>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecd|BasicMessageDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Margin="25,25,25,0" TextWrapping="Wrap" FontSize="20" DockPanel.Dock="Top"/>
+          <Button x:Name="PART_OkButton" Content="OK" DockPanel.Dock="Bottom" Margin="25,0,25,25"/>
+          <TextBlock Text="{TemplateBinding Message}" Margin="25" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
   </Style>
 </Styles>
