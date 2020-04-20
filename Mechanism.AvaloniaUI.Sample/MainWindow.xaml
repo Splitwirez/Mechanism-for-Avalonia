@@ -238,6 +238,8 @@
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
           <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
           <Button x:Name="ShowContentDialog2Button">Show ContentDialog, and then show another one after one second</Button>
+          <Button x:Name="ShowContentDialogWithActionsButton">Show ContentDialog with actions</Button>
+          <TextBlock x:Name="LastActionResultTextBlock"/>
           <Button x:Name="ShowFileListmakerDialogButton" IsEnabled="False" IsVisible="False">Show FileListmakerDialog (NYI)</Button>
         </WrapPanel>
         <!--Rectangle>

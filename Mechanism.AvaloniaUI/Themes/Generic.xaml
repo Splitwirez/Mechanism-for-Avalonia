@@ -635,4 +635,27 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="mecd|MessageActionDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Margin="25,25,25,0" TextWrapping="Wrap" FontSize="20" DockPanel.Dock="Top"/>
+          <!--Button x:Name="PART_OkButton" Content="OK" DockPanel.Dock="Bottom" Margin="25,0,25,25"/-->
+          <ItemsControl Items="{Binding Actions}" DockPanel.Dock="Bottom">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid Rows="1" Margin="25,0,0,25"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.DataTemplates>
+              <DataTemplate DataType="{x:Type mecd:IContentDialogAction}">
+                <Button Command="{Binding SelectAction, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mecd:MessageActionDialog}}}" CommandParameter="{Binding}" Content="{Binding Title}" ToolTip.Tip="{Binding Description}" Margin="0,0,25,0"/>
+              </DataTemplate>
+            </ItemsControl.DataTemplates>
+          </ItemsControl>
+          <TextBlock Text="{TemplateBinding Message}" Margin="25" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
 </Styles>

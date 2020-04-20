@@ -3,11 +3,13 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
+using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Mechanism.AvaloniaUI.Controls.ContentDialog
 {
@@ -21,7 +23,7 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
         public static bool IsShowingDialog { get; internal set; } = false;
         public static bool UseDialogQueue { get; set; } = true;
 
-        public static Queue<Action> DialogQueue { get; internal set; } = new Queue<Action>();
+        public static Queue<Task> DialogQueue { get; internal set; } = new Queue<Task>();
 
         static ContentDialog()
         {
@@ -29,8 +31,9 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
             {
                 if (UseDialogQueue && (DialogQueue.Count > 0))
                 {
-                    Action action = DialogQueue.Dequeue();
-                    action.Invoke();
+                    Task task = DialogQueue.Dequeue();
+                    task.Start();
+                    //action.Invoke();
                 }
             };
 
@@ -63,35 +66,96 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
         }
 
 
-        public static void Show(string title, string content) => Show(title, content, LastActiveTopLevel);
+        public static void Show(string title, string content, bool activateIfOnDesktop = true) => Show(title, content, LastActiveTopLevel, activateIfOnDesktop);
         public static void Show(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true)
         {
             if (topLevel == null)
                 throw new Exception("topLevel cannot be null!");
 
-            try
-            {
+            if (!IsShowingDialog)
                 UnsafeShow(title, content, topLevel, activateIfOnDesktop);
-            }
-            catch (Exception ex)
+            //catch (Exception ex)
+            else if (UseDialogQueue)
             {
-                if (UseDialogQueue)
-                    DialogQueue.Enqueue(new Action(() => UnsafeShow(title, content, topLevel)));
-                else
-                    throw ex;
+                DialogQueue.Enqueue(new Task<object>(() =>
+                {
+                    UnsafeShow(title, content, topLevel);
+                    return null;
+                }));
             }
+            else
+                throw new Exception();
         }
 
-        static void UnsafeShow(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true)
+        public static async Task<T> ShowWithActionEnum<T>(string title, string content, bool activateIfOnDesktop = true) where T : Enum => await ShowWithActionEnum<T>(title, content, LastActiveTopLevel, activateIfOnDesktop);
+        public static async Task<T> ShowWithActionEnum<T>(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true) where T : Enum
+        {
+            if (topLevel == null)
+                throw new Exception("topLevel cannot be null!");
+
+            if (!IsShowingDialog)
+            {
+                return await UnsafeShowWithActionEnum<T>(title, content, topLevel, activateIfOnDesktop);
+            }
+            //catch (Exception ex)
+            else if (UseDialogQueue)
+            {
+                var task = UnsafeShowWithActionEnum<T>(title, content, topLevel, activateIfOnDesktop);
+                DialogQueue.Enqueue(task);
+                task.Wait();
+                return task.Result;
+            }
+            else
+                throw new Exception();
+        }
+
+        public static async Task<T> UnsafeShowWithActionEnum<T>(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true) where T : Enum
         {
             if (activateIfOnDesktop && (topLevel is Window win))
                 win.Activate();
 
-            OverlayLayer.GetOverlayLayer(topLevel).Children.Add(ContentDialogFrame.GetFrame(new BasicMessageDialog()
+            var actionSet = new EnumActionSet<T>();
+            var messageActionDialog = new MessageActionDialog(actionSet)
             {
                 Title = title,
                 Message = content
-            }, topLevel));
+            };
+
+            /*await Task.Run(*/
+            var task = new Task<T>(new Func<T>(() =>
+            {
+                T value = default;
+                bool assigned = false;
+                messageActionDialog.ActionSelected += (sneder, args) =>
+                {
+                    value = (T)args.Value;
+                    assigned = true;
+                };
+                while (!assigned)
+                { }
+                return value;
+            }));
+
+            var layer = OverlayLayer.GetOverlayLayer(topLevel);
+            var frame = ContentDialogFrame.GetFrame(messageActionDialog, topLevel);
+            layer.Children.Add(frame);
+            task.Start();
+            return await task;
+        }
+
+        static void UnsafeShow(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true)
+        {
+            Dispatcher.UIThread.Post(new Action(() =>
+            {
+                if (activateIfOnDesktop && (topLevel is Window win))
+                    win.Activate();
+
+                OverlayLayer.GetOverlayLayer(topLevel).Children.Add(ContentDialogFrame.GetFrame(new BasicMessageDialog()
+                {
+                    Title = title,
+                    Message = content
+                }, topLevel));
+            }));
         }
     }
 }   
