@@ -39,9 +39,9 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
                 var isMonitoring = (bool)(e.NewValue);
                 if (isMonitoring)
                 {
-                    if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime dskLifetime)
+                    if ((Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime dskLifetime) && (sender is Window win))
                     {
-                        var win = sender as Window;
+                        //var win = sender as Window;
                         win.Activated += Window_Activated;
                         if (win.IsActive)
                             LastActiveTopLevel = sender;
@@ -49,9 +49,9 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
                     else
                         LastActiveTopLevel = sender;
                 }
-                else if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime dskLifetime)
+                else if ((Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime dskLifetime) && (sender is Window win))
                 {
-                    var win = sender as Window;
+                    //var win = sender as Window;
                     win.Activated -= Window_Activated;
                 }
             }));
