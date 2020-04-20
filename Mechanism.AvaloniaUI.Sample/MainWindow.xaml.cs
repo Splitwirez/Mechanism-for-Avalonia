@@ -22,8 +22,6 @@ namespace Mechanism.AvaloniaUI.Sample
 #if DEBUG
             this.AttachDevTools();
 #endif
-            //Closing += MainWindow_Closing;
-            HasSystemDecorations = true;
         }
 
         /*private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

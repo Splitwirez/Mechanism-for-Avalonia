@@ -14,7 +14,9 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="{TemplateBinding Background}">
-          <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          <VisualLayerManager>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </VisualLayerManager>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -73,7 +75,9 @@
             <Rectangle Height="{TemplateBinding TitlebarHeight}" DockPanel.Dock="Top"/>
             <Rectangle Fill="{TemplateBinding Background}"/>
           </DockPanel>
-          <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+          <VisualLayerManager Margin="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+          </VisualLayerManager>
           <Grid Name="ResizeGrid" ColumnDefinitions="8,*,8" RowDefinitions="8,*,8">
             <Border x:Name="PART_TopLeftEdge" Grid.Row="0" Grid.Column="0"/>
             <Border x:Name="PART_TopCenterEdge" Grid.Row="0" Grid.Column="1"/>
