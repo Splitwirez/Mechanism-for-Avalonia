@@ -11,7 +11,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
 - `SplitButton` (feature-complete, in need of testing)
 - `SplitToggleButton` (feature-complete, in need of testing)
-- `ContentDialog` (under construction, in need of testing)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
+- `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
 - `DecoratableWindow` (under construction)
 
 ### Currently-available Themes
