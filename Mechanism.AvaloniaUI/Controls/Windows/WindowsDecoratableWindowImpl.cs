@@ -47,6 +47,25 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             }
         }
 
+        public void SetExtendedTitleBar(double height)
+        {
+            if (NativeMethodsWindows.DwmIsCompositionEnabled())
+            {
+                double scaledHeight = (height * Window.PlatformImpl.Scaling);
+                int realHeight = Convert.ToInt32(Math.Round(scaledHeight, 0));
+                /*if ((scaledHeight - realHeight) > 0.5)
+                    realHeight++;*/
+                NativeMethodsWindows.MARGINS margins = new NativeMethodsWindows.MARGINS()
+                {
+                    topHeight = realHeight,
+                    leftWidth = 0,
+                    rightWidth = 0,
+                    bottomHeight = 0
+                };
+                NativeMethodsWindows.DwmExtendFrameIntoClientArea(Window.PlatformImpl.Handle.Handle, ref margins);
+            }
+        }
+
         /*static void AddAlphaHandler()
         {
             ClipByAlphaProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>

@@ -25,6 +25,7 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/TextBox.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ToolBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/CommandBar.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ContentDialog.xaml"/>
   <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/RepeatButton.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ScrollBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ScrollViewer.xaml"/>

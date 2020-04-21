@@ -1,0 +1,61 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
+        xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI">
+
+  <Style Selector="mecd|ContentDialogFrame">
+    <Setter Property="Background" Value="{DynamicResource AeroWindowBackground}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Background="Black" Opacity="0.75"/>
+          <Border Width="475" MinHeight="175" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+            <ContentPresenter Content="{TemplateBinding Content}"/>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecd|BasicMessageDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Foreground="{DynamicResource AeroContentDialogHeaderForeground}" Margin="15,15,15,0" TextWrapping="Wrap" FontSize="16" DockPanel.Dock="Top"/>
+          <Border Background="{DynamicResource AeroContentDialogFooterBackground}" BorderBrush="{DynamicResource AeroContentDialogFooterBorderBrush}" CornerRadius="0,0,3,3" DockPanel.Dock="Bottom" Padding="11,10">
+            <Button x:Name="PART_OkButton" Width="66" Content="OK" HorizontalAlignment="Right"/>
+          </Border>
+          <TextBlock Text="{TemplateBinding Message}" Margin="15" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecd|MessageActionDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Foreground="{DynamicResource AeroContentDialogHeaderForeground}" Margin="15,15,15,0" TextWrapping="Wrap" FontSize="16" DockPanel.Dock="Top"/>
+          <Border Background="{DynamicResource AeroContentDialogFooterBackground}" BorderBrush="{DynamicResource AeroContentDialogFooterBorderBrush}" CornerRadius="0,0,3,3" DockPanel.Dock="Bottom" Padding="11,10">
+            <ItemsControl Items="{Binding Actions}" DockPanel.Dock="Bottom">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8"/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.DataTemplates>
+                <DataTemplate DataType="{x:Type mecd:IContentDialogAction}">
+                  <Button Command="{Binding SelectAction, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mecd:MessageActionDialog}}}" CommandParameter="{Binding}" Content="{Binding Title}" ToolTip.Tip="{Binding Description}" Width="66"/>
+                </DataTemplate>
+              </ItemsControl.DataTemplates>
+            </ItemsControl>
+          </Border>
+          <TextBlock Text="{TemplateBinding Message}" Margin="15" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

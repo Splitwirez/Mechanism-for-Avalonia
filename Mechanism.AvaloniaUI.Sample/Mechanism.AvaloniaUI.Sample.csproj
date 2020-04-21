@@ -14,9 +14,11 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="ExtendedTitlebarSampleWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="ExtendedTitlebarSampleWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +27,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ThemeDemoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExtendedTitlebarSampleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

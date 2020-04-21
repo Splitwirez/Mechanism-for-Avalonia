@@ -313,4 +313,8 @@
     <GradientStop Offset="0" Color="#60ADBFD5"/>
     <GradientStop Offset="1" Color="#00ADBFD5"/>
   </GradientStops>
+
+  <SolidColorBrush x:Key="AeroContentDialogFooterBackground">#FFF0F0F0</SolidColorBrush>
+  <SolidColorBrush x:Key="AeroContentDialogFooterBorderBrush">#FFDFDFDF</SolidColorBrush>
+  <SolidColorBrush x:Key="AeroContentDialogHeaderForeground">#FF003399</SolidColorBrush>
 </ResourceDictionary>

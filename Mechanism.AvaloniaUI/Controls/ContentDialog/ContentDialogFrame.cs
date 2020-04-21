@@ -37,6 +37,7 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
                 LastFocusedElement = FocusManager.Instance.Current;
 
                 var layer = OverlayLayer.GetOverlayLayer(topLevel);
+                System.Diagnostics.Debug.WriteLine("layer == null: " + (layer == null).ToString());
                 return new ContentDialogFrame()
                 {
                     Content = content,

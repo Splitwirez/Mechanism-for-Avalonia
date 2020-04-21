@@ -66,6 +66,18 @@ namespace Mechanism.AvaloniaUI.Core
             TransitionMaximized = 4
         }
 
+        [DllImport("dwmapi.dll", PreserveSig = true)]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MARGINS
+        {
+            public int leftWidth;
+            public int rightWidth;
+            public int topHeight;
+            public int bottomHeight;
+        }
+
         public static int GetWindowLongInt(IntPtr hWnd, Int32 nIndex)
         {
             IntPtr prevStylePtr = GetWindowLong(hWnd, nIndex);

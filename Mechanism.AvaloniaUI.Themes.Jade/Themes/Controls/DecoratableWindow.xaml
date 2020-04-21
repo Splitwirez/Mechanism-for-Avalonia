@@ -22,7 +22,6 @@
   </Style>
   <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=False][CanBlur=False]">
     <Setter Property="BorderThickness" Value="4"/>
-    <Setter Property="TitlebarHeight" Value="20"/>
     <Setter Property="Padding" Value="4,24,4,4"/>
     <Setter Property="Template">
       <ControlTemplate>
@@ -63,14 +62,15 @@
               </Border>
             </Border>
           </Border>
-          <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="6,0,0,0" Height="{TemplateBinding TitlebarHeight}">
+          <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="6,0,0,0">
+            <Rectangle Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,24,0,0" IsHitTestVisible="False"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24">
               <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center"/>
               <TextBlock Text="{TemplateBinding Title}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
             </StackPanel>
           </Panel>
           <DockPanel Margin="{TemplateBinding BorderThickness}">
-            <Rectangle Height="{TemplateBinding TitlebarHeight}" DockPanel.Dock="Top"/>
+            <Rectangle Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,24,0,0" DockPanel.Dock="Top"/>
             <Rectangle Fill="{TemplateBinding Background}"/>
           </DockPanel>
           <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
@@ -114,7 +114,7 @@
   </Style>
   <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=False][CanBlur=True]">
     <Setter Property="BorderThickness" Value="9"/>
-    <Setter Property="TitlebarHeight" Value="20"/>
+    <!--Setter Property="TitlebarHeight" Value="20"/-->
     <Setter Property="Padding" Value="9,27,9,9"/>
     <Setter Property="HideTransitionDuration" Value="0:0:0.375"/>
     <!--Setter Property="ClipByAlpha" Value="True"/-->
@@ -284,7 +284,8 @@
                         </Border.Background>
                       </Border>
                     </Grid>
-                    <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="5,0,0,0" Height="{TemplateBinding TitlebarHeight}">
+                    <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="5,0,0,0">
+                      <Rectangle Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,20,0,0"/>
                       <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27">
                         <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center">
                           <!--Rectangle.Fill>
@@ -321,7 +322,7 @@
                       </StackPanel>
                     </Panel>
                     <DockPanel>
-                      <Rectangle DockPanel.Dock="Top" Height="{TemplateBinding TitlebarHeight}"/>
+                      <Rectangle DockPanel.Dock="Top" Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,20,0,0"/>
                       <Panel Margin="-4,-6,-4,-4">
                         <Border x:Name="WindowBodyOuterBorder" BorderBrush="#7FFFFFFF" BorderThickness="1" Margin="{TemplateBinding BorderThickness}">
                           <Border x:Name="WindowBodyInnerBorder" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}"/>

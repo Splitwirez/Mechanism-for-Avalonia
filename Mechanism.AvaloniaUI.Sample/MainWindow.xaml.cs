@@ -42,11 +42,27 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<Button>("ShowContentDialogWithActionsButton").Click += ShowContentDialogWithActionsButton_Click;
             this.Find<Button>("ShowFileListmakerDialogButton").Click += FileListmakerDialogButton_Click;
 
+            this.Find<Button>("ShowDecoratableWindowWithCustomDecorationsButton").Click += ShowDecoratableWindowWithCustomDecorationsButton_Click;
+            this.Find<Button>("ShowDecoratableWindowWithSystemDecorationsButton").Click += ShowDecoratableWindowWithSystemDecorationsButton_Click;
+
             this.Find<Button>("DefaultThemeButton").Click += (sneder, args) => SetTheme(null);
             this.Find<Button>("AeroThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
             this.Find<Button>("SlateThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
             this.Find<Button>("JadeThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
             //new ThemeDemoWindow().Show();
+        }
+
+        private void ShowDecoratableWindowWithCustomDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            new ExtendedTitlebarSampleWindow().Show();
+        }
+
+        private void ShowDecoratableWindowWithSystemDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            new ExtendedTitlebarSampleWindow()
+            {
+                HasSystemDecorations = true
+            }.Show();
         }
 
         private async void ShowContentDialogWithActionsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)

@@ -251,6 +251,12 @@
           </Rectangle.Fill>
         </Rectangle-->
       </TabItem>
+      <TabItem Header="DecoratableWindow">
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Button x:Name="ShowDecoratableWindowWithCustomDecorationsButton">Show DecoratableWindow with custom decorations and extended titlebar</Button>
+          <Button x:Name="ShowDecoratableWindowWithSystemDecorationsButton">Show DecoratableWindow with system decorations and extended titlebar</Button>
+        </WrapPanel>
+      </TabItem>
       <TabItem Header="Properties" IsEnabled="False" IsVisible="False">
         <StackPanel Orientation="Vertical">
           <StackPanel IsVisible="False">

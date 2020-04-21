@@ -23,6 +23,11 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             
         }
 
+        public void SetExtendedTitleBar(double height)
+        {
+
+        }
+
         public event EventHandler<EventArgs> CanBlurChanged;
     }
 }

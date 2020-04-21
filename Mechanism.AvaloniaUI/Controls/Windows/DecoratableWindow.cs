@@ -36,6 +36,14 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             {
                 sender.UpdateComposition();
             }));
+            ExtendedTitlebarHeightProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            {
+                sender.UpdateComposition();
+            }));
+            HasSystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            {
+                sender.UpdateComposition();
+            }));
         }
 
         public IDecoratableWindowImpl Impl = null;
@@ -83,8 +91,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public bool ClipByAlpha
         {
-            get { return GetValue(ClipByAlphaProperty); }
-            set { SetValue(ClipByAlphaProperty, value); }
+            get => GetValue(ClipByAlphaProperty);
+            set => SetValue(ClipByAlphaProperty, value);
         }
 
         public static readonly StyledProperty<double> AlphaThresholdProperty =
@@ -92,8 +100,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public double AlphaThreshold
         {
-            get { return GetValue(AlphaThresholdProperty); }
-            set { SetValue(AlphaThresholdProperty, value); }
+            get => GetValue(AlphaThresholdProperty);
+            set => SetValue(AlphaThresholdProperty, value);
         }
 
         public static readonly StyledProperty<bool> ShowTitleProperty =
@@ -101,8 +109,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public bool ShowTitle
         {
-            get { return GetValue(ShowTitleProperty); }
-            set { SetValue(ShowTitleProperty, value); }
+            get => GetValue(ShowTitleProperty);
+            set => SetValue(ShowTitleProperty, value);
         }
 
         public static readonly StyledProperty<bool> IsWindowVisibleProperty =
@@ -110,8 +118,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public bool IsWindowVisible
         {
-            get { return GetValue(IsWindowVisibleProperty); }
-            set { SetValue(IsWindowVisibleProperty, value); }
+            get => GetValue(IsWindowVisibleProperty);
+            set => SetValue(IsWindowVisibleProperty, value);
         }
 
         public static readonly StyledProperty<TimeSpan> HideTransitionDurationProperty =
@@ -119,17 +127,17 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public TimeSpan HideTransitionDuration
         {
-            get { return GetValue(HideTransitionDurationProperty); }
-            set { SetValue(HideTransitionDurationProperty, value); }
+            get => GetValue(HideTransitionDurationProperty);
+            set => SetValue(HideTransitionDurationProperty, value);
         }
 
-        public static readonly StyledProperty<double> TitlebarHeightProperty =
-        AvaloniaProperty.Register<DecoratableWindow, double>(nameof(TitlebarHeight), defaultValue: 0.0);
+        public static readonly StyledProperty<double> ExtendedTitlebarHeightProperty =
+        AvaloniaProperty.Register<DecoratableWindow, double>(nameof(ExtendedTitlebarHeight), defaultValue: 0.0);
 
-        public double TitlebarHeight
+        public double ExtendedTitlebarHeight
         {
-            get { return GetValue(TitlebarHeightProperty); }
-            set { SetValue(TitlebarHeightProperty, value); }
+            get => GetValue(ExtendedTitlebarHeightProperty);
+            set => SetValue(ExtendedTitlebarHeightProperty, value);
         }
 
         Type IStyleable.StyleKey => typeof(DecoratableWindow);
@@ -255,6 +263,11 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             {
                 if (UseBlur && Impl.GetCanBlur())
                     Impl?.SetBlur(UseBlur);
+
+                if (HasSystemDecorations)
+                    Impl.SetExtendedTitleBar(ExtendedTitlebarHeight);
+                else
+                    Impl.SetExtendedTitleBar(0);
             }
         }
         

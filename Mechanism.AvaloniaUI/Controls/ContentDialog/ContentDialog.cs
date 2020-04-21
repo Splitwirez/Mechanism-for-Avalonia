@@ -46,6 +46,7 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
                     {
                         //var win = sender as Window;
                         win.Activated += Window_Activated;
+                        win.Closed += (sneder, args) => win.SetValue(MonitorActiveProperty, false);
                         if (win.IsActive)
                             LastActiveTopLevel = sender;
                     }
