@@ -1,7 +1,9 @@
-﻿using Mechanism.AvaloniaUI.Core;
+﻿using static Mechanism.AvaloniaUI.Core.NativeMethodsWindows;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Mechanism.AvaloniaUI.Controls.Windows
 {
@@ -13,58 +15,113 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             get => _window;
             set => _window = value;
         }
-
-        public event EventHandler<EventArgs> CanBlurChanged;
+        IntPtr _windowHandle => Window.PlatformImpl.Handle.Handle;
 
         public bool GetCanBlur()
         {
-            return NativeMethodsWindows.DwmIsCompositionEnabled();
+            return DwmIsCompositionEnabled();
         }
-
+        public event EventHandler<EventArgs> CanBlurChanged;
         public void SetBlur(bool enable)
         {
-            if (Window.PlatformImpl != null)
+            if (DwmIsCompositionEnabled())
             {
-                NativeMethodsWindows.DWM_BLURBEHIND blurInfo;
-                if (enable)
-                    blurInfo = new NativeMethodsWindows.DWM_BLURBEHIND()
+                DWM_BLURBEHIND blurInfo;
+                if (enable && (!Window.HasSystemDecorations))
+                {
+                    blurInfo = new DWM_BLURBEHIND()
                     {
-                        dwFlags = NativeMethodsWindows.DWM_BB.Enable | NativeMethodsWindows.DWM_BB.BlurRegion | NativeMethodsWindows.DWM_BB.TransitionMaximized,
+                        dwFlags = DWM_BB.Enable | DWM_BB.BlurRegion | DWM_BB.TransitionMaximized,
                         fEnable = true,
                         hRgnBlur = IntPtr.Zero,
                         fTransitionOnMaximized = true
                     };
+                }
                 else
-                    blurInfo = new NativeMethodsWindows.DWM_BLURBEHIND()
-                    {
-                        //dwFlags = NativeMethodsWindows.DWM_BB.Enable | NativeMethodsWindows.DWM_BB.BlurRegion | NativeMethodsWindows.DWM_BB.TransitionMaximized,
-                        fEnable = false,
-                        //hRgnBlur = IntPtr.Zero,
-                        fTransitionOnMaximized = true
-                    };
+                {
+                    blurInfo = new DWM_BLURBEHIND(false);
+                    /*{
+                        dwFlags = DWM_BB.Enable,
+                        fEnable = false
+                    };*/
+                }
 
-                NativeMethodsWindows.DwmEnableBlurBehindWindow(Window.PlatformImpl.Handle.Handle, ref blurInfo);
+                DwmEnableBlurBehindWindow(_windowHandle, ref blurInfo);
+
+                if (Window.HasSystemDecorations)
+                {
+                    MARGINS margins = new MARGINS()
+                    {
+                        topHeight = -1,
+                        leftWidth = -1,
+                        rightWidth = -1,
+                        bottomHeight = -1
+                    };
+                    DwmExtendFrameIntoClientArea(_windowHandle, ref margins);
+                }
             }
         }
 
-        public void SetExtendedTitleBar(double height)
+        public void SetExtendedTitlebar(double height)
         {
-            if (NativeMethodsWindows.DwmIsCompositionEnabled())
+            if (DwmIsCompositionEnabled() && Window.HasSystemDecorations && (!Window.UseBlur))
             {
                 double scaledHeight = (height * Window.PlatformImpl.Scaling);
                 int realHeight = Convert.ToInt32(Math.Round(scaledHeight, 0));
                 /*if ((scaledHeight - realHeight) > 0.5)
                     realHeight++;*/
-                NativeMethodsWindows.MARGINS margins = new NativeMethodsWindows.MARGINS()
+                MARGINS margins = new MARGINS()
                 {
                     topHeight = realHeight,
                     leftWidth = 0,
                     rightWidth = 0,
                     bottomHeight = 0
                 };
-                NativeMethodsWindows.DwmExtendFrameIntoClientArea(Window.PlatformImpl.Handle.Handle, ref margins);
+                DwmExtendFrameIntoClientArea(_windowHandle, ref margins);
             }
         }
+        public bool GetCanExtendTitlebar()
+        {
+            return true;
+        }
+
+        public bool GetCanControlIcon()
+        {
+            return true;
+        }
+        public void SetShowIcon(bool show)
+        {
+            WTA_OPTIONS options = new WTA_OPTIONS()
+            {
+                Flags = WtNca.NoDrawIcon
+            };
+            if (show)
+                options.Mask = 0;
+            else
+                options.Mask = WtNca.NoDrawIcon;
+
+            int retVal = SetWindowThemeAttribute(_windowHandle, WindowThemeAttributeType.WtaNonClient, ref options, (uint)Marshal.SizeOf(typeof(WTA_OPTIONS)));
+        }
+
+
+        public bool GetCanControlTitle()
+        {
+            return true;
+        }
+        public void SetShowTitle(bool show)
+        {
+            WTA_OPTIONS options = new WTA_OPTIONS()
+            {
+                Flags = WtNca.NoDrawCaption
+            };
+            if (show)
+                options.Mask = 0;
+            else
+                options.Mask = WtNca.NoDrawCaption;
+
+            int retVal = SetWindowThemeAttribute(_windowHandle, WindowThemeAttributeType.WtaNonClient, ref options, (uint)Marshal.SizeOf(typeof(WTA_OPTIONS)));
+        }
+
 
         /*static void AddAlphaHandler()
         {

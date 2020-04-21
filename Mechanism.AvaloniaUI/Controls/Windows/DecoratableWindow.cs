@@ -31,40 +31,33 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
     {
         static DecoratableWindow()
         {
-            //DecoratableWindow.HasSystemDecorationsProperty.OverrideDefaultValue<DecoratableWindow>(false);
-            UseBlurProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>
-            {
-                sender.UpdateComposition();
-            }));
-            ExtendedTitlebarHeightProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>
-            {
-                sender.UpdateComposition();
-            }));
-            HasSystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) =>
-            {
-                sender.UpdateComposition();
-            }));
+            Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs> updateNativeFunctionalityAction = new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) => sender.UpdateNativeFunctionality());
+            UseBlurProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            ExtendedTitlebarHeightProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            HasSystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            ShowIconProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            ShowTitleProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
         }
 
-        public IDecoratableWindowImpl Impl = null;
+        public IDecoratableWindowImpl DecoratableImpl = null;
         
         public DecoratableWindow()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                Impl = new WindowsDecoratableWindowImpl()
+                DecoratableImpl = new WindowsDecoratableWindowImpl()
                 {
                     Window = this
                 };
             else //TODO: Proper support for Linux and (if possible) macOS
-                Impl = new DefaultDecoratableWindowImpl()
+                DecoratableImpl = new DefaultDecoratableWindowImpl()
                 {
                     Window = this
                 };
             //else
-            CanBlur = Impl.GetCanBlur();
-            Impl.CanBlurChanged += (sneder, args) => CanBlur = Impl.GetCanBlur();
+            CanBlur = DecoratableImpl.GetCanBlur();
+            DecoratableImpl.CanBlurChanged += (sneder, args) => CanBlur = DecoratableImpl.GetCanBlur();
             HasSystemDecorations = false;
-            UpdateComposition();
+            UpdateNativeFunctionality();
         }
 
         
@@ -84,6 +77,15 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
         {
             get => GetValue(CanBlurProperty);
             private set => SetValue(CanBlurProperty, value);
+        }
+
+        public static readonly StyledProperty<bool> ShowIconProperty =
+        AvaloniaProperty.Register<DecoratableWindow, bool>(nameof(ShowIcon), defaultValue: false);
+
+        public bool ShowIcon
+        {
+            get => GetValue(ShowIconProperty);
+            set => SetValue(ShowIconProperty, value);
         }
 
         public static readonly StyledProperty<bool> ClipByAlphaProperty =
@@ -257,17 +259,21 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             }
         }
 
-        void UpdateComposition()
+        void UpdateNativeFunctionality()
         {
-            if (Impl != null)
+            if (DecoratableImpl != null)
             {
-                if (UseBlur && Impl.GetCanBlur())
-                    Impl?.SetBlur(UseBlur);
+                if (DecoratableImpl.GetCanBlur())
+                    DecoratableImpl.SetBlur(UseBlur);
 
-                if (HasSystemDecorations)
-                    Impl.SetExtendedTitleBar(ExtendedTitlebarHeight);
-                else
-                    Impl.SetExtendedTitleBar(0);
+                if (DecoratableImpl.GetCanExtendTitlebar())
+                    DecoratableImpl.SetExtendedTitlebar(ExtendedTitlebarHeight);
+
+                if (DecoratableImpl.GetCanControlTitle())
+                    DecoratableImpl.SetShowTitle(ShowTitle);
+
+                if (DecoratableImpl.GetCanControlIcon())
+                    DecoratableImpl.SetShowIcon(ShowIcon);
             }
         }
         

@@ -100,10 +100,10 @@ namespace Mechanism.AvaloniaUI.Core
         }
 
         [DllImport("user32.dll", EntryPoint = "GetWindowLong", CharSet = CharSet.Auto)]
-        public static extern IntPtr GetWindowLong32(IntPtr hWnd, int nIndex);
+        static extern IntPtr GetWindowLong32(IntPtr hWnd, int nIndex);
 
         [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr", CharSet = CharSet.Auto)]
-        public static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+        static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
 
         public static IntPtr SetWindowLong(IntPtr hWnd, Int32 nIndex, Int32 dwNewLong)/* => IntPtr.Size == 8
         ? SetWindowLongPtr64(hWnd, nIndex, dwNewLong)
@@ -120,6 +120,38 @@ namespace Mechanism.AvaloniaUI.Core
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
         static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, Int32 nIndex, Int32 dwNewLong);
+
+        [DllImport("uxtheme.dll")]
+        public static extern int SetWindowThemeAttribute(IntPtr hWnd, WindowThemeAttributeType wtype, ref WTA_OPTIONS attributes, uint size);
+
+        [DllImport("uxtheme.dll"/*, EntryPoint = "SetWindowThemeNonClientAttributes"*/)]
+        public static extern int SetWindowThemeNonClientAttributes(IntPtr hwnd, uint dwMask, uint dwAttributes);
+
+        public enum WindowThemeAttributeType : uint
+        {
+            /// <summary>Non-client area window attributes will be set.</summary>
+            WtaNonClient = 1
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct WTA_OPTIONS
+        {
+            public WtNca Flags;
+            public WtNca Mask;
+        }
+
+        [Flags]
+        public enum WtNca : uint
+        {
+            NoDrawCaption = 1,
+            NoDrawIcon = 2,
+            NoSysMenu = 3,
+            NoMirrorHelp = 4,
+            WtaNcaValidBits = NoDrawCaption | NoDrawIcon | NoSysMenu | NoMirrorHelp
+        }
+        /*WtNcaNoDrawCaption = 0x00000001,
+        WtNcaNoDrawIcon = 0x00000002;*/
+
 
         [DllImport("gdi32.dll")]
         public static extern IntPtr CreateRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);

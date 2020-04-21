@@ -5,9 +5,9 @@ using Mechanism.AvaloniaUI.Controls.Windows;
 
 namespace Mechanism.AvaloniaUI.Sample
 {
-    public class ExtendedTitlebarSampleWindow : DecoratableWindow
+    public class DecoratableWindowFeaturesDemoWindow : DecoratableWindow
     {
-        public ExtendedTitlebarSampleWindow()
+        public DecoratableWindowFeaturesDemoWindow()
         {
             this.InitializeComponent();
 #if DEBUG

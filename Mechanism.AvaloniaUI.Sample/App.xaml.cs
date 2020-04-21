@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using System;
+using System.Linq;
 
 namespace Mechanism.AvaloniaUI.Sample
 {
@@ -27,6 +28,10 @@ namespace Mechanism.AvaloniaUI.Sample
         }
 
         private static readonly IStyle DummyStyle = new Style();
+        public static bool UseSystemDecorations = false;
+
+        Uri _lastThemeUri = null;
+        public void ResetTheme() => SetTheme(_lastThemeUri);
 
         public void SetTheme(Uri uri)
         {
@@ -40,7 +45,12 @@ namespace Mechanism.AvaloniaUI.Sample
 
 
             if (isDesktop)
-                desktop.MainWindow.Close();
+            {
+                //desktop.MainWindow.Close();
+                var windows = desktop.Windows.ToList();
+                foreach (Avalonia.Controls.Window w in windows)
+                    w.Close();
+            }
 
             //App.Current.Styles[3] = style;
             if (App.Current.Styles.Count == 4)
@@ -59,6 +69,8 @@ namespace Mechanism.AvaloniaUI.Sample
                 desktop.MainWindow = new MainWindow();
                 desktop.MainWindow.Show();
             }
+
+            _lastThemeUri = uri;
         }
 
         public void RefreshAllStyles()

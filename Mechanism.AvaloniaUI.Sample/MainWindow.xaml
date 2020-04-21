@@ -252,10 +252,21 @@
         </Rectangle-->
       </TabItem>
       <TabItem Header="DecoratableWindow">
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-          <Button x:Name="ShowDecoratableWindowWithCustomDecorationsButton">Show DecoratableWindow with custom decorations and extended titlebar</Button>
-          <Button x:Name="ShowDecoratableWindowWithSystemDecorationsButton">Show DecoratableWindow with system decorations and extended titlebar</Button>
-        </WrapPanel>
+        <StackPanel Orientation="Vertical" Spacing="10">
+          <!--WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="ShowDecoratableWindowWithCustomDecorationsButton">Show DecoratableWindow features demo with custom decorations</Button>
+            <Button x:Name="ShowDecoratableWindowWithSystemDecorationsButton">Show DecoratableWindow features demo with system decorations</Button>
+          </WrapPanel-->
+          <CheckBox x:Name="SystemDecorationsCheckBox" Content="Use system decorations"/>
+          <DockPanel>
+            <TextBlock Text="ExtendedTitlebarHeight" DockPanel.Dock="Left" Margin="0,0,5,0"/>
+            <Slider Value="{Binding $parent[mewin:DecoratableWindow].ExtendedTitlebarHeight}"/>
+          </DockPanel>
+          <!--, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}-->
+          <CheckBox Content="UseBlur" IsChecked="{Binding $parent[mewin:DecoratableWindow].UseBlur}"/>
+          <CheckBox Content="ShowIcon" IsChecked="{Binding ShowIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}}"/>
+          <CheckBox Content="ShowTitle" IsChecked="{Binding ShowTitle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}}"/>
+        </StackPanel>
       </TabItem>
       <TabItem Header="Properties" IsEnabled="False" IsVisible="False">
         <StackPanel Orientation="Vertical">

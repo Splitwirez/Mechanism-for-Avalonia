@@ -33,6 +33,21 @@ namespace Mechanism.AvaloniaUI.Sample
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            HasSystemDecorations = App.UseSystemDecorations;
+            CheckBox systemDecorationsCheckBox = this.Find<CheckBox>("SystemDecorationsCheckBox");
+            systemDecorationsCheckBox.IsChecked = HasSystemDecorations;
+            //if (HasSystemDecorations)
+            systemDecorationsCheckBox.Unchecked += (sneder, args) =>
+            {
+                App.UseSystemDecorations = false;
+                (App.Current as App).ResetTheme();
+            };
+            systemDecorationsCheckBox.Checked += (sneder, args) =>
+            {
+                App.UseSystemDecorations = true;
+                (App.Current as App).ResetTheme();
+            };
+
             var commandBar = this.Find<CommandBar>("CommandBar");
             this.Find<RadioButton>("CommandBarLeftRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Left;
             this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
@@ -42,8 +57,8 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<Button>("ShowContentDialogWithActionsButton").Click += ShowContentDialogWithActionsButton_Click;
             this.Find<Button>("ShowFileListmakerDialogButton").Click += FileListmakerDialogButton_Click;
 
-            this.Find<Button>("ShowDecoratableWindowWithCustomDecorationsButton").Click += ShowDecoratableWindowWithCustomDecorationsButton_Click;
-            this.Find<Button>("ShowDecoratableWindowWithSystemDecorationsButton").Click += ShowDecoratableWindowWithSystemDecorationsButton_Click;
+            //this.Find<Button>("ShowDecoratableWindowWithCustomDecorationsButton").Click += ShowDecoratableWindowWithCustomDecorationsButton_Click;
+            //this.Find<Button>("ShowDecoratableWindowWithSystemDecorationsButton").Click += ShowDecoratableWindowWithSystemDecorationsButton_Click;
 
             this.Find<Button>("DefaultThemeButton").Click += (sneder, args) => SetTheme(null);
             this.Find<Button>("AeroThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
@@ -54,12 +69,12 @@ namespace Mechanism.AvaloniaUI.Sample
 
         private void ShowDecoratableWindowWithCustomDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            new ExtendedTitlebarSampleWindow().Show();
+            new DecoratableWindowFeaturesDemoWindow().Show();
         }
 
         private void ShowDecoratableWindowWithSystemDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            new ExtendedTitlebarSampleWindow()
+            new DecoratableWindowFeaturesDemoWindow()
             {
                 HasSystemDecorations = true
             }.Show();

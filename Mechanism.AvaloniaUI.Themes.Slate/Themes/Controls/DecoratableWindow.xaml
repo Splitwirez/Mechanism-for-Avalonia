@@ -66,8 +66,16 @@
           <Panel x:Name="PART_Titlebar" Background="#01000000" VerticalAlignment="Top" Margin="6,0,0,0">
             <Rectangle Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,20,0,0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24">
-              <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center"/>
-              <TextBlock Text="{TemplateBinding Title}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
+              <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center" IsVisible="{TemplateBinding ShowIcon}">
+                <Rectangle.Fill>
+                  <Binding Path="Icon" RelativeSource="{RelativeSource Mode=TemplatedParent}">
+                    <Binding.Converter>
+                      <meconv:WindowIconToImageBrushConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Rectangle.Fill>
+              </Rectangle>
+              <TextBlock Text="{TemplateBinding Title}" IsVisible="{TemplateBinding ShowTitle}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
             </StackPanel>
           </Panel>
           <DockPanel Margin="{TemplateBinding BorderThickness}">

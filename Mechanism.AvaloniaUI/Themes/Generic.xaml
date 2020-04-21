@@ -33,7 +33,7 @@
         <Panel>
           <DockPanel>
             <Rectangle IsHitTestVisible="False" Height="{TemplateBinding ExtendedTitlebarHeight}" DockPanel.Dock="Top"/>
-            <Border Background="{TemplateBinding Background}"/>
+            <Border x:Name="BackgroundBorder"/>
           </DockPanel>
           <VisualLayerManager>
             <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Background="Transparent"/>
@@ -41,6 +41,10 @@
         </Panel>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=True][UseBlur=False] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+    <!--Background="{TemplateBinding Background}"-->
   </Style>
   <Style Selector="mewin|DecoratableWindow[HasSystemDecorations=False]">
     <Setter Property="Padding" Value="1,31,1,1"/>
@@ -58,7 +62,7 @@
           <Panel x:Name="PART_Titlebar" Classes="ReduceOpacityOnInactive" Background="#01000000" VerticalAlignment="Top" Margin="6,0,0,0">
             <Rectangle Height="{TemplateBinding ExtendedTitlebarHeight}" Margin="0,30,0,0" IsHitTestVisible="False"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30">
-              <Rectangle Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center" RenderOptions.BitmapInterpolationMode="HighQuality">
+              <Rectangle IsVisible="{TemplateBinding ShowIcon}" Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center" RenderOptions.BitmapInterpolationMode="HighQuality">
                 <Rectangle.Fill>
                   <Binding Path="Icon" RelativeSource="{RelativeSource Mode=TemplatedParent}">
                     <Binding.Converter>
@@ -67,7 +71,7 @@
                   </Binding>
                 </Rectangle.Fill>
               </Rectangle>
-              <TextBlock Text="{TemplateBinding Title}" Foreground="{DynamicResource ThemeForegroundBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
+              <TextBlock IsVisible="{TemplateBinding ShowTitle}" Text="{TemplateBinding Title}" Foreground="{DynamicResource ThemeForegroundBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
             </StackPanel>
           </Panel>
           <Grid Name="ResizeGrid" ColumnDefinitions="8,*,8" RowDefinitions="8,*,8">

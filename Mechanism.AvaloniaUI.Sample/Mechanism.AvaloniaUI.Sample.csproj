@@ -14,16 +14,16 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="ExtendedTitlebarSampleWindow.xaml" />
+    <AvaloniaResource Remove="DecoratableWindowFeaturesDemoWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ExtendedTitlebarSampleWindow.xaml" />
+    <None Remove="DecoratableWindowFeaturesDemoWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.7" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.7" />
+    <PackageReference Include="Avalonia" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ThemeDemoWindow.xaml">
@@ -31,7 +31,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ExtendedTitlebarSampleWindow.xaml">
+    <EmbeddedResource Include="DecoratableWindowFeaturesDemoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -40,5 +40,10 @@
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Jade\Mechanism.AvaloniaUI.Themes.Jade.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Slate\Mechanism.AvaloniaUI.Themes.Slate.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="DecoratableWindowFeaturesDemoWindow.xaml.cs">
+      <DependentUpon>DecoratableWindowFeaturesDemoWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
