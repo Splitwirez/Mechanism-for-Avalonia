@@ -14,11 +14,9 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="DecoratableWindowFeaturesDemoWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="DecoratableWindowFeaturesDemoWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -31,19 +29,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DecoratableWindowFeaturesDemoWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Aero.NormalColor\Mechanism.AvaloniaUI.Themes.Aero.NormalColor.csproj" />
+    <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Fruit\Mechanism.AvaloniaUI.Themes.Fruit.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Jade\Mechanism.AvaloniaUI.Themes.Jade.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Themes.Slate\Mechanism.AvaloniaUI.Themes.Slate.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="DecoratableWindowFeaturesDemoWindow.xaml.cs">
-      <DependentUpon>DecoratableWindowFeaturesDemoWindow.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>

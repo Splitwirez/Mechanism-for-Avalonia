@@ -64,20 +64,8 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<Button>("AeroThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml");
             this.Find<Button>("SlateThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml");
             this.Find<Button>("JadeThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
+            this.Find<Button>("FruitThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Fruit.xaml");
             //new ThemeDemoWindow().Show();
-        }
-
-        private void ShowDecoratableWindowWithCustomDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            new DecoratableWindowFeaturesDemoWindow().Show();
-        }
-
-        private void ShowDecoratableWindowWithSystemDecorationsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            new DecoratableWindowFeaturesDemoWindow()
-            {
-                HasSystemDecorations = true
-            }.Show();
         }
 
         private async void ShowContentDialogWithActionsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)

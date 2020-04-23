@@ -37,6 +37,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             HasSystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             ShowIconProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             ShowTitleProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            AffectsMeasure<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
+            AffectsArrange<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
         }
 
         public IDecoratableWindowImpl DecoratableImpl = null;
@@ -80,12 +82,39 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
         }
 
         public static readonly StyledProperty<bool> ShowIconProperty =
-        AvaloniaProperty.Register<DecoratableWindow, bool>(nameof(ShowIcon), defaultValue: false);
+        AvaloniaProperty.Register<DecoratableWindow, bool>(nameof(ShowIcon), defaultValue: true);
 
         public bool ShowIcon
         {
             get => GetValue(ShowIconProperty);
             set => SetValue(ShowIconProperty, value);
+        }
+
+        public static readonly StyledProperty<bool> UseHeaderbarProperty =
+        AvaloniaProperty.Register<DecoratableWindow, bool>(nameof(UseHeaderbar), defaultValue: false);
+
+        public bool UseHeaderbar
+        {
+            get => GetValue(UseHeaderbarProperty);
+            set => SetValue(UseHeaderbarProperty, value);
+        }
+
+        public static readonly StyledProperty<double> LeftHeaderbarInsetProperty =
+        AvaloniaProperty.Register<DecoratableWindow, double>(nameof(LeftHeaderbarInset), defaultValue: 0.0);
+
+        public double LeftHeaderbarInset
+        {
+            get => GetValue(LeftHeaderbarInsetProperty);
+            set => SetValue(LeftHeaderbarInsetProperty, value);
+        }
+
+        public static readonly StyledProperty<double> RightHeaderbarInsetProperty =
+        AvaloniaProperty.Register<DecoratableWindow, double>(nameof(LeftHeaderbarInset), defaultValue: 0.0);
+
+        public double RightHeaderbarInset
+        {
+            get => GetValue(RightHeaderbarInsetProperty);
+            set => SetValue(RightHeaderbarInsetProperty, value);
         }
 
         public static readonly StyledProperty<bool> ClipByAlphaProperty =

@@ -6,6 +6,7 @@
              xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
              xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
@@ -19,6 +20,12 @@
           <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
         </Popup>
       </Panel>
+    </ControlTemplate>
+  
+    <ControlTemplate x:Key="ButtonToolStripItemTemplate">
+      <Button Command="{Binding Command, RelativeSource={RelativeSource Mode=TemplatedParent}}" CommandParameter="{Binding CommandParameter, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+        <TemplatedControl Template="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+      </Button>
     </ControlTemplate>
   </Styles.Resources>
   <Style Selector=":is(TopLevel)">
@@ -675,4 +682,34 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="mets|ToolStrip">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ItemsControl Items="{TemplateBinding CurrentItems}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type mets:ToolStripItemReference}">
+              <DockPanel>
+                <TextBlock Text="{Binding TargetItem.DisplayName}" DockPanel.Dock="Bottom"/>
+                <TemplatedControl Template="{Binding TargetItem.Template}"/>
+              </DockPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <!--Style Selector="mets|ButtonToolStripItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}">
+          <TemplatedControl Template="{TemplateBinding Icon}"/>
+        </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style-->
 </Styles>

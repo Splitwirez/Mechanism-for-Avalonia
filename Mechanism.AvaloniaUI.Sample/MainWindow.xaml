@@ -6,6 +6,7 @@
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
+        xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
         xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="480"
@@ -13,207 +14,225 @@
         Title="Mechanism for Avalonia: Sample App" Width="800" Height="480"
         Icon="/Assets/avalonia-logo.ico">
   <DockPanel>
-    <TabControl TabStripPlacement="Bottom" DockPanel.Dock="Top">
-      <TabItem Header="CommandBar">
-        <StackPanel Orientation="Vertical" Width="{Binding $parent[DockPanel].Width}" Spacing="10">
-          <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
-            <mecb:CommandBar.Layers>
-              <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
-              <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
-            </mecb:CommandBar.Layers>
-            <Button Content="Always visible">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 1">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </ToggleButton>
-            <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 1">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </RepeatButton>
-            <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 2">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </ToggleButton>
-            <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 2">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </RepeatButton>
-            <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 3">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </ToggleButton>
-            <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 3">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </RepeatButton>
-            <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 4">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </ToggleButton>
-            <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 4">
-              <mecore:AttachedIcon.Icon>
-                <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-              </mecore:AttachedIcon.Icon>
-            </RepeatButton>
-            <mecb:CommandBar.EndItems>
-              <Button>
-                <Panel Width="16" Height="16">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding $parent[Button].Foreground}"/>
-                </Panel>
+    <DockPanel DockPanel.Dock="Top">
+      <Rectangle Width="{Binding LeftHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Left"/>
+      <Rectangle Width="{Binding RightHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Right"/>
+      <TabControl TabStripPlacement="Bottom">
+        <TabItem Header="CommandBar">
+          <StackPanel Orientation="Vertical" Width="{Binding $parent[TabControl].Width}" Spacing="10">
+            <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
+              <mecb:CommandBar.Layers>
+                <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
+                <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
+              </mecb:CommandBar.Layers>
+              <Button Content="Always visible">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
               </Button>
-            </mecb:CommandBar.EndItems>
-          </mecb:CommandBar>
-          <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
-          <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
-          <StackPanel Margin="10,0,0,0">
-            <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
-            <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment">Align items to right</RadioButton>
+              <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 1">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </ToggleButton>
+              <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 1">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </RepeatButton>
+              <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 2">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </ToggleButton>
+              <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 2">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </RepeatButton>
+              <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton 3">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </ToggleButton>
+              <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton 3">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </RepeatButton>
+              <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="ToggleButton 4">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </ToggleButton>
+              <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="RepeatButton 4">
+                <mecore:AttachedIcon.Icon>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                </mecore:AttachedIcon.Icon>
+              </RepeatButton>
+              <mecb:CommandBar.EndItems>
+                <Button>
+                  <Panel Width="16" Height="16">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding $parent[Button].Foreground}"/>
+                  </Panel>
+                </Button>
+              </mecb:CommandBar.EndItems>
+            </mecb:CommandBar>
+            <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
+            <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
+            <StackPanel Margin="10,0,0,0">
+              <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
+              <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment">Align items to right</RadioButton>
+            </StackPanel>
           </StackPanel>
-        </StackPanel>
-      </TabItem>
-      <TabItem Header="ToolBarTray">
-        <StackPanel Orientation="Vertical" Spacing="10">
-        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
-          <metb:ToolBar UseOverflow="False">
-            <Menu>
-              <MenuItem Header="File">
-                <MenuItem Header="Open" IsEnabled="False"/>
-                <MenuItem Header="Save" IsEnabled="False"/>
-                <MenuItem Header="Save as..." IsEnabled="False"/>
-                <Separator/>
-                <MenuItem Header="Exit" Command="{Binding $parent[Window].CloseCommand}"/>
-              </MenuItem>
-              <MenuItem Header="Edit">
-                <MenuItem Header="Cut" IsEnabled="False"/>
-                <MenuItem Header="Copy" IsEnabled="False"/>
-                <MenuItem Header="Paste" IsEnabled="False"/>
-              </MenuItem>
-              <MenuItem Header="View">
-                <MenuItem Header="Icons" IsEnabled="False"/>
-                <MenuItem Header="List" IsEnabled="False"/>
-                <MenuItem Header="Details" IsEnabled="False"/>
-              </MenuItem>
-              <MenuItem Header="Tools">
-                <MenuItem Header="Options" IsEnabled="False"/>
-              </MenuItem>
-              <MenuItem Header="Help">
-                <MenuItem Header="About" IsEnabled="False"/>
-              </MenuItem>
-            </Menu>
-          </metb:ToolBar>
-          <metb:ToolBar Width="202" Band="1">
-            <Button Content="Back">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button Content="Forward">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button Content="Cancel">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-          </metb:ToolBar>
-          <metb:ToolBar Band="1" Width="279">
-            <Button Content="Button">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <ToggleButton Content="ToggleButton">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <!--Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/-->
-                  <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </ToggleButton>
-            <RepeatButton Content="RepeatButton">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </RepeatButton>
-          </metb:ToolBar>
-          <metb:ToolBar Band="1">
-            <Button Content="Button1">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-            <Button Content="Button2">
-              <mecore:AttachedIcon.Icon>
-                <Panel Width="24" Height="24">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                  <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Panel>
-              </mecore:AttachedIcon.Icon>
-            </Button>
-          </metb:ToolBar>
-          <metb:ToolBar Band="2" UseOverflow="False">
-            <metb:ToolBar.ItemsPanel>
-              <ItemsPanelTemplate>
-                <DockPanel/>
-              </ItemsPanelTemplate>
-            </metb:ToolBar.ItemsPanel>
-            <TextBlock Margin="5,0" Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
-            <Button Padding="4" Margin="-1,0,0,0" DockPanel.Dock="Right">Go</Button>
-            <TextBox>http://avaloniaui.net/</TextBox>
-          </metb:ToolBar>
-        </metb:ToolBarTray>
-        <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
-        </StackPanel>
-      </TabItem>
-    </TabControl>
+        </TabItem>
+        <TabItem Header="ToolBarTray">
+          <StackPanel Orientation="Vertical" Spacing="10">
+          <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
+            <metb:ToolBar UseOverflow="False">
+              <Menu>
+                <MenuItem Header="File">
+                  <MenuItem Header="Open" IsEnabled="False"/>
+                  <MenuItem Header="Save" IsEnabled="False"/>
+                  <MenuItem Header="Save as..." IsEnabled="False"/>
+                  <Separator/>
+                  <MenuItem Header="Exit" Command="{Binding $parent[Window].CloseCommand}"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                  <MenuItem Header="Cut" IsEnabled="False"/>
+                  <MenuItem Header="Copy" IsEnabled="False"/>
+                  <MenuItem Header="Paste" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="View">
+                  <MenuItem Header="Icons" IsEnabled="False"/>
+                  <MenuItem Header="List" IsEnabled="False"/>
+                  <MenuItem Header="Details" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                  <MenuItem Header="Options" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                  <MenuItem Header="About" IsEnabled="False"/>
+                </MenuItem>
+              </Menu>
+            </metb:ToolBar>
+            <metb:ToolBar Width="202" Band="1">
+              <Button Content="Back">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <Button Content="Forward">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <Button Content="Cancel">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+            </metb:ToolBar>
+            <metb:ToolBar Band="1" Width="279">
+              <Button Content="Button">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <ToggleButton Content="ToggleButton">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <!--Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/-->
+                    <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </ToggleButton>
+              <RepeatButton Content="RepeatButton">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </RepeatButton>
+            </metb:ToolBar>
+            <metb:ToolBar Band="1">
+              <Button Content="Button1">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+              <Button Content="Button2">
+                <mecore:AttachedIcon.Icon>
+                  <Panel Width="24" Height="24">
+                    <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                    <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Panel>
+                </mecore:AttachedIcon.Icon>
+              </Button>
+            </metb:ToolBar>
+            <metb:ToolBar Band="2" UseOverflow="False">
+              <metb:ToolBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <DockPanel/>
+                </ItemsPanelTemplate>
+              </metb:ToolBar.ItemsPanel>
+              <TextBlock Margin="5,0" Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+              <Button Padding="4" Margin="-1,0,0,0" DockPanel.Dock="Right">Go</Button>
+              <TextBox>http://avaloniaui.net/</TextBox>
+            </metb:ToolBar>
+          </metb:ToolBarTray>
+          <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+          </StackPanel>
+        </TabItem>
+        <TabItem Header="ToolStrip">
+          <mets:ToolStrip>
+            <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test">
+              <mets:ButtonToolStripItem.Icon>
+                <ControlTemplate>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </ControlTemplate>
+              </mets:ButtonToolStripItem.Icon>
+            </mets:ButtonToolStripItem>
+            <mets:ToolStrip.CurrentItems>
+              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem}"/>
+            </mets:ToolStrip.CurrentItems>
+          </mets:ToolStrip>
+        </TabItem>
+      </TabControl>
+    </DockPanel>
     <TreeView Width="150" mecore:BorderPresence.BorderPresence="false,false,true,false" DockPanel.Dock="Left" IsVisible="False">
       <TreeViewItem Header="Sample text">
         <TreeViewItem Header="Sample text 2"/>
@@ -227,6 +246,7 @@
           <Button x:Name="AeroThemeButton" Content="Windows Aero"/>
           <Button x:Name="SlateThemeButton" Content="Slate"/>
           <Button x:Name="JadeThemeButton" Content="Jade"/>
+          <Button x:Name="FruitThemeButton" Content="Fruit"/>
           <Button x:Name="LunaThemeButton" Content="Luna (Planned, NYI)" IsVisible="False"/>
           <Button x:Name="PlexThemeButton" Content="Plex (Planned, NYI)" IsVisible="False"/>
           <Button x:Name="MetroThemeButton" Content="Metro (Planned, NYI)" IsVisible="False"/>
@@ -264,6 +284,7 @@
           </DockPanel>
           <!--, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}-->
           <CheckBox Content="UseBlur" IsChecked="{Binding $parent[mewin:DecoratableWindow].UseBlur}"/>
+          <CheckBox Content="UseHeaderbar" IsChecked="{Binding $parent[mewin:DecoratableWindow].UseHeaderbar}"/>
           <CheckBox Content="ShowIcon" IsChecked="{Binding ShowIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}}"/>
           <CheckBox Content="ShowTitle" IsChecked="{Binding ShowTitle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}}"/>
         </StackPanel>
