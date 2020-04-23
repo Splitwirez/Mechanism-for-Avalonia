@@ -42,6 +42,8 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - `ToggleSwitch`
 - `BreadcrumbsBar` and `BreadcrumbItem`
 - `Rearranger` and `RearrangeablePane`
+- macOS-style Rearrangeable Toolbars
+- macOS-style Column view
 
 ### Planned Themes
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
