@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample;assembly=Mechanism.AvaloniaUI.Sample"
+        xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
@@ -13,6 +14,9 @@
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
         Title="Mechanism for Avalonia: Sample App" Width="800" Height="480"
         Icon="/Assets/avalonia-logo.ico">
+  <mewin:DecoratableWindow.DataContext>
+    <vm:MainWindowViewModel/>
+  </mewin:DecoratableWindow.DataContext>
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
       <Rectangle Width="{Binding LeftHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Left"/>
@@ -218,18 +222,60 @@
           </StackPanel>
         </TabItem>
         <TabItem Header="ToolStrip">
-          <mets:ToolStrip>
-            <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test">
-              <mets:ButtonToolStripItem.Icon>
-                <ControlTemplate>
-                  <Rectangle Width="16" Height="16" Fill="Red"/>
-                </ControlTemplate>
-              </mets:ButtonToolStripItem.Icon>
-            </mets:ButtonToolStripItem>
-            <mets:ToolStrip.CurrentItems>
-              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem}"/>
-            </mets:ToolStrip.CurrentItems>
-          </mets:ToolStrip>
+          <StackPanel Orientation="Vertical" Spacing="10">
+            <mets:ToolStrip x:Name="ToolStrip">
+              <mets:ToolStrip.Items>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Test2" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Test3" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Test4" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+                    <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Test5" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Test6" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                  <mets:ButtonToolStripItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Purple"/>
+                    </ControlTemplate>
+                  </mets:ButtonToolStripItem.Icon>
+                </mets:ButtonToolStripItem>
+              </mets:ToolStrip.Items>
+              <mets:ToolStrip.DefaultItems>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem}"/>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
+              </mets:ToolStrip.DefaultItems>
+            </mets:ToolStrip>
+            <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip}"/>
+            <CheckBox Content="ShowLabels" IsChecked="{Binding ShowLabels, ElementName=ToolStrip}"/>
+          </StackPanel>
         </TabItem>
       </TabControl>
     </DockPanel>

@@ -10,6 +10,7 @@ using Mechanism.AvaloniaUI.Controls.ContentDialog;
 using Mechanism.AvaloniaUI.Controls.Windows;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Timers;
 
@@ -66,6 +67,11 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<Button>("JadeThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml");
             this.Find<Button>("FruitThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Fruit.xaml");
             //new ThemeDemoWindow().Show();
+        }
+
+        public void EmptyCommand(object parameter)
+        {
+            Debug.WriteLine("parameter: " + parameter.ToString());
         }
 
         private async void ShowContentDialogWithActionsButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)

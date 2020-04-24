@@ -18,7 +18,7 @@
     </Panel>
   </Design.PreviewWith>
   <Style Selector="mectrl|ThemeControlDecorator">
-    <Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
+    <!--Setter Property="Content" Value="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="mecore:AttachedIcon.Icon" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="IsVisuallyPointerOver" Value="{Binding IsPointerOver, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="IsVisuallyPressed" Value="{Binding IsPressed, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
@@ -32,9 +32,9 @@
     <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Center}"/>
     <Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
     <Setter Property="mecore:BorderPresence.BorderPresence" Value="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
-    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="Focusable" Value="False"/-->
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
+  <!--Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
@@ -111,7 +111,7 @@
         </Border>
       </ControlTemplate>
     </Setter>
-  </Style>
+  </Style-->
   <!--Style Selector="mectrl|ThemeControlDecorator:not(:pointerover) /template/ :is(Control)#HoverBackground">
     <Setter Property="IsVisible" Value="False"/>
   </Style>

@@ -39,6 +39,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             ShowTitleProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             AffectsMeasure<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
             AffectsArrange<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
+            AffectsRender<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
         }
 
         public IDecoratableWindowImpl DecoratableImpl = null;

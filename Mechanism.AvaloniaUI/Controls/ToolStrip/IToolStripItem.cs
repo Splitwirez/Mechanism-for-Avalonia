@@ -18,5 +18,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         string DisplayName { get; set; }
 
         bool AllowDuplicates { get; set; }
+
+        ToolStrip Owner { get; set; }
     }
 }

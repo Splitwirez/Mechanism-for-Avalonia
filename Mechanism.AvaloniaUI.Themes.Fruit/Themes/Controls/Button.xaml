@@ -119,12 +119,37 @@
     <Setter Property="Fill" Value="#FF919191"/>
   </Style>
 
-  <Style Selector="Button">
+  <!--Style Selector="Button">
     <Setter Property="Background" Value="{DynamicResource ButtonIdleBackground}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <mectrl:ThemeControlDecorator Content="{TemplateBinding Content}" ControlStyle="Button"/>
+      </ControlTemplate>
+    </Setter>
+  </Style-->
+  <Style Selector="Button.ToolStrip">
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border CornerRadius="3">
+            <Border.BorderBrush>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                <GradientStop Offset="0" Color="#30000000"/>
+                <GradientStop Offset="1" Color="#40000000"/>
+              </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                <GradientStop Offset="0" Color="White"/>
+                <GradientStop Offset="1" Color="#FFF2F2F2"/>
+              </LinearGradientBrush>
+            </Border.Background>
+          </Border>
+          <ContentPresenter Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Panel>
       </ControlTemplate>
     </Setter>
   </Style>
