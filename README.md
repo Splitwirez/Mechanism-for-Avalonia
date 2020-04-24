@@ -1,6 +1,6 @@
 # Mechanism for Avalonia
 
-Mechanism is a collection of Controls, Themes, and other such tools, intended for use with [Avalonia](https://github.com/AvaloniaUI/Avalonia/). More information will be added to this page as time goes on and development proceeds.
+Mechanism is a collection of Controls, Themes, and other such tools, intended for use with [Avalonia](https://github.com/AvaloniaUI/Avalonia/), with a partial focus on helping Avalonia apps look and feel more 'at home' on each supported platform.
 
 ### Current State of Development
 At this early stage, I cannot promise that all of Mechanism for Avalonia is production-ready. That's not to say it necessarily isn't, more just that I don't know, and could use some help finding out.
