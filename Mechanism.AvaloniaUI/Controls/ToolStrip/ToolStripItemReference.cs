@@ -23,10 +23,17 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         public static ToolStripItemReference ToReference(this IToolStripItem item)
         {
-            return new ToolStripItemReference()
-            {
-                [!ToolStripItemReference.TargetItemProperty] = new Binding() { Source = item }
-            };
+            IBinding itemBinding = new Binding() { Source = item };
+            if (item is FlexibleSpaceToolStripItem spaceRef)
+                return new ToolStripFlexibleSpaceReference()
+                {
+                    [!ToolStripItemReference.TargetItemProperty] = itemBinding
+                };
+            else 
+                return new ToolStripItemReference()
+                {
+                    [!ToolStripItemReference.TargetItemProperty] = itemBinding
+                };
         }
     }
 }

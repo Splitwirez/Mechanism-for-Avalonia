@@ -23,16 +23,16 @@
       </Panel>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ButtonToolStripItemTemplate" TargetType="{x:Type TemplatedControl}">
+    <!--ControlTemplate x:Key="ButtonToolStripItemTemplate" TargetType="{x:Type TemplatedControl}">
       <Button x:Name="ToolStripButton" Classes="ToolStrip" DataContext="{TemplateBinding DataContext}">
-        <!--Command="{Binding Command, FallbackValue={x:Null}}" CommandParameter="{Binding CommandParameter}"-->
-        <i:Interaction.Behaviors>
+        <!-Command="{Binding Command, FallbackValue={x:Null}}" CommandParameter="{Binding CommandParameter}"->
+        <!-i:Interaction.Behaviors>
           <mets:ButtonCommandBehavior TargetItem="{Binding DataContext, ElementName=ToolStripButton}"/>
-          <!--Command="{Binding DataContext.Command, ElementName=ToolStripButton}" CommandParameter="{Binding DataContext.CommandParameter, ElementName=ToolStripButton}"-->
-        </i:Interaction.Behaviors>
+          <!-Command="{Binding DataContext.Command, ElementName=ToolStripButton}" CommandParameter="{Binding DataContext.CommandParameter, ElementName=ToolStripButton}"->
+        </i:Interaction.Behaviors->
         <TemplatedControl Template="{Binding Icon}"/>
       </Button>
-    </ControlTemplate>
+    </ControlTemplate-->
   </Styles.Resources>
   <Style Selector="mets|ToolStrip">
     <Setter Property="MinHeight" Value="38"/>
@@ -43,10 +43,29 @@
           <ItemsControl x:Name="PART_CurrentItemsItemsControl" Items="{TemplateBinding CurrentItems}">
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" Spacing="6" Margin="7,0"/>
+                <!--StackPanel Orientation="Horizontal" Spacing="6" Margin="7,0"/-->
+                <mets:ToolStripItemsPanel HorizontalAlignment="Stretch" Spacing="6" Margin="7,0"/>
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+            <ItemsControl.DataTemplates>
+              <DataTemplate DataType="{x:Type mets:ToolStripFlexibleSpaceReference}">
+                <Panel Tag="FLEXIBLE_SPACE">
+                  <i:Interaction.Behaviors>
+                    <mets:ToolStripItemPointerOverBehavior Target="{Binding}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                  </i:Interaction.Behaviors>
+                  <DockPanel VerticalAlignment="Stretch">
+                    <Panel IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}" DockPanel.Dock="Bottom">
+                      <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" IsVisible="{Binding ShowLabels, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}"/>
+                    </Panel>
+                    <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
+                  </DockPanel>
+                  <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+                    <i:Interaction.Behaviors>
+                      <mets:MoveOrRemoveFromToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                    </i:Interaction.Behaviors>
+                  </Thumb>
+                </Panel>
+              </DataTemplate>
               <DataTemplate DataType="{x:Type mets:ToolStripItemReference}">
                 <Panel VerticalAlignment="Stretch">
                   <i:Interaction.Behaviors>
@@ -63,34 +82,40 @@
                   </Thumb>
                 </Panel>
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.DataTemplates>
           </ItemsControl>
-          <Popup IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="100">
-            <DockPanel>
-              <ToggleButton Content="Done" IsChecked="{Binding !IsCustomizing, RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="Right" DockPanel.Dock="Bottom"/>
-              <ItemsControl Items="{TemplateBinding AvailableItems}">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <WrapPanel Margin="7,7,1,1"/>
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                  <DataTemplate DataType="{x:Type mets:ToolStripItemReference}">
-                    <Panel VerticalAlignment="Stretch" Margin="0,0,6,6">
-                      <DockPanel VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" DockPanel.Dock="Bottom"/>
-                        <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
-                      </DockPanel>
-                      <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
-                        <i:Interaction.Behaviors>
-                          <mets:AddToToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
-                        </i:Interaction.Behaviors>
-                      </Thumb>
-                    </Panel>
-                  </DataTemplate>
-                </ItemsControl.ItemTemplate>
-              </ItemsControl>
-            </DockPanel>
+          <Popup IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="10">
+            <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
+              <StackPanel Orientation="Vertical" Margin="20">
+                <TextBlock Text="Drag your favorite items into the toolbar..."/>
+                <ItemsControl Items="{TemplateBinding AvailableItems}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <WrapPanel/>
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type mets:ToolStripItemReference}">
+                      <Panel VerticalAlignment="Stretch" Margin="0,0,20,20">
+                        <DockPanel VerticalAlignment="Stretch">
+                          <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" DockPanel.Dock="Bottom"/>
+                          <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
+                        </DockPanel>
+                        <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+                          <i:Interaction.Behaviors>
+                            <mets:AddToToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                          </i:Interaction.Behaviors>
+                        </Thumb>
+                      </Panel>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Rectangle Margin="-20,20" Height="1" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                <DockPanel LastChildFill="False">
+                  <ToggleButton Content="Done" IsChecked="{Binding !IsCustomizing, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Right"/>
+                </DockPanel>
+              </StackPanel>
+            </Border>
           </Popup>
         </Panel>
       </ControlTemplate>
@@ -121,5 +146,35 @@
   <Style Selector=":is(Button).ToolStrip">
     <Setter Property="Width" Value="40"/>
     <Setter Property="Height" Value="24"/>
+  </Style>
+  <Style Selector="mets|ButtonToolStripItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Button x:Name="ToolStripButton" Classes="ToolStrip" DataContext="{TemplateBinding DataContext}" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}">
+          <!--Command="{Binding Command, FallbackValue={x:Null}}" CommandParameter="{Binding CommandParameter}"-->
+          <!--i:Interaction.Behaviors>
+            <mets:ButtonCommandBehavior TargetItem="{Binding DataContext, ElementName=ToolStripButton}"/>
+            <!-Command="{Binding DataContext.Command, ElementName=ToolStripButton}" CommandParameter="{Binding DataContext.CommandParameter, ElementName=ToolStripButton}"->
+          </i:Interaction.Behaviors-->
+          <TemplatedControl Template="{Binding Icon}"/>
+        </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mets|FlexibleSpaceToolStripItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Height="24">
+          <!--Rectangle Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" StrokeDashArray="2" StrokeDashOffset="2"/-->
+          <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="1" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+            <DockPanel>
+              <Path Data="M 0 4 L 8 0 L 8 8 Z" Fill="{DynamicResource ThemeForegroundBrush}" Width="8" Height="8" DockPanel.Dock="Left"/>
+              <Path Data="M 8 4 L 0 0 L 0 8 Z" Fill="{DynamicResource ThemeForegroundBrush}" Width="8" Height="8" DockPanel.Dock="Right"/>
+              <Rectangle VerticalAlignment="Center" Height="2" Fill="{DynamicResource ThemeForegroundBrush}"/>
+            </DockPanel>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
   </Style>
 </Styles>

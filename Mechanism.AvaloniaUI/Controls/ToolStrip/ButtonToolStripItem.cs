@@ -36,7 +36,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         private static IControlTemplate DefaultTemplate2 => (IControlTemplate)Application.Current.FindResource("ButtonToolStripItemTemplate");
 
         public static readonly StyledProperty<IControlTemplate> TemplateProperty =
-            AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Template), DefaultTemplate2);
+            AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Template)/*, DefaultTemplate2*/);
 
         public IControlTemplate Template
         {

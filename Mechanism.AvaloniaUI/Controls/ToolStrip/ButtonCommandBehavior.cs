@@ -68,7 +68,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         public void UpdateIsEnabled()
         {
-            if (TargetItem.Command != null)
+            if ((TargetItem != null) && (TargetItem.Command != null))
                 AssociatedObject[!Button.IsEnabledProperty] = TargetItem.GetObservable(ButtonToolStripItem.CommandProperty).Select(x => x.CanExecute(TargetItem.CommandParameter)).ToBinding();
             else
                 AssociatedObject.IsEnabled = true;

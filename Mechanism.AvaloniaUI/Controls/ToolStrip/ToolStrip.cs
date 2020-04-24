@@ -101,6 +101,23 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             {
                 sender.UpdateItems();
             }));*/
+            ItemsProperty.Changed.AddClassHandler<ToolStrip>(new Action<ToolStrip, AvaloniaPropertyChangedEventArgs>((sender, e) =>
+            {
+                if (e.OldValue != null)
+                    ((AvaloniaList<object>)e.OldValue).CollectionChanged -= sender.Items_CollectionChanged;
+
+                if (e.NewValue != null)
+                    ((AvaloniaList<object>)e.NewValue).CollectionChanged += sender.Items_CollectionChanged;
+            }));
+
+            CurrentItemsProperty.Changed.AddClassHandler<ToolStrip>(new Action<ToolStrip, AvaloniaPropertyChangedEventArgs>((sender, e) =>
+            {
+                if (e.OldValue != null)
+                    ((ObservableCollection<ToolStripItemReference>)e.OldValue).CollectionChanged -= sender.CurrentItems_CollectionChanged;
+
+                if (e.NewValue != null)
+                    ((ObservableCollection<ToolStripItemReference>)e.NewValue).CollectionChanged += sender.CurrentItems_CollectionChanged;
+            }));
         }
 
         bool ShouldBeInAvailableItems(IToolStripItem item)
@@ -110,29 +127,10 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         public ToolStrip()
         {
-            ((AvaloniaList<object>)Items).CollectionChanged += (sender, e) =>
+            /*((AvaloniaList<object>)Items).CollectionChanged += (sender, e) =>
             {
-                if (e.NewItems != null)
-                {
-                    foreach (IToolStripItem item in e.NewItems)
-                    {
-                        item.Owner = this;
-                        if (ShouldBeInAvailableItems(item))
-                            AvailableItems.Add(item.ToReference());
-                    }
-                }
-
-                if (e.OldItems != null)
-                {
-                    foreach (IToolStripItem item in e.OldItems)
-                    {
-                        item.Owner = null;
-                        var reference = AvailableItems.FirstOrDefault(x => x.TargetItem == item);
-                        if (AvailableItems.Contains(reference))
-                            AvailableItems.Remove(reference);
-                    }
-                }
-            };
+                
+            };*/
             /*AvailableItems.CollectionChanged += (sender, e) =>
             {
                 if (e.NewItems != null)
@@ -143,9 +141,12 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
                 //UpdateItems();
             };*/
+            ((AvaloniaList<object>)Items).CollectionChanged += Items_CollectionChanged;
+            CurrentItems.CollectionChanged += CurrentItems_CollectionChanged;
 
             if (CurrentItems.Count == 0)
                 CurrentItems = DefaultItems;
+            /*CurrentItems.CollectionChanged += CurrentItems_CollectionChanged;
             CurrentItems.CollectionChanged += (sneder, args) =>
             {
                 if (args.NewItems != null)
@@ -172,7 +173,67 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                         AvailableItems.Add(rfrnc);
                     }
                 }
-            };
+            };*/
+        }
+
+        private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (ToolStripItemReference rfrnc in e.NewItems)
+                {
+                    var item = rfrnc.TargetItem;
+                    if (!item.AllowDuplicates)
+                    {
+                        var matches = AvailableItems.Where(x => x.TargetItem == item).ToList();
+                        if (matches.Count() > 0)
+                        {
+                            foreach (ToolStripItemReference reference in matches)
+                                AvailableItems.Remove(reference);
+                        }
+                    }
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (ToolStripItemReference rfrnc in e.OldItems)
+                {
+                    if (AvailableItems.FirstOrDefault(x => x.TargetItem == rfrnc.TargetItem) == null)
+                        AvailableItems.Add(rfrnc);
+                }
+            }
+        }
+
+        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (IToolStripItem item in e.NewItems)
+                {
+                    item.Owner = this;
+                    if (ShouldBeInAvailableItems(item))
+                        AvailableItems.Add(item.ToReference());
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (IToolStripItem item in e.OldItems)
+                {
+                    item.Owner = null;
+                    var reference = AvailableItems.FirstOrDefault(x => x.TargetItem == item);
+                    if (AvailableItems.Contains(reference))
+                        AvailableItems.Remove(reference);
+                }
+            }
+
+            var flexibleSpaces = Items.OfType<FlexibleSpaceToolStripItem>().ToList();
+            if (flexibleSpaces.Count() > 1)
+                ((AvaloniaList<object>)Items).RemoveAll(flexibleSpaces); //.Insert(0, new FlexibleSpaceToolStripItem());
+
+            if (flexibleSpaces.Count() == 0)
+                ((AvaloniaList<object>)Items).Insert(0, new FlexibleSpaceToolStripItem());
         }
 
         //public List<IToolStripItem> HoverItems = new List<IToolStripItem>();
