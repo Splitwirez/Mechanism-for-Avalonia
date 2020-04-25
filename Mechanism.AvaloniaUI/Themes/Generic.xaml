@@ -27,6 +27,7 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ContentDialog.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolBarTray.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolStrip.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/StyleableWindow.xaml"/>
     
   
   <Style Selector=":is(TopLevel)">

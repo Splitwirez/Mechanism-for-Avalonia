@@ -1,0 +1,148 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
+             xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="mewin|StyleableWindow">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="BaseTitlebarHeight" Value="25"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Panel>
+            <DockPanel>
+              <Border Classes="TitlebarPushAside" Background="{DynamicResource ThemeAccentBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="0,0,0,1" Height="{TemplateBinding TitlebarHeight}" DockPanel.Dock="Top"/>
+              <!--IsVisible="{Binding !ExtendBackgroundIntoTitlebar, RelativeSource={RelativeSource Mode=TemplatedParent}}"-->
+              <Border Background="{TemplateBinding Background}"/>
+            </DockPanel>
+            <Border Classes="ShowOnlyWhenTitlebarVisibilityOverlay" VerticalAlignment="Top" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="0,0,0,1" Height="{TemplateBinding TitlebarHeight}">
+              <!--IsVisible="{Binding ExtendBackgroundIntoTitlebar, RelativeSource={RelativeSource Mode=TemplatedParent}}"-->
+              <Border Background="{DynamicResource ThemeAccentBrush}" Opacity="0.25"/>
+            </Border>
+            <DockPanel>
+              <Rectangle Classes="ShowOnlyWhenTitlebarOutsideContent" Height="{TemplateBinding BaseTitlebarHeight}" DockPanel.Dock="Top"/>
+              <VisualLayerManager>
+                <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
+              </VisualLayerManager>
+            </DockPanel>
+            <ContentControl x:Name="PART_Titlebar" VerticalAlignment="Top" Height="{TemplateBinding BaseTitlebarHeight}">
+              <ContentControl.ContextMenu>
+                <ContextMenu>
+                  <MenuItem x:Name="PART_RestoreMenuItem" Header="Restore"/>
+                  <MenuItem x:Name="PART_MinimizeMenuItem" Header="Minimize"/>
+                  <MenuItem x:Name="PART_MaximizeMenuItem" Header="Maximize"/>
+                  <Separator/>
+                  <MenuItem x:Name="PART_CloseMenuItem" Header="Close"/>
+                </ContextMenu>
+              </ContentControl.ContextMenu>
+              <Panel>
+                <DockPanel>
+                  <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button x:Name="PART_MinimizeButton" Classes="CaptionButton">
+                      <Rectangle Width="10" Height="2" Fill="{Binding $parent[Button].Foreground}"/>
+                    </Button>
+                    <Button x:Name="PART_MaximizeButton" Classes="CaptionButton">
+                      <Border Width="10" Height="10" BorderThickness="2" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                    </Button>
+                    <Button x:Name="PART_CloseButton" Classes="CaptionButton">
+                      <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" ClipToBounds="True"/>
+                    </Button>
+                  </StackPanel>
+                  <Panel>
+                    <DockPanel HorizontalAlignment="{TemplateBinding HorizontalCaptionAlignment}" Margin="5,0">
+                      <Panel IsVisible="{TemplateBinding ShowCaptionIcon}" VerticalAlignment="Center" DockPanel.Dock="Left">
+                        <Rectangle x:Name="IconRectangle" Width="16" Height="16" Margin="0,0,5,0" IsVisible="{TemplateBinding ShowCaptionIcon}"  RenderOptions.BitmapInterpolationMode="HighQuality">
+                          <Rectangle.IsVisible>
+                            <MultiBinding ConverterParameter="Any">
+                              <MultiBinding.Bindings>
+                                <Binding Path="HasIcon" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                              </MultiBinding.Bindings>
+                              <MultiBinding.Converter>
+                                <meconv:BoolsToBoolConverter/>
+                              </MultiBinding.Converter>
+                            </MultiBinding>
+                          </Rectangle.IsVisible>
+                          <Rectangle.Fill>
+                            <Binding Path="Icon" RelativeSource="{RelativeSource Mode=TemplatedParent}">
+                              <Binding.Converter>
+                                <meconv:WindowIconToImageBrushConverter/>
+                              </Binding.Converter>
+                            </Binding>
+                          </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter x:Name="PART_IconPresenter" Width="16" Height="16" Margin="0,0,5,0" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                          <ContentPresenter.IsVisible>
+                            <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="False">
+                              <Binding.Converter>
+                                <meconv:NullToBoolConverter/>
+                              </Binding.Converter>
+                            </Binding>
+                          </ContentPresenter.IsVisible>
+                        </ContentPresenter>
+                      </Panel>
+                      <TextBlock Classes="CaptionText" IsVisible="{TemplateBinding ShowCaptionText}" Text="{TemplateBinding Title}" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </DockPanel>
+                  </Panel>
+                </DockPanel>
+              </Panel>
+            </ContentControl>
+            <Grid Name="ResizeGrid" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
+              <Border x:Name="PART_TopLeftEdge" Grid.Row="0" Grid.Column="0"/>
+              <Border x:Name="PART_TopCenterEdge" Grid.Row="0" Grid.Column="1"/>
+              <Border x:Name="PART_TopRightEdge" Grid.Row="0" Grid.Column="2"/>
+              <Border x:Name="PART_MiddleRightEdge" Grid.Row="1" Grid.Column="2"/>
+              <Border x:Name="PART_BottomRightEdge" Grid.Row="2" Grid.Column="2"/>
+              <Border x:Name="PART_BottomCenterEdge" Grid.Row="2" Grid.Column="1"/>
+              <Border x:Name="PART_BottomLeftEdge" Grid.Row="2" Grid.Column="0"/>
+              <Border x:Name="PART_MiddleLeftEdge" Grid.Row="1" Grid.Column="0"/>
+            </Grid>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mewin|StyleableWindow /template/ Grid#ResizeGrid > Border">
+    <Setter Property="Background" Value="#01000000"/>
+    <Setter Property="MinWidth" Value="4"/>
+    <Setter Property="MinHeight" Value="4"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow Button.CaptionButton">
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Margin" Value="0,0,0,1"/>
+    <Setter Property="Width" Value="45"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow Button.CaptionButton:not(:pointerover)">
+    <Setter Property="Background" Value="Transparent"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[TitlebarVisibility=None]) Button.CaptionButton:not(:pointerover)">
+    <Setter Property="Foreground" Value="{DynamicResource ThemeBackgroundBrush}"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[TitlebarVisibility=None]) TextBlock.CaptionText">
+    <Setter Property="Foreground" Value="{DynamicResource ThemeBackgroundBrush}"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[TitlebarPlacement=OutsideContent]) /template/ :is(Control).ShowOnlyWhenTitlebarOutsideContent">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[TitlebarVisibility=Overlay]) /template/ :is(Control).ShowOnlyWhenTitlebarVisibilityOverlay">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow[TitlebarPlacement=Headerbar]">
+    <Setter Property="BaseTitlebarHeight" Value="40"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow[IsActive=False] /template/ Button#DragMover">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[TitlebarVisibility=Full]) /template/ :is(Control).TitlebarPushAside">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow /template/ :is(Control).UseExtendedTitlebarHeight">
+    <Setter Property="Height" Value="{Binding ExtendedTitlebarHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style>
+</Styles>

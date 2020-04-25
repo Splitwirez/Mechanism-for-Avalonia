@@ -50,7 +50,7 @@ namespace Mechanism.AvaloniaUI.Converters
                 }
             }
             else
-                return new ImageBrush();
+                return null; //new ImageBrush();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

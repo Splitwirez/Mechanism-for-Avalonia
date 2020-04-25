@@ -1,0 +1,53 @@
+﻿<mewin:StyleableWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+        xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
+        xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        mc:Ignorable="d"
+        Width="400" Height="400" Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/avalonia-logo.ico"
+        x:Class="Mechanism.AvaloniaUI.Sample.SampleStyleableWindow"
+        Title="SampleStyleableWindow">
+  <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Spacing="10">
+      <DockPanel>
+        <TextBlock Text="ExtendedTitlebarHeight" DockPanel.Dock="Left" Margin="0,0,5,0"/>
+        <Slider Value="{Binding $parent[mewin:StyleableWindow].ExtendedTitlebarHeight}"/>
+      </DockPanel>
+      <!--, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:StyleableWindow}}-->
+      <CheckBox Content="UseBlur" IsChecked="{Binding $parent[mewin:StyleableWindow].UseBlur}"/>
+      <!--CheckBox Content="UseHeaderbar" IsChecked="{Binding $parent[mewin:StyleableWindow].UseHeaderbar}"/-->
+      <CheckBox Content="ShowCaptionIcon" IsChecked="{Binding $parent[mewin:StyleableWindow].ShowCaptionIcon}"/>
+      <CheckBox Content="ShowCaptionText" IsChecked="{Binding $parent[mewin:StyleableWindow].ShowCaptionText}"/>
+      <CheckBox Content="ExtendBackgroundIntoTitlebar" IsChecked="{Binding $parent[mewin:StyleableWindow].ExtendBackgroundIntoTitlebar}"/>
+      <DockPanel>
+        <TextBlock Text="HorizontalCaptionAlignment" Margin="0,0,5,0"/>
+        <ComboBox SelectionChanged="HorizontalCaptionAlignmentComboBox_SelectionChanged" SelectedIndex="0">
+          <ComboBoxItem Content="Stretch"/>
+          <ComboBoxItem Content="Left"/>
+          <ComboBoxItem Content="Center"/>
+          <ComboBoxItem Content="Right"/>
+        </ComboBox>
+      </DockPanel>
+      <DockPanel>
+        <TextBlock Text="TitlebarPlacement" Margin="0,0,5,0"/>
+        <ComboBox SelectionChanged="TitlebarPlacementComboBox_SelectionChanged" SelectedIndex="0">
+          <ComboBoxItem Content="OutsideContent"/>
+          <ComboBoxItem Content="InsideContent"/>
+          <ComboBoxItem Content="Headerbar"/>
+        </ComboBox>
+      </DockPanel>
+      <DockPanel>
+        <TextBlock Text="TitlebarVisibility" Margin="0,0,5,0"/>
+        <ComboBox SelectionChanged="TitlebarVisibilityComboBox_SelectionChanged" SelectedIndex="0">
+          <ComboBoxItem Content="Full"/>
+          <ComboBoxItem Content="Overlay"/>
+          <ComboBoxItem Content="None"/>
+        </ComboBox>
+      </DockPanel>
+      <Button Click="SetBackgroundButton_Click">(Un)Set background to something stupid</Button>
+    </StackPanel>
+  </ScrollViewer>
+</mewin:StyleableWindow>

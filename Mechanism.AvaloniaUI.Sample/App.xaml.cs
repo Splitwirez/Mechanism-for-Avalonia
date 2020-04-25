@@ -30,21 +30,21 @@ namespace Mechanism.AvaloniaUI.Sample
         private static readonly IStyle DummyStyle = new Style();
         public static bool UseSystemDecorations = false;
 
-        Uri _lastThemeUri = null;
-        public void ResetTheme() => SetTheme(_lastThemeUri);
-
-        public void SetTheme(Uri uri)
+        static Uri _lastThemeUri = null;
+        public static void ResetTheme() => SetTheme(_lastThemeUri, true);
+        public static void SetTheme(Uri uri) => SetTheme(uri, false);
+        public static void SetTheme(Uri uri, bool resetWindows)
         {
             IClassicDesktopStyleApplicationLifetime desktop = null;
             bool isDesktop = false;
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktp)
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktp)
             {
                 desktop = desktp;
                 isDesktop = true;
             }
 
 
-            if (isDesktop)
+            if (isDesktop && resetWindows)
             {
                 //desktop.MainWindow.Close();
                 var windows = desktop.Windows.ToList();
@@ -64,9 +64,9 @@ namespace Mechanism.AvaloniaUI.Sample
                 });
             //(App.Current as App).RefreshAllStyles();
 
-            if (isDesktop)
+            if (isDesktop && resetWindows)
             {
-                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow = new SampleDecoratableWindow();
                 desktop.MainWindow.Show();
             }
 
@@ -83,7 +83,7 @@ namespace Mechanism.AvaloniaUI.Sample
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow.Close();
-                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow = new SampleDecoratableWindow();
                 desktop.MainWindow.Show();
             }
         }
