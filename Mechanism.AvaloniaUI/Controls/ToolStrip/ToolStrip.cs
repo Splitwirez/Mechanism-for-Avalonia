@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Generators;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.LogicalTree;
 using Avalonia.Metadata;
 using Avalonia.Threading;
 using System;
@@ -46,7 +47,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         //private ObservableCollection<ToolStripItemReference> DefaultItems = new ObservableCollection<ToolStripItemReference>();
         ObservableCollection<ToolStripItemReference> _defaultItems = new ObservableCollection<ToolStripItemReference>();
         public static readonly DirectProperty<ToolStrip, ObservableCollection<ToolStripItemReference>> DefaultItemsProperty =
-            AvaloniaProperty.RegisterDirect<ToolStrip, ObservableCollection<ToolStripItemReference>>(nameof(DefaultItems), o => o.CurrentItems, (o, v) => o.CurrentItems = v);
+            AvaloniaProperty.RegisterDirect<ToolStrip, ObservableCollection<ToolStripItemReference>>(nameof(DefaultItems), o => o.DefaultItems, (o, v) => o.DefaultItems = v);
 
         public ObservableCollection<ToolStripItemReference> DefaultItems
         {
@@ -92,7 +93,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             get => GetValue(ShowLabelsProperty);
             set => SetValue(ShowLabelsProperty, value);
         }
-
 
 
         static ToolStrip()
@@ -143,9 +143,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             };*/
             ((AvaloniaList<object>)Items).CollectionChanged += Items_CollectionChanged;
             CurrentItems.CollectionChanged += CurrentItems_CollectionChanged;
-
-            if (CurrentItems.Count == 0)
-                CurrentItems = DefaultItems;
+            //DefaultItems.CollectionChanged += DefaultItems_CollectionChanged;
             /*CurrentItems.CollectionChanged += CurrentItems_CollectionChanged;
             CurrentItems.CollectionChanged += (sneder, args) =>
             {
@@ -176,6 +174,30 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             };*/
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            if (CurrentItems.Count == 0)
+                ResetToDefaults();
+        }
+
+        private void DefaultItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            
+        }
+
+        /*void UpdateDefaultItems()
+        {
+            var spaceItem = Items.OfType<ToolStripItemReference>().FirstOrDefault<ToolStripFlexibleSpaceReference>();
+            foreach (ToolStripItemReference reference in DefaultItems)
+            {
+                if (reference is ToolStripFlexibleSpaceReference)
+                {
+                    reference.TargetItem = spaceItem;//[!ToolStripFlexibleSpaceReference.TargetItemProperty] = 
+                }
+            }
+        }*/
+
         private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -188,7 +210,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                         var matches = AvailableItems.Where(x => x.TargetItem == item).ToList();
                         if (matches.Count() > 0)
                         {
-                            foreach (ToolStripItemReference reference in matches)
+                            foreach (ToolStripItemReference reference in matches.Where(x => AvailableItems.Contains(x)))
                                 AvailableItems.Remove(reference);
                         }
                     }
@@ -233,55 +255,71 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 ((AvaloniaList<object>)Items).RemoveAll(flexibleSpaces); //.Insert(0, new FlexibleSpaceToolStripItem());
 
             if (flexibleSpaces.Count() == 0)
-                ((AvaloniaList<object>)Items).Insert(0, new FlexibleSpaceToolStripItem());
+                ((AvaloniaList<object>)Items).Insert(0, ToolStripFlexibleSpaceReference.ItemInstance);
         }
 
         //public List<IToolStripItem> HoverItems = new List<IToolStripItem>();
         public ToolStripItemReference HoverItem = null;
         public void ValidateAddToToolStrip(IToolStripItem item)
         {
-            Timer timer = new Timer(100);
-            timer.Elapsed += (sneder, args) =>
+            WaitForPointer(() =>
             {
-                Dispatcher.UIThread.Post(() =>
+                if (_currentItemsItemsControl.IsPointerOver)
                 {
-                    if (_currentItemsItemsControl.IsPointerOver)
-                    {
-                        if (HoverItem != null)
-                            CurrentItems.Insert(CurrentItems.IndexOf(HoverItem)/*(CurrentItems.Last(x => x.TargetItem == HoverItems.Last()))*/, item.ToReference());
-                        else
-                            CurrentItems.Add(item.ToReference());
-                    }
-                    //_currentItemsItemsControl.ItemContainerGenerator.
-                    Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
-                });
-                timer.Stop();
-            };
-            timer.Start();
+                    if (HoverItem != null)
+                        CurrentItems.Insert(CurrentItems.IndexOf(HoverItem)/*(CurrentItems.Last(x => x.TargetItem == HoverItems.Last()))*/, item.ToReference());
+                    else
+                        CurrentItems.Add(item.ToReference());
+                }
+                //_currentItemsItemsControl.ItemContainerGenerator.
+                Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
+            });
         }
-        public void ValidateMoveOrRemoveFromToolStrip(IToolStripItem item)
+        public void ValidateMoveOrRemoveFromToolStrip(ToolStripItemReference item)
+        {
+            WaitForPointer(() =>
+            {
+                //var match = CurrentItems.FirstOrDefault(x => x.TargetItem == item);
+                if (CurrentItems.Contains(item))
+                    CurrentItems.Remove(item);
+                /*foreach (ToolStripItemReference reference in matches)
+                {
+                    CurrentItems.Remove(reference);
+                    break;
+                }*/
+
+                if (_currentItemsItemsControl.IsPointerOver)
+                {
+                    int hoverItemIndex = -1;
+                    if (HoverItem != null)
+                        hoverItemIndex = CurrentItems.IndexOf(HoverItem);
+
+                    if ((hoverItemIndex >= 0) && (hoverItemIndex < CurrentItems.Count))
+                        CurrentItems.Insert(hoverItemIndex, item);
+                    else
+                        CurrentItems.Add(item);
+                }
+                Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
+            });
+        }
+
+        void WaitForPointer(Action action)
         {
             Timer timer = new Timer(100);
             timer.Elapsed += (sneder, args) =>
             {
-                Dispatcher.UIThread.Post(() =>
-                {
-                    var matches = CurrentItems.Where(x => x.TargetItem == item).ToList();
-                    foreach (ToolStripItemReference reference in matches)
-                        CurrentItems.Remove(reference);
-
-                    if (_currentItemsItemsControl.IsPointerOver)
-                    {
-                        if (HoverItem != null)
-                            CurrentItems.Insert(CurrentItems.IndexOf(HoverItem), item.ToReference());
-                        else
-                            CurrentItems.Add(item.ToReference());
-                    }
-                    Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
-                });
+                Dispatcher.UIThread.Post(action);
                 timer.Stop();
             };
             timer.Start();
+        }
+
+        public void ResetToDefaults()
+        {
+            //CurrentItems = DefaultItems;
+            CurrentItems.Clear();
+            foreach (ToolStripItemReference reference in DefaultItems)
+                CurrentItems.Add(reference);
         }
 
         void zUpdateItems()
@@ -296,7 +334,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 CurrentItems = DefaultItems;*/
         }
 
-        void AddToDefault(ToolStripItemReference reference)
+        /*void AddToDefault(ToolStripItemReference reference)
         {
             ((ObservableCollection<ToolStripItemReference>)DefaultItems).Add(reference);
         }
@@ -304,7 +342,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         void AddToCurrent(ToolStripItemReference reference)
         {
             ((ObservableCollection<ToolStripItemReference>)CurrentItems).Add(reference);
-        }
+        }*/
 
         ItemsControl _currentItemsItemsControl = null;
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -317,6 +355,15 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 var pnt = args.GetCurrentPoint(_currentItemsItemsControl);
                 Debug.WriteLine("Point: " + pnt.Position);
             };*/
+            Thumb defaultItemsDragThumb = e.NameScope.Get<Thumb>("PART_DefaultItemsThumb");
+            defaultItemsDragThumb.DragCompleted += (sneder, args) =>
+            {
+                WaitForPointer(() =>
+                {
+                    if (_currentItemsItemsControl.IsPointerOver)
+                        ResetToDefaults();
+                });
+            };
         }
 
         public IItemsPresenter Presenter

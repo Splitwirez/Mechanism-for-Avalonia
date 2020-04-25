@@ -19,9 +19,9 @@
   </mewin:DecoratableWindow.DataContext>
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
-      <Rectangle Width="{Binding LeftHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Left"/>
-      <Rectangle Width="{Binding RightHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Right"/>
-      <TabControl TabStripPlacement="Bottom">
+      <Control Width="{Binding LeftHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Left"/>
+      <Control Width="{Binding RightHeaderbarInset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:DecoratableWindow}}, Mode=OneWay}" DockPanel.Dock="Right"/>
+      <TabControl x:Name="TopUserInterfaceTabControl" TabStripPlacement="Bottom">
         <TabItem Header="CommandBar">
           <StackPanel Orientation="Vertical" Width="{Binding $parent[TabControl].Width}" Spacing="10">
             <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
@@ -270,7 +270,11 @@
               </mets:ToolStrip.Items>
               <mets:ToolStrip.DefaultItems>
                 <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem}"/>
+                <mets:ToolStripFlexibleSpaceReference/>
                 <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem3}"/>
+                <mets:ToolStripFlexibleSpaceReference/>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem4}"/>
               </mets:ToolStrip.DefaultItems>
             </mets:ToolStrip>
             <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip}"/>

@@ -7,6 +7,7 @@ using Avalonia.Styling;
 using Avalonia.Threading;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
 using Mechanism.AvaloniaUI.Controls.ContentDialog;
+using Mechanism.AvaloniaUI.Controls.ToolStrip;
 using Mechanism.AvaloniaUI.Controls.Windows;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,17 @@ namespace Mechanism.AvaloniaUI.Sample
         {
             e.Cancel = true;
         }*/
+        static MainWindow()
+        {
+            UseHeaderbarProperty.Changed.AddClassHandler<MainWindow>(new Action<MainWindow, AvaloniaPropertyChangedEventArgs>((sender, e) =>
+            {
+                if (sender._topUITabControl != null)
+                    sender.UpdateTitlebarHeight();
+            }));
+        }
 
+        TabControl _topUITabControl = null;
+        ToolStrip _toolStrip = null;
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -50,6 +61,10 @@ namespace Mechanism.AvaloniaUI.Sample
             };
 
             var commandBar = this.Find<CommandBar>("CommandBar");
+            _toolStrip = this.Find<ToolStrip>("ToolStrip");
+            _toolStrip.AttachedToVisualTree += (sneder, args) => UpdateTitlebarHeight();
+            _topUITabControl = this.Find<TabControl>("TopUserInterfaceTabControl");
+            _topUITabControl.SelectionChanged += (sneder, args) => UpdateTitlebarHeight();
             this.Find<RadioButton>("CommandBarLeftRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Left;
             this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
 
@@ -68,6 +83,35 @@ namespace Mechanism.AvaloniaUI.Sample
             this.Find<Button>("FruitThemeButton").Click += (sneder, args) => SetTheme("avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Fruit.xaml");
             //new ThemeDemoWindow().Show();
         }
+
+        //bool _updateTopUI = false;
+        void UpdateTitlebarHeight()
+        {
+            /*_updateTopUI = true;
+            InvalidateMeasure();*/
+            Width--;
+            LayoutManager.ExecuteLayoutPass();
+            if ((_topUITabControl.SelectedIndex == 2) && (!UseHeaderbar))
+                ExtendedTitlebarHeight = _toolStrip.DesiredSize.Height;
+            else
+                ExtendedTitlebarHeight = 0;
+            Width++;
+            //_updateTopUI = false;
+        }
+
+        /*protected override Size MeasureOverride(Size availableSize)
+        {
+            var retVal = base.MeasureOverride(availableSize);
+            if (_updateTopUI)
+            {
+                if ((_topUITabControl.SelectedIndex == 2) && (!UseHeaderbar))
+                    ExtendedTitlebarHeight = _toolStrip.DesiredSize.Height;
+                else
+                    ExtendedTitlebarHeight = 0;
+                _updateTopUI = false;
+            }
+            return retVal;
+        }*/
 
         public void EmptyCommand(object parameter)
         {

@@ -19,13 +19,21 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             set => SetValue(OwnerProperty, value);
         }
 
-        public static readonly StyledProperty<IToolStripItem> TargetItemProperty =
+        /*public static readonly StyledProperty<IToolStripItem> TargetItemProperty =
             AvaloniaProperty.Register<MoveOrRemoveFromToolStripBehavior, IToolStripItem>(nameof(TargetItem));
 
         public IToolStripItem TargetItem
         {
             get => GetValue(TargetItemProperty);
             set => SetValue(TargetItemProperty, value);
+        }*/
+        public static readonly StyledProperty<ToolStripItemReference> TargetProperty =
+            AvaloniaProperty.Register<ToolStripItemPointerOverBehavior, ToolStripItemReference>(nameof(Target));
+
+        public ToolStripItemReference Target
+        {
+            get => GetValue(TargetProperty);
+            set => SetValue(TargetProperty, value);
         }
 
         protected override void OnAttached()
@@ -38,7 +46,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         private void AssociatedObject_DragCompleted(object sender, Avalonia.Input.VectorEventArgs e)
         {
             Debug.WriteLine("Drag completed");
-            Owner.ValidateMoveOrRemoveFromToolStrip(TargetItem);
+            Owner.ValidateMoveOrRemoveFromToolStrip(Target);
         }
     }
 }

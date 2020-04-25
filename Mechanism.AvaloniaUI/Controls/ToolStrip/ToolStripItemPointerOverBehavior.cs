@@ -30,8 +30,16 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerEnter += (sneder, args) => Owner.HoverItem = Target; //Owner.HoverItems.Add(TargetItem);
-            AssociatedObject.PointerLeave += (sneder, args) => Owner.HoverItem = null;
+            AssociatedObject.PointerEnter += (sneder, args) =>
+            {
+                if (Owner != null)
+                    Owner.HoverItem = Target;
+            };//Owner.HoverItems.Add(TargetItem);
+            AssociatedObject.PointerLeave += (sneder, args) =>
+            {
+                if (Owner != null)
+                    Owner.HoverItem = null;
+            };
         }
     }
 }

@@ -26,10 +26,10 @@ namespace Mechanism.AvaloniaUI.Sample.ViewModels
             LastActionText = paramString;
         }
 
-        string _lastActionText = "none";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        string _lastActionText = "none";
         public string LastActionText
         {
             get => _lastActionText;

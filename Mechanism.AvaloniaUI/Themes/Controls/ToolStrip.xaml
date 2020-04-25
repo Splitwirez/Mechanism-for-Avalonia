@@ -59,9 +59,9 @@
                     </Panel>
                     <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
                   </DockPanel>
-                  <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+                  <Thumb Classes="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
                     <i:Interaction.Behaviors>
-                      <mets:MoveOrRemoveFromToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                      <mets:MoveOrRemoveFromToolStripBehavior Target="{Binding}" Owner="{Binding $parent[mets:ToolStrip]}"/>
                     </i:Interaction.Behaviors>
                   </Thumb>
                 </Panel>
@@ -75,9 +75,10 @@
                     <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" IsVisible="{Binding ShowLabels, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}" DockPanel.Dock="Bottom"/>
                     <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
                   </DockPanel>
-                  <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+                  <Thumb Classes="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
                     <i:Interaction.Behaviors>
-                      <mets:MoveOrRemoveFromToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                      <mets:MoveOrRemoveFromToolStripBehavior Target="{Binding}" Owner="{Binding $parent[mets:ToolStrip]}"/>
+                    <!--TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}"-->
                     </i:Interaction.Behaviors>
                   </Thumb>
                 </Panel>
@@ -87,7 +88,7 @@
           <Popup IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="10">
             <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
               <StackPanel Orientation="Vertical" Margin="20">
-                <TextBlock Text="Drag your favorite items into the toolbar..."/>
+                <TextBlock Text="Drag your favorite items into the Toolstrip..." Margin="0,0,0,10"/>
                 <ItemsControl Items="{TemplateBinding AvailableItems}">
                   <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -101,7 +102,7 @@
                           <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" DockPanel.Dock="Bottom"/>
                           <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
                         </DockPanel>
-                        <Thumb x:Name="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+                        <Thumb Classes="DragThumb" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
                           <i:Interaction.Behaviors>
                             <mets:AddToToolStripBehavior TargetItem="{Binding DataContext, ElementName=ItemTemplatedControl}" Owner="{Binding $parent[mets:ToolStrip]}"/>
                           </i:Interaction.Behaviors>
@@ -110,6 +111,35 @@
                     </DataTemplate>
                   </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                <TextBlock Text="...or drag the default set into the Toolstrip." Margin="0,20,0,10"/>
+                <Panel>
+                  <ItemsControl Items="{TemplateBinding DefaultItems}" IsHitTestVisible="False">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <mets:ToolStripItemsPanel HorizontalAlignment="Stretch" Spacing="6" Margin="7,0"/>
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.DataTemplates>
+                      <DataTemplate DataType="{x:Type mets:ToolStripFlexibleSpaceReference}">
+                        <Panel>
+                          <DockPanel VerticalAlignment="Stretch">
+                            <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" DockPanel.Dock="Bottom"/>
+                            <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
+                          </DockPanel>
+                        </Panel>
+                      </DataTemplate>
+                      <DataTemplate DataType="{x:Type mets:ToolStripItemReference}">
+                        <Panel VerticalAlignment="Stretch">
+                          <DockPanel VerticalAlignment="Stretch">
+                            <TextBlock Text="{Binding TargetItem.DisplayName}" TextAlignment="Center" DockPanel.Dock="Bottom"/>
+                            <TemplatedControl x:Name="ItemTemplatedControl" DataContext="{Binding TargetItem}" Template="{Binding Template}"/>
+                          </DockPanel>
+                        </Panel>
+                      </DataTemplate>
+                    </ItemsControl.DataTemplates>
+                  </ItemsControl>
+                  <Thumb x:Name="PART_DefaultItemsThumb" Classes="DragThumb"/>
+                </Panel>
                 <Rectangle Margin="-20,20" Height="1" Fill="{DynamicResource ThemeForegroundBrush}"/>
                 <DockPanel LastChildFill="False">
                   <ToggleButton Content="Done" IsChecked="{Binding !IsCustomizing, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Right"/>
@@ -121,7 +151,7 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mets|ToolStrip[IsCustomizing=True] Thumb#DragThumb">
+  <Style Selector="mets|ToolStrip[IsCustomizing=True] Thumb.DragThumb">
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="Template">
