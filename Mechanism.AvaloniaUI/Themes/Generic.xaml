@@ -10,6 +10,16 @@
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Design.PreviewWith>
+    <HeaderedContentControl Classes="GroupBox"  Header="Header">
+      <StackPanel Orientation="Vertical">
+        <TextBlock Text="Content content content"/>
+        <TextBlock Text="Content content content"/>
+        <TextBlock Text="Content content content"/>
+        <TextBlock Text="Content content content"/>
+      </StackPanel>
+    </HeaderedContentControl>
+  </Design.PreviewWith>
   <Styles.Resources>
     <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
       <Panel x:Name="PART_ButtonArea">
@@ -28,8 +38,8 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolBarTray.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolStrip.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/StyleableWindow.xaml"/>
-    
-  
+
+
   <Style Selector=":is(TopLevel)">
     <Setter Property="mecd:ContentDialog.MonitorActive" Value="True"/>
   </Style>
@@ -184,7 +194,7 @@
   <Style Selector="mewin|DecoratableWindow /template/ Grid#ResizeGrid Border">
     <Setter Property="Background" Value="#01000000"/>
   </Style>
-  
+
   <!--Style Selector="mewin|DecoratableWindow[HasSystemDecorations=True]">
     <Setter Property="Template">
       <ControlTemplate>
@@ -237,5 +247,25 @@
   </Style>
   <Style Selector="mectrl|OverflowFlyoutItemsControl /template/ ToggleButton#PART_FlyoutToggleButton:not(:pointerover):not(:pressed)">
     <Setter Property="Background" Value="Transparent"/>
+  </Style>
+
+  <Style Selector="HeaderedContentControl.GroupBox">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Padding" Value="4"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Margin="0,9,0,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0,1,1">
+          <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="0,-9,0,-3">
+              <Rectangle Width="5" Height="1" Fill="{TemplateBinding BorderBrush}" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,9,0,0"/>
+              <ContentPresenter Content="{TemplateBinding Header}" Margin="4,0" DockPanel.Dock="Left"/>
+              <Rectangle Height="1" Fill="{TemplateBinding BorderBrush}" VerticalAlignment="Top" Margin="0,9,0,0"/>
+            </DockPanel>
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}"/>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
   </Style>
 </Styles>

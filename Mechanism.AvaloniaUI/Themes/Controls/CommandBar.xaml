@@ -46,7 +46,7 @@
               <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mectrl:OverflowFlyoutItemsControl].HorizontalItemsAlignment}" />
+                    <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>

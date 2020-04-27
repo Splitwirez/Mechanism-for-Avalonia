@@ -20,7 +20,7 @@
           <Panel>
             <DockPanel>
               <Panel Classes="TitlebarPushAside" Height="{TemplateBinding TitlebarHeight}" DockPanel.Dock="Top">
-                <Border BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" IsVisible="{Binding !IsActive, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                <Border BorderThickness="1,1,1,0" CornerRadius="3.5,3.5,0,0" IsVisible="{Binding !IsActive, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                   <Border.Background>
                     <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource InactiveTitlebarBackgroundGradientStops}"/>
                   </Border.Background>
@@ -29,7 +29,7 @@
                   </Border.BorderBrush>
                   <Rectangle Fill="{DynamicResource InactiveTitlebarSeparatorFill}" Height="1" VerticalAlignment="Bottom" Margin="-1,0"/>
                 </Border>
-                <Border BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" IsVisible="{TemplateBinding IsActive}">
+                <Border BorderThickness="1,1,1,0" CornerRadius="3.5,3.5,0,0" IsVisible="{TemplateBinding IsActive}">
                   <Border.Background>
                     <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource ActiveTitlebarBackgroundGradientStops}"/>
                   </Border.Background>
@@ -43,7 +43,7 @@
             </DockPanel>
             <Border Classes="ShowOnlyWhenTitlebarVisibilityOverlay" VerticalAlignment="Top" Height="{TemplateBinding TitlebarHeight}">
               <Panel>
-                <Border BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" IsVisible="{Binding !IsActive, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                <Border BorderThickness="1,1,1,0" CornerRadius="3.5,3.5,0,0" IsVisible="{Binding !IsActive, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                   <Border.Background>
                     <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource InactiveTitlebarOverlayBackgroundGradientStops}"/>
                   </Border.Background>
@@ -52,7 +52,7 @@
                   </Border.BorderBrush>
                   <Rectangle Fill="{DynamicResource InactiveTitlebarSeparatorFill}" Height="1" VerticalAlignment="Bottom" Margin="-1,0"/>
                 </Border>
-                <Border BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" IsVisible="{TemplateBinding IsActive}">
+                <Border BorderThickness="1,1,1,0" CornerRadius="3.5,3.5,0,0" IsVisible="{TemplateBinding IsActive}">
                   <Border.Background>
                     <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource ActiveTitlebarOverlayBackgroundGradientStops}"/>
                   </Border.Background>

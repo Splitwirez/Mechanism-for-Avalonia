@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Mechanism.AvaloniaUI.Controls.CommandBar;
 using System;
 
 namespace Mechanism.AvaloniaUI.Sample
@@ -23,6 +24,10 @@ namespace Mechanism.AvaloniaUI.Sample
             var themesStackPanel = this.Find<StackPanel>("ThemesStackPanel");
             foreach (RadioButton rbtn in themesStackPanel.Children)
                 rbtn.Checked += ThemeRadioButton_Checked;
+
+            var commandBar = this.Find<CommandBar>("CommandBar");
+            this.Find<RadioButton>("CommandBarLeftRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Left;
+            this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
         }
 
         public void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
