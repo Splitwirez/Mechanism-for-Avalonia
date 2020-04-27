@@ -48,7 +48,7 @@ namespace Mechanism.AvaloniaUI.Sample
                 Background = new LinearGradientBrush()
                 {
                     StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
-                    EndPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
+                    EndPoint = new RelativePoint(1, 1, RelativeUnit.Relative),
                     GradientStops = new GradientStops()
                     {
                         new GradientStop(Colors.Red, 0),

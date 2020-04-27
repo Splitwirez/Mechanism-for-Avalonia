@@ -4,68 +4,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
   <SolidColorBrush x:Key="WindowBackground">#FFFFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowForeground">#FF000000</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowBorderBrush">#7F000000</SolidColorBrush>
+  
   <GradientStops x:Key="ActiveTitlebarBorderGradientStops">
-    <GradientStop Offset="0" Color="#FFE1E1E2"/>
-    <GradientStop Offset="0.25" Color="#FFC5C4C6"/>
+    <GradientStop Offset="0" Color="#FFF6F5F6"/>
+    <GradientStop Offset="0.25" Color="#FFCBC9CB"/>
   </GradientStops>
   <GradientStops x:Key="ActiveTitlebarBackgroundGradientStops">
-    <GradientStop Offset="0" Color="#FFECEBED"/>
-    <GradientStop Offset="1" Color="#FFD6D5D7"/>
+    <GradientStop Offset="0" Color="#FFECEBEC"/>
+    <GradientStop Offset="1" Color="#FFD4D1D4"/>
   </GradientStops>
-  <SolidColorBrush x:Key="ActiveTitlebarSeparatorFill">#FF989799</SolidColorBrush>
-  <SolidColorBrush x:Key="InactiveWindowBorderBrush">#FF777E80</SolidColorBrush><GradientStops x:Key="InactiveTitlebarGradientStops">
-    <GradientStop Offset="0" Color="#FF9CA1A2"/>
-    <GradientStop Offset="0.45" Color="#FFCBCECF"/>
-    <GradientStop Offset="0.55" Color="#FFCBCECF"/>
-    <GradientStop Offset="1" Color="#FF9CA1A2"/>
+  <GradientStops x:Key="ActiveTitlebarOverlayBackgroundGradientStops">
+    <GradientStop Offset="0" Color="#DCECEBEC"/>
+    <GradientStop Offset="1" Color="#C4D4D1D4"/>
   </GradientStops>
+  <SolidColorBrush x:Key="ActiveTitlebarSeparatorFill">#FFB5B4B5</SolidColorBrush>
 
-
-
-  <SolidColorBrush x:Key="ButtonBorderBrush">#FF003C74</SolidColorBrush>
-  <GradientStops x:Key="ButtonShineBorderGradientStops">
-    <GradientStop Offset="0" Color="#40FFFFFF"/>
-    <GradientStop Offset="0.9" Color="#00FFFFFF"/>
-    <GradientStop Offset="1" Color="#40000000"/>
+  <GradientStops x:Key="InactiveTitlebarBorderGradientStops">
+    <GradientStop Offset="0" Color="#FFF6F6F6"/>
+    <GradientStop Offset="0.25" Color="#FFE8E8E8"/>
   </GradientStops>
-  
-  <GradientStops x:Key="ButtonIdleBackgroundGradientStops">
-    <GradientStop Offset="0" Color="#FFFDFDFD"/>
-    <GradientStop Offset="1" Color="#FFCDCCDE"/>
+  <GradientStops x:Key="InactiveTitlebarBackgroundGradientStops">
+    <GradientStop Offset="0" Color="#FFF6F6F6"/>
   </GradientStops>
-  <LinearGradientBrush x:Key="ButtonIdleBackground" StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource ButtonIdleBackgroundGradientStops}"/>
-  <GradientStops x:Key="ButtonHoverBorderGradientStops">
-    <GradientStop Offset="0" Color="#FFFDD889"/>
-    <GradientStop Offset="1" Color="#FFF8B230"/>
+  <GradientStops x:Key="InactiveTitlebarOverlayBackgroundGradientStops">
+    <GradientStop Offset="0" Color="#E6F6F6F6"/>
   </GradientStops>
-  <SolidColorBrush x:Key="ButtonPressedInnerBorderBrush">#FFFFFFFF</SolidColorBrush>
-  
-  <SolidColorBrush x:Key="ButtonDisabledBackground">#FFC4C3BF</SolidColorBrush>
-  <SolidColorBrush x:Key="ButtonDisabledBorderBrush">#FFF1F1ED</SolidColorBrush>
-
-  
-  
-  <GradientStops x:Key="NavigationButtonFrameFillGradientStops">
-    <GradientStop Offset="0" Color="#2D161616"/>
-    <GradientStop Offset="0.5" Color="#8DE8E8E8"/>
-    <GradientStop Offset="1" Color="#BAF5F5F5"/>
-  </GradientStops>
-  <GradientStops x:Key="NavigationButtonFrameStrokeGradientStops">
-    <GradientStop Offset="0" Color="#2E161616"/>
-    <GradientStop Offset="1" Color="#00161616"/>
-  </GradientStops>
-
-  <SolidColorBrush x:Key="NavigationButtonIconStroke">#7F000000</SolidColorBrush>
-  <GradientStops x:Key="NavigationButtonIconFillGradientStops">
-    <GradientStop Offset="0.25" Color="#FFFFFFFF"/>
-    <GradientStop Offset="1" Color="#FFCCD4DE"/>
-  </GradientStops>
-
-  <SolidColorBrush x:Key="TreeViewExpanderIdleStroke">#FFBABABA</SolidColorBrush>
-  <GradientStops x:Key="TreeViewExpanderIdleFillGradientStops">
-    <GradientStop Offset="0" Color="#FFF0F0F0"/>
-    <GradientStop Offset="1" Color="#FFE1E1E1"/>
-  </GradientStops>
-
-  <SolidColorBrush x:Key="PaneBorderBrush">#FFB4B4B4</SolidColorBrush>
+  <SolidColorBrush x:Key="InactiveTitlebarSeparatorFill">#FFB5B4B5</SolidColorBrush>
+  <SolidColorBrush x:Key="CaptionButtonStroke">#40000000</SolidColorBrush>
+  <SolidColorBrush x:Key="CloseButtonFill">#FFFF635B</SolidColorBrush>
+  <SolidColorBrush x:Key="MinimizeButtonFill">#FFFFC431</SolidColorBrush>
+  <SolidColorBrush x:Key="MaximizeButtonFill">#FF2BD043</SolidColorBrush>
 </ResourceDictionary>
