@@ -9,6 +9,7 @@
         xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d"
+        d:DesignWidth="500"
         Width="800" Height="300"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
         Title="Mechanism Sample Launcher" Padding="5">
@@ -38,6 +39,9 @@
       </HeaderedContentControl>
     </DockPanel>
     <TabControl>
+      <TabItem Header="ShadowDecorator">
+        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="10" Margin="20" CornerRadius="50"/>
+      </TabItem>
       <TabItem Header="Dialogs">
         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
           <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
