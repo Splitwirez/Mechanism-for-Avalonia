@@ -40,7 +40,14 @@
     </DockPanel>
     <TabControl>
       <TabItem Header="ShadowDecorator">
-        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="10" Margin="20" CornerRadius="50"/>
+        <UniformGrid Columns="2">
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="30" Extent="20,10,20,30" UseClipping="True" CornerRadius="15"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="40" Extent="30,20,30,40" CornerRadius="0">
+          <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </mectrl:ShadowDecorator>
+        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="20" Extent="10,5,10,15" UseClipping="True" CornerRadius="5"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="4" Extent="0,0,4,4" UseClipping="True" CornerRadius="0"/>
+      </UniformGrid>
       </TabItem>
       <TabItem Header="Dialogs">
         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

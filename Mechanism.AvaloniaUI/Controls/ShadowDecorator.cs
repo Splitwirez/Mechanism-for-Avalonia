@@ -1,10 +1,10 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls.Utils;
 using Avalonia.Layout;
 using Avalonia.Media;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Avalonia.Media;
+using Avalonia;
+using Avalonia.Controls;
 
 namespace Mechanism.AvaloniaUI.Controls
 {
@@ -13,51 +13,82 @@ namespace Mechanism.AvaloniaUI.Controls
         public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ShadowDecorator, Color>(nameof(Color));
 
-        public static readonly StyledProperty<double> DepthProperty =
-            AvaloniaProperty.Register<ShadowDecorator, double>(nameof(Depth));
+        public static readonly StyledProperty<bool> UseClippingProperty =
+            AvaloniaProperty.Register<ShadowDecorator, bool>(nameof(UseClipping));
+
+        public static readonly StyledProperty<Thickness> ExtentProperty =
+            AvaloniaProperty.Register<ShadowDecorator, Thickness>(nameof(Extent));
+
+        public static readonly StyledProperty<Thickness> DepthProperty =
+            AvaloniaProperty.Register<ShadowDecorator, Thickness>(nameof(Depth));
 
         public static readonly StyledProperty<CornerRadius> CornerRadiusProperty =
             AvaloniaProperty.Register<ShadowDecorator, CornerRadius>(nameof(CornerRadius));
 
-        private readonly ShadowRenderHelper _shadowRenderHelper = new ShadowRenderHelper();
+        private readonly ShadowDecoratorRenderHelper _shadowDecoratorRenderHelper = new ShadowDecoratorRenderHelper();
 
+        /// <summary>
+        /// Initializes static members of the <see cref="ShadowDecorator"/> class.
+        /// </summary>
         static ShadowDecorator()
         {
             AffectsRender<ShadowDecorator>(
                 ColorProperty,
-                DepthProperty,
-                CornerRadiusProperty);
-            AffectsMeasure<ShadowDecorator>(DepthProperty);
+                ExtentProperty,
+                CornerRadiusProperty,
+                UseClippingProperty);
+            AffectsMeasure<ShadowDecorator>(ExtentProperty);
+        }
+
+        /*public ShadowDecorator()
+        {
+            Clip = _shadowDecoratorRenderHelper.Update(Bounds.Size, Extent, CornerRadius);
+        }*/
+
+        public bool UseClipping
+        {
+            get => GetValue(UseClippingProperty);
+            set => SetValue(UseClippingProperty, value);
         }
 
         public Color Color
         {
-            get { return GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
-        public double Depth
+        public Thickness Extent
         {
-            get { return GetValue(DepthProperty); }
-            set { SetValue(DepthProperty, value); }
+            get => GetValue(ExtentProperty);
+            set => SetValue(ExtentProperty, value);
+        }
+
+        public Thickness Depth
+        {
+            get => GetValue(DepthProperty);
+            set => SetValue(DepthProperty, value);
         }
 
         public CornerRadius CornerRadius
         {
-            get { return GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
+            get => GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
         }
 
         public override void Render(DrawingContext context)
         {
-            _shadowRenderHelper.Render(context, Bounds.Size, Depth, CornerRadius, Color);
+            //base.Render(context);
+            Clip = _shadowDecoratorRenderHelper.Render(context, Bounds.Size, Extent, Depth, CornerRadius, Color);
         }
 
-        static Thickness ZeroThickness = new Thickness(0);
-
+        /// <summary>
+        /// Measures the control.
+        /// </summary>
+        /// <param name="availableSize">The available size.</param>
+        /// <returns>The desired size of the control.</returns>
         protected override Size MeasureOverride(Size availableSize)
         {
-            return LayoutHelper.MeasureChild(Child, availableSize, Padding, ZeroThickness);
+            return LayoutHelper.MeasureChild(Child, availableSize, Padding, Extent);
         }
 
         /// <summary>
@@ -67,190 +98,164 @@ namespace Mechanism.AvaloniaUI.Controls
         /// <returns>The space taken.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            _shadowRenderHelper.Update(finalSize, Depth, CornerRadius);
+            Clip = _shadowDecoratorRenderHelper.Update(finalSize, Extent, CornerRadius, UseClipping);
 
-            return LayoutHelper.ArrangeChild(Child, finalSize, Padding, ZeroThickness);
+            return LayoutHelper.ArrangeChild(Child, finalSize, Padding, Extent);
         }
     }
 
-    internal class ShadowRenderHelper
+    internal class ShadowDecoratorRenderHelper
     {
-        private StreamGeometry _topLeftGeometryCache;
-        private RectangleGeometry _topCenterGeometryCache;
-        private StreamGeometry _topRightGeometryCache;
+        private StreamGeometry _backgroundGeometryCache;
+        private StreamGeometry _borderGeometryCache;
 
-        private RectangleGeometry _middleLeftGeometryCache;
-        private StreamGeometry _middleCenterGeometryCache;
-        private RectangleGeometry _middleRightGeometryCache;
-
-        private StreamGeometry _bottomLeftGeometryCache;
-        private RectangleGeometry _bottomCenterGeometryCache;
-        private StreamGeometry _bottomRightGeometryCache;
-
-        public void Update(Size size, double depth, CornerRadius radii)
+        public Geometry Update(Size finalSize, Thickness extent, CornerRadius cornerRadius, bool useClipping)
         {
-            var boundRect = new Rect(size);
-            var innerRect = boundRect.Deflate(depth);
-            BorderGeometryKeypoints backgroundKeypoints = null;
-            StreamGeometry backgroundGeometry = null;
-
-            if (innerRect.Width != 0 && innerRect.Height != 0)
+            if (useClipping && (finalSize.Width > 0) && (finalSize.Height > 0))
             {
-                //new RectangleGeometry()
-                //backgroundGeometry = new StreamGeometry();
-                //backgroundKeypoints = new BorderGeometryKeypoints(innerRect, new Thickness(depth), radii, true);
+                var borderGeometry = new StreamGeometry();
 
-                /*using (var ctx = backgroundGeometry.Open())
-                {
-                    CreateGeometry(ctx, innerRect, backgroundKeypoints);
-                }*/
-
-                _middleCenterGeometryCache = backgroundGeometry;
-            }
-            else
-            {
-                _middleCenterGeometryCache = null;
-            }
-
-            /*if (boundRect.Width != 0 && innerRect.Height != 0)
-            {*/
-            //var borderGeometryKeypoints = new BorderGeometryKeypoints(boundRect, depth, radii, false);
-            //borderGeometryKeypoints.
-            var borderGeometry = new StreamGeometry();
-
-            /*if (backgroundGeometry != null)
-            {
                 using (var ctx = borderGeometry.Open())
                 {
-                    CreateGeometry(ctx, innerRect, backgroundKeypoints);
+                    CreateEdgeGeometry(ctx, finalSize, extent, cornerRadius);
                 }
-            }*/
 
-            if (depth > 0)
-            {
-                double outer = depth + radii.TopLeft;
-
-                _topLeftGeometryCache = GetCornerGeometry(new Point(0, outer), new Point(outer, 0), new Point(outer, depth), new Point(depth, outer), outer, radii.TopLeft, 0, 0);
-
-                double baseCenterWidth = size.Width - (depth * 2);
-                _topCenterGeometryCache = new RectangleGeometry(new Rect(outer, 0, baseCenterWidth - (radii.TopLeft + radii.TopRight), depth));
-
-                outer = depth + radii.TopRight;
-                _topRightGeometryCache = GetCornerGeometry(new Point(0, 0), new Point(outer, outer), new Point(radii.TopRight, outer), new Point(0, depth), outer, radii.TopRight, size.Width - outer, 0);
-
-                _bottomCenterGeometryCache = new RectangleGeometry(new Rect(outer, size.Height - depth, baseCenterWidth - (radii.BottomLeft + radii.BottomRight), depth));
+                _borderGeometryCache = borderGeometry;
             }
             else
             {
-                RectangleGeometry rectG = new RectangleGeometry(new Rect(0, 0, 0, 0));
-                StreamGeometry streamG = new StreamGeometry();
-                using (var ctx = streamG.Open())
-                {
-                    ctx.BeginFigure(new Point(0, 0), true);
-                    ctx.EndFigure(true);
-                }
-                _topLeftGeometryCache = streamG;
-                _middleLeftGeometryCache = rectG;
-                _topRightGeometryCache = streamG;
-                _topCenterGeometryCache = rectG;
-                _bottomRightGeometryCache = streamG;
-                _middleRightGeometryCache = rectG;
-                _bottomLeftGeometryCache = streamG;
-                _bottomCenterGeometryCache = rectG;
+                _borderGeometryCache = null;
             }
+            return _borderGeometryCache;
         }
 
-        private static StreamGeometry GetCornerGeometry(Point outerStart, Point outerEnd, Point innerEnd, Point innerStart, double outerRadius, double innerRadius, double xOffset, double yOffset)
+        public Geometry Render(DrawingContext context, Size size, Thickness extent, Thickness depth, CornerRadius radii, Color color)
         {
-            outerStart = outerStart.WithOffset(xOffset, yOffset);
-            outerEnd = outerEnd.WithOffset(xOffset, yOffset);
-            innerEnd = innerEnd.WithOffset(xOffset, yOffset);
-            innerStart = innerStart.WithOffset(xOffset, yOffset);
+            /*if (_borderGeometryCache != null)
+                context.DrawGeometry(new SolidColorBrush(Colors.SkyBlue), null, _borderGeometryCache);*/
 
-            Size outerRd = new Size(outerRadius, outerRadius);
-            Size innerRd = new Size(innerRadius, innerRadius);
-            var geometry = new StreamGeometry();
-            using (var ctx = geometry.Open())
-            {
-                ctx.BeginFigure(outerStart, true);
-                ctx.ArcTo(outerEnd, outerRd, 90, false, SweepDirection.Clockwise);
-                //ctx.LineTo(outerEnd);
-                ctx.LineTo(innerEnd);
-                ctx.ArcTo(innerStart, innerRd, -90, false, SweepDirection.CounterClockwise);
-                //ctx.LineTo(innerStart);
-                ctx.EndFigure(true);
-            }
-            //geometry.Transform = new TranslateTransform(xOffset, yOffset);
-            return geometry;
-        }
-
-        public void Render(DrawingContext context, Size size, double depth, CornerRadius radii, Color bg)
-        {
-            context.FillRectangle(new SolidColorBrush(Colors.LightSkyBlue), new Rect(size));
-            var blue = new SolidColorBrush(Colors.GreenYellow);
-            double totalInset = radii.TopLeft + depth;
-            context.FillRectangle(blue, new Rect(0, 0, totalInset, totalInset));
-            totalInset = radii.TopRight + depth;
-            context.FillRectangle(blue, new Rect(size.Width - totalInset, 0, totalInset, totalInset));
-            var backgroundGeometry = _middleCenterGeometryCache;
-            Color bgTrans = new Color(0, bg.R, bg.G, bg.B);
+            Color transp = new Color(0, color.R, color.G, color.B);
 
             GradientStops stops = new GradientStops()
             {
-                new GradientStop(bg, 0),
-                new GradientStop(bgTrans, 1)
+                new GradientStop(color, 0),
+                new GradientStop(new Color(Convert.ToByte(color.A * 0.375), color.R, color.G, color.B), 0.375),
+                //new GradientStop(new Color(Convert.ToByte(color.A * 0.25), color.R, color.G, color.B), 0.5),
+                new GradientStop(new Color(Convert.ToByte(color.A * 0.1375), color.R, color.G, color.B), 0.75),
+                //new GradientStop(new Color(Convert.ToByte(color.A * 0.125), color.R, color.G, color.B), 0.875),
+                new GradientStop(transp, 0.95)
             };
-
+            double cntrWidth = size.Width - (depth.Left + depth.Right);
+            double cntrHeight = size.Height - (depth.Top + depth.Bottom);
+            double rightInterior = size.Width - depth.Right;
+            double bottomInterior = size.Height - depth.Bottom;
+            /*var backgroundGeometry = _backgroundGeometryCache;
             if (backgroundGeometry != null)
             {
-                context.DrawGeometry(new SolidColorBrush(bg), null, backgroundGeometry);
-            };
+                context.DrawGeometry(new SolidColorBrush(color), null, backgroundGeometry);
+            }*/
 
-            RelativePoint tlOrigin = new RelativePoint(radii.TopLeft + depth, radii.TopLeft + depth, RelativeUnit.Absolute);
-            double innerStopPos = radii.TopLeft / (depth + radii.TopLeft);
-            context.DrawGeometry(new RadialGradientBrush()
+            // TOP LEFT //
+            RelativePoint center = new RelativePoint(1, 1, RelativeUnit.Relative);
+            context.FillRectangle(new RadialGradientBrush()
             {
-                Center = tlOrigin,
-                GradientOrigin = tlOrigin,
-                Radius = 1,
-                GradientStops = new GradientStops()
-                {
-                    new GradientStop(bg, innerStopPos),
-                    new GradientStop(bgTrans, 1)
-                }
-            }, null, _topLeftGeometryCache);
-
-            context.DrawGeometry(new LinearGradientBrush()
-            {
+                Center = center,
+                GradientOrigin = center,
                 GradientStops = stops,
+                Radius = 1
+            }, new Rect(0, 0, depth.Left, depth.Top));
+
+            // TOP CENTER //
+            context.FillRectangle(new LinearGradientBrush()
+            {
                 StartPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
-                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative)
-            }, null, _topCenterGeometryCache);
+                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+                GradientStops = stops
+            }, new Rect(depth.Left, 0, cntrWidth, depth.Top));
 
-            tlOrigin = new RelativePoint(size.Width - (radii.TopRight + depth), radii.TopRight + depth, RelativeUnit.Absolute);
-            innerStopPos = radii.TopRight / (depth + radii.TopRight);
-            context.DrawGeometry(new RadialGradientBrush()
+            // TOP RIGHT //
+            center = new RelativePoint(rightInterior, depth.Top, RelativeUnit.Absolute);
+            context.FillRectangle(new RadialGradientBrush()
             {
-                Center = tlOrigin,
-                GradientOrigin = tlOrigin,
-                Radius = 1,
-                GradientStops = new GradientStops()
-                {
-                    new GradientStop(bg, innerStopPos),
-                    new GradientStop(bgTrans, 1)
-                }
-            }, null, _topRightGeometryCache);
-
-
-            context.DrawGeometry(new LinearGradientBrush()
-            {
+                Center = center,
+                GradientOrigin = center,
                 GradientStops = stops,
-                StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
-                EndPoint = new RelativePoint(0, 1, RelativeUnit.Relative)
-            }, null, _bottomCenterGeometryCache);
+                Radius = 1
+            }, new Rect(rightInterior, 0, depth.Right, depth.Top));
+
+            // MIDDLE LEFT //
+            context.FillRectangle(new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(1, 0, RelativeUnit.Relative),
+                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+                GradientStops = stops
+            }, new Rect(0, depth.Top, depth.Left, cntrHeight));
+
+            // MIDDLE CENTER //
+            context.FillRectangle(new SolidColorBrush(color), new Rect(depth.Left, depth.Top, cntrWidth, cntrHeight));
+
+            // MIDDLE RIGHT //
+            context.FillRectangle(new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(rightInterior, 0, RelativeUnit.Absolute),
+                EndPoint = new RelativePoint(size.Width, 0, RelativeUnit.Absolute),
+                GradientStops = stops
+            }, new Rect(rightInterior, depth.Top, depth.Right, cntrHeight));
+
+            // BOTTOM LEFT //
+            center = new RelativePoint(depth.Left, bottomInterior, RelativeUnit.Absolute);
+            context.FillRectangle(new RadialGradientBrush()
+            {
+                Center = center,
+                GradientOrigin = center,
+                GradientStops = stops,
+                Radius = 1
+            }, new Rect(0, bottomInterior, depth.Left, depth.Bottom));
+
+            // BOTTOM CENTER //
+            context.FillRectangle(new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(0, bottomInterior, RelativeUnit.Absolute),
+                EndPoint = new RelativePoint(0, size.Height, RelativeUnit.Absolute),
+                GradientStops = stops
+            }, new Rect(depth.Left, bottomInterior, cntrWidth, depth.Bottom));
+
+            // BOTTOM RIGHT //
+            center = new RelativePoint(rightInterior, bottomInterior, RelativeUnit.Absolute);
+            context.FillRectangle(new RadialGradientBrush()
+            {
+                Center = center,
+                GradientOrigin = center,
+                GradientStops = stops,
+                Radius = 1
+            }, new Rect(rightInterior, bottomInterior, depth.Right, depth.Bottom));
+
+            return _borderGeometryCache;
+        }
+        
+        private static void CreateEdgeGeometry(StreamGeometryContext context, Size size, Thickness extent, CornerRadius radius)
+        {
+            Size innerSize = size.Deflate(extent);
+            Point start = new Point(0, extent.Top + radius.TopLeft);
+            context.BeginFigure(start, true);
+            context.LineTo(new Point(0, 0));
+            context.LineTo(new Point(size.Width, 0));
+            context.LineTo(new Point(size.Width, size.Height));
+            context.LineTo(new Point(0, size.Height));
+            context.LineTo(start);
+            context.LineTo(new Point(extent.Left, extent.Top + radius.TopLeft));
+            context.ArcTo(new Point(extent.Left + radius.TopLeft, extent.Top), new Size(radius.TopLeft, radius.TopLeft), 90, false, SweepDirection.Clockwise);
+            context.LineTo(new Point((innerSize.Width + extent.Left) - radius.TopRight, extent.Top));
+            context.ArcTo(new Point(innerSize.Width + extent.Left, extent.Top + radius.TopRight), new Size(radius.TopRight, radius.TopRight), 90, false, SweepDirection.Clockwise);
+            context.LineTo(new Point(innerSize.Width + extent.Left, (innerSize.Height + extent.Top) - radius.BottomRight));
+            context.ArcTo(new Point((innerSize.Width + extent.Left) - radius.BottomRight, innerSize.Height + extent.Top), new Size(radius.BottomRight, radius.BottomRight), 90, false, SweepDirection.Clockwise);
+            context.LineTo(new Point(extent.Left + radius.BottomRight, innerSize.Height + extent.Top));
+            context.ArcTo(new Point(extent.Left, (innerSize.Height + extent.Top) - radius.BottomRight), new Size(radius.BottomLeft, radius.BottomLeft), 90, false, SweepDirection.Clockwise);
+            context.LineTo(new Point(extent.Left, extent.Top + radius.TopLeft));
+            context.EndFigure(true);
         }
 
-        private static void CreateGeometry(StreamGeometryContext context, Rect boundRect, BorderGeometryKeypoints keypoints)
+        private static void CreateGeometry(StreamGeometryContext context, Rect boundRect, ShadowDecoratorGeometryKeypoints keypoints)
         {
             context.BeginFigure(keypoints.TopLeft, true);
 
@@ -302,14 +307,16 @@ namespace Mechanism.AvaloniaUI.Controls
             context.EndFigure(true);
         }
 
-        private class BorderGeometryKeypoints
+        private class ShadowDecoratorGeometryKeypoints
         {
-            internal BorderGeometryKeypoints(Rect boundRect, Thickness borderThickness, CornerRadius cornerRadius, bool inner)
+            internal CornerRadius originalRadius;
+            internal ShadowDecoratorGeometryKeypoints(Rect boundRect, Thickness shadowDecoratorThickness, CornerRadius cornerRadius, bool inner)
             {
-                var left = 0.5 * borderThickness.Left;
-                var top = 0.5 * borderThickness.Top;
-                var right = 0.5 * borderThickness.Right;
-                var bottom = 0.5 * borderThickness.Bottom;
+                originalRadius = cornerRadius;
+                var left = 0.5 * shadowDecoratorThickness.Left;
+                var top = 0.5 * shadowDecoratorThickness.Top;
+                var right = 0.5 * shadowDecoratorThickness.Right;
+                var bottom = 0.5 * shadowDecoratorThickness.Bottom;
 
                 double leftTopY;
                 double topLeftX;
@@ -406,14 +413,6 @@ namespace Mechanism.AvaloniaUI.Controls
             internal Point BottomLeft { get; }
 
             internal Point LeftBottom { get; }
-        }
-    }
-
-    static class Extensions
-    {
-        public static Point WithOffset(this Point point, double x, double y)
-        {
-            return point.WithX(point.X + x).WithY(point.Y + y);
         }
     }
 }
