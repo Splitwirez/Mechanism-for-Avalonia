@@ -186,7 +186,7 @@
             <mets:ButtonCommandBehavior TargetItem="{Binding DataContext, ElementName=ToolStripButton}"/>
             <!-Command="{Binding DataContext.Command, ElementName=ToolStripButton}" CommandParameter="{Binding DataContext.CommandParameter, ElementName=ToolStripButton}"->
           </i:Interaction.Behaviors-->
-          <TemplatedControl Template="{Binding Icon}"/>
+          <TemplatedControl Template="{Binding Path=(mecore:AttachedIcon.Icon)}"/>
         </Button>
       </ControlTemplate>
     </Setter>

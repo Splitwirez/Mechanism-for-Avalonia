@@ -98,7 +98,7 @@ namespace Mechanism.AvaloniaUI.Controls
         /// <returns>The space taken.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            Clip = _shadowDecoratorRenderHelper.Update(finalSize, Extent, CornerRadius, UseClipping);
+            Clip = _shadowDecoratorRenderHelper.Update(finalSize, Extent, CornerRadius, Color, UseClipping);
 
             return LayoutHelper.ArrangeChild(Child, finalSize, Padding, Extent);
         }
@@ -108,9 +108,51 @@ namespace Mechanism.AvaloniaUI.Controls
     {
         private StreamGeometry _backgroundGeometryCache;
         private StreamGeometry _borderGeometryCache;
+        private Brush _topLeftBrush;
+        private Brush _middleLeftBrush;
+        private Brush _topCenterBrush;
+        private Brush _centerMiddleBrush;
+        private GradientStops _stops;
 
-        public Geometry Update(Size finalSize, Thickness extent, CornerRadius cornerRadius, bool useClipping)
+        public Geometry Update(Size finalSize, Thickness extent, CornerRadius cornerRadius, Color color, bool useClipping)
         {
+            _centerMiddleBrush = new SolidColorBrush(color);
+
+            Color transp = new Color(0, color.R, color.G, color.B);
+
+            _stops = new GradientStops()
+                {
+                    new GradientStop(color, 0),
+                    new GradientStop(new Color(Convert.ToByte(color.A * 0.375), color.R, color.G, color.B), 0.375),
+                    //new GradientStop(new Color(Convert.ToByte(color.A * 0.25), color.R, color.G, color.B), 0.5),
+                    new GradientStop(new Color(Convert.ToByte(color.A * 0.1375), color.R, color.G, color.B), 0.75),
+                    //new GradientStop(new Color(Convert.ToByte(color.A * 0.125), color.R, color.G, color.B), 0.875),
+                    new GradientStop(transp, 0.95)
+                };
+
+            RelativePoint tlCenter = new RelativePoint(1, 1, RelativeUnit.Relative);
+            _topLeftBrush = new RadialGradientBrush()
+            {
+                Center = tlCenter,
+                GradientOrigin = tlCenter,
+                GradientStops = _stops,
+                Radius = 1
+            };
+
+            _topCenterBrush = new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
+                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+                GradientStops = _stops
+            };
+
+            _middleLeftBrush = new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(1, 0, RelativeUnit.Relative),
+                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+                GradientStops = _stops
+            };
+
             if (useClipping && (finalSize.Width > 0) && (finalSize.Height > 0))
             {
                 var borderGeometry = new StreamGeometry();
@@ -133,18 +175,6 @@ namespace Mechanism.AvaloniaUI.Controls
         {
             /*if (_borderGeometryCache != null)
                 context.DrawGeometry(new SolidColorBrush(Colors.SkyBlue), null, _borderGeometryCache);*/
-
-            Color transp = new Color(0, color.R, color.G, color.B);
-
-            GradientStops stops = new GradientStops()
-            {
-                new GradientStop(color, 0),
-                new GradientStop(new Color(Convert.ToByte(color.A * 0.375), color.R, color.G, color.B), 0.375),
-                //new GradientStop(new Color(Convert.ToByte(color.A * 0.25), color.R, color.G, color.B), 0.5),
-                new GradientStop(new Color(Convert.ToByte(color.A * 0.1375), color.R, color.G, color.B), 0.75),
-                //new GradientStop(new Color(Convert.ToByte(color.A * 0.125), color.R, color.G, color.B), 0.875),
-                new GradientStop(transp, 0.95)
-            };
             double cntrWidth = size.Width - (depth.Left + depth.Right);
             double cntrHeight = size.Height - (depth.Top + depth.Bottom);
             double rightInterior = size.Width - depth.Right;
@@ -156,50 +186,33 @@ namespace Mechanism.AvaloniaUI.Controls
             }*/
 
             // TOP LEFT //
-            RelativePoint center = new RelativePoint(1, 1, RelativeUnit.Relative);
-            context.FillRectangle(new RadialGradientBrush()
-            {
-                Center = center,
-                GradientOrigin = center,
-                GradientStops = stops,
-                Radius = 1
-            }, new Rect(0, 0, depth.Left, depth.Top));
+            context.FillRectangle(_topLeftBrush, new Rect(0, 0, depth.Left, depth.Top));
 
             // TOP CENTER //
-            context.FillRectangle(new LinearGradientBrush()
-            {
-                StartPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
-                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
-                GradientStops = stops
-            }, new Rect(depth.Left, 0, cntrWidth, depth.Top));
+            context.FillRectangle(_topCenterBrush, new Rect(depth.Left, 0, cntrWidth, depth.Top));
 
             // TOP RIGHT //
-            center = new RelativePoint(rightInterior, depth.Top, RelativeUnit.Absolute);
+            RelativePoint center = new RelativePoint(rightInterior, depth.Top, RelativeUnit.Absolute);
             context.FillRectangle(new RadialGradientBrush()
             {
                 Center = center,
                 GradientOrigin = center,
-                GradientStops = stops,
+                GradientStops = _stops,
                 Radius = 1
             }, new Rect(rightInterior, 0, depth.Right, depth.Top));
 
             // MIDDLE LEFT //
-            context.FillRectangle(new LinearGradientBrush()
-            {
-                StartPoint = new RelativePoint(1, 0, RelativeUnit.Relative),
-                EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
-                GradientStops = stops
-            }, new Rect(0, depth.Top, depth.Left, cntrHeight));
+            context.FillRectangle(_middleLeftBrush, new Rect(0, depth.Top, depth.Left, cntrHeight));
 
             // MIDDLE CENTER //
-            context.FillRectangle(new SolidColorBrush(color), new Rect(depth.Left, depth.Top, cntrWidth, cntrHeight));
+            context.FillRectangle(_centerMiddleBrush, new Rect(depth.Left, depth.Top, cntrWidth, cntrHeight));
 
             // MIDDLE RIGHT //
             context.FillRectangle(new LinearGradientBrush()
             {
                 StartPoint = new RelativePoint(rightInterior, 0, RelativeUnit.Absolute),
                 EndPoint = new RelativePoint(size.Width, 0, RelativeUnit.Absolute),
-                GradientStops = stops
+                GradientStops = _stops
             }, new Rect(rightInterior, depth.Top, depth.Right, cntrHeight));
 
             // BOTTOM LEFT //
@@ -208,7 +221,7 @@ namespace Mechanism.AvaloniaUI.Controls
             {
                 Center = center,
                 GradientOrigin = center,
-                GradientStops = stops,
+                GradientStops = _stops,
                 Radius = 1
             }, new Rect(0, bottomInterior, depth.Left, depth.Bottom));
 
@@ -217,7 +230,7 @@ namespace Mechanism.AvaloniaUI.Controls
             {
                 StartPoint = new RelativePoint(0, bottomInterior, RelativeUnit.Absolute),
                 EndPoint = new RelativePoint(0, size.Height, RelativeUnit.Absolute),
-                GradientStops = stops
+                GradientStops = _stops
             }, new Rect(depth.Left, bottomInterior, cntrWidth, depth.Bottom));
 
             // BOTTOM RIGHT //
@@ -226,7 +239,7 @@ namespace Mechanism.AvaloniaUI.Controls
             {
                 Center = center,
                 GradientOrigin = center,
-                GradientStops = stops,
+                GradientStops = _stops,
                 Radius = 1
             }, new Rect(rightInterior, bottomInterior, depth.Right, depth.Bottom));
 

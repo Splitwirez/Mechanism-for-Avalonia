@@ -44,14 +44,14 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             set => SetValue(TemplateProperty, value);
         }
 
-        public static readonly StyledProperty<IControlTemplate> IconProperty =
+        /*public static readonly StyledProperty<IControlTemplate> IconProperty =
             AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Icon), null);
 
         public IControlTemplate Icon
         {
             get => GetValue(IconProperty);
             set => SetValue(IconProperty, value);
-        }
+        }*/
 
         /*private static readonly ICommand DefaultCommand = new Func<object>(() =>
         {
