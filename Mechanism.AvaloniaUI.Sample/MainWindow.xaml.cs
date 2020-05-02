@@ -3,7 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
+using Mechanism.AvaloniaUI.Controls.ContentDialog;
 using System;
+using System.Timers;
 
 namespace Mechanism.AvaloniaUI.Sample
 {

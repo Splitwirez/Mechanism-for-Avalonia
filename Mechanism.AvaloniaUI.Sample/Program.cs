@@ -19,6 +19,7 @@ namespace Mechanism.AvaloniaUI.Sample
         {
             var builder = AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseDirect2D1()
                 //.UseManagedSystemDialogs()
                 //.UseManagedDialogs()
                 //.With(new AvaloniaNativePlatformOptions() { UseDeferredRendering = false })

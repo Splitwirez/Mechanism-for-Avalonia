@@ -99,7 +99,7 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
                 _bmp.Render(TargetElement);
                 var transform = new FreeTransform()
                 {
-                    IsBilinearInterpolation = true,
+                    //IsBilinearInterpolation = true,
                     TopLeftVertex = new PointF(0, 0),
                     TopRightVertex = new PointF((float)TargetElement.Bounds.Width, 0),
                     BottomRightVertex = new PointF((float)TargetElement.Bounds.Width, (float)TargetElement.Bounds.Height),
