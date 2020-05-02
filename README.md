@@ -36,6 +36,9 @@ While I can't make any promises, if you need certain controls or themes or anyth
 If you wish to contribute to Mechanism yourself, it is best if you contact me before doing so. I'm generally open to external contributions, but I'd hate to see someone put a lot of work into something, only for me to have to turn it down for whatever reason, so if that's not a risk you want to take, do reach out beforehand and inquire about your planned changes. I won't take any such inquiries as promises or commitments unless you indicate otherwise, so if, you're worried about biting off more than you can handle...if it's any reassurance, I've been there myself, in the past. As such, I've taken great care to ensure that Mechanism does not overpromise, and wish to extend that same respect to you, should you choose to contribute.
 When submitting a Pull Request, please include whatever alias(es) you wish to be listed under in the Mechanism credits, should your PR be merged, as well as any website links or whatever you'd like me to include along with your chosen alias(es). Additionally, please be aware that if needed, I will not hesitate to suggest changes to your contributions for any number of reasons.
 
+### Attributions
+- https://www.codeproject.com/Articles/36145/Free-Image-Transformation
+
 ### Planned Controls
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
 - `ActionBox`
