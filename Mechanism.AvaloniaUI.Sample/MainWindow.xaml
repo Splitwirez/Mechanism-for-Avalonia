@@ -27,6 +27,7 @@
             <RadioButton Tag="Slate" Content="Slate" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Jade" Content="Jade" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Fruit" Content="Fruit" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Fluent" Content="Fluent" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Luna.NormalColor" Content="Luna (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
             <RadioButton Tag="Plex.NormalColor" Content="Plex (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
             <RadioButton Tag="Metro" Content="Metro (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>

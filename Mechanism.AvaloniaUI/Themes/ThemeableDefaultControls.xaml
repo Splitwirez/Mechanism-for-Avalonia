@@ -46,8 +46,9 @@
   <Style Selector="mectrl|ThemeControlDecorator:not(.NoContent):not(.NoIcon)">
     <Setter Property="mecore:AttachedIcon.IconGap" Value="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=0.0}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon) /template/ ContentPresenter#IconPresenter">
-    <Setter Property="Content" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  <!--Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon) /template/ ContentPresenter#IconPresenter"-->
+  <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon) /template/ TemplatedControl#IconControl">
+    <Setter Property="Template" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
     <Setter Property="IsVisible" Value="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}"/>
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator:not(.NoIcon):not(.NoContent) /template/ Rectangle#IconGapRect">

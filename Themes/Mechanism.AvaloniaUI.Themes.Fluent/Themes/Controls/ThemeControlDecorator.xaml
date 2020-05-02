@@ -1,0 +1,56 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Themes.Fluent;assembly=Mechanism.AvaloniaUI.Themes.Fluent"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
+        xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
+  <Design.PreviewWith>
+    <Panel d:DesignWidth="100" d:DesignHeight="50">
+      <Panel.Resources>
+        <ResourceDictionary>
+          <ResourceDictionary.MergedDictionaries>
+            <ResourceInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Colors/BaseLight.xaml"/>
+          </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+      </Panel.Resources>
+      <Button>Yes</Button>
+    </Panel>
+  </Design.PreviewWith>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!--i:Interaction.Behaviors>
+            <local:PressedRotationAngleBehavior/>
+          </i:Interaction.Behaviors-->
+          <ContentControl>
+            <Panel x:Name="ElementPanel">
+              <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}"/>
+              <DockPanel x:Name="ContentIconPanel">
+                <TemplatedControl Name="IconControl" DockPanel.Dock="Left"/>
+                <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
+                <ContentPresenter Name="PART_ContentPresenter"/>
+              </DockPanel>
+            </Panel>
+          </ContentControl>
+          <local:ButtonPressRotator IsHitTestVisible="False" TargetElement="{Binding ElementName=ElementPanel}" IsVisuallyPressed="{TemplateBinding IsVisuallyPressed}"/>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPointerOver=True][IsVisuallyPressed=False] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPressed=True] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseMediumLowBrush}"/>
+  </Style>
+<Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ TemplatedControl#IconControl">
+  <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+</Style>
+<Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ ContentPresenter#PART_ContentPresenter">
+  <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+</Style>
+</Styles>

@@ -11,6 +11,6 @@
     <PackageReference Include="Avalonia" Version="0.9.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
+    <ProjectReference Include="..\..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
   </ItemGroup>
 </Project>
