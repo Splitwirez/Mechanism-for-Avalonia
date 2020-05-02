@@ -35,10 +35,29 @@
               </DockPanel>
             </Panel>
           </ContentControl>
-          <local:ButtonPressRotator IsHitTestVisible="False" TargetElement="{Binding ElementName=ElementPanel}" IsVisuallyPressed="{TemplateBinding IsVisuallyPressed}"/>
+          <local:ButtonPressRotator IsHitTestVisible="False" TargetElement="{Binding ElementName=ElementPanel}"/>
+        <!--IsVisuallyPressed="{TemplateBinding IsVisuallyPressed}"-->
         </Panel>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPressed=True] /template/ local|ButtonPressRotator">
+    <Style.Animations>
+        <Animation Duration="0:0:0.125" FillMode="Both" Easing="QuadraticEaseOut">
+            <KeyFrame Cue="100%">
+                <Setter Property="InsetMultiplier" Value="20"/>
+            </KeyFrame>
+        </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPressed=False] /template/ local|ButtonPressRotator">
+    <Style.Animations>
+        <Animation Duration="0:0:0.125" FillMode="Both" Easing="QuadraticEaseOut">
+            <KeyFrame Cue="100%">
+                <Setter Property="InsetMultiplier" Value="0"/>
+            </KeyFrame>
+        </Animation>
+    </Style.Animations>
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPointerOver=True][IsVisuallyPressed=False] /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>

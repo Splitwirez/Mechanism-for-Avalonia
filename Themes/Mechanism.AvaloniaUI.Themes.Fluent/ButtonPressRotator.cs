@@ -17,13 +17,22 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
 {
     public class ButtonPressRotator : TemplatedControl
     {
-        public static readonly StyledProperty<bool> IsVisuallyPressedProperty =
+        /*public static readonly StyledProperty<bool> IsVisuallyPressedProperty =
             AvaloniaProperty.Register<ButtonPressRotator, bool>(nameof(IsVisuallyPressed), defaultValue: false);
 
         public bool IsVisuallyPressed
         {
             get => GetValue(IsVisuallyPressedProperty);
             set => SetValue(IsVisuallyPressedProperty, value);
+        }*/
+
+        public static readonly StyledProperty<float> InsetMultiplierProperty =
+            AvaloniaProperty.Register<ButtonPressRotator, float>(nameof(InsetMultiplier), defaultValue: 0);
+
+        public float InsetMultiplier
+        {
+            get => GetValue(InsetMultiplierProperty);
+            set => SetValue(InsetMultiplierProperty, value);
         }
 
         public static readonly StyledProperty<Control> TargetElementProperty =
@@ -37,7 +46,7 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
 
         static ButtonPressRotator()
         {
-            IsVisuallyPressedProperty.Changed.AddClassHandler<ButtonPressRotator>(new Action<ButtonPressRotator, AvaloniaPropertyChangedEventArgs>((sender, e) => sender.OnIsVisuallyPressedChanged((bool)e.NewValue)));
+            InsetMultiplierProperty.Changed.AddClassHandler<ButtonPressRotator>(new Action<ButtonPressRotator, AvaloniaPropertyChangedEventArgs>((sender, e) => sender.OnInsetMultiplierPropertyChanged()));
             TargetElementProperty.Changed.AddClassHandler<ButtonPressRotator>(new Action<ButtonPressRotator, AvaloniaPropertyChangedEventArgs>((sender, e) =>
             {
                 if (e.OldValue != null)
@@ -50,8 +59,8 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
 
         static Brush _background = new SolidColorBrush(Color.FromArgb(1, 0, 0, 0));
 
-        float xPercentage = -1;
-        float yPercentage = -1;
+        float xPercentage = 0.5f;
+        float yPercentage = 0.5f;
         public ButtonPressRotator()
         {
             //Background = _background;
@@ -64,10 +73,12 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
             yPercentage = (float)(pnt.Y / TargetElement.Bounds.Height);
         }
 
-        void OnIsVisuallyPressedChanged(bool value)
+        bool IsPressed => Math.Round(InsetMultiplier, 1) > 0.0f;
+
+        void OnInsetMultiplierPropertyChanged()
         {
             InvalidateVisual();
-            if (value)
+            if (IsPressed)
                 (TargetElement.Parent as Visual).Opacity = 0.001;
             else
                 (TargetElement.Parent as Visual).Opacity = 1;
@@ -77,11 +88,12 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
             }*/
         }
 
+        //bool _saved = false;
         RenderTargetBitmap _bmp = null;
         public override void Render(DrawingContext context)
         {
             base.Render(context);
-            if (IsVisuallyPressed)
+            if (IsPressed)
             {
                 _bmp = new RenderTargetBitmap(PixelSize.FromSize(TargetElement.Bounds.Size, VisualRoot.RenderScaling));
                 _bmp.Render(TargetElement);
@@ -95,8 +107,8 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
                 };
 
                 transform.Bitmap = _bmp.ToDrawingBitmap();
-                float InsetMultiplier = 5;
-                float halfInsetMultiplier = InsetMultiplier * 2;
+                //float InsetMultiplier = 5;
+                float halfInsetMultiplier = InsetMultiplier / 2;
                 float minDimension = (float)Math.Min(TargetElement.Bounds.Width, TargetElement.Bounds.Height);
 
                 /*float invX = (float)(-xPercentage + 1);
@@ -117,29 +129,29 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
                 transform.BottomRightVertex = new Point(targetWidth - farX, targetWidth - farY).ToDrawingPointF();
                 transform.BottomLeftVertex = new Point(nearX, targetWidth - farY).ToDrawingPointF();*/
 
-                float inset = (minDimension / InsetMultiplier);
-                float halfInset = (minDimension / halfInsetMultiplier);
-                if ((xPercentage <= 0.333) && (yPercentage <= 0.333)) //TOP LEFT
+                float inset = (minDimension / 100) * InsetMultiplier;
+                float halfInset = (minDimension / 100) * halfInsetMultiplier;
+                if ((xPercentage <= 0.5) && (yPercentage <= 0.5)) //TOP LEFT
                 {
                     transform.TopLeftVertex = new PointF(inset, inset);
                     transform.TopRightVertex = new Point(transform.TopRightVertex.X - halfInset, halfInset).ToDrawingPointF();
                     transform.BottomLeftVertex = new Point(halfInset, transform.BottomLeftVertex.Y - halfInset).ToDrawingPointF();
                     //transform.BottomRightVertex = new Point(transform.BottomRightVertex.X - inset, transform.BottomRightVertex.Y - inset).ToDrawingPointF();
                 }
-                else if ((xPercentage > 0.667) && (yPercentage < 0.333)) //TOP RIGHT
+                else if ((xPercentage > 0.5) && (yPercentage < 0.5)) //TOP RIGHT
                 {
                     transform.TopLeftVertex = new PointF(halfInset, halfInset);
                     transform.TopRightVertex = new Point(transform.TopRightVertex.X - inset, inset).ToDrawingPointF();
                     //transform.BottomLeftVertex = new Point(halfInset, transform.BottomLeftVertex.Y - halfInset).ToDrawingPointF();
                     transform.BottomRightVertex = new Point(transform.BottomRightVertex.X - halfInset, transform.BottomRightVertex.Y - halfInset).ToDrawingPointF();
                 }
-                else if ((xPercentage > 0.667) && (yPercentage > 0.667)) //BOTTOM RIGHT
+                else if ((xPercentage > 0.5) && (yPercentage > 0.5)) //BOTTOM RIGHT
                 {
                     transform.TopRightVertex = new Point(transform.TopRightVertex.X - halfInset, halfInset).ToDrawingPointF();
                     transform.BottomLeftVertex = new Point(halfInset, transform.BottomLeftVertex.Y - halfInset).ToDrawingPointF();
                     transform.BottomRightVertex = new Point(transform.BottomRightVertex.X - inset, transform.BottomRightVertex.Y - inset).ToDrawingPointF();
                 }
-                else if ((xPercentage < 0.333) && (yPercentage > 0.667)) //BOTTOM LEFT
+                else if ((xPercentage < 0.5) && (yPercentage > 0.5)) //BOTTOM LEFT
                 {
                     transform.TopLeftVertex = new PointF(halfInset, halfInset);
                     //transform.TopRightVertex = new Point(transform.TopRightVertex.X - halfInset, halfInset).ToDrawingPointF();
@@ -161,6 +173,13 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
                 var distorted = transform.Bitmap.ToMediaBitmap();
                 context.DrawImage(distorted, 1, new Rect(0, 0, distorted.PixelSize.Width, distorted.PixelSize.Height), new Rect(Bounds.Size));
             }
+            /*else if (!_saved) //FOR DIAGNOSTIC PURPOSES ONLY
+            {
+                _bmp = new RenderTargetBitmap(PixelSize.FromSize(TargetElement.Bounds.Size, VisualRoot.RenderScaling));
+                _bmp.Render(TargetElement);
+                _bmp.Save(Environment.ExpandEnvironmentVariables(@"%userprofile%\Pictures\AVALONIA_TEXT_RENDER_TEST.png"));
+                _saved = true;
+            }*/
         }
     }
 }
