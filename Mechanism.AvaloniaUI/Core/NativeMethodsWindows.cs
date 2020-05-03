@@ -264,5 +264,47 @@ namespace Mechanism.AvaloniaUI.Core
         public const Int32
             SrcCopy = 0x00CC0020,
             CaptureBlt = 0x40000000;
+
+
+
+        #region Undocumented APIs (DANGER ZONE)
+
+        //https://gist.github.com/riverar/fd6525579d6bbafc6e48
+        //https://www.kechuang.org/t/79675
+        [DllImport("user32.dll")]
+        internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WindowCompositionAttributeData
+        {
+            public WindowCompositionAttribute Attribute;
+            public IntPtr Data;
+            public int SizeOfData;
+        }
+
+        internal enum WindowCompositionAttribute
+        {
+            WcaAccentPolicy = 19
+        }
+
+        internal enum AccentState : int
+        {
+            AccentDisabled = 0,
+            AccentEnableGradient = 1,
+            AccentEnableTransparentGradient = 2,
+            AccentEnableBlurBehind = 3,
+            AccentInvalidState = 4
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct AccentPolicy
+        {
+            public AccentState AccentState;
+            public int AccentFlags;
+            public int GradientColor;
+            public int AnimationId;
+        }
+
+        #endregion Undocumented APIs (DANGER ZONE)
     }
 }

@@ -13,7 +13,7 @@
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="BaseTitlebarHeight" Value="22"/>
     <Setter Property="HorizontalCaptionAlignment" Value="Center"/>
-    <Setter Property="UseBlur" Value="True"/>
+    <Setter Property="BlurBehind" Value="Strong"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">

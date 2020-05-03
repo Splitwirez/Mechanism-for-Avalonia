@@ -12,6 +12,8 @@ using Mechanism.AvaloniaUI.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Timers;
 
@@ -31,25 +33,32 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
         None
     }
 
+    public enum BlurMode
+    {
+        None,
+        Weak,
+        Strong
+    }
+
     public class StyleableWindow : Window, IStyleable
     {
-        public static readonly StyledProperty<bool> UseBlurProperty =
-            AvaloniaProperty.Register<StyleableWindow, bool>(nameof(UseBlur), defaultValue: false);
+        public static readonly StyledProperty<BlurMode> BlurBehindProperty =
+            AvaloniaProperty.Register<StyleableWindow, BlurMode>(nameof(BlurBehind), defaultValue: BlurMode.None);
 
-        public bool UseBlur
+        public BlurMode BlurBehind
         {
-            get => GetValue(UseBlurProperty);
-            set => SetValue(UseBlurProperty, value);
+            get => GetValue(BlurBehindProperty);
+            set => SetValue(BlurBehindProperty, value);
         }
 
-        public static readonly StyledProperty<bool> CanBlurProperty =
-        AvaloniaProperty.Register<StyleableWindow, bool>(nameof(CanBlur), defaultValue: false);
+        /*public static readonly StyledProperty<bool> CanBlurProperty =
+            AvaloniaProperty.Register<StyleableWindow, bool>(nameof(CanBlur), defaultValue: false);
 
         public bool CanBlur
         {
             get => GetValue(CanBlurProperty);
             protected set => SetValue(CanBlurProperty, value);
-        }
+        }*/
 
         public static readonly StyledProperty<bool> ShowCaptionIconProperty =
             AvaloniaProperty.Register<StyleableWindow, bool>(nameof(ShowCaptionIcon), defaultValue: true);
@@ -174,6 +183,159 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             BaseTitlebarHeightProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateTotalTitlebarHeight());
             ExtendedTitlebarHeightProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateTotalTitlebarHeight());
             IconProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.HasIcon = (sender.Icon != null));
+            BlurBehindProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateBlur());
+        }
+
+        protected void UpdateBlur()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                WindowsUpdateBlur();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                //TODO: https://userbase.kde.org/Tutorials/Force_Transparency_And_Blur
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                //TODO: Anything at all lol
+            }
+        }
+
+        protected void WindowsUpdateBlur()
+        {
+            if ((PlatformImpl != null) && NativeMethodsWindows.DwmIsCompositionEnabled())
+            {
+                bool creatorsUpdateOrHigher = Environment.OSVersion.Version >= new Version(10, 0, 15063, 0); //requires app manifest
+                bool win10RTMOrHigher = Environment.OSVersion.Version >= new Version(10, 0, 10240, 0); //requires app manifest
+                bool win8OrHigher = Environment.OSVersion.Version >= new Version(6, 2, 9200, 0);
+
+                if (win8OrHigher) //Windows 8 or 10
+                {
+                    NativeMethodsWindows.WindowCompositionAttributeData blurData = new NativeMethodsWindows.WindowCompositionAttributeData()
+                    {
+                        Attribute = NativeMethodsWindows.WindowCompositionAttribute.WcaAccentPolicy
+                    };
+                    NativeMethodsWindows.AccentPolicy accent = new NativeMethodsWindows.AccentPolicy()
+                    {
+                        AccentFlags = 0x20 | 0x40 | 0x80 | 0x100
+                    };
+
+                    int structSize = Marshal.SizeOf(accent);
+                    IntPtr accentPtr = Marshal.AllocHGlobal(structSize);
+                    Marshal.StructureToPtr(accent, accentPtr, false);
+
+                    if (BlurBehind == BlurMode.Strong)
+                        accent.AccentState = NativeMethodsWindows.AccentState.AccentEnableBlurBehind;
+                    else if (BlurBehind == BlurMode.Weak)
+                        accent.AccentState = NativeMethodsWindows.AccentState.AccentEnableTransparentGradient;
+                    else if (BlurBehind == BlurMode.None)
+                        accent.AccentState = NativeMethodsWindows.AccentState.AccentDisabled;
+
+                    blurData.Data = accentPtr;
+                    blurData.SizeOfData = structSize;
+
+                    if (creatorsUpdateOrHigher)
+                    {
+                        if (BlurBehind == BlurMode.Strong)
+                        {
+                            NativeMethodsWindows.SetWindowCompositionAttribute(PlatformImpl.Handle.Handle, ref blurData);
+                            SetBlurBehindPseudoClasses(true, BlurBehind);
+                        }
+                        else
+                            SetWin8GlassModBlur();
+                    }
+                    else
+                    {
+                        SetWin8GlassModBlur();
+                    }
+                }
+                else //Windows 7 or below
+                    SetWin7Blur(true);
+            }
+        }
+
+        private bool SetWin8GlassModBlur()
+        {
+            string dynamicPath = Path.Combine(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.System)).Root.ToString(), "AeroGlass", "aerohost.exe");
+            bool hasGlassMod = File.Exists(@"C:\AeroGlass\aerohost.exe") || File.Exists(dynamicPath); //TODO: Better detection?
+            if (hasGlassMod)
+            {
+                SetWin7Blur(false);
+                if (BlurBehind == BlurMode.None)
+                    SetBlurBehindPseudoClasses(true, BlurMode.None);
+                else
+                    SetBlurBehindPseudoClasses(true, BlurMode.Weak);
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private void SetWin7Blur(bool setPseudoClasses)
+        {
+            NativeMethodsWindows.DWM_BLURBEHIND blurInfo;
+            if (BlurBehind == BlurMode.None)
+            {
+                blurInfo = new NativeMethodsWindows.DWM_BLURBEHIND(false);
+
+                if (setPseudoClasses)
+                    SetBlurBehindPseudoClasses(false, BlurMode.None);
+            }
+            else
+            {
+                blurInfo = new NativeMethodsWindows.DWM_BLURBEHIND()
+                {
+                    dwFlags = NativeMethodsWindows.DWM_BB.Enable | NativeMethodsWindows.DWM_BB.BlurRegion | NativeMethodsWindows.DWM_BB.TransitionMaximized,
+                    fEnable = true,
+                    hRgnBlur = IntPtr.Zero,
+                    fTransitionOnMaximized = true
+                };
+
+                if (setPseudoClasses)
+                    SetBlurBehindPseudoClasses(true, BlurMode.Weak);
+            }
+            NativeMethodsWindows.DwmEnableBlurBehindWindow(PlatformImpl.Handle.Handle, ref blurInfo);
+        }
+
+        private static string _transparentPseudo = ":transparent";
+        private static string _noBlurPseudo = ":noblur";
+        private static string _hasBlurPseudo = ":hasblur";
+        private static string _weakBlurPseudo = ":weakblur";
+        private static string _strongBlurPseudo = ":strongblur";
+        protected void SetBlurBehindPseudoClasses(bool transparent, BlurMode mode)
+        {
+            if (transparent && (mode == BlurMode.None))
+            {
+                PseudoClasses.Add(_noBlurPseudo);
+                PseudoClasses.Remove(_hasBlurPseudo);
+            }
+            else
+            {
+                PseudoClasses.Remove(_noBlurPseudo);
+                PseudoClasses.Add(_hasBlurPseudo);
+            }
+
+            if (transparent && (mode == BlurMode.Weak))
+                PseudoClasses.Add(_weakBlurPseudo);
+            else
+                PseudoClasses.Remove(_weakBlurPseudo);
+
+            if (transparent && (mode == BlurMode.Strong))
+                PseudoClasses.Add(_strongBlurPseudo);
+            else
+                PseudoClasses.Remove(_strongBlurPseudo);
+
+
+
+            if (transparent)
+                PseudoClasses.Add(_transparentPseudo);
+            else
+            {
+                PseudoClasses.Remove(_transparentPseudo);
+                PseudoClasses.Remove(_hasBlurPseudo);
+            }
         }
 
         protected void UpdateTotalTitlebarHeight()
@@ -184,6 +346,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
         public StyleableWindow()
         {
             RaisePropertyChanged(SystemDecorationsProperty, SystemDecorations.Full, SystemDecorations);
+            UpdateBlur();
         }
 
         public override void Render(DrawingContext context)

@@ -3,9 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <AvaloniaResource Include="*.xaml" />
-    <AvaloniaResource Include="**/*.xaml" />
+	  <AvaloniaResource Include="Themes/*.xaml" />
 	  <AvaloniaResource Include="Themes/Controls/*.xaml" />
+	  <AvaloniaResource Include="Themes/Colors/*.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007054-beta" />
