@@ -34,7 +34,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs> updateNativeFunctionalityAction = new Action<DecoratableWindow, AvaloniaPropertyChangedEventArgs>((sender, args) => sender.UpdateNativeFunctionality());
             UseBlurProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             ExtendedTitlebarHeightProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
-            HasSystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
+            SystemDecorationsProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             ShowIconProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             ShowTitleProperty.Changed.AddClassHandler<DecoratableWindow>(updateNativeFunctionalityAction);
             AffectsMeasure<DecoratableWindow>(UseHeaderbarProperty, LeftHeaderbarInsetProperty, RightHeaderbarInsetProperty, ShowIconProperty, ShowTitleProperty);
@@ -59,7 +59,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             //else
             CanBlur = DecoratableImpl.GetCanBlur();
             DecoratableImpl.CanBlurChanged += (sneder, args) => CanBlur = DecoratableImpl.GetCanBlur();
-            HasSystemDecorations = false;
+            //HasSystemDecorations = false;
             UpdateNativeFunctionality();
         }
 

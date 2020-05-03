@@ -169,7 +169,8 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
                 return value == false;
             }));*/
             //HasSystemDecorationsProperty.OverrideMetadata<StyleableWindow>(new StyledPropertyMetadata<bool>(false, new Func<IAvaloniaObject, bool, bool>((window, value) => value == false)));
-            HasSystemDecorationsProperty.OverrideMetadata<StyleableWindow>(new StyledPropertyMetadata<bool>(true, new Func<IAvaloniaObject, bool, bool>((window, value) => false)));
+            SystemDecorationsProperty.OverrideMetadata<StyleableWindow>(new StyledPropertyMetadata<SystemDecorations>(SystemDecorations.None));
+            //HasSystemDecorationsProperty.OverrideMetadata<StyleableWindow>(new StyledPropertyMetadata<bool>(true, new Func<IAvaloniaObject, bool, bool>((window, value) => false)));
             BaseTitlebarHeightProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateTotalTitlebarHeight());
             ExtendedTitlebarHeightProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateTotalTitlebarHeight());
             IconProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.HasIcon = (sender.Icon != null));
@@ -182,8 +183,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
 
         public StyleableWindow()
         {
-            HasSystemDecorations = false;
-            //hass
+            RaisePropertyChanged(SystemDecorationsProperty, SystemDecorations.Full, SystemDecorations);
         }
 
         public override void Render(DrawingContext context)

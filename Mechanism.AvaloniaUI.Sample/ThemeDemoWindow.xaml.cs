@@ -9,9 +9,9 @@ namespace Mechanism.AvaloniaUI.Sample
         public ThemeDemoWindow()
         {
             this.InitializeComponent();
-#if DEBUG
+/*#if DEBUG
             this.AttachDevTools();
-#endif
+#endif*/
         }
 
         private void InitializeComponent()

@@ -22,9 +22,9 @@ namespace Mechanism.AvaloniaUI.Sample
         public SampleDecoratableWindow()
         {
             InitializeComponent();
-#if DEBUG
+/*#if DEBUG
             this.AttachDevTools();
-#endif
+#endif*/
         }
 
         /*private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

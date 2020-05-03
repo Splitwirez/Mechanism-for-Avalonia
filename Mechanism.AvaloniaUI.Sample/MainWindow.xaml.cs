@@ -14,9 +14,9 @@ namespace Mechanism.AvaloniaUI.Sample
         public MainWindow()
         {
             this.InitializeComponent();
-#if DEBUG
+/*#if DEBUG
             this.AttachDevTools();
-#endif
+#endif*/
         }
 
         private void InitializeComponent()
