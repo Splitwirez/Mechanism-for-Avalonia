@@ -137,10 +137,19 @@
       <SolidColorBrush x:Key="SystemControlTransparentBrush" Color="Transparent" />
       <SolidColorBrush x:Key="SystemControlErrorTextForegroundBrush" Color="{DynamicResource SystemErrorTextColor}" />
       <SolidColorBrush x:Key="SystemControlTransientBorderBrush" Color="#000000" Opacity="0.36" />
+
+      <SolidColorBrush x:Key="SystemAccentBrushLight3" Color="{DynamicResource SystemAccentColorLight3}" />
+      <SolidColorBrush x:Key="SystemAccentBrushLight2" Color="{DynamicResource SystemAccentColorLight2}" />
+      <SolidColorBrush x:Key="SystemAccentBrushLight1" Color="{DynamicResource SystemAccentColorLight1}" />
+      <SolidColorBrush x:Key="SystemAccentBrush" Color="{DynamicResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="SystemAccentBrushDark1" Color="{DynamicResource SystemAccentColorDark1}" />
+      <SolidColorBrush x:Key="SystemAccentBrushDark2" Color="{DynamicResource SystemAccentColorDark2}" />
+      <SolidColorBrush x:Key="SystemAccentBrushDark3" Color="{DynamicResource SystemAccentColorDark3}" />
     </ResourceDictionary>
   </Styles.Resources>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/ThemeableDefaultControls.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/ThemeControlDecorator.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/Button.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/CheckBox.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/StyleableWindow.xaml"/>
 </Styles>

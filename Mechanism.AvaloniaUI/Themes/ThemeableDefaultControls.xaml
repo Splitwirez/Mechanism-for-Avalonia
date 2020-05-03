@@ -8,6 +8,9 @@
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
              xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="mectrl|ThemeControlDecorator:not(.NoAutoBorderThickness)">
+    <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style>
   <Style Selector="mectrl|ThemeControlDecorator:not(.NoAutoCornerCurves)">
     <Setter Property="mecore:CornerCurves.CornerCurves" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=false}"/>
   </Style>

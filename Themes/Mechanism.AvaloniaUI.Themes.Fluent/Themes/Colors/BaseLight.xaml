@@ -32,4 +32,12 @@
   
   <Color x:Key="SystemListLowColor">#19000000</Color>
   <Color x:Key="SystemListMediumColor">#33000000</Color>
+
+  <Color x:Key="SystemAccentColorLight3">#FFADD8FF</Color>
+  <Color x:Key="SystemAccentColorLight2">#FF80B9EE</Color>
+  <Color x:Key="SystemAccentColorLight1">#FF559CE4</Color>
+  <Color x:Key="SystemAccentColor">#FF3379D9</Color>
+  <Color x:Key="SystemAccentColorDark1">#FF235A9F</Color>
+  <Color x:Key="SystemAccentColorDark2">#FF174276</Color>
+  <Color x:Key="SystemAccentColorDark3">#FF092642</Color>
 </ResourceDictionary>

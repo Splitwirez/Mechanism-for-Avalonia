@@ -8,7 +8,7 @@
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d"
-        Width="525" Height="350" Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/avalonia-logo.ico"
+        Width="550" Height="600" Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/avalonia-logo.ico"
         x:Class="Mechanism.AvaloniaUI.Sample.SampleStyleableWindow"
         Title="SampleStyleableWindow">
   <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" Spacing="10">

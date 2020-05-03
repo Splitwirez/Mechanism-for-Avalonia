@@ -6,18 +6,6 @@
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
-  <Design.PreviewWith>
-    <Panel d:DesignWidth="100" d:DesignHeight="50">
-      <Panel.Resources>
-        <ResourceDictionary>
-          <ResourceDictionary.MergedDictionaries>
-            <ResourceInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Colors/BaseLight.xaml"/>
-          </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-      </Panel.Resources>
-      <Button>Yes</Button>
-    </Panel>
-  </Design.PreviewWith>
   <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button]">
     <Setter Property="Template">
       <ControlTemplate>
@@ -66,10 +54,62 @@
   <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=Button][IsVisuallyPressed=True] /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseMediumLowBrush}"/>
   </Style>
-<Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ TemplatedControl#IconControl">
-  <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
-</Style>
-<Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ ContentPresenter#PART_ContentPresenter">
-  <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
-</Style>
+
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <Border x:Name="BackgroundBorder" Width="20" Height="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" DockPanel.Dock="Left">
+            <Panel>
+              <Path Name="CheckMark" Data="M 0 4 L 4 8 L 12 0" Stroke="{DynamicResource SystemControlHighlightAltChromeWhiteBrush}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Rectangle Name="IndeterminateMark" Fill="{DynamicResource SystemControlHighlightAltChromeWhiteBrush}" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Panel>
+          </Border>
+          <DockPanel x:Name="ContentIconPanel">
+            <TemplatedControl Name="IconControl" DockPanel.Dock="Left"/>
+            <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
+            <ContentPresenter Name="PART_ContentPresenter"/>
+          </DockPanel>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyPointerOver=True][IsVisuallyChecked=False] /template/ Border#BackgroundBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightBaseHighBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyPressed=True][IsVisuallyChecked=False] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyEnabled=False] /template/ Border#BackgroundBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemAccentBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyPointerOver=True][IsVisuallyPressed=False]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemAccentBrushLight1}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrushLight1}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyPressed=True]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemAccentBrushDark1}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrushLight1}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox]:not(:indeterminate) /template/ Rectangle#IndeterminateMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox]:indeterminate /template/ Path#CheckMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyChecked=False] /template/ Path#CheckMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  
+  
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ TemplatedControl#IconControl">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[IsVisuallyEnabled=False] /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+  </Style>
 </Styles>
