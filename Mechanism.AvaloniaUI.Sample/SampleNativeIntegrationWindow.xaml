@@ -12,11 +12,107 @@
   <UniformGrid Columns="1">
     <Panel>
       <DockPanel mecore:PerPlatformUI.ShowOnPlatforms="Windows">
-        <mecb:CommandBar DockPanel.Dock="Top"/>
+        <mecb:CommandBar DockPanel.Dock="Top">
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+          <Button Content="Button">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="16" Height="16" Fill="Orange"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </Button>
+        </mecb:CommandBar>
         <TextBlock Text="This UI is only visible on Windows!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
       </DockPanel>
       <DockPanel mecore:PerPlatformUI.ShowOnPlatforms="OSX">
-        <mets:ToolStrip DockPanel.Dock="Top"/>
+        <mets:ToolStrip DockPanel.Dock="Top">
+            <mets:ToolStrip.Items>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Test2" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Test3" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Blue"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Test4" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Test5" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Test6" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                  <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Purple"/>
+                  </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+              </mets:ButtonToolStripItem>
+            </mets:ToolStrip.Items>
+            <mets:ToolStrip.DefaultItems>
+              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem}"/>
+              <mets:ToolStripFlexibleSpaceReference/>
+              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
+              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem3}"/>
+              <mets:ToolStripFlexibleSpaceReference/>
+              <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem4}"/>
+            </mets:ToolStrip.DefaultItems>
+          </mets:ToolStrip>
         <TextBlock Text="This UI is only visible on macOS!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
       </DockPanel>
       <DockPanel mecore:PerPlatformUI.ShowOnPlatforms="Linux">
