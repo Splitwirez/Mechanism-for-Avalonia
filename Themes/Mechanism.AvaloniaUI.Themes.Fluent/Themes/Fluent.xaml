@@ -170,4 +170,5 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/Button.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/CheckBox.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/StyleableWindow.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fluent/Themes/Controls/TextBox.xaml"/>
 </Styles>

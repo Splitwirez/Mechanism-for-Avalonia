@@ -15,7 +15,7 @@
           </i:Interaction.Behaviors-->
           <ContentControl>
             <Panel x:Name="ElementPanel">
-              <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}"/>
+              <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"/>
               <DockPanel x:Name="ContentIconPanel">
                 <TemplatedControl Name="IconControl" DockPanel.Dock="Left"/>
                 <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
@@ -103,6 +103,91 @@
   </Style>
   <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=CheckBox][IsVisuallyChecked=False] /template/ Path#CheckMark">
     <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+            <Panel Width="20" Height="20" DockPanel.Dock="Left">
+              <Ellipse x:Name="BackgroundBorder" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"/>
+              <Ellipse x:Name="CheckMark" Fill="{DynamicResource SystemControlHighlightAltChromeWhiteBrush}" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Rectangle x:Name="IndeterminateMark" Fill="{DynamicResource SystemControlHighlightAltChromeWhiteBrush}" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Panel>
+          <DockPanel x:Name="ContentIconPanel">
+            <TemplatedControl Name="IconControl" DockPanel.Dock="Left"/>
+            <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
+            <ContentPresenter Name="PART_ContentPresenter"/>
+          </DockPanel>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyPointerOver=True][IsVisuallyChecked=False] /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Stroke" Value="{DynamicResource SystemControlHighlightBaseHighBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyPressed=True][IsVisuallyChecked=False] /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Fill" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyEnabled=False] /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Stroke" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Fill" Value="{DynamicResource SystemAccentBrush}"/>
+    <Setter Property="Stroke" Value="{DynamicResource SystemAccentBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyPointerOver=True][IsVisuallyPressed=False]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Fill" Value="{DynamicResource SystemAccentBrushLight1}"/>
+    <Setter Property="Stroke" Value="{DynamicResource SystemAccentBrushLight1}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyPressed=True]:not(mectrl|ThemeControlDecorator[IsVisuallyChecked=False]) /template/ Ellipse#BackgroundBorder">
+    <Setter Property="Fill" Value="{DynamicResource SystemAccentBrushDark1}"/>
+    <Setter Property="Stroke" Value="{DynamicResource SystemAccentBrushLight1}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton]:not(:indeterminate) /template/ Rectangle#IndeterminateMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton]:indeterminate /template/ Ellipse#CheckMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=RadioButton][IsVisuallyChecked=False] /template/ Ellipse#CheckMark">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  
+    
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=TextBox]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+            <Border.BorderThickness>
+              <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                <Binding.Converter>
+                  <mecore:BorderPresenceToThicknessesConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.BorderThickness>
+          </Border>
+          <DockPanel x:Name="ContentIconPanel" HorizontalAlignment="Stretch">
+            <TemplatedControl Name="IconControl" DockPanel.Dock="Left"/>
+            <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
+            <ContentPresenter Name="PART_ContentPresenter" TextBlock.TextAlignment="{Binding TextAlignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}, FallbackValue=Left}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+          </DockPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=TextBox][IsVisuallyPointerOver=True][IsVisuallyChecked=False] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightBaseMediumHighBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=TextBox][IsVisuallyChecked=True] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightAccentBrush}"/>
+  </Style>
+  <Style Selector="mectrl|ThemeControlDecorator[ControlStyle=TextBox][IsVisuallyEnabled=False] /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlDisabledBaseLowBrush}"/>
   </Style>
   
   

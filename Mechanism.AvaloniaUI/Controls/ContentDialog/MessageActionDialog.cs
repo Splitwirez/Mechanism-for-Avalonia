@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls.Primitives;
+﻿using Avalonia;
+using Avalonia.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,12 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
         }
 
         public event EventHandler<DialogEventArgs> ActionSelected;
+
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+            Focus();
+        }
     }
 
     public class DialogEventArgs : EventArgs

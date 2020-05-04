@@ -4,6 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Text;
 
@@ -51,11 +52,13 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
         {
             base.OnAttachedToVisualTree(e);
             ContentDialog.IsShowingDialog = true;
+            Debug.WriteLine("Attached to visual tree!");
         }
 
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnDetachedFromVisualTree(e);
+            Debug.WriteLine("Detached from visual tree!");
             LastFocusedElement.Focus();
             ContentDialog.IsShowingDialog = false;
         }

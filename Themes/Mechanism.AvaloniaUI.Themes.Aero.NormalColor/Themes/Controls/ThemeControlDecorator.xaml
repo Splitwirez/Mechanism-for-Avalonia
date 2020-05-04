@@ -5,28 +5,6 @@
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI">
-  <Design.PreviewWith>
-    <StackPanel Orientation="Vertical" Width="100">
-      <StackPanel.Styles>
-        <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/>
-      </StackPanel.Styles>
-      <Button Content="Button">
-        <mecore:AttachedIcon.Icon>
-          <Rectangle Width="16" Height="16" Fill="Red"/>
-        </mecore:AttachedIcon.Icon>
-      </Button>
-      <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}">
-        <mecore:AttachedIcon.Icon>
-          <Rectangle Width="16" Height="16" Fill="Red"/>
-        </mecore:AttachedIcon.Icon>
-      </CheckBox>
-      <RadioButton Content="RadioButton">
-        <mecore:AttachedIcon.Icon>
-          <Rectangle Width="16" Height="16" Fill="Red"/>
-        </mecore:AttachedIcon.Icon>
-      </RadioButton>
-    </StackPanel>
-  </Design.PreviewWith>
   <Style Selector="mectrl|ThemeControlDecorator">
     <Setter Property="Focusable" Value="False"/>
   </Style>

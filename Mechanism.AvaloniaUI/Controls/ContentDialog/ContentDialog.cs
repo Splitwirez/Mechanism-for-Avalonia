@@ -75,7 +75,6 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
 
             if (!IsShowingDialog)
                 UnsafeShow(title, content, topLevel, activateIfOnDesktop);
-            //catch (Exception ex)
             else if (UseDialogQueue)
             {
                 DialogQueue.Enqueue(new Task<object>(() =>
@@ -94,23 +93,29 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
             if (topLevel == null)
                 throw new Exception("topLevel cannot be null!");
 
+            Task<T> task = UnsafeShowWithActionEnum<T>(title, content, topLevel, activateIfOnDesktop);
             if (!IsShowingDialog)
             {
-                return await UnsafeShowWithActionEnum<T>(title, content, topLevel, activateIfOnDesktop);
+                //Debug.wrote
+                //task.Start();
+                return await task;
             }
             //catch (Exception ex)
             else if (UseDialogQueue)
             {
-                var task = UnsafeShowWithActionEnum<T>(title, content, topLevel, activateIfOnDesktop);
                 DialogQueue.Enqueue(task);
-                task.Wait();
+                //task.GetAwaiter().IsCompleted;
+                await Task.Run(new Action(() =>
+                {
+                    while (!task.IsCompleted) { }
+                }));
                 return task.Result;
             }
             else
                 throw new Exception();
         }
 
-        public static async Task<T> UnsafeShowWithActionEnum<T>(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true) where T : Enum
+        static async Task<T> UnsafeShowWithActionEnum<T>(string title, string content, TopLevel topLevel, bool activateIfOnDesktop = true) where T : Enum
         {
             if (activateIfOnDesktop && (topLevel is Window win))
                 win.Activate();
@@ -125,6 +130,13 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
             /*await Task.Run(*/
             var task = new Task<T>(new Func<T>(() =>
             {
+                Dispatcher.UIThread.Post(() =>
+                {
+                    var layer = OverlayLayer.GetOverlayLayer(topLevel);
+                    var frame = ContentDialogFrame.GetFrame(messageActionDialog, topLevel);
+                    layer.Children.Add(frame);
+                });
+
                 T value = default;
                 bool assigned = false;
                 messageActionDialog.ActionSelected += (sneder, args) =>
@@ -137,10 +149,6 @@ namespace Mechanism.AvaloniaUI.Controls.ContentDialog
                 return value;
             }));
 
-            var layer = OverlayLayer.GetOverlayLayer(topLevel);
-            var frame = ContentDialogFrame.GetFrame(messageActionDialog, topLevel);
-            layer.Children.Add(frame);
-            task.Start();
             return await task;
         }
 

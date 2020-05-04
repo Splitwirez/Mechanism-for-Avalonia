@@ -101,8 +101,8 @@
   <Style Selector="mectrl|ThemeControlDecorator.Checkable">
     <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
   </Style>
-  <Style Selector="mectrl|ThemeControlDecorator.ButtonCheckable">
-    <Setter Property="IsVisuallyChecked" Value="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+  <Style Selector="mectrl|ThemeControlDecorator.TextBoxCheckable">
+    <Setter Property="IsVisuallyChecked" Value="{Binding IsFocused, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
   </Style>
   
   
@@ -145,10 +145,25 @@
   <Style Selector="TextBox">
     <Setter Property="Template">
       <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="TextBox">
-          <DockPanel Margin="{TemplateBinding Padding}">
-            
+        <Panel>
+          <mectrl:ThemeControlDecorator ControlStyle="TextBox" Classes="NoAutoAlignment NoContent NoIcon TextBoxCheckable"/>
+          <DockPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+            <TemplatedControl Name="IconControl" Template="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" IsVisible="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}" DockPanel.Dock="Left"/>
+            <Rectangle Width="4" DockPanel.Dock="Left">
+              <Rectangle.IsVisible>
+                <MultiBinding ConverterParameter="All">
+                  <MultiBinding.Converter>
+                    <meconv:BoolsToBoolConverter/>
+                  </MultiBinding.Converter>
+                  <MultiBinding.Bindings>
+                    <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                    <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                  </MultiBinding.Bindings>
+                </MultiBinding>
+              </Rectangle.IsVisible>
+            </Rectangle>
             <TextBlock Name="floatingWatermark"
+                       Foreground="{DynamicResource ThemeAccentBrush}"
                        FontSize="{DynamicResource FontSizeSmall}"
                        Text="{TemplateBinding Watermark}"
                        DockPanel.Dock="Top">
@@ -187,7 +202,7 @@
               </ScrollViewer>
             </DataValidationErrors>
           </DockPanel>
-        </mectrl:ThemeControlDecorator>
+        </Panel>
       </ControlTemplate>
     </Setter>
   </Style>
