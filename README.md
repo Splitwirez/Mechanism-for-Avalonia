@@ -12,13 +12,19 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `SplitButton` (feature-complete, in need of testing)
 - `SplitToggleButton` (feature-complete, in need of testing)
 - `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
-- `DecoratableWindow` (under construction)<br/>![DecoratableWindow](/ReadmeImages/DecoratableWindow.png)
+- `StyleableWindow` (under construction)
+- `ToolStrip` (under construction)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
 
 ### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
 - Windows Aero
+- Windows Fluent
+- macOS Human
 - Jade
 - Slate
+
+### Currently-available tools
+- `PerPlatformUI` (under construction)
 
 ### Wiki
 I'll admit, I'm not exactly the best at writing documentation, and don't have a great deal of experience doing so. That said, I do believe that clear documentation is very important, so if you find anything on the Wiki that's unclear, missing, inaccurate, do submit an issue for that as well. This also applies for smaller things, such as typos.
@@ -45,7 +51,6 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - `ToggleSwitch`
 - `BreadcrumbsBar` and `BreadcrumbItem`
 - `Rearranger` and `RearrangeablePane`
-- macOS-style Rearrangeable Toolbars
 - macOS-style Column view
 
 ### Planned Themes
