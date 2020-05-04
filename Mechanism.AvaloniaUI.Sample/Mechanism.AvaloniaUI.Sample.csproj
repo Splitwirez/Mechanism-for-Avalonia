@@ -17,18 +17,21 @@
     <AvaloniaResource Remove="ControlsSample.xaml" />
     <AvaloniaResource Remove="MainWindow.xaml" />
     <AvaloniaResource Remove="SampleDecoratableWindow.xaml" />
+    <AvaloniaResource Remove="SampleNativeIntegrationWindow.xaml" />
     <AvaloniaResource Remove="SampleStyleableWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ControlsSample.xaml" />
     <None Remove="MainWindow.xaml" />
+    <None Remove="SampleNativeIntegrationWindow.xaml" />
     <None Remove="SampleStyleableWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007062-beta" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0007062-beta" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.999-build20200416-01" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ThemeDemoWindow.xaml">
@@ -51,6 +54,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SampleNativeIntegrationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
     <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Aero.NormalColor\Mechanism.AvaloniaUI.Themes.Aero.NormalColor.csproj" />
     <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Fluent\Mechanism.AvaloniaUI.Themes.Fluent.csproj" />
@@ -61,6 +69,9 @@
   <ItemGroup>
     <Compile Update="SampleDecoratableWindow.xaml.cs">
       <DependentUpon>SampleDecoratableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SampleNativeIntegrationWindow.xaml.cs">
+      <DependentUpon>SampleNativeIntegrationWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

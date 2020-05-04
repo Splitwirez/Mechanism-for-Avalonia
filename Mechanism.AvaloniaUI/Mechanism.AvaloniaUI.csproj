@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007062-beta" />
     <PackageReference Include="Avalonia.Native" Version="0.9.999-cibuild0007062-beta" />
-    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.999-build20200416-01" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 </Project>

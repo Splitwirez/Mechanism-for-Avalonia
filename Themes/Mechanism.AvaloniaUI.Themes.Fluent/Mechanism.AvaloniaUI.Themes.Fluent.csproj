@@ -9,6 +9,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007062-beta" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.999-build20200416-01" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />

@@ -46,5 +46,10 @@ namespace Mechanism.AvaloniaUI.Sample
         {
             new SampleStyleableWindow().Show();
         }
+
+        public void ShowSampleNativeIntegrationWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            new SampleNativeIntegrationWindow().Show();
+        }
     }
 }
