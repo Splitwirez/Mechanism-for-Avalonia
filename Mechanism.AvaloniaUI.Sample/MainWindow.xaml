@@ -12,11 +12,11 @@
         d:DesignWidth="500"
         Width="800" Height="300"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
-        Title="Mechanism Sample Launcher" Padding="5">
+        Title="Mechanism Sample Launchpad" Padding="5">
   <DockPanel>
     <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
       <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom">
-        <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show sample platform-integration Window</Button>
+        <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>
       </HeaderedContentControl>
       <HeaderedContentControl Classes="GroupBox" Header="Theme stuff">
         <DockPanel>
