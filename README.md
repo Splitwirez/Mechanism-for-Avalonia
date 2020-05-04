@@ -57,15 +57,13 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
 - Windows XP Luna
 - Metro (e.g. Windows 8, Windows 10 pre-Fluent)
-- Fluent (waiting on drop shadows)
 - Windows Classic
 - Mac OS X Aqua
-- macOS Human(?)
 - Ubuntu Ambiance and/or Communitheme(?)
 - Elementary OS
 - Possibly some other popular Linux themes (open to suggestions)
 - Plex
-- Shale (waiting on drop shadows)
+- Shale
 
 ### Planned Tools
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
