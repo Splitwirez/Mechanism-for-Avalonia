@@ -8,7 +8,7 @@
         xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Mechanism.AvaloniaUI.Sample.SampleNativeIntegrationWindow"
-        Title="Native Integration Sample">
+        Title="Native Integration Sample" Width="300" Height="200">
   <UniformGrid Columns="1">
     <Panel>
       <DockPanel mecore:PerPlatformUI.ShowOnPlatforms="Windows">
