@@ -52,6 +52,7 @@ When submitting a Pull Request, please include whatever alias(es) you wish to be
 - `BreadcrumbsBar` and `BreadcrumbItem`
 - `Rearranger` and `RearrangeablePane`
 - macOS-style Column view
+- Some kind of MDI-window-based `ItemsControl` thing
 
 ### Planned Themes
 ##### (Note that these planned features are subject to change, and are not guaranteed to be implemented)
