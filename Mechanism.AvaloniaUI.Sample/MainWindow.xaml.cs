@@ -51,5 +51,10 @@ namespace Mechanism.AvaloniaUI.Sample
         {
             new SampleNativeIntegrationWindow().Show();
         }
+
+        public void ShowPretendPhoneWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            new TouchDemoWindow().Show();
+        }
     }
 }

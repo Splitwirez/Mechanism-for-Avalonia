@@ -8,12 +8,103 @@
              xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
-             xmlns:met="clr-namespace:Mechanism.AvaloniaUI.Controls.Touch;assembly=Mechanism.AvaloniaUI"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mechanism.AvaloniaUI.Sample.ControlsSample">
   <TabControl>
+    <TabItem Header="Button Controls">
+      <ScrollViewer>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
+          <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
+            <Grid.Styles>
+              <Style Selector=":is(Control):disabled">
+                <Setter Property="Grid.Column" Value="2"/>
+              </Style>
+              <Style Selector="mectrl|FlyoutButton">
+                <Setter Property="Grid.Row" Value="0"/>
+              </Style>
+              <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=True]">
+                <Setter Property="Grid.Row" Value="2"/>
+              </Style>
+              <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=False]">
+                <Setter Property="Grid.Row" Value="4"/>
+              </Style>
+              <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=True]">
+                <Setter Property="Grid.Row" Value="6"/>
+              </Style>
+              <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=False]">
+                <Setter Property="Grid.Row" Value="8"/>
+              </Style>
+            </Grid.Styles>
+            <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}" AutoCloseFlyout="False">
+              <mectrl:FlyoutButton.FlyoutContent>
+                <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
+                  <TextBlock Text="Flyout content" FontWeight="Bold"/>
+                  <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
+                  <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
+                </StackPanel>
+              </mectrl:FlyoutButton.FlyoutContent>
+            </mectrl:FlyoutButton>
+            <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
+
+
+            <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox1}">
+              <mectrl:SplitButton.FlyoutContent>
+                <ListBox x:Name="FlyoutListBox1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                </ListBox>
+              </mectrl:SplitButton.FlyoutContent>
+            </mectrl:SplitButton>
+            <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
+              <mectrl:SplitButton.FlyoutContent>
+                <ListBox x:Name="FlyoutListBox2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                </ListBox>
+              </mectrl:SplitButton.FlyoutContent>
+            </mectrl:SplitButton>
+            <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="False"/>
+            <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+
+
+            <mectrl:SplitToggleButton Content="SplitToggleButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
+              <mectrl:SplitToggleButton.FlyoutContent>
+                <ListBox x:Name="FlyoutListBox3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                </ListBox>
+              </mectrl:SplitToggleButton.FlyoutContent>
+            </mectrl:SplitToggleButton>
+            <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
+              <mectrl:SplitToggleButton.FlyoutContent>
+                <ListBox x:Name="FlyoutListBox4" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                  <ListBoxItem>Flyout content here</ListBoxItem>
+                </ListBox>
+              </mectrl:SplitToggleButton.FlyoutContent>
+            </mectrl:SplitToggleButton>
+            <mectrl:SplitToggleButton Content="SplitToggleButton" IsFlyoutSegmentEnabled="False"/>
+            <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+          </Grid>
+        </StackPanel>
+      </ScrollViewer>
+    </TabItem>
+    <TabItem Header="ShadowDecorator">
+      <UniformGrid Columns="2">
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="30" Extent="20,10,20,30" UseClipping="True" CornerRadius="15"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="40" Extent="30,20,30,40" CornerRadius="0">
+          <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </mectrl:ShadowDecorator>
+        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="20" Extent="10,5,10,15" UseClipping="True" CornerRadius="5"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="4" Extent="0,0,4,4" UseClipping="True" CornerRadius="0"/>
+      </UniformGrid>
+    </TabItem>
     <TabItem Header="Dialogs">
-      <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
         <Button x:Name="ShowContentDialog2Button">Show ContentDialog, and then show another one after one second</Button>
         <Button x:Name="ShowContentDialogWithActionsButton">Show ContentDialog with actions</Button>
@@ -21,7 +112,7 @@
         <Button x:Name="ShowFileListmakerDialogButton" IsEnabled="False" IsVisible="False">Show FileListmakerDialog (NYI)</Button>
       </WrapPanel>
     </TabItem>
-    <TabItem Header="Buttons">
+    <!--TabItem Header="Buttons">
       <ScrollViewer>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
           <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
@@ -126,7 +217,7 @@
           </StackPanel>
         </StackPanel>
       </ScrollViewer>
-    </TabItem>
+    </TabItem-->
     <TabItem Header="Boxes">
       <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
         <ComboBox SelectedIndex="0">
@@ -203,39 +294,6 @@
           Duis maximus eget ante at blandit. Aenean vel nibh gravida, consequat turpis quis, pellentesque metus. Quisque varius, urna eget auctor iaculis, sem quam convallis sapien, sed laoreet ex turpis vel massa. Nullam imperdiet magna varius imperdiet placerat. Morbi convallis arcu lorem, eu sollicitudin felis ultricies id. Duis rutrum, sem in consectetur tincidunt, sapien tortor tristique dui, venenatis auctor mauris orci a nisl. Vestibulum sit amet erat semper, consectetur nulla pharetra, condimentum risus. Phasellus porta, lacus nec malesuada imperdiet, nibh sapien condimentum arcu, pretium laoreet orci arcu sit amet diam. Nullam vitae mauris purus.
         </TextBlock>
       </ScrollViewer>
-    </TabItem>
-    <TabItem Header="SwipeSheet">
-      <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
-          <TextBlock TextWrapping="Wrap">
-
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lectus metus. Cras suscipit scelerisque eros. Ut fringilla tellus ultricies feugiat viverra. Aliquam id feugiat ligula. Cras et iaculis tellus. Praesent vitae ultricies massa, quis pellentesque nunc. Nullam enim nulla, sollicitudin sed neque eget, ullamcorper egestas velit. Suspendisse malesuada porta diam convallis aliquam. Phasellus nisl nisi, molestie sit amet sodales egestas, varius ut ligula. Integer sit amet neque ipsum. Fusce lobortis, sem a consequat posuere, est sapien consectetur ligula, elementum dictum metus massa sed dui. Nunc sed tortor non diam facilisis semper. Curabitur vel finibus mauris, id sagittis nibh. Nulla rhoncus luctus purus eget pellentesque.
-          </TextBlock>
-          <!--
-
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sed ante erat. Integer finibus molestie justo non faucibus. Sed sed dui venenatis, laoreet sem in, lobortis est. Praesent molestie purus vel dolor finibus faucibus. Nullam lobortis velit vulputate urna malesuada, ac maximus urna tincidunt. In sed accumsan odio. Vestibulum porttitor sem id risus pellentesque, mollis ultrices tellus congue. Fusce scelerisque, enim vitae tempus rhoncus, nibh ipsum lobortis est, posuere dapibus lorem metus quis ipsum. Donec id ipsum odio. Fusce pretium, nisi id viverra tempor, massa diam congue ex, in tincidunt eros sem id tortor. Aenean a sem convallis, interdum ligula ut, maximus turpis. Curabitur efficitur tellus ex, et faucibus enim pulvinar et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus accumsan efficitur dapibus.
-
-            Phasellus ante mi, consequat eu dui in, ultrices condimentum dui. Integer efficitur sem nunc, eu vestibulum diam varius sed. In non commodo lectus. Nulla eget sodales arcu. In quis consectetur augue, nec semper augue. Praesent tortor justo, pharetra at nibh eget, rhoncus aliquam erat. Maecenas hendrerit posuere tortor quis dictum. Cras porta quis nibh at porta. Quisque fermentum vestibulum arcu, non euismod neque luctus ac. Proin malesuada nunc lobortis diam egestas vehicula.
-
-            Nam rhoncus lacus et ligula malesuada, sed commodo orci euismod. Quisque ornare risus non massa commodo euismod. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec non massa nisi. Nulla augue sapien, ornare a bibendum ut, imperdiet a erat. Fusce venenatis sem aliquet odio sollicitudin dictum vel elementum massa. Morbi a nulla maximus, placerat dui in, congue ante. Nullam bibendum dui ac dolor consequat varius. Curabitur efficitur, ligula a mollis pulvinar, tellus mauris ullamcorper lorem, ut malesuada libero nunc eget arcu. Curabitur iaculis, sem id tempus laoreet, eros lectus luctus risus, vitae commodo ex ligula ut enim. Quisque eget augue et sem rutrum blandit. Nulla lacinia sollicitudin dolor, sed rutrum purus luctus faucibus. Suspendisse porttitor aliquam massa, sagittis dignissim risus scelerisque quis. Vestibulum a iaculis lacus, a facilisis ante.
-
-            Vestibulum ac diam at nulla posuere fermentum non quis massa. Maecenas tincidunt sit amet ipsum vel porta. Mauris vestibulum porttitor iaculis. Nam tristique velit ac felis lacinia hendrerit. Morbi condimentum erat at sapien luctus, non consequat nisl dapibus. Ut facilisis sollicitudin mollis. Donec viverra lacus posuere ante luctus, nec pretium sem tempus. Quisque nec vestibulum ex. Sed ut odio ipsum. Ut rutrum magna ut ipsum sodales auctor.
-
-            Phasellus aliquam dolor eros, id varius mauris faucibus eu. Phasellus mauris arcu, consequat eget sem at, semper porta neque. Nulla maximus orci eget ligula iaculis condimentum. Ut quis est interdum neque pulvinar ultricies. Maecenas pharetra quam sed arcu imperdiet, sed sagittis nunc accumsan. Donec ullamcorper justo in tincidunt luctus. Cras urna magna, congue ac sapien ac, laoreet mattis tellus. Phasellus tempor auctor justo quis hendrerit. Mauris vel arcu sit amet neque pharetra suscipit. Sed porta vitae lorem quis tincidunt.
-
-            Ut sodales eleifend orci, sed dictum nisl bibendum venenatis. Duis ullamcorper diam ac sapien ultrices, vitae vestibulum mi tincidunt. Aenean posuere interdum augue, pellentesque rutrum velit congue vel. Proin pharetra posuere tincidunt. Duis vel est ut nunc pharetra eleifend. Aliquam nisi ligula, tincidunt in rutrum eu, aliquam ullamcorper diam. Phasellus sit amet massa metus. Proin erat purus, sollicitudin eu est vel, varius rhoncus enim.
-
-            Ut luctus ante vel viverra euismod. Proin a turpis eget felis sagittis pharetra. Nam at blandit quam. In sem arcu, faucibus eget scelerisque vel, sollicitudin nec magna. Ut convallis commodo est, sed ultrices enim facilisis at. Proin massa mauris, consequat eu fermentum ut, gravida quis nibh. Nam efficitur, lacus sit amet accumsan maximus, risus augue vehicula justo, sed egestas mi augue id nisi. Fusce sagittis eleifend dolor. Curabitur finibus nibh ex, eu vehicula nulla commodo quis. Vivamus porta luctus varius. Morbi vitae ultrices urna, sed consectetur justo. Sed condimentum ornare diam, ac dapibus est condimentum varius. Suspendisse potenti.
-
-            Nam consectetur sollicitudin nisi eu condimentum. Vestibulum dictum neque a velit convallis maximus. Vivamus id maximus felis, in lobortis massa. Suspendisse sagittis imperdiet enim. Donec mollis ullamcorper euismod. Vivamus efficitur libero quis mattis mollis. Donec vel malesuada ipsum. Suspendisse potenti. Sed lobortis eleifend libero, dapibus fringilla massa bibendum non. Vivamus quam dolor, posuere nec lectus vitae, dapibus ultrices velit. Nam iaculis sem a eleifend euismod. Duis laoreet justo tellus, quis feugiat felis elementum eget. Vestibulum varius viverra ligula a ullamcorper. Suspendisse eu magna quis nulla egestas efficitur non at nibh. Nunc vestibulum magna vitae elit sodales facilisis.
-
-            Duis maximus eget ante at blandit. Aenean vel nibh gravida, consequat turpis quis, pellentesque metus. Quisque varius, urna eget auctor iaculis, sem quam convallis sapien, sed laoreet ex turpis vel massa. Nullam imperdiet magna varius imperdiet placerat. Morbi convallis arcu lorem, eu sollicitudin felis ultricies id. Duis rutrum, sem in consectetur tincidunt, sapien tortor tristique dui, venenatis auctor mauris orci a nisl. Vestibulum sit amet erat semper, consectetur nulla pharetra, condimentum risus. Phasellus porta, lacus nec malesuada imperdiet, nibh sapien condimentum arcu, pretium laoreet orci arcu sit amet diam. Nullam vitae mauris purus.-->
-        </ScrollViewer>
-        <met:SwipeSheet>
-          <TextBlock TextWrapping="Wrap" Text="Here's some SwipeSheet content, I guess"/>
-        </met:SwipeSheet>
-      </Grid>
     </TabItem>
   </TabControl>
 </UserControl>

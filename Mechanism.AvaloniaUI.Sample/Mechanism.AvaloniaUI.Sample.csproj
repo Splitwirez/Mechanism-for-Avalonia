@@ -20,6 +20,7 @@
     <AvaloniaResource Remove="SampleNativeIntegrationWindow.xaml" />
     <AvaloniaResource Remove="SampleStyleableWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
+    <AvaloniaResource Remove="TouchDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ControlsSample.xaml" />
@@ -27,6 +28,7 @@
     <None Remove="SampleNativeIntegrationWindow.xaml" />
     <None Remove="SampleStyleableWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
+    <None Remove="TouchDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007117-beta" />
@@ -55,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SampleNativeIntegrationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TouchDemoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

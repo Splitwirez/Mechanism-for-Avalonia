@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample;assembly=Mechanism.AvaloniaUI.Sample"
         xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
         xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI"
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
@@ -10,137 +11,11 @@
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d"
         d:DesignWidth="500"
-        Width="800" Height="300"
+        Width="800" Height="500"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
         Title="Mechanism Sample Launchpad" Padding="5">
   <DockPanel>
-    <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
-      <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom">
-        <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>
-      </HeaderedContentControl>
-      <HeaderedContentControl Classes="GroupBox" Header="Theme stuff">
-        <DockPanel>
-          <Button x:Name="ShowSampleStyleableWindowButton" Click="ShowSampleStyleableWindowButton_Click" DockPanel.Dock="Bottom" Margin="0,8,0,0">Show sample StyleableWindow</Button>
-          <StackPanel x:Name="ThemesStackPanel" Orientation="Vertical" Spacing="4">
-            <RadioButton x:Name="DefaultThemeRadioButton" Tag="DEFAULT_THEME" Content="Avalonia Default" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Aero.NormalColor" Content="Windows Aero" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Slate" Content="Slate" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Jade" Content="Jade" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Fruit" Content="Fruit" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Fluent" Content="Fluent" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Luna.NormalColor" Content="Luna (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Plex.NormalColor" Content="Plex (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Metro" Content="Metro (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Shale" Content="Shale (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Aqua" Content="Aqua (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Ubuntu" Content="Ubuntu (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-            <RadioButton Tag="Elementary" Content="Elementary (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
-          </StackPanel>
-        </DockPanel>
-      </HeaderedContentControl>
-    </DockPanel>
-    <TabControl>
-      <TabItem Header="ShadowDecorator">
-        <UniformGrid Columns="2">
-        <mectrl:ShadowDecorator Color="#7F000000" Depth="30" Extent="20,10,20,30" UseClipping="True" CornerRadius="15"/>
-        <mectrl:ShadowDecorator Color="#7F000000" Depth="40" Extent="30,20,30,40" CornerRadius="0">
-          <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        </mectrl:ShadowDecorator>
-        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="20" Extent="10,5,10,15" UseClipping="True" CornerRadius="5"/>
-        <mectrl:ShadowDecorator Color="#7F000000" Depth="4" Extent="0,0,4,4" UseClipping="True" CornerRadius="0"/>
-      </UniformGrid>
-      </TabItem>
-      <TabItem Header="Dialogs">
-        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-          <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
-          <Button x:Name="ShowContentDialog2Button">Show ContentDialog, and then show another one after one second</Button>
-          <Button x:Name="ShowContentDialogWithActionsButton">Show ContentDialog with actions</Button>
-          <TextBlock x:Name="LastActionResultTextBlock"/>
-          <Button x:Name="ShowFileListmakerDialogButton" IsEnabled="False" IsVisible="False">Show FileListmakerDialog (NYI)</Button>
-        </WrapPanel>
-      </TabItem>
-      <TabItem Header="Button Controls">
-        <ScrollViewer>
-          <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
-            <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
-              <Grid.Styles>
-                <Style Selector=":is(Control):disabled">
-                  <Setter Property="Grid.Column" Value="2"/>
-                </Style>
-                <Style Selector="mectrl|FlyoutButton">
-                  <Setter Property="Grid.Row" Value="0"/>
-                </Style>
-                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=True]">
-                  <Setter Property="Grid.Row" Value="2"/>
-                </Style>
-                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=False]">
-                  <Setter Property="Grid.Row" Value="4"/>
-                </Style>
-                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=True]">
-                  <Setter Property="Grid.Row" Value="6"/>
-                </Style>
-                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=False]">
-                  <Setter Property="Grid.Row" Value="8"/>
-                </Style>
-              </Grid.Styles>
-              <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}" AutoCloseFlyout="False">
-                <mectrl:FlyoutButton.FlyoutContent>
-                  <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
-                    <TextBlock Text="Flyout content" FontWeight="Bold"/>
-                    <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
-                    <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
-                  </StackPanel>
-                </mectrl:FlyoutButton.FlyoutContent>
-              </mectrl:FlyoutButton>
-              <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
-
-
-              <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox1}">
-                <mectrl:SplitButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                  </ListBox>
-                </mectrl:SplitButton.FlyoutContent>
-              </mectrl:SplitButton>
-              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
-                <mectrl:SplitButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                  </ListBox>
-                </mectrl:SplitButton.FlyoutContent>
-              </mectrl:SplitButton>
-              <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="False"/>
-              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
-
-
-              <mectrl:SplitToggleButton Content="SplitToggleButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
-                <mectrl:SplitToggleButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                  </ListBox>
-                </mectrl:SplitToggleButton.FlyoutContent>
-              </mectrl:SplitToggleButton>
-              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
-                <mectrl:SplitToggleButton.FlyoutContent>
-                  <ListBox x:Name="FlyoutListBox4" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                    <ListBoxItem>Flyout content here</ListBoxItem>
-                  </ListBox>
-                </mectrl:SplitToggleButton.FlyoutContent>
-              </mectrl:SplitToggleButton>
-              <mectrl:SplitToggleButton Content="SplitToggleButton" IsFlyoutSegmentEnabled="False"/>
-              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
-            </Grid>
-          </StackPanel>
-        </ScrollViewer>
-      </TabItem>
+    <TabControl Margin="0,0,0,5" TabStripPlacement="Bottom" DockPanel.Dock="Top">
       <TabItem Header="CommandBar">
         <StackPanel Orientation="Vertical" Width="{Binding $parent[TabControl].Width}" Spacing="4">
           <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
@@ -305,7 +180,7 @@
             <metb:ToolBar Band="1">
               <Button Content="Button1">
                 <mecore:AttachedIcon.Icon>
-                  <ControlTemplate>    
+                  <ControlTemplate>
                     <Panel Width="24" Height="24">
                       <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
                       <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -315,7 +190,7 @@
               </Button>
               <Button Content="Button2">
                 <mecore:AttachedIcon.Icon>
-                  <ControlTemplate>  
+                  <ControlTemplate>
                     <Panel Width="24" Height="24">
                       <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
                       <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -399,5 +274,137 @@
         </StackPanel>
       </TabItem>
     </TabControl>
+    <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
+      <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom">
+        <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>
+      </HeaderedContentControl>
+      <HeaderedContentControl Classes="GroupBox" Header="Touch input stuff" DockPanel.Dock="Bottom">
+        <Button x:Name="ShowPretendPhoneWindowButton" Click="ShowPretendPhoneWindowButton_Click">Show touch demo</Button>
+      </HeaderedContentControl>
+      <HeaderedContentControl Classes="GroupBox" Header="Theme stuff">
+        <DockPanel>
+          <Button x:Name="ShowSampleStyleableWindowButton" Click="ShowSampleStyleableWindowButton_Click" DockPanel.Dock="Bottom" Margin="0,8,0,0">Show sample StyleableWindow</Button>
+          <StackPanel x:Name="ThemesStackPanel" Orientation="Vertical" Spacing="4">
+            <RadioButton x:Name="DefaultThemeRadioButton" Tag="DEFAULT_THEME" Content="Avalonia Default" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Aero.NormalColor" Content="Windows Aero" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Slate" Content="Slate" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Jade" Content="Jade" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Fruit" Content="Fruit" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Fluent" Content="Fluent" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Luna.NormalColor" Content="Luna (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Plex.NormalColor" Content="Plex (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Metro" Content="Metro (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Shale" Content="Shale (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Aqua" Content="Aqua (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Ubuntu" Content="Ubuntu (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Elementary" Content="Elementary (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>
+          </StackPanel>
+        </DockPanel>
+      </HeaderedContentControl>
+    </DockPanel>
+    <!--TabControl>
+      <TabItem Header="ShadowDecorator">
+        <UniformGrid Columns="2">
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="30" Extent="20,10,20,30" UseClipping="True" CornerRadius="15"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="40" Extent="30,20,30,40" CornerRadius="0">
+          <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </mectrl:ShadowDecorator>
+        <mectrl:ShadowDecorator Color="#7FFF00FF" Depth="20" Extent="10,5,10,15" UseClipping="True" CornerRadius="5"/>
+        <mectrl:ShadowDecorator Color="#7F000000" Depth="4" Extent="0,0,4,4" UseClipping="True" CornerRadius="0"/>
+      </UniformGrid>
+      </TabItem>
+      <TabItem Header="Dialogs">
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Button x:Name="ShowContentDialogButton">Show ContentDialog</Button>
+          <Button x:Name="ShowContentDialog2Button">Show ContentDialog, and then show another one after one second</Button>
+          <Button x:Name="ShowContentDialogWithActionsButton">Show ContentDialog with actions</Button>
+          <TextBlock x:Name="LastActionResultTextBlock"/>
+          <Button x:Name="ShowFileListmakerDialogButton" IsEnabled="False" IsVisible="False">Show FileListmakerDialog (NYI)</Button>
+        </WrapPanel>
+      </TabItem>
+      <TabItem Header="Button Controls">
+        <ScrollViewer>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
+            <Grid ColumnDefinitions="*,10,*" RowDefinitions="*,10,*,10,*,10,*,10,*" VerticalAlignment="Top">
+              <Grid.Styles>
+                <Style Selector=":is(Control):disabled">
+                  <Setter Property="Grid.Column" Value="2"/>
+                </Style>
+                <Style Selector="mectrl|FlyoutButton">
+                  <Setter Property="Grid.Row" Value="0"/>
+                </Style>
+                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=True]">
+                  <Setter Property="Grid.Row" Value="2"/>
+                </Style>
+                <Style Selector="mectrl|SplitButton[IsFlyoutSegmentEnabled=False]">
+                  <Setter Property="Grid.Row" Value="4"/>
+                </Style>
+                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=True]">
+                  <Setter Property="Grid.Row" Value="6"/>
+                </Style>
+                <Style Selector="mectrl|SplitToggleButton[IsFlyoutSegmentEnabled=False]">
+                  <Setter Property="Grid.Row" Value="8"/>
+                </Style>
+              </Grid.Styles>
+              <mectrl:FlyoutButton x:Name="FlyoutButton" Content="FlyoutButton" FocusOnOpenElement="{Binding ElementName=OkButton}" AutoCloseFlyout="False">
+                <mectrl:FlyoutButton.FlyoutContent>
+                  <StackPanel Orientation="Vertical" Margin="10" Spacing="10">
+                    <TextBlock Text="Flyout content" FontWeight="Bold"/>
+                    <TextBlock Text="You could also put a ListBox here or something, if needed." TextWrapping="Wrap"/>
+                    <ToggleButton x:Name="OkButton" IsChecked="{Binding !IsChecked, ElementName=FlyoutButton, Mode=TwoWay}">OK</ToggleButton>
+                  </StackPanel>
+                </mectrl:FlyoutButton.FlyoutContent>
+              </mectrl:FlyoutButton>
+              <mectrl:FlyoutButton Content="Disabled FlyoutButton" IsEnabled="False"/>
+
+
+              <mectrl:SplitButton Content="SplitButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox1}">
+                <mectrl:SplitButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitButton.FlyoutContent>
+              </mectrl:SplitButton>
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox2}">
+                <mectrl:SplitButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitButton.FlyoutContent>
+              </mectrl:SplitButton>
+              <mectrl:SplitButton Content="SplitButton" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitButton Content="Disabled SplitButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+
+
+              <mectrl:SplitToggleButton Content="SplitToggleButton" FocusOnOpenElement="{Binding ElementName=FlyoutListBox3}">
+                <mectrl:SplitToggleButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitToggleButton.FlyoutContent>
+              </mectrl:SplitToggleButton>
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="True" FocusOnOpenElement="{Binding ElementName=FlyoutListBox4}">
+                <mectrl:SplitToggleButton.FlyoutContent>
+                  <ListBox x:Name="FlyoutListBox4" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                    <ListBoxItem>Flyout content here</ListBoxItem>
+                  </ListBox>
+                </mectrl:SplitToggleButton.FlyoutContent>
+              </mectrl:SplitToggleButton>
+              <mectrl:SplitToggleButton Content="SplitToggleButton" IsFlyoutSegmentEnabled="False"/>
+              <mectrl:SplitToggleButton Content="Disabled SplitToggleButton" IsEnabled="False" IsFlyoutSegmentEnabled="False"/>
+            </Grid>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl-->
+    <local:ControlsSample/>
   </DockPanel>
 </Window>
