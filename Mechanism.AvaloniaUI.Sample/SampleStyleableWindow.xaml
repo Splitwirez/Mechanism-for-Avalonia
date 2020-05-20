@@ -15,6 +15,7 @@
     <!--, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mewin:StyleableWindow}}-->
     <!--CheckBox Content="UseHeaderbar" IsChecked="{Binding $parent[mewin:StyleableWindow].UseHeaderbar}"/-->
     <Button HorizontalAlignment="Center" Click="SetBackgroundButton_Click">(Un)Set background to something stupid</Button>
+    <CheckBox Content="ShowFullscreenButton" IsChecked="{Binding $parent[mewin:StyleableWindow].ShowFullscreenButton}"/>
     <CheckBox Content="ShowCaptionIcon" IsChecked="{Binding $parent[mewin:StyleableWindow].ShowCaptionIcon}"/>
     <CheckBox Content="ShowCaptionText" IsChecked="{Binding $parent[mewin:StyleableWindow].ShowCaptionText}"/>
     <DockPanel>

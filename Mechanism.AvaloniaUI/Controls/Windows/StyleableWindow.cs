@@ -51,6 +51,15 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             set => SetValue(BlurBehindProperty, value);
         }
 
+        public static readonly StyledProperty<bool> ShowFullscreenButtonProperty =
+            AvaloniaProperty.Register<StyleableWindow, bool>(nameof(ShowFullscreenButton), defaultValue: false);
+
+        public bool ShowFullscreenButton
+        {
+            get => GetValue(ShowFullscreenButtonProperty);
+            set => SetValue(ShowFullscreenButtonProperty, value);
+        }
+
         /*public static readonly StyledProperty<bool> CanBlurProperty =
             AvaloniaProperty.Register<StyleableWindow, bool>(nameof(CanBlur), defaultValue: false);
 
@@ -184,6 +193,21 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             ExtendedTitlebarHeightProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateTotalTitlebarHeight());
             IconProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.HasIcon = (sender.Icon != null));
             BlurBehindProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) => sender.UpdateBlur());
+
+            WindowStateProperty.Changed.AddClassHandler<StyleableWindow>((sender, e) =>
+            {
+                sender.UpdateWindowStatePseudoClasses();
+            });
+        }
+
+
+        private static string _maxOrFullscreenPseudo = ":fillscreenarea";
+        protected void UpdateWindowStatePseudoClasses()
+        {
+            if ((WindowState == WindowState.Maximized) || (WindowState == WindowState.FullScreen))
+                PseudoClasses.Add(_maxOrFullscreenPseudo);
+            else
+                PseudoClasses.Remove(_maxOrFullscreenPseudo);
         }
 
         protected void UpdateBlur()
@@ -194,7 +218,7 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                //TODO: https://userbase.kde.org/Tutorials/Force_Transparency_And_Blur
+                //TODO: https://userbase.kde.org/Tutorials/Force_Transparency_And_Blur ?
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
@@ -403,6 +427,10 @@ namespace Mechanism.AvaloniaUI.Controls.Windows
             if (e.NameScope.TryGet("PART_CloseButton", out Button closeBtn))
             {
                 closeBtn.Click += (sneder, args) => Close();
+            }
+            if (e.NameScope.TryGet("PART_FullscreenButton", out Button flscBtn))
+            {
+                flscBtn.Click += (sneder, args) => WindowState = WindowState.FullScreen;
             }
 
             if (e.NameScope.TryGet("PART_Titlebar", out Control titlebar))

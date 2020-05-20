@@ -44,6 +44,12 @@
             </DockPanel>
             <DockPanel VerticalAlignment="Top" Height="{TemplateBinding BaseTitlebarHeight}">
               <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button x:Name="PART_FullscreenButton" Classes="CaptionButton">
+                  <Panel Width="10" Height="10">
+                    <Border BorderThickness="2,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="4" Height="4" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderThickness="0,2,2,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="4" Height="4" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                  </Panel>
+                </Button>
                 <Button x:Name="PART_MinimizeButton" Classes="CaptionButton">
                   <Rectangle Width="10" Height="2" Fill="{Binding $parent[Button].Foreground}"/>
                 </Button>
@@ -105,10 +111,16 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mewin|StyleableWindow[WindowState=Maximized] /template/ Grid#ResizeGrid">
+  <Style Selector="mewin|StyleableWindow:not(mewin|StyleableWindow[WindowState=FullScreen]) /template/ Button#PART_FullscreenButton">
+    <Setter Property="IsVisible" Value="{Binding ShowFullscreenButton, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow[WindowState=FullScreen] /template/ Button#PART_FullscreenButton">
     <Setter Property="IsVisible" Value="False"/>
   </Style>
-  <Style Selector="mewin|StyleableWindow[WindowState=Maximized] /template/ Border.HideBorderOnMaximize">
+  <Style Selector="mewin|StyleableWindow:fillscreenarea /template/ Grid#ResizeGrid">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mewin|StyleableWindow:fillscreenarea /template/ Border.HideBorderOnMaximize">
     <Setter Property="BorderThickness" Value="0"/>
   </Style>
   <Style Selector="mewin|StyleableWindow /template/ Grid#ResizeGrid > Border">
