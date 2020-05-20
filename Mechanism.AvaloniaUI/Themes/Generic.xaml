@@ -38,6 +38,7 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolBarTray.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolStrip.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/StyleableWindow.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/SwipeSheet.xaml"/>
 
 
   <Style Selector=":is(TopLevel)">
