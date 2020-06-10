@@ -275,13 +275,13 @@
       </TabItem>
     </TabControl>
     <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
-      <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom">
+      <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom" IsVisible="False">
         <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>
       </HeaderedContentControl>
-      <HeaderedContentControl Classes="GroupBox" Header="Touch input stuff" DockPanel.Dock="Bottom">
+      <HeaderedContentControl Classes="GroupBox" Header="Touch input stuff" DockPanel.Dock="Bottom" IsVisible="False">
         <Button x:Name="ShowPretendPhoneWindowButton" Click="ShowPretendPhoneWindowButton_Click">Show touch demo</Button>
       </HeaderedContentControl>
-      <HeaderedContentControl Classes="GroupBox" Header="Theme stuff">
+      <HeaderedContentControl Classes="GroupBox" Header="Theme stuff" IsVisible="False">
         <DockPanel>
           <Button x:Name="ShowSampleStyleableWindowButton" Click="ShowSampleStyleableWindowButton_Click" DockPanel.Dock="Bottom" Margin="0,8,0,0">Show sample StyleableWindow</Button>
           <StackPanel x:Name="ThemesStackPanel" Orientation="Vertical" Spacing="4">
