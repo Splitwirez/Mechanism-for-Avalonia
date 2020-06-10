@@ -200,6 +200,27 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+            {
+                AvailableItems.Clear();
+                foreach (IToolStripItem itm in Items.OfType<IToolStripItem>().Where(x => !CurrentItems.Any(w => w.TargetItem == x)))
+                    AvailableItems.Add(itm.ToReference());
+            }
+            else if (e.OldItems != null)
+            {
+                Debug.WriteLine("e.OldItems.Count: " + e.OldItems.Count);
+                foreach (ToolStripItemReference rfrnc in e.OldItems)
+                {
+                    Debug.WriteLine("DisplayName: " + rfrnc.TargetItem.DisplayName);
+                    //if (!rfrnc.TargetItem.AllowDuplicates)
+                    if (!AvailableItems.Any(x => x.TargetItem.Equals(rfrnc.TargetItem) || (x.TargetItem == rfrnc.TargetItem)))
+                        AvailableItems.Add(rfrnc);
+                    //else if (AvailableItems.FirstOrDefault(x => x.TargetItem == rfrnc.TargetItem).TargetItem.AllowDuplicates)
+                }
+            }
+            else
+                Debug.WriteLine("e.OldItems == null");
+
             if (e.NewItems != null)
             {
                 foreach (ToolStripItemReference rfrnc in e.NewItems)
@@ -214,15 +235,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                                 AvailableItems.Remove(reference);
                         }
                     }
-                }
-            }
-
-            if (e.OldItems != null)
-            {
-                foreach (ToolStripItemReference rfrnc in e.OldItems)
-                {
-                    if (AvailableItems.FirstOrDefault(x => x.TargetItem == rfrnc.TargetItem) == null)
-                        AvailableItems.Add(rfrnc);
                 }
             }
         }
@@ -316,8 +328,13 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         public void ResetToDefaults()
         {
-            //CurrentItems = DefaultItems;
-            CurrentItems.Clear();
+            /*for (int i = 0; i < CurrentItems.Count; i++)
+                CurrentItems.Remove(CurrentItems[0]);*/
+            Debug.WriteLine("CLEARING");
+                CurrentItems.Clear();
+            Debug.WriteLine("CLEARED");
+
+            //CurrentItems.Clear();
             foreach (ToolStripItemReference reference in DefaultItems)
                 CurrentItems.Add(reference);
         }
