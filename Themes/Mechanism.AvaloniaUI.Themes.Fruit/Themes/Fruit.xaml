@@ -11,7 +11,6 @@
     </ResourceDictionary>
   </Styles.Resources>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Controls/Button.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Controls/StyleableWindow.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Controls/Menu.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Controls/ThemeControlDecorator.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Fruit/Themes/Controls/TreeView.xaml"/>

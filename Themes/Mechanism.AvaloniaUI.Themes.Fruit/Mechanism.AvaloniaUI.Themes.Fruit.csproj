@@ -8,8 +8,8 @@
 	  <AvaloniaResource Include="Themes/Controls/*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007117-beta" />
-    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.999-build20200416-01" />
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />

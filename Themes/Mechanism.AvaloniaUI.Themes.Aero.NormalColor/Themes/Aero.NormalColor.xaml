@@ -11,13 +11,7 @@
     </ResourceDictionary>
   </Styles.Resources>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/ThemeableDefaultControls.xaml"/>
-  <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/Button.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/DecoratableWindow.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/Menu.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ThemeControlDecorator.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/TreeView.xaml"/-->
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ThemeControlDecorator.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/DecoratableWindow.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/Button.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ButtonSpinner.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/CheckBox.xaml"/>
@@ -26,12 +20,4 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ToolBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/CommandBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ContentDialog.xaml"/>
-  <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/RepeatButton.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ScrollBar.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ScrollViewer.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/TabControl.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/TabItem.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/ToggleButton.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/Window.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Controls/NumericUpDown.xaml"/-->
 </Styles>

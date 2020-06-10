@@ -171,7 +171,7 @@ namespace Mechanism.AvaloniaUI.Themes.Fluent
                 //VertexLeftTop = 
                 //};
                 var distorted = transform.Bitmap.ToMediaBitmap();
-                context.DrawImage(distorted, /*1, */new Rect(0, 0, distorted.PixelSize.Width, distorted.PixelSize.Height), new Rect(Bounds.Size));
+                context.DrawImage(distorted, 1, new Rect(0, 0, distorted.PixelSize.Width, distorted.PixelSize.Height), new Rect(Bounds.Size));
             }
             /*else if (!_saved) //FOR DIAGNOSTIC PURPOSES ONLY
             {

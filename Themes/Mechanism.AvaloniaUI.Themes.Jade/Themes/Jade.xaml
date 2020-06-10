@@ -11,7 +11,6 @@
     </ResourceDictionary>
   </Styles.Resources>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/Button.xaml"/>
-  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/DecoratableWindow.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/Menu.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/ThemeControlDecorator.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Controls/TreeView.xaml"/>

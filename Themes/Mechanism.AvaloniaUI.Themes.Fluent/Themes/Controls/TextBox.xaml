@@ -8,8 +8,6 @@
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     <Setter Property="CaretBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=Self}}" />
-    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="Padding" Value="8,5" />
   </Style>

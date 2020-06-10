@@ -14,5 +14,46 @@
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
     <Setter Property="mecore:AttachedIcon.IconGap" Value="2"/>
     <Setter Property="Height" Value="13"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*">
+          <Panel VerticalAlignment="Stretch" Width="{Binding Bounds.Height, RelativeSource={RelativeSource Mode=Self}}">
+            <Border Classes="AeroStyledIdleBackground">
+              <Grid>
+                <Ellipse Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"/>
+                <Ellipse Stroke="{DynamicResource AeroCheckBoxIdleMiddleBorderBrush}" StrokeThickness="1" Margin="1"/>
+                <Ellipse Fill="{TemplateBinding Background}" Stroke="{DynamicResource AeroCheckBoxIdleInnerBorderBrush}" StrokeThickness="1" Margin="2"/>
+              </Grid>
+            </Border>
+            <Border Classes="AeroStyledHoverBackground">
+              <Grid>
+                <Ellipse Stroke="{DynamicResource AeroCheckBoxHoverOuterBorderBrush}" StrokeThickness="1"/>
+                <Ellipse Stroke="{DynamicResource AeroCheckBoxHoverMiddleBorderBrush}" StrokeThickness="1" Margin="1"/>
+                <Ellipse Fill="{DynamicResource AeroCheckBoxHoverBackground}" Stroke="{DynamicResource AeroCheckBoxHoverInnerBorderBrush}" StrokeThickness="1" Margin="2"/>
+              </Grid>
+            </Border>
+            <Border Classes="AeroStyledPressedBackground">
+              <Grid>
+                <Ellipse Stroke="{DynamicResource AeroCheckBoxPressedOuterBorderBrush}" StrokeThickness="1"/>
+                <Ellipse Stroke="{DynamicResource AeroCheckBoxPressedMiddleBorderBrush}" StrokeThickness="1" Margin="1"/>
+                <Ellipse Fill="{DynamicResource AeroCheckBoxPressedBackground}" Stroke="{DynamicResource AeroCheckBoxPressedInnerBorderBrush}" StrokeThickness="1" Margin="2"/>
+              </Grid>
+            </Border>
+            <Border Classes="AeroStyledDisabledBackground">
+              <Ellipse Fill="{DynamicResource AeroCheckBoxDisabledBackground}" Stroke="{DynamicResource AeroCheckBoxDisabledBorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
+            </Border>
+            <Panel Width="5" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Ellipse Name="CheckMark" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform"/>
+              <Rectangle Name="IndeterminateMark" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Panel>
+          </Panel>
+          <DockPanel x:Name="ContentIconPanel" Grid.Column="1">
+            <ContentPresenter Name="IconPresenter" DockPanel.Dock="Left"/>
+            <Rectangle Name="IconGapRect" DockPanel.Dock="Left"/>
+            <ContentPresenter Name="PART_ContentPresenter"/>
+          </DockPanel>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
   </Style>
 </Styles>

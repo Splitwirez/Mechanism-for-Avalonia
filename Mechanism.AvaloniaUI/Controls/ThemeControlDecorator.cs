@@ -11,26 +11,15 @@ namespace Mechanism.AvaloniaUI.Controls
         None,
         Button,
         NavigationButton,
-        CheckBox,
-        RadioButton,
         ToolTip,
-        MenuBar,
-        ContextMenu,
+        Menu,
         MenuItem,
         TextBox,
-        ProgressBarFill,
-        TitleBar,
-        WindowBody,
         CaptionButton,
         PaneFrame,
-        ScrollBarTrack,
         TabBody,
         TabItem,
-        ToolBarTray,
-        ToolBar,
-        ToolBarButton,
-        CommandBar,
-        CommandBarButton
+        ControlBar
     }
 
     public class ThemeControlDecorator : ContentControl

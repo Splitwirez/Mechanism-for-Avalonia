@@ -16,24 +16,14 @@
   <ItemGroup>
     <AvaloniaResource Remove="ControlsSample.xaml" />
     <AvaloniaResource Remove="MainWindow.xaml" />
-    <AvaloniaResource Remove="SampleDecoratableWindow.xaml" />
-    <AvaloniaResource Remove="SampleNativeIntegrationWindow.xaml" />
-    <AvaloniaResource Remove="SampleStyleableWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
     <AvaloniaResource Remove="TouchDemoWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ControlsSample.xaml" />
     <None Remove="MainWindow.xaml" />
-    <None Remove="SampleNativeIntegrationWindow.xaml" />
-    <None Remove="SampleStyleableWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
     <None Remove="TouchDemoWindow.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0007117-beta" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0007117-beta" />
-    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.999-build20200416-01" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ThemeDemoWindow.xaml">
@@ -46,17 +36,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SampleStyleableWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ControlsSample.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SampleNativeIntegrationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -66,19 +46,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.9" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
     <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Aero.NormalColor\Mechanism.AvaloniaUI.Themes.Aero.NormalColor.csproj" />
     <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Fluent\Mechanism.AvaloniaUI.Themes.Fluent.csproj" />
     <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Fruit\Mechanism.AvaloniaUI.Themes.Fruit.csproj" />
-    <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Jade\Mechanism.AvaloniaUI.Themes.Jade.csproj" />
-    <ProjectReference Include="..\Themes\Mechanism.AvaloniaUI.Themes.Slate\Mechanism.AvaloniaUI.Themes.Slate.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="SampleDecoratableWindow.xaml.cs">
-      <DependentUpon>SampleDecoratableWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="SampleNativeIntegrationWindow.xaml.cs">
-      <DependentUpon>SampleNativeIntegrationWindow.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>

@@ -66,7 +66,7 @@ namespace Mechanism.AvaloniaUI.Sample
 
             if (isDesktop && resetWindows)
             {
-                desktop.MainWindow = new SampleDecoratableWindow();
+                desktop.MainWindow = new MainWindow();
                 desktop.MainWindow.Show();
             }
 
@@ -83,7 +83,7 @@ namespace Mechanism.AvaloniaUI.Sample
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow.Close();
-                desktop.MainWindow = new SampleDecoratableWindow();
+                desktop.MainWindow = new MainWindow();
                 desktop.MainWindow.Show();
             }
         }

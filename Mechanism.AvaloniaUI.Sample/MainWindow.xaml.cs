@@ -44,12 +44,12 @@ namespace Mechanism.AvaloniaUI.Sample
 
         public void ShowSampleStyleableWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            new SampleStyleableWindow().Show();
+            //new SampleStyleableWindow().Show();
         }
 
         public void ShowSampleNativeIntegrationWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            new SampleNativeIntegrationWindow().Show();
+            //new SampleNativeIntegrationWindow().Show();
         }
 
         public void ShowPretendPhoneWindowButton_Click(object sender, RoutedEventArgs e)

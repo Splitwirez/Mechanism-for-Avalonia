@@ -42,52 +42,49 @@
     <Setter Property="BaseWidth" Value="16"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="ToolBar">
-          <DockPanel>
-            <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left"/>
-            <Panel>
-              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True">
-                <mectrl:OverflowFlyoutItemsControl.Template>
-                  <ControlTemplate>
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                      <Panel Name="RootPanel">
-                        <DockPanel>
-                          <Panel Width="15" DockPanel.Dock="Right">
-                            <ToggleButton x:Name="PART_FlyoutToggleButton" Foreground="{DynamicResource AeroToolBarFlyoutButtonForeground}" VerticalContentAlignment="Top" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
-                              <ToggleButton.Template>
-                                <ControlTemplate>
-                                  <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton"/>
-                                </ControlTemplate>
-                              </ToggleButton.Template>
-                              <Path Data="M 0.5 0 L 2.5 0 L 5.5 3 L 2.5 6 L 0.5 6 L 3.5 3 Z
+        <Border BorderBrush="{DynamicResource AeroToolBarOuterBorderBrush}" BorderThickness="0,0,1,1">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1,1,0">
+            <DockPanel>
+              <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left"/>
+              <Panel>
+                <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True">
+                  <mectrl:OverflowFlyoutItemsControl.Template>
+                    <ControlTemplate>
+                      <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Panel Name="RootPanel">
+                          <DockPanel>
+                            <Panel Width="15" DockPanel.Dock="Right">
+                              <ToggleButton x:Name="PART_FlyoutToggleButton" Foreground="{DynamicResource AeroToolBarFlyoutButtonForeground}" VerticalContentAlignment="Top" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
+                                <Path Data="M 0.5 0 L 2.5 0 L 5.5 3 L 2.5 6 L 0.5 6 L 3.5 3 Z
                                     M 4.5 0 L 6.5 0 L 9.5 3 L 6.5 6 L 4.5 6 L 7.5 3 Z" Fill="{Binding $parent[ToggleButton].Foreground}"/>
-                              <!--M 0 0 L 2 0 L 5 3 L 2 6 L 0 6 L 3 3 Z
+                                <!--M 0 0 L 2 0 L 5 3 L 2 6 L 0 6 L 3 3 Z
                                     M 4 0 L 6 0 L 9 3 L 6 6 L 4 6 L 7 3 Z-->
-                              <!--StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <!--StackPanel Orientation="Horizontal" Spacing="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                                 <StackPanel.RenderTransform>
                                   <TranslateTransform X="-1"/>
                                 </StackPanel.RenderTransform>
                                 <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.25"/>
                                 <Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1.25"/>
                               </StackPanel-->
-                            </ToggleButton>
-                          </Panel>
-                          <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" ItemsPanel="{TemplateBinding ItemsPanel}" Margin="{TemplateBinding Padding}"/>
-                        </DockPanel>
-                        <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
-                          <Border Background="{DynamicResource AeroToolBarTrayBackground}" BorderBrush="{DynamicResource AeroToolBarOuterBorderBrush}" BorderThickness="1">
-                            <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
-                          </Border>
-                        </Popup>
-                      </Panel>
-                    </Border>
-                  </ControlTemplate>
-                </mectrl:OverflowFlyoutItemsControl.Template>
-              </mectrl:OverflowFlyoutItemsControl>
-              <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
-            </Panel>
-          </DockPanel>
-        </mectrl:ThemeControlDecorator>
+                              </ToggleButton>
+                            </Panel>
+                            <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" ItemsPanel="{TemplateBinding ItemsPanel}" Margin="{TemplateBinding Padding}"/>
+                          </DockPanel>
+                          <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
+                            <Border Background="{DynamicResource AeroToolBarTrayBackground}" BorderBrush="{DynamicResource AeroToolBarOuterBorderBrush}" BorderThickness="1">
+                              <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+                            </Border>
+                          </Popup>
+                        </Panel>
+                      </Border>
+                    </ControlTemplate>
+                  </mectrl:OverflowFlyoutItemsControl.Template>
+                </mectrl:OverflowFlyoutItemsControl>
+                <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+              </Panel>
+            </DockPanel>
+          </Border>
+        </Border>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
@@ -98,16 +95,105 @@
   </Style>
   <Style Selector="metb|ToolBar > :is(Button)">
     <Setter Property="Padding" Value="12,8"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton"/>
-      </ControlTemplate>
-    </Setter>
   </Style>
-  <Style Selector="metb|ToolBar > ToggleButton">
+  <Style Selector="metb|ToolBar > :is(Button), metb|ToolBar /template/ ToggleButton#PART_FlyoutToggleButton">
     <Setter Property="Template">
       <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="ToolBarButton" Classes="ButtonCheckable"/>
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Panel>
+              <Border Classes="AeroStyledHoverBackground" BorderBrush="{DynamicResource AeroToolBarButtonHoverOuterBorderBrush}">
+                <Border.CornerRadius>
+                  <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+                    <Binding.Converter>
+                      <mecore:CornerCurvesToCornerRadiiConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Border.CornerRadius>
+                <Border.BorderThickness>
+                  <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                    <Binding.Converter>
+                      <mecore:BorderPresenceToThicknessesConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Border.BorderThickness>
+                <Panel>
+                  <Border>
+                    <Border.Background>
+                      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolBarButtonHoverBackgroundGradientStops}"/>
+                    </Border.Background>
+                    <Border.CornerRadius>
+                      <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="2;0">
+                        <Binding.Converter>
+                          <mecore:CornerCurvesToCornerRadiiConverter/>
+                        </Binding.Converter>
+                      </Binding>
+                    </Border.CornerRadius>
+                  </Border>
+                  <Border BorderBrush="{DynamicResource AeroToolBarButtonHoverInnerBorderBrush}" BorderThickness="1">
+                    <Border.CornerRadius>
+                      <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="2;0">
+                        <Binding.Converter>
+                          <mecore:CornerCurvesToCornerRadiiConverter/>
+                        </Binding.Converter>
+                      </Binding>
+                    </Border.CornerRadius>
+                  </Border>
+                </Panel>
+              </Border>
+              <Border Classes="AeroStyledPressedBackground" BorderBrush="{DynamicResource AeroToolBarButtonPressedBorderBrush}">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolBarButtonPressedBackgroundGradientStops}"/>
+                </Border.Background>
+                <Border.CornerRadius>
+                  <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+                    <Binding.Converter>
+                      <mecore:CornerCurvesToCornerRadiiConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Border.CornerRadius>
+                <Border.BorderThickness>
+                  <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                    <Binding.Converter>
+                      <mecore:BorderPresenceToThicknessesConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Border.BorderThickness>
+                <Panel>
+                  <Border Width="5" HorizontalAlignment="Left">
+                    <Border.Background>
+                      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource AeroToolBarButtonPressedShadowGradientStops}"/>
+                    </Border.Background>
+                    <Border.CornerRadius>
+                      <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="2,0,0,2;0">
+                        <Binding.Converter>
+                          <mecore:CornerCurvesToCornerRadiiConverter/>
+                        </Binding.Converter>
+                      </Binding>
+                    </Border.CornerRadius>
+                  </Border>
+                  <Border Height="5" VerticalAlignment="Top">
+                    <Border.Background>
+                      <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolBarButtonPressedShadowGradientStops}"/>
+                    </Border.Background>
+                    <Border.CornerRadius>
+                      <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="2,2,0,0;0">
+                        <Binding.Converter>
+                          <mecore:CornerCurvesToCornerRadiiConverter/>
+                        </Binding.Converter>
+                      </Binding>
+                    </Border.CornerRadius>
+                  </Border>
+                </Panel>
+              </Border>
+              <DockPanel x:Name="ContentIconPanel">
+                <ContentPresenter Name="IconPresenter" DockPanel.Dock="Top"/>
+                <Rectangle Name="IconGapRect" DockPanel.Dock="Top"/>
+                <ContentPresenter Name="PART_ContentPresenter"/>
+              </DockPanel>
+            </Panel>
+          </ControlTemplate>
+        </Setter>
       </ControlTemplate>
     </Setter>
   </Style>
@@ -116,19 +202,52 @@
     <Setter Property="BorderBrush" Value="{DynamicResource AeroToolBarTrayBorderBrush}" />
     <Setter Property="BorderThickness" Value="1,0,0,0" />
     <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate>
-          <mectrl:ThemeControlDecorator ControlStyle="ToolBarTray">
-            <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" HorizontalAlignment="Stretch" ClipToBounds="True">
-              <ItemsPresenter.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <metb:ToolBarTrayPanel HorizontalAlignment="Stretch" Margin="0,0,-1,0"/>
-                </ItemsPanelTemplate>
-              </ItemsPresenter.ItemsPanel>
-            </ItemsPresenter>
-          </mectrl:ThemeControlDecorator>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate>
+        <Panel>
+          <Border Background="{TemplateBinding Background}" BorderThickness="0">
+            <Border.CornerRadius>
+              <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+                <Binding.Converter>
+                  <mecore:CornerCurvesToCornerRadiiConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.CornerRadius>
+            <Border BorderBrush="{TemplateBinding BorderBrush}">
+              <Border.CornerRadius>
+                <Binding Path="(mecore:CornerCurves.CornerCurves)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="3;0">
+                  <Binding.Converter>
+                    <mecore:CornerCurvesToCornerRadiiConverter/>
+                  </Binding.Converter>
+                </Binding>
+              </Border.CornerRadius>
+              <Border.BorderThickness>
+                <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1,1,0,0;0">
+                  <Binding.Converter>
+                    <mecore:BorderPresenceToThicknessesConverter/>
+                  </Binding.Converter>
+                </Binding>
+              </Border.BorderThickness>
+            </Border>
+          </Border>
+          <Border Height="9" VerticalAlignment="Top">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolBarTrayTopShineGradientStops}"/>
+            </Border.Background>
+          </Border>
+          <Border Height="14" VerticalAlignment="Bottom">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource AeroToolBarTrayBottomGlowGradientStops}"/>
+            </Border.Background>
+          </Border>
+          <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" HorizontalAlignment="Stretch" ClipToBounds="True">
+            <ItemsPresenter.ItemsPanel>
+              <ItemsPanelTemplate>
+                <metb:ToolBarTrayPanel HorizontalAlignment="Stretch" Margin="0,0,-1,0"/>
+              </ItemsPanelTemplate>
+            </ItemsPresenter.ItemsPanel>
+          </ItemsPresenter>
+        </Panel>
+      </ControlTemplate>
     </Setter>
   </Style>
 </Styles>

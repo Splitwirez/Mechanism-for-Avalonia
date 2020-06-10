@@ -128,26 +128,12 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="CheckBox">
-    <Setter Property="Template">
-      <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="CheckBox" Classes="Checkable"/>
-      </ControlTemplate>
-    </Setter>
-  </Style>
-  <Style Selector="RadioButton">
-    <Setter Property="Template">
-      <ControlTemplate>
-        <mectrl:ThemeControlDecorator ControlStyle="RadioButton" Classes="Checkable"/>
-      </ControlTemplate>
-    </Setter>
-  </Style>
   <Style Selector="TextBox">
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
           <mectrl:ThemeControlDecorator ControlStyle="TextBox" Classes="NoAutoAlignment NoContent NoIcon TextBoxCheckable"/>
-          <DockPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+          <DockPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}">
             <TemplatedControl Name="IconControl" Template="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" IsVisible="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}" DockPanel.Dock="Left"/>
             <Rectangle Width="4" DockPanel.Dock="Left">
               <Rectangle.IsVisible>

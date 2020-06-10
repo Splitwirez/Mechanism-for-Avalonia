@@ -287,8 +287,8 @@
           <StackPanel x:Name="ThemesStackPanel" Orientation="Vertical" Spacing="4">
             <RadioButton x:Name="DefaultThemeRadioButton" Tag="DEFAULT_THEME" Content="Avalonia Default" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Aero.NormalColor" Content="Windows Aero" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Slate" Content="Slate" GroupName="ThemeRadioButtons"/>
-            <RadioButton Tag="Jade" Content="Jade" GroupName="ThemeRadioButtons"/>
+            <RadioButton Tag="Slate" Content="Slate" GroupName="ThemeRadioButtons" IsVisible="False"/>
+            <RadioButton Tag="Jade" Content="Jade" GroupName="ThemeRadioButtons" IsVisible="False"/>
             <RadioButton Tag="Fruit" Content="Fruit" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Fluent" Content="Fluent" GroupName="ThemeRadioButtons"/>
             <RadioButton Tag="Luna.NormalColor" Content="Luna (Planned, NYI)" GroupName="ThemeRadioButtons" IsVisible="False"/>

@@ -13,10 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Fluent", "Themes\Mechanism.AvaloniaUI.Themes.Fluent\Mechanism.AvaloniaUI.Themes.Fluent.csproj", "{9EBB980B-906E-456C-AF99-9E0155CF6086}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Jade", "Themes\Mechanism.AvaloniaUI.Themes.Jade\Mechanism.AvaloniaUI.Themes.Jade.csproj", "{BC879EF4-8467-4E4F-9B89-8A65A19D11BB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Slate", "Themes\Mechanism.AvaloniaUI.Themes.Slate\Mechanism.AvaloniaUI.Themes.Slate.csproj", "{4C26E087-65C7-4CE8-BFCF-EEA4135BF295}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mechanism.AvaloniaUI.Themes.Fruit", "Themes\Mechanism.AvaloniaUI.Themes.Fruit\Mechanism.AvaloniaUI.Themes.Fruit.csproj", "{253977B3-C86B-4B4B-A675-2D2B56DC4678}"
 EndProject
 Global
@@ -41,14 +37,6 @@ Global
 		{9EBB980B-906E-456C-AF99-9E0155CF6086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EBB980B-906E-456C-AF99-9E0155CF6086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EBB980B-906E-456C-AF99-9E0155CF6086}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC879EF4-8467-4E4F-9B89-8A65A19D11BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC879EF4-8467-4E4F-9B89-8A65A19D11BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC879EF4-8467-4E4F-9B89-8A65A19D11BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC879EF4-8467-4E4F-9B89-8A65A19D11BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C26E087-65C7-4CE8-BFCF-EEA4135BF295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C26E087-65C7-4CE8-BFCF-EEA4135BF295}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C26E087-65C7-4CE8-BFCF-EEA4135BF295}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C26E087-65C7-4CE8-BFCF-EEA4135BF295}.Release|Any CPU.Build.0 = Release|Any CPU
 		{253977B3-C86B-4B4B-A675-2D2B56DC4678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{253977B3-C86B-4B4B-A675-2D2B56DC4678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{253977B3-C86B-4B4B-A675-2D2B56DC4678}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,8 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{04AE9FBF-6CE7-40D7-96B5-FC14945C3523} = {D05061D4-5401-4F1A-A03E-4944AC3C08ED}
 		{9EBB980B-906E-456C-AF99-9E0155CF6086} = {D05061D4-5401-4F1A-A03E-4944AC3C08ED}
-		{BC879EF4-8467-4E4F-9B89-8A65A19D11BB} = {D05061D4-5401-4F1A-A03E-4944AC3C08ED}
-		{4C26E087-65C7-4CE8-BFCF-EEA4135BF295} = {D05061D4-5401-4F1A-A03E-4944AC3C08ED}
 		{253977B3-C86B-4B4B-A675-2D2B56DC4678} = {D05061D4-5401-4F1A-A03E-4944AC3C08ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
