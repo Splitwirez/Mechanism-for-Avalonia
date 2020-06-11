@@ -12,16 +12,16 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `SplitButton` (feature-complete, in need of testing)
 - `SplitToggleButton` (feature-complete, in need of testing)
 - `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
-- `StyleableWindow` (under construction)
-- `ToolStrip` (under construction)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
+- `StyleableWindow` (shelved)
+- `ToolStrip` (functional but lacks visual polish, in need of testing)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
 
 ### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
 - Windows Aero
 - Windows Fluent
 - macOS Human
-- Jade
-- Slate
+- Jade (shelved)
+- Slate (shelved)
 
 ### Currently-available tools
 - `PerPlatformUI` (under construction)
