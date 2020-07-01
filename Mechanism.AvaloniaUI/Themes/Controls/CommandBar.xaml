@@ -43,18 +43,21 @@
                   </StackPanel>
                 </ToggleButton>
               </Panel>
-              <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
+              <!--ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}" />
+                    <mectrl:AlignableStackPanel x:Name="PART_VisibleItemsHost" Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-              </ItemsControl>
+              </ItemsControl-->
+            <ItemsPresenter x:Name="PART_ItemsPresenter"/>
+            <mectrl:AlignableStackPanel x:Name="PART_VisibleItemsPanel" Classes="ItemsPanel" Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{TemplateBinding HorizontalItemsAlignment}" />
             </DockPanel>
             <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <!--IsOpen="{Binding Path=IsChecked, ElementName=PART_FlyoutToggleButton, Mode=TwoWay}"-->
               <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
-                <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+                <!--ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/-->
+                <StackPanel x:Name="PART_FlyoutItemsPanel" Classes="ItemsPanel" Orientation="Vertical" />
               </Border>
             </Popup>
           </Panel>
@@ -65,7 +68,7 @@
   <Style Selector="mecb|CommandBar /template/ ToggleButton#PART_FlyoutToggleButton:not(:pointerover):not(:pressed)">
     <Setter Property="Background" Value="Transparent"/>
   </Style>
-  <Style Selector="mecb|CommandBar > :is(Button)">
+  <Style Selector="mecb|CommandBar  /template/ Panel.ItemsPanel > :is(Button)">
     <Setter Property="Padding" Value="4"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
@@ -80,19 +83,19 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mecb|CommandBar > :is(Button) /template/ Border#BackgroundBorder">
+  <Style Selector="mecb|CommandBar /template/ Panel.ItemsPanel > :is(Button) /template/ Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>
-  <Style Selector="mecb|CommandBar > :is(Button):not(:pointerover):not(:pressed) /template/ Border#BackgroundBorder">
+  <Style Selector="mecb|CommandBar /template/ Panel.ItemsPanel > :is(Button):not(:pointerover):not(:pressed) /template/ Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
-  <Style Selector="mecb|CommandBar > :is(Button):pointerover /template/ Border#BackgroundBorder">
+  <Style Selector="mecb|CommandBar /template/ Panel.ItemsPanel > :is(Button):pointerover /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
   </Style>
-  <Style Selector="mecb|CommandBar > :is(Button):pressed /template/ Border#BackgroundBorder">
+  <Style Selector="mecb|CommandBar /template/ Panel.ItemsPanel > :is(Button):pressed /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
-  <Style Selector="mecb|CommandBar > ToggleButton:checked /template/ Border#BackgroundBorder">
+  <Style Selector="mecb|CommandBar /template/ Panel.ItemsPanel > ToggleButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
 

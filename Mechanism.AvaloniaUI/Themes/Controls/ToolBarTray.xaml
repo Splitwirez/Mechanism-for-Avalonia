@@ -135,4 +135,24 @@
       </ControlTemplate>
     </Setter>
   </Style-->
+  <Style Selector="ItemsControl.Test">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              Padding="{TemplateBinding Padding}">
+          <mectrl:OverflowFlyoutItemsPresenter Name="PART_ItemsPresenter"
+                          Items="{TemplateBinding Items}"
+                          ItemsPanel="{TemplateBinding ItemsPanel}"
+                          ItemTemplate="{TemplateBinding ItemTemplate}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal"/>
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
 </Styles>

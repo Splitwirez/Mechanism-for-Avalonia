@@ -12,18 +12,21 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Views\**" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Remove="ControlsSample.xaml" />
     <AvaloniaResource Remove="MainWindow.xaml" />
     <AvaloniaResource Remove="ThemeDemoWindow.xaml" />
     <AvaloniaResource Remove="TouchDemoWindow.xaml" />
+    <AvaloniaResource Remove="Views\BindingDemoView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ControlsSample.xaml" />
     <None Remove="MainWindow.xaml" />
     <None Remove="ThemeDemoWindow.xaml" />
     <None Remove="TouchDemoWindow.xaml" />
+    <None Remove="Views\BindingDemoView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ThemeDemoWindow.xaml">
@@ -42,6 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TouchDemoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BindingDemoView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

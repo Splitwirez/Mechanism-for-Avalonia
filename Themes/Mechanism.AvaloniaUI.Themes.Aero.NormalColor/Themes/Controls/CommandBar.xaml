@@ -79,17 +79,19 @@
                   </StackPanel-->
                 </ToggleButton>
               </Panel>
-              <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" VerticalAlignment="Stretch">
+              <!--ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}" VerticalAlignment="Stretch">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mectrl:OverflowFlyoutItemsControl].HorizontalItemsAlignment}" VerticalAlignment="Stretch" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-              </ItemsControl>
+              </ItemsControl-->
+              <mectrl:AlignableStackPanel x:Name="PART_VisibleItemsPanel" Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{TemplateBinding HorizontalItemsAlignment}" />
             </DockPanel>
             <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+                <!--ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/-->
+                <StackPanel x:Name="PART_FlyoutItemsPanel" Orientation="Vertical" />
               </Border>
             </Popup>
           </Panel>

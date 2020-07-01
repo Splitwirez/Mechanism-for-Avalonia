@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
 using Mechanism.AvaloniaUI.Controls.ContentDialog;
+using Mechanism.AvaloniaUI.Sample.Views;
 using System;
 using System.Timers;
 
@@ -55,6 +56,11 @@ namespace Mechanism.AvaloniaUI.Sample
         public void ShowPretendPhoneWindowButton_Click(object sender, RoutedEventArgs e)
         {
             new TouchDemoWindow().Show();
+        }
+
+        public void ShowBindingDemoButton_Click(object sender, RoutedEventArgs e)
+        {
+            new BindingDemoView().Show();
         }
     }
 }
