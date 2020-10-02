@@ -131,7 +131,8 @@
                                     Grid.Column="1"/>
               </Grid-->
               <Path Data="M 4 0 L 4 4 L 0 4 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Right" IsVisible="{TemplateBinding ItemCount, Converter={StaticResource ItemCountToHasItemsBooleanConverter}}" Margin="4"/>
-              <Popup x:Name="PART_ItemsPopup" PlacementMode="Bottom" IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" StaysOpen="False">
+              <Popup x:Name="PART_ItemsPopup" PlacementMode="Bottom">
+              <!--IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"-->
                 <ItemsPresenter Name="PART_ItemsPresenter"
                               Items="{TemplateBinding Items}"
                               ItemsPanel="{TemplateBinding ItemsPanel}"/>
@@ -141,7 +142,8 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mebb|BlenderBarItem:selected /template/ Border#selectionBorder">
+  <Style Selector="mebb|BlenderBarItem:selected /template/ Border#selectionBorder,
+                   mebb|BlenderBarItem[AnyChildSelected=True] /template/ Border#selectionBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
   </Style>
