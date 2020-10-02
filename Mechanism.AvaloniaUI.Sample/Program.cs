@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Dialogs;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Logging.Serilog;
+//using Avalonia.Logging.Serilog;
 
 namespace Mechanism.AvaloniaUI.Sample
 {
@@ -23,9 +23,9 @@ namespace Mechanism.AvaloniaUI.Sample
                 //.UseManagedSystemDialogs()
                 //.UseManagedDialogs()
                 //.With(new AvaloniaNativePlatformOptions() { UseDeferredRendering = false })
-#if DEBUG
+/*#if DEBUG
                 .LogToDebug()
-#endif
+#endif*/
                 ;
             ManagedFileDialogExtensions.UseManagedSystemDialogs(builder);
             return builder;

@@ -8,6 +8,7 @@
         xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
         xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
+        xmlns:mebb="clr-namespace:Mechanism.AvaloniaUI.Controls.BlenderBar;assembly=Mechanism.AvaloniaUI"
         xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
         mc:Ignorable="d"
         d:DesignWidth="500"
@@ -274,6 +275,81 @@
         </StackPanel>
       </TabItem>
     </TabControl>
+    <mebb:BlenderBar DockPanel.Dock="Left" mecore:BorderPresence.BorderPresence="False,True,True,False">
+      <mebb:BlenderBarItem Header="Square" GroupIndex="0">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Circle" GroupIndex="0">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Triangle" GroupIndex="0">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+
+      <mebb:BlenderBarItem Header="Red" GroupIndex="1">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Red"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Green" GroupIndex="1">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Green"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Blue" GroupIndex="1">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Blue"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+
+      <mebb:BlenderBarItem Header="With subItems" GroupIndex="2">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Ellipse Width="24" Height="24" Fill="Cyan"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+
+        <mebb:BlenderBarItem Header="Yellow" GroupIndex="1">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Yellow"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Cyan" GroupIndex="1">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Cyan"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Pink" GroupIndex="1">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Pink"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+      </mebb:BlenderBarItem>
+    </mebb:BlenderBar>
     <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
       <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom" IsVisible="False">
         <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>

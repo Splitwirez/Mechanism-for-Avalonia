@@ -32,6 +32,7 @@
     </ControlTemplate>
   </Styles.Resources>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/Buttons.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/BlenderBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/CommandBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ContentDialog.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Controls/ToolBarTray.xaml"/>

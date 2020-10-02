@@ -1,0 +1,185 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
+             xmlns:mebb="clr-namespace:Mechanism.AvaloniaUI.Controls.BlenderBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Styles.Resources>
+    <meconv:ItemCountToHasItemsBooleanConverter x:Key="ItemCountToHasItemsBooleanConverter"/>
+    <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
+    <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
+  </Styles.Resources>
+  <Style Selector="mebb|BlenderBar">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="RootBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter=1;0}">
+          <Panel>
+            <Thumb x:Name="PART_BarModeThumb" Width="4" HorizontalAlignment="Right" Cursor="SizeWestEast">
+              <Thumb.Template>
+                <ControlTemplate>
+                  <Rectangle Fill="#01000000"/>
+                </ControlTemplate>
+              </Thumb.Template>
+            </Thumb>
+            <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" Margin="{TemplateBinding Padding}">
+              <ItemsPresenter.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <mebb:BlenderBarPanel IconsOnlyItemWidth="{TemplateBinding IconsOnlyItemWidth}" ItemHeight="{TemplateBinding ItemHeight}" BarMode="{Binding BarMode, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                </ItemsPanelTemplate>
+              </ItemsPresenter.ItemsPanel>
+            </ItemsPresenter>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <!--Style Selector="mebb|BlenderBar[BarMode=Labels]">
+    <!-/template/ ItemsPresenter#PART_ItemsPresenter /template/ mebb|BlenderBarPanel->
+    <Setter Property="Width" Value="{Binding LabelledWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mebb:BlenderBar}}, Mode=OneWay}"/>
+    <Setter Property="MinWidth" Value="{Binding LabelledMinWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mebb:BlenderBar}}, Mode=OneWay}"/>
+  </Style-->
+  <!--Style Selector="mebb|BlenderBar[BarMode=Labels] /template/ ItemsControl#PART_ItemsPresenter">
+    <Setter Property="ItemTemplate">
+      <DataTemplate>
+        <DockPanel>
+          <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          <Rectangle Name="IconGapRect" DockPanel.Dock="Left">
+            <Rectangle.IsVisible>
+              <MultiBinding ConverterParameter="All">
+                <MultiBinding.Converter>
+                  <meconv:BoolsToBoolConverter/>
+                </MultiBinding.Converter>
+                <MultiBinding.Bindings>
+                  <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                  <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                </MultiBinding.Bindings>
+              </MultiBinding>
+            </Rectangle.IsVisible>
+          </Rectangle>
+          <ContentPresenter Name="PART_ContentPresenter" Content="{Binding Content}" VerticalAlignment="Center"/>
+        </DockPanel>
+      </DataTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mebb|BlenderBar:not([BarMode=Labels]) /template/ ItemsControl#PART_ItemsPresenter">
+    <Setter Property="ItemTemplate">
+      <DataTemplate>
+        <ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+      </DataTemplate>
+    </Setter>
+  </Style-->
+
+  <Style Selector="mebb|BlenderBarItem">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="Padding" Value="5,4"/>
+    <Setter Property="mecore:AttachedIcon.IconGap" Value="6"/>
+    <Setter Property="Height" Value="{Binding $parent[mebb:BlenderBar].ItemHeight}"/>
+    <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+          <Border Name="selectionBorder" Focusable="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"
+          CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='6;0'}"
+          TemplatedControl.IsTemplateFocusTarget="True">
+            <!--Border.BorderThickness>
+              <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                <Binding.Converter>
+                  <mecore:BorderPresenceToThicknessesConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.BorderThickness-->
+          <!--BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"-->
+            <Panel>
+            <!--{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}-->
+              <DockPanel x:Name="ContentIconPanel" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}">
+                <!--ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/-->
+                <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <Rectangle Name="IconGapRect" DockPanel.Dock="Left" Width="{Binding (mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                  <Rectangle.IsVisible>
+                    <MultiBinding ConverterParameter="All">
+                      <MultiBinding.Converter>
+                        <meconv:BoolsToBoolConverter/>
+                      </MultiBinding.Converter>
+                      <MultiBinding.Bindings>
+                        <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                        <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                      </MultiBinding.Bindings>
+                    </MultiBinding>
+                  </Rectangle.IsVisible>
+                </Rectangle>
+                <ContentPresenter Name="PART_HeaderPresenter" TextBlock.TextAlignment="{Binding Path=(TextBlock.TextAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}" Focusable="False" Content="{TemplateBinding Header}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+              </DockPanel>
+              <!--Grid Name="PART_Header"
+                    ColumnDefinitions="16, *"
+                    Margin="{TemplateBinding Level, Mode=OneWay, Converter={StaticResource LeftMarginConverter}}" >
+                  <ToggleButton Name="expander"
+                                Focusable="False"
+                                IsChecked="{TemplateBinding IsExpanded, Mode=TwoWay}"/>
+                  <ContentPresenter Name="PART_HeaderPresenter"
+                                    Focusable="False"
+                                    Content="{TemplateBinding Header}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
+                                    Padding="{TemplateBinding Padding}"
+                                    Grid.Column="1"/>
+              </Grid-->
+              <Path Data="M 4 0 L 4 4 L 0 4 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Right" IsVisible="{TemplateBinding ItemCount, Converter={StaticResource ItemCountToHasItemsBooleanConverter}}" Margin="4"/>
+              <Popup x:Name="PART_ItemsPopup" PlacementMode="Bottom" IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" StaysOpen="False">
+                <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"/>
+              </Popup>
+            </Panel>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mebb|BlenderBarItem:selected /template/ Border#selectionBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBarItem:pointerover /template/ Border#selectionBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBarItem:pressed /template/ Border#selectionBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBarItem:disabled /template/ Border#selectionBorder">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+
+  <Style Selector="mebb|BlenderBar[BarMode=Labels] > mebb|BlenderBarItem">
+    <Setter Property="Width" Value="{Binding $parent[mebb:BlenderBar].LabelledWidth}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar[BarMode=Labels] > mebb|BlenderBarItem /template/ DockPanel#ContentIconPanel">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar:not(mebb|BlenderBar[BarMode=Labels]) > mebb|BlenderBarItem /template/ DockPanel#ContentIconPanel">
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar[BarMode=IconsSingleColumn] > mebb|BlenderBarItem">
+    <Setter Property="Width" Value="{Binding $parent[mebb:BlenderBar].IconsOnlyItemWidth}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar[BarMode=IconsDoubleColumn] > mebb|BlenderBarItem">
+    <Setter Property="Width" Value="{Binding $parent[mebb:BlenderBar].IconsOnlyItemWidth}"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar[BarMode=IconsSingleColumn] > mebb|BlenderBarItem /template/ ContentPresenter#PART_HeaderPresenter,
+                   mebb|BlenderBar[BarMode=IconsSingleColumn] > mebb|BlenderBarItem /template/ Rectangle#IconGapRect">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="mebb|BlenderBar[BarMode=IconsDoubleColumn] > mebb|BlenderBarItem /template/ ContentPresenter#PART_HeaderPresenter,
+                   mebb|BlenderBar[BarMode=IconsDoubleColumn] > mebb|BlenderBarItem /template/ Rectangle#IconGapRect">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+    <Style Selector="mebb|BlenderBarItem mebb|BlenderBarItem">
+    <Setter Property="MinWidth" Value="{Binding $parent[mebb:BlenderBar].LabelledWidth}"/>
+  </Style>
+</Styles>

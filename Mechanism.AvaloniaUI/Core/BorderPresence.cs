@@ -62,7 +62,7 @@ namespace Mechanism.AvaloniaUI.Core
 
         public BorderPresence() { }
         public BorderPresence(bool uniformValue) : this(uniformValue, uniformValue, uniformValue, uniformValue) { }
-        public BorderPresence(bool top, bool bottom) : this(top, top, bottom, bottom) { }
+        public BorderPresence(bool horizontal, bool vertical) : this(horizontal, vertical, horizontal, vertical) { }
         public BorderPresence(bool left, bool top, bool right, bool bottom)
         {
             Left = left;
@@ -103,6 +103,17 @@ namespace Mechanism.AvaloniaUI.Core
         {
             return Left + ", " + Top + ", " + Right + ", " + Bottom;
         }
+
+
+        /*public static BorderPresence None = new BorderPresence(false);
+
+        public static BorderPresence HorizontalOnly = new BorderPresence(true, false);
+        public static BorderPresence VerticalOnly = new BorderPresence(false, true);
+
+        public static BorderPresence TopLeftOnly = new BorderPresence(true, true, false, false);
+        public static BorderPresence TopRightOnly = new BorderPresence(false, true, true, false);
+        public static BorderPresence BottomRightOnly = new BorderPresence(false, false, true, true);
+        public static BorderPresence BottomLeftOnly = new BorderPresence(true, false, false, true);*/
     }
 
     public class BorderPresenceToThicknessesConverter : IValueConverter
