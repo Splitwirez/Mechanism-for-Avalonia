@@ -22,6 +22,7 @@ using Avalonia.Styling;
 using System.Globalization;
 using Avalonia.Input;
 using System.Timers;
+using Avalonia.LogicalTree;
 
 namespace Mechanism.AvaloniaUI.Controls.BlenderBar
 {
@@ -35,6 +36,8 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
             get => GetValue(GroupIndexProperty);
             set => SetValue(GroupIndexProperty, value);
         }
+
+
 
         public static readonly StyledProperty<bool> IsPressedProperty =
         Button.IsPressedProperty.AddOwner<BlenderBarItem>();
@@ -54,28 +57,97 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
             private set => SetValue(AnyChildSelectedProperty, value);
         }
 
+        public static readonly StyledProperty<object> LastSelectedItemProperty =
+        AvaloniaProperty.Register<BlenderBarItem, object>(nameof(LastSelectedItem), null);
+
+        public object LastSelectedItem
+        {
+            get => GetValue(LastSelectedItemProperty);
+            set => SetValue(LastSelectedItemProperty, value);
+        }
+
+        static BlenderBarItem()
+        {
+            AffectsMeasure<BlenderBarItem>(AnyChildSelectedProperty, LastSelectedItemProperty);
+            AffectsArrange<BlenderBarItem>(AnyChildSelectedProperty, LastSelectedItemProperty);
+            AffectsRender<BlenderBarItem>(AnyChildSelectedProperty, LastSelectedItemProperty);
+
+            ItemCountProperty.Changed.AddClassHandler<BlenderBarItem>((sender, args) =>
+            {
+                if (((int)args.NewValue > 0) && (sender.LastSelectedItem == null))
+                    sender.LastSelectedItem = sender.Items.Cast<object>().FirstOrDefault(x => x != null);
+            });
+        }
 
         public BlenderBarItem()
         {
             UpdatePseudoClasses(IsPressed);
-            UpdateAnyChildSelected();
+            
+            if (ItemCount > 0)
+            {
+                
+            }
+
+            AttachedToLogicalTree += BlenderBarItem_AttachedToLogicalTree;
         }
 
-        object _lastSelected = null;
+        void BlenderBarItem_AttachedToLogicalTree(object sender, LogicalTreeAttachmentEventArgs e)
+        {
+            GetOwnerBlenderBar().SelectionChanged += (sneder, args) =>
+            {
+                UpdateAnyChildSelected();
+                
+                if ((LastSelectedItem != null) && (args.AddedItems != null) && args.AddedItems.Contains(this))
+                {
+                    args.Handled = true;
+                    GetOwnerBlenderBar().SelectedItems.Clear();
+                    GetOwnerBlenderBar().SelectedItems.Add(LastSelectedItem);
+                }
+                    
+
+                InvalidateArrange();
+                InvalidateMeasure();
+                InvalidateStyles();
+                InvalidateVisual();
+            };
+            
+            
+            AttachedToLogicalTree -= BlenderBarItem_AttachedToLogicalTree;
+        }
+
         void UpdateAnyChildSelected()
         {
             var bar = GetOwnerBlenderBar();
-            if ((bar != null))
+            if (bar != null)
             {
-                var selected = bar.SelectedItems.Cast<object>().FirstOrDefault(x => Items.Cast<object>().Contains(x));
-                AnyChildSelected = selected != null;
-
-                if (AnyChildSelected)
-                    _lastSelected = selected;    
+                var selected = bar.SelectedItem; //.SelectedItems.Cast<object>().FirstOrDefault(x => Items.Cast<object>().Contains(x));
+                if ((selected != null) && Items.Cast<object>().Contains(selected))
+                {
+                    LastSelectedItem = selected;
+                    AnyChildSelected = true;
+                    /*bool newVal = Items.Cast<object>().Contains(selected);
+                    
+                    AnyChildSelected = newVal;
+                    
+                    if (newVal)
+                    {
+                        if (newVal)
+                            LastSelectedItem = selected;
+                        else if (LastSelectedItem == null)
+                            LastSelectedItem = Items.Cast<object>().ElementAtOrDefault(0);
+                    }
+                    else if (LastSelectedItem == null)
+                        LastSelectedItem = Items.Cast<object>().ElementAtOrDefault(0);
+                }
+                else if (LastSelectedItem == null)
+                    LastSelectedItem = Items.Cast<object>().ElementAtOrDefault(0);*/
+                }
+                else
+                    AnyChildSelected = false;
             }
         }
 
-        bool _handle = true;
+        int _millis = 0;
         protected override void OnPointerPressed(PointerPressedEventArgs e)
         {
             if (ItemCount == 0)
@@ -87,15 +159,21 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
             if (ItemCount > 0)
             {
                 e.Handled = true;
+                _millis = 0;
 
-                Timer timer = new Timer(300);
+                Timer timer = new Timer(1);
                 timer.Elapsed += (snader, ergs) =>
                 {
-                    Dispatcher.UIThread.Post(() =>
+                    _millis++;
+                    
+                    if (_millis > 300)
                     {
-                        if (IsPressed)
+                        Dispatcher.UIThread.Post(() =>
+                        {
                             _itemsPopup.IsOpen = true;
-                    });
+                        });
+                        timer.Stop();
+                    }
                 };
                 timer.Start();
             }
@@ -111,7 +189,35 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
             if (ItemCount > 0)
             {
                 e.Handled = true;
-                Timer timer = new Timer(100);
+
+                if (_millis > 300)
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        var items = Items.Cast<object>().ToList();
+                        foreach (object o in items)
+                        {
+                            if (o is BlenderBarItem bbi)
+                            {
+                                bbi.PointerMoved += SubItem_PointerEnter;
+                            }
+                            else
+                            {
+                                var container = ItemContainerGenerator.ContainerFromIndex(items.IndexOf(o));
+                                if (container is BlenderBarItem bbi2)
+                                    bbi2.PointerMoved += SubItem_PointerEnter;
+                            }
+                            //_itemsPopup.PointerLeave += (sneder, args) => UnsetSubItemEventHandlers();
+                        }
+                    });
+                }
+                else
+                {
+                    GetOwnerBlenderBar().SelectedItems.Clear();
+                    GetOwnerBlenderBar().SelectedItems.Add(LastSelectedItem);
+                }
+                _millis = 0;
+                /*Timer timer = new Timer(100);
                 timer.Elapsed += (snader, ergs) =>
                 {
                     Dispatcher.UIThread.Post(() =>
@@ -143,9 +249,48 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
                     });
                     timer.Stop();
                 };
-                timer.Start();
+                timer.Start();*/
             }
-                //_itemsPopup.PointerEnter += ItemsPopup_PointerMoved;
+            //_itemsPopup.PointerEnter += ItemsPopup_PointerMoved;
+        }
+
+        void SubItem_PointerEnter(object sender, PointerEventArgs e)
+        {
+            try
+            {
+                var item = Items.Cast<object>().ElementAt(ItemContainerGenerator.IndexFromContainer(sender as BlenderBarItem));
+                Console.WriteLine("ITEM SELECTED FROM CONTAINER: " + item.GetType().FullName);
+                GetOwnerBlenderBar().SelectedItems.Clear();
+                GetOwnerBlenderBar().SelectedItems.Add(item);
+                UpdateAnyChildSelected();
+            }
+            catch
+            {
+                Console.WriteLine("ITEM SELECTED BUT IT WAS THE CONTAINER");
+                GetOwnerBlenderBar().SelectedItems.Clear();
+                GetOwnerBlenderBar().SelectedItems.Add(sender);
+                UpdateAnyChildSelected();
+            }
+            UnsetSubItemEventHandlers();
+        }
+
+        void UnsetSubItemEventHandlers()
+        {
+            var items = Items.Cast<object>().ToList();
+            foreach (object o in items)
+            {
+                if (o is BlenderBarItem bbi)
+                {
+                    bbi.PointerMoved -= SubItem_PointerEnter;
+                }
+                else
+                {
+                    var container = ItemContainerGenerator.ContainerFromIndex(items.IndexOf(o));
+                    if (container is BlenderBarItem bbi2)
+                        bbi2.PointerMoved -= SubItem_PointerEnter;
+                }
+            }
+            _itemsPopup.IsOpen = false;
         }
 
         void ItemsPopup_PointerMoved(object sender, PointerEventArgs e)
@@ -195,6 +340,14 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
 
             if (change.Property == IsPressedProperty)
                 UpdatePseudoClasses(change.NewValue.GetValueOrDefault<bool>());
+            /*else if (change.Property == IsSelectedProperty)
+            {
+                if (change.NewValue.GetValueOrDefault<bool>())
+                {
+                    GetOwnerBlenderBar().SelectedItems.Clear();
+                    GetOwnerBlenderBar().SelectedItems.Add(LastSelectedItem);   
+                }
+            }*/
 
             UpdateAnyChildSelected();
         }

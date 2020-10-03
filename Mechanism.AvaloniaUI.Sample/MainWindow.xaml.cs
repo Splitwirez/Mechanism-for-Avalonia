@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Mechanism.AvaloniaUI.Controls.BlenderBar;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
 using Mechanism.AvaloniaUI.Controls.ContentDialog;
 using System;
@@ -30,6 +31,12 @@ namespace Mechanism.AvaloniaUI.Sample
             var commandBar = this.Find<CommandBar>("CommandBar");
             this.Find<RadioButton>("CommandBarLeftRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Left;
             this.Find<RadioButton>("CommandBarRightRadioButton").Checked += (sneder, args) => commandBar.HorizontalItemsAlignment = Controls.ChildrenHorizontalAlignment.Right;
+
+            this.Find<BlenderBar>("BlenderBar").SelectionChanged += (sneder, args) => 
+            {
+                if ((args.AddedItems != null) && (args.AddedItems.Count > 0) && (args.AddedItems[0] is BlenderBarItem item))
+                    Console.WriteLine("Selected " + item.Header);
+            };
         }
 
         public void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)

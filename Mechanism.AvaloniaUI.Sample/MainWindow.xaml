@@ -275,58 +275,13 @@
         </StackPanel>
       </TabItem>
     </TabControl>
-    <mebb:BlenderBar DockPanel.Dock="Left" mecore:BorderPresence.BorderPresence="False,True,True,False">
-      <mebb:BlenderBarItem Header="Square" GroupIndex="0">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Circle" GroupIndex="0">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Triangle" GroupIndex="0">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-
-      <mebb:BlenderBarItem Header="Red" GroupIndex="1">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Red"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Green" GroupIndex="1">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Green"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Blue" GroupIndex="1">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Blue"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-
-      <mebb:BlenderBarItem Header="With subItems" GroupIndex="2">
+    <mebb:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left" mecore:BorderPresence.BorderPresence="False,False,True,False">
+      <mebb:BlenderBarItem Header="With Sub-items" GroupIndex="2">
         <mecore:AttachedIcon.Icon>
           <ControlTemplate>
             <Ellipse Width="24" Height="24" Fill="Cyan"/>
           </ControlTemplate>
         </mecore:AttachedIcon.Icon>
-
         <mebb:BlenderBarItem Header="Yellow" GroupIndex="1">
           <mecore:AttachedIcon.Icon>
             <ControlTemplate>
@@ -348,6 +303,73 @@
             </ControlTemplate>
           </mecore:AttachedIcon.Icon>
         </mebb:BlenderBarItem>
+      </mebb:BlenderBarItem>
+
+      <mebb:BlenderBarItem Header="On" GroupIndex="1">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="4" Margin="10,0" Height="24" Fill="{DynamicResource ThemeBorderMidBrush}"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Off" GroupIndex="1">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Ellipse Width="24" Height="24" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="4"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      
+
+      <mebb:BlenderBarItem Header="Red" GroupIndex="2">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Red"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Green" GroupIndex="2">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Green"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Blue" GroupIndex="2">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="Blue"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+
+      <mebb:BlenderBarItem Header="Square" GroupIndex="3">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Circle" GroupIndex="3">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Triangle" GroupIndex="3">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
+      </mebb:BlenderBarItem>
+      <mebb:BlenderBarItem Header="Hourglass" GroupIndex="3">
+        <mecore:AttachedIcon.Icon>
+          <ControlTemplate>
+            <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+          </ControlTemplate>
+        </mecore:AttachedIcon.Icon>
       </mebb:BlenderBarItem>
     </mebb:BlenderBar>
     <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
