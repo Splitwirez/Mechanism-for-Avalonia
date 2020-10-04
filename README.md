@@ -14,7 +14,7 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
 - `StyleableWindow` (shelved)
 - `ToolStrip` (functional but lacks visual polish, in need of testing)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
-- `BlenderBar` (under construction)<br/>![BlenderBar](/ReadmeImages/BlenderBar.gif)
+- `BlenderBar` (feature-complete, in need of testing)<br/>![BlenderBar](/ReadmeImages/BlenderBar.gif)
 
 ### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
