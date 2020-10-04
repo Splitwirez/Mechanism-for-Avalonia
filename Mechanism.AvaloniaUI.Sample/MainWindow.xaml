@@ -276,7 +276,7 @@
       </TabItem>
     </TabControl>
     <mebb:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left" mecore:BorderPresence.BorderPresence="False,False,True,False">
-      <mebb:BlenderBarItem Header="With Sub-items" GroupIndex="2">
+      <mebb:BlenderBarItem Header="With Sub-items" GroupIndex="0">
         <mecore:AttachedIcon.Icon>
           <ControlTemplate>
             <Ellipse Width="24" Height="24" Fill="Cyan"/>

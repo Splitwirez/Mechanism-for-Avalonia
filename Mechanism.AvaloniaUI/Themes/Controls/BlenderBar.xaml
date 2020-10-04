@@ -78,8 +78,6 @@
   </Style-->
 
   <Style Selector="mebb|BlenderBarItem">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
     <Setter Property="Padding" Value="5,4"/>
     <Setter Property="mecore:AttachedIcon.IconGap" Value="6"/>
@@ -99,7 +97,7 @@
               </Binding>
             </Border.BorderThickness-->
           <!--BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"-->
-            <Panel>
+            <Panel Background="#01000000">
             <!--{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}-->
               <DockPanel x:Name="ContentIconPanel" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}">
                 <!--ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/-->
@@ -111,7 +109,7 @@
                         <meconv:BoolsToBoolConverter/>
                       </MultiBinding.Converter>
                       <MultiBinding.Bindings>
-                        <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                        <Binding Path="Header" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
                         <Binding Path="(mecore:AttachedIcon.Icon)" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
                       </MultiBinding.Bindings>
                     </MultiBinding>
@@ -122,15 +120,17 @@
               <DockPanel x:Name="SelectedContentIconPanel" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}" IsVisible="{Binding !#ContentIconPanel.IsVisible}">
                 <!--ContentPresenter Name="IconPresenter" Content="{Binding Path=(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/-->
                 <TemplatedControl Template="{Binding Path=LastSelectedItem.(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
-                <Rectangle DockPanel.Dock="Left" Width="{Binding Path=LastSelectedItem.(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}}">
+                <Rectangle DockPanel.Dock="Left" Width="{Binding Width, ElementName=IconGapRect}">
+
+                <!--{Binding Path=LastSelectedItem.(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}-->
                   <Rectangle.IsVisible>
                     <MultiBinding ConverterParameter="All">
                       <MultiBinding.Converter>
                         <meconv:BoolsToBoolConverter/>
                       </MultiBinding.Converter>
                       <MultiBinding.Bindings>
-                        <Binding Path="Content" Source="{Binding LastSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                        <Binding Path="(mecore:AttachedIcon.Icon)" Source="{Binding LastSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                        <Binding Path="Header" Source="{Binding Path=LastSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                        <Binding Path="(mecore:AttachedIcon.Icon)" Source="{Binding Path=LastSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}" Converter="{x:Static ObjectConverters.IsNotNull}"/>
                       </MultiBinding.Bindings>
                     </MultiBinding>
                   </Rectangle.IsVisible>
@@ -151,16 +151,20 @@
                                     Grid.Column="1"/>
               </Grid-->
               <Path Data="M 4 0 L 4 4 L 0 4 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Right" IsVisible="{TemplateBinding ItemCount, Converter={StaticResource ItemCountToHasItemsBooleanConverter}}" Margin="2"/>
-              <Popup x:Name="PART_ItemsPopup" PlacementMode="Bottom">
+              <Popup x:Name="PART_ItemsPopup" PlacementMode="Bottom" StaysOpen="False">
+                <Border Background="{DynamicResource ThemeControlMidBrush}" BorderBrush="{DynamicResource ThemeBorderLowBrush}" BorderThickness="1" CornerRadius="0,0,6,6" Padding="-1">
               <!--IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"-->
-                <ItemsPresenter Name="PART_ItemsPresenter"
-                              Items="{TemplateBinding Items}"
-                              ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                  <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                </Border>
               </Popup>
             </Panel>
           </Border>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="mebb|BlenderBar > mebb|BlenderBarItem">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
   </Style>
   <Style Selector="mebb|BlenderBarItem:selected /template/ Border#selectionBorder,
                    mebb|BlenderBarItem[AnyChildSelected=True] /template/ Border#selectionBorder">
