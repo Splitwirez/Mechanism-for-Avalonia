@@ -8,9 +8,36 @@
              xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
              xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
+             xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample;assembly=Mechanism.AvaloniaUI.Sample"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mechanism.AvaloniaUI.Sample.ControlsSample">
   <TabControl>
+    <TabItem Header="Triggers">
+      <UniformGrid Rows="1">
+        <StackPanel Orientation="Vertical">
+          <i:Interaction.Behaviors>
+            <mecore:Trigger SourceName="TriggerTestNumericUpDown" TargetProperty="Value" Value="2">
+              <mecore:TriggerSetter TargetName="TriggerTestTextBlock" TargetProperty="IsVisible" Value="False"/>
+            </mecore:Trigger>
+          </i:Interaction.Behaviors>
+          <NumericUpDown x:Name="TriggerTestNumericUpDown" Value="1"/>
+          <TextBlock x:Name="TriggerTestTextBlock" Text="Control property value is not 2!"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+          <StackPanel.DataContext>
+            <local:DataTriggerDemo/>
+          </StackPanel.DataContext>
+          <i:Interaction.Behaviors>
+            <mecore:DataTrigger Binding="{Binding NumberValue}" Value="2">
+              <mecore:TriggerSetter TargetName="DataTriggerTestTextBlock" TargetProperty="IsVisible" Value="False"/>
+            </mecore:DataTrigger>
+          </i:Interaction.Behaviors>
+          <NumericUpDown Value="{Binding NumberValue}"/>
+          <TextBlock x:Name="DataTriggerTestTextBlock" Text="Bound property value is not 2!"/>
+        </StackPanel>
+      </UniformGrid>
+    </TabItem>
     <TabItem Header="Button Controls">
       <ScrollViewer>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10" Margin="4">
