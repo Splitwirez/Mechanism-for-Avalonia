@@ -1,20 +1,11 @@
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using Avalonia.Data;
 using Avalonia.Styling;
 using System.Collections.ObjectModel;
-using Avalonia.Styling;
-using System.Collections.Specialized;
 using Avalonia.Metadata;
-using Avalonia.LogicalTree;
 
 namespace Mechanism.AvaloniaUI.Core
 {
@@ -58,20 +49,13 @@ namespace Mechanism.AvaloniaUI.Core
             ValueProperty.Changed.AddClassHandler<DataTrigger>((sender, e) => sender.Refresh());
         }
 
-        /*protected override void OnAttached()
-        {
-            AssociatedObject.AttachedToLogicalTree += AssociatedObject_AttachedToLogicalTree;
-        }*/
-
         void Refresh()
         {
             if ((AssociatedObject != null) && (Avalonia.VisualTree.VisualExtensions.GetVisualRoot(AssociatedObject) != null))
             {
                 foreach (TriggerSetter s in Setters)
                 {
-                    string targetName = /*SourceName;
-                    if ((!string.IsNullOrEmpty(s.TargetName)) && (!string.IsNullOrWhiteSpace(s.TargetName)))
-                        targetName =*/ s.TargetName;
+                    string targetName = s.TargetName;
                 
                     var targetObj = AssociatedObject.FindNameScope().Get<Visual>(targetName);
                     Console.WriteLine("Matched: " + (Binding.ToString() == Value.ToString()).ToString() + ", " + Binding.ToString() + ", " + Value.ToString());
