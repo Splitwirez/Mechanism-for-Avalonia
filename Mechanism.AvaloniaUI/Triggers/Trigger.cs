@@ -14,21 +14,6 @@ namespace Mechanism.AvaloniaUI.Core
 {
     public class Trigger : Behavior<Visual>
     {
-        /*static ObservableCollection<TriggerSetter> GetSetterCollection()
-        {
-            return new ObservableCollection<TriggerSetter>();
-        }
-        public static readonly StyledProperty<AvaloniaList<TriggerSetter>> SettersProperty =
-            AvaloniaProperty.Register<Trigger, AvaloniaList<TriggerSetter>>(nameof(Setters), GetSetterCollection());
-        
-        
-        [Content]
-        public ObservableCollection<TriggerSetter> Setters
-        {
-            get => GetValue(SettersProperty);
-            set => SetValue(SettersProperty, value);
-        }*/
-
         public static readonly DirectProperty<Trigger, IEnumerable> SettersProperty =
             AvaloniaProperty.RegisterDirect<Trigger, IEnumerable>(nameof(Setters), o => o.Setters, (o, v) => o.Setters = v);
 
@@ -85,13 +70,11 @@ namespace Mechanism.AvaloniaUI.Core
         Visual GetDescendantByName(Visual ancestor, string name)
         {
             var descendants = ancestor.GetLogicalDescendants().ToList();
-            //Console.WriteLine("Descendant count: " + descendants.Count());
+            
             foreach (var v in descendants)
             {
-                //Console.WriteLine("TYPE: " + v.GetType());
                 if (v is Visual vis)
                 {
-                    //Console.WriteLine("NAME: " + vis.Name);
                     if (vis.Name == name)
                         return vis;
                 }
@@ -151,9 +134,8 @@ namespace Mechanism.AvaloniaUI.Core
                 Console.WriteLine("sourcePropValue, value: " + sourcePropValue + ", " + value);
                 if (sourcePropValue.Equals(value) || (sourcePropValue == value))
                 {
-                    //Console.WriteLine("targetObj != null: " + (targetObj != null).ToString());
                     var targetType = targetObj.GetType();
-                    //Console.WriteLine("Matched! Setting for " + targetName);
+                    
                     var style = new TriggerStyle()
                     {
                         Selector = Selectors.OfType(null, targetType).Name(targetName),

@@ -13,16 +13,6 @@ namespace Mechanism.AvaloniaUI.Core
 {
     public class DataTrigger : Behavior<Visual>
     {
-        /*public static readonly StyledProperty<ObservableCollection<TriggerSetter>> SettersProperty =
-            Trigger.SettersProperty.AddOwner<DataTrigger>();
-        
-        
-        [Content]
-        public ObservableCollection<TriggerSetter> Setters
-        {
-            get => GetValue(SettersProperty);
-            set => SetValue(SettersProperty, value);
-        }*/
         public static readonly DirectProperty<DataTrigger, IEnumerable> SettersProperty =
             Trigger.SettersProperty.AddOwner<DataTrigger>(o => o.Setters, (o, v) => o.Setters = v);
 
