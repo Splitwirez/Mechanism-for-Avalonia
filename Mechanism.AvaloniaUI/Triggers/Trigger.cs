@@ -7,13 +7,19 @@ using Avalonia.Styling;
 using System.Collections.ObjectModel;
 using Avalonia.Metadata;
 using Avalonia.LogicalTree;
+using Avalonia.Collections;
+using System.Collections;
 
 namespace Mechanism.AvaloniaUI.Core
 {
     public class Trigger : Behavior<Visual>
     {
-        public static readonly StyledProperty<ObservableCollection<TriggerSetter>> SettersProperty =
-            AvaloniaProperty.Register<Trigger, ObservableCollection<TriggerSetter>>(nameof(Setters), new ObservableCollection<TriggerSetter>());
+        /*static ObservableCollection<TriggerSetter> GetSetterCollection()
+        {
+            return new ObservableCollection<TriggerSetter>();
+        }
+        public static readonly StyledProperty<AvaloniaList<TriggerSetter>> SettersProperty =
+            AvaloniaProperty.Register<Trigger, AvaloniaList<TriggerSetter>>(nameof(Setters), GetSetterCollection());
         
         
         [Content]
@@ -21,11 +27,23 @@ namespace Mechanism.AvaloniaUI.Core
         {
             get => GetValue(SettersProperty);
             set => SetValue(SettersProperty, value);
+        }*/
+
+        public static readonly DirectProperty<Trigger, IEnumerable> SettersProperty =
+            AvaloniaProperty.RegisterDirect<Trigger, IEnumerable>(nameof(Setters), o => o.Setters, (o, v) => o.Setters = v);
+
+
+        private IEnumerable _setters = new AvaloniaList<TriggerSetter>();
+        [Content]
+        public IEnumerable Setters
+        {
+            get => _setters;
+            set => SetAndRaise(SettersProperty, ref _setters, value);
         }
 
 
         public static readonly StyledProperty<string> SourceNameProperty =
-            AvaloniaProperty.Register<Trigger, string>(nameof(SourceName));
+            AvaloniaProperty.Register<Trigger, string>(nameof(SourceName), defaultBindingMode: Avalonia.Data.BindingMode.OneWay);
         
         public string SourceName
         {
@@ -34,7 +52,7 @@ namespace Mechanism.AvaloniaUI.Core
         }
 
         public static readonly StyledProperty<string> TargetPropertyProperty =
-            AvaloniaProperty.Register<Trigger, string>(nameof(TargetProperty));
+            AvaloniaProperty.Register<Trigger, string>(nameof(TargetProperty), defaultBindingMode: Avalonia.Data.BindingMode.OneWay);
         
         public string TargetProperty
         {
@@ -44,12 +62,18 @@ namespace Mechanism.AvaloniaUI.Core
 
 
         public static readonly StyledProperty<object> ValueProperty =
-            AvaloniaProperty.Register<Trigger, object>(nameof(Value));
+            AvaloniaProperty.Register<Trigger, object>(nameof(Value), defaultBindingMode: Avalonia.Data.BindingMode.OneWay);
         
         public object Value
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
+        }
+
+
+        static Trigger()
+        {
+            ValueProperty.Changed.AddClassHandler<Trigger>((sender, e) => sender.ValuePropertyChanged(sender, e));
         }
 
         Visual _source = null;
@@ -61,13 +85,13 @@ namespace Mechanism.AvaloniaUI.Core
         Visual GetDescendantByName(Visual ancestor, string name)
         {
             var descendants = ancestor.GetLogicalDescendants().ToList();
-            Console.WriteLine("Descendant count: " + descendants.Count());
+            //Console.WriteLine("Descendant count: " + descendants.Count());
             foreach (var v in descendants)
             {
-                Console.WriteLine("TYPE: " + v.GetType());
+                //Console.WriteLine("TYPE: " + v.GetType());
                 if (v is Visual vis)
                 {
-                    Console.WriteLine("NAME: " + vis.Name);
+                    //Console.WriteLine("NAME: " + vis.Name);
                     if (vis.Name == name)
                         return vis;
                 }
@@ -94,45 +118,70 @@ namespace Mechanism.AvaloniaUI.Core
         {
             if (TargetProperty == e.Property.Name)
             {
-                Console.WriteLine("Target property changed!");
-                foreach (TriggerSetter s in Setters)
+                //Console.WriteLine("Target property changed!");
+                Refresh(e.NewValue, GetValue(ValueProperty));
+            }
+        }
+
+        protected void ValuePropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
+        {
+            if ((e.NewValue != null) && (AssociatedObject != null) && (Avalonia.VisualTree.VisualExtensions.GetVisualRoot(AssociatedObject) != null))
+            {
+                Type targetType = _source.GetType();
+                var targetProps = AvaloniaPropertyRegistry.Instance.GetRegisteredInherited(targetType).ToList();
+                targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegistered(targetType).ToList());
+                targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredDirect(targetType).ToList());
+                targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType).ToList());
+                
+                var targetPropVal = _source.GetValue(targetProps.First(x => x.Name == TargetProperty));
+                Refresh(targetPropVal, e.NewValue);
+            }
+        }
+
+        protected void Refresh(object sourcePropertyValue, object value)
+        {
+            var sourcePropValue = Convert.ChangeType(sourcePropertyValue, value.GetType());
+            foreach (TriggerSetter s in Setters)
+            {
+                string targetName = SourceName;
+                if ((!string.IsNullOrEmpty(s.TargetName)) && (!string.IsNullOrWhiteSpace(s.TargetName)))
+                    targetName = s.TargetName;
+                
+                var targetObj = AssociatedObject.FindNameScope().Get<Visual>(targetName);
+                Console.WriteLine("sourcePropValue, value: " + sourcePropValue + ", " + value);
+                if (sourcePropValue.Equals(value) || (sourcePropValue == value))
                 {
-                    string targetName = SourceName;
-                    if ((!string.IsNullOrEmpty(s.TargetName)) && (!string.IsNullOrWhiteSpace(s.TargetName)))
-                        targetName = s.TargetName;
+                    //Console.WriteLine("targetObj != null: " + (targetObj != null).ToString());
+                    var targetType = targetObj.GetType();
+                    //Console.WriteLine("Matched! Setting for " + targetName);
+                    var style = new TriggerStyle()
+                    {
+                        Selector = Selectors.OfType(null, targetType).Name(targetName),
+                        Setter = s
+                    };
+                    Console.WriteLine("SELECTOR: " + style.Selector.ToString());
+                    var targetProps = AvaloniaPropertyRegistry.Instance.GetRegisteredInherited(targetType).ToList();
+                    targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegistered(targetType).ToList());
+                    targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredDirect(targetType).ToList());
+                    targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType).ToList());
                     
-                    var targetObj = AssociatedObject.FindNameScope().Get<Visual>(targetName);
-                    if (e.NewValue.ToString() == Value.ToString())
-                    {
-                        Console.WriteLine("targetObj != null: " + (targetObj != null).ToString());
-                        var targetType = targetObj.GetType();
-                        Console.WriteLine("Matched! Setting for " + targetName);
-                        var style = new TriggerStyle()
-                        {
-                            Selector = Selectors.Name(Selectors.OfType(null, targetType), targetName),
-                            Setter = s
-                        };
-                        
-                        var targetProps = AvaloniaPropertyRegistry.Instance.GetRegisteredInherited(targetType).ToList();
-                        targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegistered(targetType).ToList());
-                        targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredDirect(targetType).ToList());
-                        targetProps.AddRange(AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType).ToList());
-                        
-                        var targetProp = targetProps.First(x => x.Name == s.TargetProperty);
-                        
-                        style.Setters.Add(new Setter(targetProp, Convert.ChangeType(s.Value, targetProp.PropertyType)));
-                        
-                        AssociatedObject.Styles.Add(style);
-                    }
+                    var targetProp = targetProps.First(x => x.Name == s.TargetProperty);
+                    
+                    style.Setters.Add(new Setter(targetProp, Convert.ChangeType(s.Value, targetProp.PropertyType)));
+                    
+                    AssociatedObject.Styles.Add(style);
+                }
+                else
+                {
+                    Console.WriteLine("Not matched!");
+                    var style = AssociatedObject.Styles.OfType<TriggerStyle>().FirstOrDefault(x => x.Setter == s);
+                    if (style != null)
+                        AssociatedObject.Styles.Remove(style);
                     else
-                    {
-                        Console.WriteLine("Not matched!");
-                        var style = AssociatedObject.Styles.OfType<TriggerStyle>().FirstOrDefault(x => x.Setter == s);
-                        if (style != null)
-                            AssociatedObject.Styles.Remove(style);
-                    }
+                        Console.WriteLine("Style not found!");
                 }
             }
+            AssociatedObject.InvalidateVisual();
         }
     }
 }

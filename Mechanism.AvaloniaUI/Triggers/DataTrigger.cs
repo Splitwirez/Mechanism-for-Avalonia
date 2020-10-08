@@ -6,12 +6,14 @@ using System.Linq;
 using Avalonia.Styling;
 using System.Collections.ObjectModel;
 using Avalonia.Metadata;
+using System.Collections;
+using Avalonia.Collections;
 
 namespace Mechanism.AvaloniaUI.Core
 {
     public class DataTrigger : Behavior<Visual>
     {
-        public static readonly StyledProperty<ObservableCollection<TriggerSetter>> SettersProperty =
+        /*public static readonly StyledProperty<ObservableCollection<TriggerSetter>> SettersProperty =
             Trigger.SettersProperty.AddOwner<DataTrigger>();
         
         
@@ -20,11 +22,21 @@ namespace Mechanism.AvaloniaUI.Core
         {
             get => GetValue(SettersProperty);
             set => SetValue(SettersProperty, value);
+        }*/
+        public static readonly DirectProperty<DataTrigger, IEnumerable> SettersProperty =
+            Trigger.SettersProperty.AddOwner<DataTrigger>(o => o.Setters, (o, v) => o.Setters = v);
+
+        private IEnumerable _setters = new AvaloniaList<TriggerSetter>();
+        [Content]
+        public IEnumerable Setters
+        {
+            get => _setters;
+            set => SetAndRaise(SettersProperty, ref _setters, value);
         }
 
 
         public static readonly StyledProperty<object> BindingProperty =
-            AvaloniaProperty.Register<DataTrigger, object>(nameof(Binding));
+            AvaloniaProperty.Register<DataTrigger, object>(nameof(Binding), defaultBindingMode: Avalonia.Data.BindingMode.OneWay);
         
         public object Binding
         {

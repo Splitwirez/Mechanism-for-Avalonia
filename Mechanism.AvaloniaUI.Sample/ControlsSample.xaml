@@ -20,9 +20,14 @@
             <mecore:Trigger SourceName="TriggerTestNumericUpDown" TargetProperty="Value" Value="2">
               <mecore:TriggerSetter TargetName="TriggerTestTextBlock" TargetProperty="IsVisible" Value="False"/>
             </mecore:Trigger>
+            <mecore:Trigger SourceName="TriggerTestNumericUpDown" TargetProperty="Value" Value="{Binding #TriggerTestNumericUpDown2.Value}">
+              <mecore:TriggerSetter TargetName="TriggerTestTextBlock2" TargetProperty="IsVisible" Value="False"/>
+            </mecore:Trigger>
           </i:Interaction.Behaviors>
           <NumericUpDown x:Name="TriggerTestNumericUpDown" Value="1"/>
+          <NumericUpDown x:Name="TriggerTestNumericUpDown2" Value="2"/>
           <TextBlock x:Name="TriggerTestTextBlock" Text="Control property value is not 2!"/>
+          <TextBlock x:Name="TriggerTestTextBlock2" Text="NumericUpDowns' values are not equal!"/>
         </StackPanel>
         <StackPanel Orientation="Vertical">
           <StackPanel.DataContext>
