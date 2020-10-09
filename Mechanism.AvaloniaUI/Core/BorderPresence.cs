@@ -10,7 +10,7 @@ namespace Mechanism.AvaloniaUI.Core
 {
     public class BorderPresence : Layoutable, IEquatable<BorderPresence>
     {
-        public static readonly AttachedProperty<BorderPresence> BorderPresenceProperty = AvaloniaProperty.RegisterAttached<BorderPresence, Control, BorderPresence>("BorderPresence", new BorderPresence(), defaultBindingMode: BindingMode.TwoWay);
+        public static readonly AttachedProperty<BorderPresence> BorderPresenceProperty = AvaloniaProperty.RegisterAttached<BorderPresence, Control, BorderPresence>(nameof(BorderPresence), new BorderPresence(), defaultBindingMode: BindingMode.TwoWay);
 
         /*static BorderPresence()
         {

@@ -551,6 +551,6 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
         {
             PseudoClasses.Set(":pressed", isPressed);
         }
-        Type IStyleable.StyleKey => typeof(BlenderBarItem);
+        //Type IStyleable.StyleKey => typeof(BlenderBarItem);
     }
 }

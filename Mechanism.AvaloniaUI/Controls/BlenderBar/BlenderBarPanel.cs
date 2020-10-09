@@ -115,7 +115,7 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
                     }
 
 
-                    var borderPresence = new BorderPresence();
+                    var borderPresence = new BorderPresence(true);
                     var cornerCurves = new CornerCurves(false);
                     borderPresence.Left = !isRightColumn;
                     
@@ -201,29 +201,41 @@ namespace Mechanism.AvaloniaUI.Controls.BlenderBar
                 {
                     var child = children[i];
 
-                    var borderPresence = new BorderPresence();
-                    var cornerCurves = new CornerCurves();
+                    //var borderPresence = new BorderPresence(true);
 
-                    if (_prevGroupIndex != child.GroupIndex)
-                    {
+                    bool groupChanged = _prevGroupIndex != child.GroupIndex;
+                    if (groupChanged)
                         yTotal += 5;
-                        borderPresence.Top = true;
-                    }
-                    else if (i == 0)
-                        borderPresence.Top = true;
+                    
+                    if (groupChanged || (i == 0))
+                        BorderPresence.SetBorderPresence(child, new BorderPresence()
+                        {
+                            Left = true,
+                            Top = true,
+                            Right = true,
+                            Bottom = true
+                        });
+                        //borderPresence.Top = true;
                     else
-                        borderPresence.Top = false;
+                        BorderPresence.SetBorderPresence(child, new BorderPresence()
+                        {
+                            Left = true,
+                            Top = false,
+                            Right = true,
+                            Bottom = true
+                        });
+                        //borderPresence.Top = false;
 
-                    BorderPresence.SetBorderPresence(child, borderPresence);
+                    //BorderPresence.SetBorderPresence(child, new BorderPresence(true));
 
                     
-                    if (children.Where(x => x.GroupIndex == child.GroupIndex).Count() == 1)
+                    if (children.Where(x => x.GroupIndex == child.GroupIndex).Count() == 1) //only element in its group
                         CornerCurves.SetCornerCurves(child, new CornerCurves(true));
-                    else if (children.Last(x => x.GroupIndex == child.GroupIndex) == child)
+                    else if (children.Last(x => x.GroupIndex == child.GroupIndex) == child) //last element in its group
                         CornerCurves.SetCornerCurves(child, new CornerCurves(false, false, true, true));
-                    else if (children.First(x => x.GroupIndex == child.GroupIndex) == child)
+                    else if (children.First(x => x.GroupIndex == child.GroupIndex) == child) //first element in its group
                         CornerCurves.SetCornerCurves(child, new CornerCurves(true, true, false, false));
-                    else
+                    else //middle element in its group
                         CornerCurves.SetCornerCurves(child, new CornerCurves(false));
                     
 

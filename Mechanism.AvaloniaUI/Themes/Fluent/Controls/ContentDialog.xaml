@@ -1,0 +1,62 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI"
+             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI"
+             xmlns:mewin="clr-namespace:Mechanism.AvaloniaUI.Controls.Windows;assembly=Mechanism.AvaloniaUI"
+             xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
+  <Style Selector="mecd|ContentDialogFrame">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Background="Black" Opacity="0.75"/>
+          <Border Width="475" MinHeight="175" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <ContentPresenter Content="{TemplateBinding Content}"/>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecd|BasicMessageDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Margin="25,25,25,0" TextWrapping="Wrap" FontSize="20" DockPanel.Dock="Top"/>
+          <Button x:Name="PART_OkButton" Content="OK" DockPanel.Dock="Bottom" Margin="25,0,25,25"/>
+          <TextBlock Text="{TemplateBinding Message}" Margin="25" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mecd|MessageActionDialog">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <TextBlock Text="{TemplateBinding Title}" Margin="25,25,25,0" TextWrapping="Wrap" FontSize="20" DockPanel.Dock="Top"/>
+          <!--Button x:Name="PART_OkButton" Content="OK" DockPanel.Dock="Bottom" Margin="25,0,25,25"/-->
+          <ItemsControl Items="{Binding Actions}" DockPanel.Dock="Bottom">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid Rows="1" Margin="25,0,0,25"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.DataTemplates>
+              <DataTemplate DataType="{x:Type mecd:IContentDialogAction}">
+                <Button Command="{Binding SelectAction, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mecd:MessageActionDialog}}}" CommandParameter="{Binding}" Content="{Binding Title}" ToolTip.Tip="{Binding Description}" Margin="0,0,25,0"/>
+              </DataTemplate>
+            </ItemsControl.DataTemplates>
+          </ItemsControl>
+          <TextBlock Text="{TemplateBinding Message}" Margin="25" TextWrapping="Wrap"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
