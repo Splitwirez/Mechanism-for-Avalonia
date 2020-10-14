@@ -18,7 +18,7 @@
           <Path Data="M 0 0 L 4 4 L 0 8 Z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
         </Border>
         <Popup x:Name="PART_Flyout" IsOpen="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" MinWidth="1" MinHeight="1" PlacementMode="Right" PlacementTarget="{Binding #BackgroundBorder}">
-          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+          <ContentPresenter Name="PART_FlyoutContentPresenter" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" ContentTemplate="{Binding FlyoutContentTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" Content="{Binding FlyoutContent, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
         </Popup>
       </Panel>
     </ControlTemplate>
@@ -35,7 +35,7 @@
     </ControlTemplate-->
   </Styles.Resources>
   <Style Selector="mets|ToolStrip">
-    <Setter Property="MinHeight" Value="38"/>
+    <Setter Property="MinHeight" Value="40"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
@@ -86,7 +86,7 @@
             </ItemsControl.DataTemplates>
           </ItemsControl>
           <Popup IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="10">
-            <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
+            <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3">
               <StackPanel Orientation="Vertical" Margin="20">
                 <TextBlock Text="Drag your favorite items into the Toolstrip..." Margin="0,0,0,10"/>
                 <ItemsControl Items="{TemplateBinding AvailableItems}">
@@ -140,7 +140,7 @@
                   </ItemsControl>
                   <Thumb x:Name="PART_DefaultItemsThumb" Classes="DragThumb"/>
                 </Panel>
-                <Rectangle Margin="-20,20" Height="1" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                <Rectangle Margin="-20,20" Height="1" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
                 <DockPanel LastChildFill="False">
                   <ToggleButton Content="Done" IsChecked="{Binding !IsCustomizing, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Right"/>
                 </DockPanel>
@@ -175,7 +175,7 @@
   </Style>
   <Style Selector=":is(Button).ToolStrip">
     <Setter Property="Width" Value="40"/>
-    <Setter Property="Height" Value="24"/>
+    <Setter Property="Height" Value="30"/>
   </Style>
   <Style Selector="mets|ButtonToolStripItem">
     <Setter Property="Template">
@@ -195,14 +195,11 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Panel Height="24">
-          <!--Rectangle Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" StrokeDashArray="2" StrokeDashOffset="2"/-->
-          <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="1" IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
-            <DockPanel>
-              <Path Data="M 0 4 L 8 0 L 8 8 Z" Fill="{DynamicResource ThemeForegroundBrush}" Width="8" Height="8" DockPanel.Dock="Left"/>
-              <Path Data="M 8 4 L 0 0 L 0 8 Z" Fill="{DynamicResource ThemeForegroundBrush}" Width="8" Height="8" DockPanel.Dock="Right"/>
-              <Rectangle VerticalAlignment="Center" Height="2" Fill="{DynamicResource ThemeForegroundBrush}"/>
-            </DockPanel>
-          </Border>
+          <DockPanel IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
+            <Path Data="M 0 4 L 8 0 L 8 8 Z" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Width="8" Height="8" DockPanel.Dock="Left"/>
+            <Path Data="M 8 4 L 0 0 L 0 8 Z" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Width="8" Height="8" DockPanel.Dock="Right"/>
+            <Rectangle VerticalAlignment="Center" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+          </DockPanel>
         </Panel>
       </ControlTemplate>
     </Setter>
