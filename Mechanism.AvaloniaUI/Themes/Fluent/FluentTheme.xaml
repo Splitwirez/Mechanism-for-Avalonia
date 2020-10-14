@@ -50,16 +50,11 @@
         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
           <Panel Name="RootPanel">
             <DockPanel>
-              <Panel Width="15" DockPanel.Dock="Right">
-                <ToggleButton x:Name="PART_FlyoutToggleButton" BorderThickness="0" HorizontalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
-                  <StackPanel Orientation="Horizontal" Spacing="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <StackPanel.RenderTransform>
-                      <TranslateTransform X="-1"/>
-                    </StackPanel.RenderTransform>
-                    <Path Data="M0,0 L0,3 1.5,4.5 0,6 0,9 4.5,4.5 z" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
-                    <Path Data="M0,0 L0,3 1.5,4.5 0,6 0,9 4.5,4.5 z" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
-                    <!--Path Data="M 0 0 L 3 3 L 0 6 L 2 6 L 5 3 L 2 0 Z" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/-->
-                    <!--Path Data="M 0 0 L 3 3 L 0 6" Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="2"/-->
+              <Panel Width="36" DockPanel.Dock="Right">
+                <ToggleButton x:Name="PART_FlyoutToggleButton" Padding="0" Margin="8,4" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}">
+                  <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
                   </StackPanel>
                 </ToggleButton>
               </Panel>
@@ -73,7 +68,8 @@
             </DockPanel>
             <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <!--IsOpen="{Binding Path=IsChecked, ElementName=PART_FlyoutToggleButton, Mode=TwoWay}"-->
-              <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}">
+              <!--Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}"-->
+              <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3">
                 <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
               </Border>
             </Popup>

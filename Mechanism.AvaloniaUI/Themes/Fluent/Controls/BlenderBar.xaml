@@ -61,8 +61,7 @@
     </Setter-->
     <Setter Property="Template">
       <ControlTemplate>
-          <Border Name="selectionBorder" Focusable="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" TextBlock.Foreground="{TemplateBinding Foreground}" Padding="0" BorderThickness="{TemplateBinding BorderThickness}"
-          Margin="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='0;-1'}"
+          <Border Name="selectionBorder" Focusable="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" TextBlock.Foreground="{TemplateBinding Foreground}" Padding="0" BorderThickness="0"
           CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}"
           TemplatedControl.IsTemplateFocusTarget="True">
           <!--BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='5;0'}"-->

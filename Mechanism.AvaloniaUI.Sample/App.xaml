@@ -2,12 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Mechanism.AvaloniaUI.Sample.App">
     <Application.Styles>
-        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>
         <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Fluent/FluentTheme.xaml"/>
         <!--StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Default/DefaultTheme.xaml"/-->
-      <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/-->
+
+        <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/-->
         <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml"/-->
         <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml"/-->
     </Application.Styles>

@@ -14,9 +14,119 @@
         d:DesignWidth="500"
         Width="800" Height="500"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
-        Title="Mechanism Sample Launchpad" Padding="5">
+        TransparencyLevelHint="AcrylicBlur"
+        Title="Mechanism Sample Launchpad">
   <DockPanel>
-    <TabControl Margin="0,0,0,5" TabStripPlacement="Bottom" DockPanel.Dock="Top">
+    <ExperimentalAcrylicBorder DockPanel.Dock="Left">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial
+          TintColor="Black"
+          TintOpacity="0.625"
+          MaterialOpacity="0.625"
+          BackgroundSource="Digger" />
+      </ExperimentalAcrylicBorder.Material>
+      <mebb:BlenderBar x:Name="BlenderBar" Background="Transparent" mecore:BorderPresence.BorderPresence="False,False,True,False">
+        <!--mebb:BlenderBar.Background>
+          <SolidColorBrush Color="{StaticResource SystemAltHighColor}" Opacity="0.75"/>
+        </mebb:BlenderBar.Background-->
+        <mebb:BlenderBarItem Header="With Sub-items" GroupIndex="0">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Ellipse Width="24" Height="24" Fill="Cyan"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+          <mebb:BlenderBarItem Header="Yellow" GroupIndex="1">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="24" Height="24" Fill="Yellow"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </mebb:BlenderBarItem>
+          <mebb:BlenderBarItem Header="Cyan" GroupIndex="1">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="24" Height="24" Fill="Cyan"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </mebb:BlenderBarItem>
+          <mebb:BlenderBarItem Header="Pink" GroupIndex="1">
+            <mecore:AttachedIcon.Icon>
+              <ControlTemplate>
+                <Rectangle Width="24" Height="24" Fill="Pink"/>
+              </ControlTemplate>
+            </mecore:AttachedIcon.Icon>
+          </mebb:BlenderBarItem>
+        </mebb:BlenderBarItem>
+
+        <mebb:BlenderBarItem Header="On" GroupIndex="1">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="4" Margin="10,0" Height="24" Fill="{Binding $parent[mebb:BlenderBarItem].Foreground}"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Off" GroupIndex="1">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Ellipse Width="24" Height="24" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="4"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        
+
+        <mebb:BlenderBarItem Header="Red" GroupIndex="2">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Red"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Green" GroupIndex="2">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Green"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Blue" GroupIndex="2">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="Blue"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+
+        <mebb:BlenderBarItem Header="Square" GroupIndex="3">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Circle" GroupIndex="3">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Triangle" GroupIndex="3">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+        <mebb:BlenderBarItem Header="Hourglass" GroupIndex="3">
+          <mecore:AttachedIcon.Icon>
+            <ControlTemplate>
+              <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+            </ControlTemplate>
+          </mecore:AttachedIcon.Icon>
+        </mebb:BlenderBarItem>
+      </mebb:BlenderBar>
+    </ExperimentalAcrylicBorder>
+    <TabControl TabStripPlacement="Bottom" DockPanel.Dock="Top">
       <TabItem Header="CommandBar">
         <StackPanel Orientation="Vertical" Width="{Binding $parent[TabControl].Width}" Spacing="4">
           <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
@@ -27,49 +137,49 @@
             <Button Content="Always visible">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </Button>
             <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </ToggleButton>
             <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton">
               <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
               </mecore:AttachedIcon.Icon>
             </RepeatButton>
             <mecb:CommandBar.EndItems>
               <Button>
                 <Panel Width="16" Height="16">
-                  <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                  <Ellipse Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
                   <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding $parent[Button].Foreground}"/>
                 </Panel>
               </Button>
@@ -206,9 +316,9 @@
                   <DockPanel/>
                 </ItemsPanelTemplate>
               </metb:ToolBar.ItemsPanel>
-              <TextBlock Margin="5,0" Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
-              <Button Padding="4" Margin="-1,0,0,0" DockPanel.Dock="Right">Go</Button>
-              <TextBox>http://avaloniaui.net/</TextBox>
+              <TextBlock Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+              <Button DockPanel.Dock="Right">Go</Button>
+              <TextBox Margin="2">http://avaloniaui.net/</TextBox>
             </metb:ToolBar>
           </metb:ToolBarTray>
           <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
@@ -275,104 +385,7 @@
         </StackPanel>
       </TabItem>
     </TabControl>
-    <mebb:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left" mecore:BorderPresence.BorderPresence="False,False,True,False" Classes="accent">
-      <mebb:BlenderBarItem Header="With Sub-items" GroupIndex="0">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Ellipse Width="24" Height="24" Fill="Cyan"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-        <mebb:BlenderBarItem Header="Yellow" GroupIndex="1">
-          <mecore:AttachedIcon.Icon>
-            <ControlTemplate>
-              <Rectangle Width="24" Height="24" Fill="Yellow"/>
-            </ControlTemplate>
-          </mecore:AttachedIcon.Icon>
-        </mebb:BlenderBarItem>
-        <mebb:BlenderBarItem Header="Cyan" GroupIndex="1">
-          <mecore:AttachedIcon.Icon>
-            <ControlTemplate>
-              <Rectangle Width="24" Height="24" Fill="Cyan"/>
-            </ControlTemplate>
-          </mecore:AttachedIcon.Icon>
-        </mebb:BlenderBarItem>
-        <mebb:BlenderBarItem Header="Pink" GroupIndex="1">
-          <mecore:AttachedIcon.Icon>
-            <ControlTemplate>
-              <Rectangle Width="24" Height="24" Fill="Pink"/>
-            </ControlTemplate>
-          </mecore:AttachedIcon.Icon>
-        </mebb:BlenderBarItem>
-      </mebb:BlenderBarItem>
-
-      <mebb:BlenderBarItem Header="On" GroupIndex="1">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="4" Margin="10,0" Height="24" Fill="{Binding $parent[mebb:BlenderBarItem].Foreground}"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Off" GroupIndex="1">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Ellipse Width="24" Height="24" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="4"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      
-
-      <mebb:BlenderBarItem Header="Red" GroupIndex="2">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Red"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Green" GroupIndex="2">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Green"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Blue" GroupIndex="2">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="Blue"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-
-      <mebb:BlenderBarItem Header="Square" GroupIndex="3">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Circle" GroupIndex="3">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Triangle" GroupIndex="3">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-      <mebb:BlenderBarItem Header="Hourglass" GroupIndex="3">
-        <mecore:AttachedIcon.Icon>
-          <ControlTemplate>
-            <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mebb:BlenderBarItem].Foreground}" StrokeThickness="1"/>
-          </ControlTemplate>
-        </mecore:AttachedIcon.Icon>
-      </mebb:BlenderBarItem>
-    </mebb:BlenderBar>
-    <DockPanel Margin="0,0,5,0" DockPanel.Dock="Left">
+    <DockPanel DockPanel.Dock="Left">
       <HeaderedContentControl Classes="GroupBox" Header="Platform integration stuff" DockPanel.Dock="Bottom" IsVisible="False">
         <Button x:Name="ShowSampleNativeIntegrationWindowButton" Click="ShowSampleNativeIntegrationWindowButton_Click">Show platform integration sample Window</Button>
       </HeaderedContentControl>
@@ -503,6 +516,6 @@
         </ScrollViewer>
       </TabItem>
     </TabControl-->
-    <local:ControlsSample/>
+    <local:ControlsSample Padding="5,5,0,0"/>
   </DockPanel>
 </Window>

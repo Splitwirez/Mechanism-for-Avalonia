@@ -11,22 +11,36 @@
              xmlns:mecd="clr-namespace:Mechanism.AvaloniaUI.Controls.ContentDialog;assembly=Mechanism.AvaloniaUI"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI">
   <Style Selector="metb|ToolBar">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+    <Setter Property="BorderBrush" Value="{Binding $parent[metb:ToolBarTray].BorderBrush}" />
     <Setter Property="MinWidth" Value="75"/>
     <Setter Property="BaseWidth" Value="16"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-          <DockPanel>
-            <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left"/>
-            <Panel>
-              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True"/>
-              <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
-            </Panel>
-          </DockPanel>
-        </Border>
+        <DockPanel>
+          <Thumb x:Name="PART_GripThumb" Width="10" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left">
+            <Thumb.Template>
+              <ControlTemplate>
+                <Panel Background="#01000000" Margin="2,0,0,0">
+                  <Border BorderThickness="1,0,0,1" CornerRadius="0,0,0,3" BorderBrush="{Binding $parent[metb:ToolBar].BorderBrush}" Margin="0,5,0,0"/>
+                  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
+                  </StackPanel>
+                </Panel>
+              </ControlTemplate>
+            </Thumb.Template>
+          </Thumb>
+          <Panel>
+            <DockPanel Height="1" VerticalAlignment="Bottom">
+              <Rectangle Width="5" IsVisible="{Binding $parent[metb:ToolBarTray].IsLocked}" DockPanel.Dock="Left"/>
+              <Rectangle Width="5" DockPanel.Dock="Right"/>
+              <Rectangle Fill="{TemplateBinding BorderBrush}"/>
+            </DockPanel>
+            <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True"/>
+            <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+          </Panel>
+        </DockPanel>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
@@ -41,24 +55,6 @@
   <Style Selector="metb|ToolBar[UseOverflow=False] /template/ ItemsPresenter#RegularItemsPresenter">
     <Setter Property="Items" Value="{Binding Items, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>
-  <Style Selector="metb|ToolBar /template/ Thumb#PART_GripThumb">
-    <Setter Property="Background" Value="#01000000"/>
-    <Setter Property="Width" Value="9"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border Background="#01000000" Padding="3">
-          <Border>
-            <Border.Background>
-              <LinearGradientBrush StartPoint="0,0" EndPoint="0,7" SpreadMethod="Repeat">
-                <GradientStop Offset="0.42857142857142857142857142857143" Color="{DynamicResource ThemeBorderLowColor}"/>
-                <GradientStop Offset="0.42857142857142857142857142857143" Color="#01000000"/>
-              </LinearGradientBrush>
-            </Border.Background>
-          </Border>
-        </Border>
-      </ControlTemplate>
-    </Setter>
-  </Style>
   <!--Style Selector="metb|ToolBar[UseOverflow=False] > Menu">
     <Setter Property="Template">
       <ControlTemplate>
@@ -69,40 +65,60 @@
     </Setter>
   </Style-->
   <Style Selector="metb|ToolBar > :is(Button)">
-    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="Margin" Value="4"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
-          <StackPanel Orientation="Vertical" Spacing="2">
-            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
-            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        <Border x:Name="BackgroundBorder" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent"/>
+            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent"/>
           </StackPanel>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="metb|ToolBar > :is(Button) /template/ Border#BackgroundBorder">
-    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="metb|ToolBar > :is(Button):not(:pointerover):not(:pressed) /template/ Border#BackgroundBorder">
-    <Setter Property="BorderBrush" Value="Transparent"/>
-  </Style>
   <Style Selector="metb|ToolBar > :is(Button):pointerover /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
   </Style>
   <Style Selector="metb|ToolBar > :is(Button):pressed /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
   </Style>
   <Style Selector="metb|ToolBar > ToggleButton:checked /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundChecked}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushChecked}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundChecked}" />
+  </Style>
+  <Style Selector="metb|ToolBar > ToggleButton:checked:pointerover /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedPointerOver}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedPointerOver}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedPointerOver}" />
+  </Style>
+  <Style Selector="metb|ToolBar > ToggleButton:checked:pressed /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedPressed}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedPressed}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedPressed}" />
+  </Style>
+  <Style Selector="metb|ToolBar > ToggleButton:checked:disabled /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedDisabled}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedDisabled}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedDisabled}" />
+  </Style>
+  <Style Selector="metb|ToolBar > ToggleButton:disabled /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
   </Style>
 
   <Style Selector="metb|ToolBarTray">
-    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-    <Setter Property="BorderThickness" Value="1,1,0,0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
