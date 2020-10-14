@@ -40,7 +40,7 @@
       <ControlTemplate>
         <Panel>
           <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" IsVisible="False"/>
-          <ItemsControl x:Name="PART_CurrentItemsItemsControl" Items="{TemplateBinding CurrentItems}">
+          <ItemsControl x:Name="PART_CurrentItemsItemsControl" Items="{TemplateBinding CurrentItems}" Background="#01000000">
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
                 <!--StackPanel Orientation="Horizontal" Spacing="6" Margin="7,0"/-->

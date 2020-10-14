@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Generators;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.LogicalTree;
 using Avalonia.Metadata;
 using Avalonia.Threading;
@@ -272,50 +273,80 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         //public List<IToolStripItem> HoverItems = new List<IToolStripItem>();
         public ToolStripItemReference HoverItem = null;
-        public void ValidateAddToToolStrip(IToolStripItem item)
+        internal void ValidateAddToToolStrip(IToolStripItem item, Visual sender, Vector cursor)
         {
-            WaitForPointer(() =>
+            var popupRoot = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(sender);
+            
+            var point = VisualRoot.PointToClient(sender.PointToScreen(new Point(cursor.X, cursor.Y)));
+            //Console.WriteLine("point: " + point);
+
+            var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null).OfType<Visual>();
+            //Console.WriteLine("hitTestItems count: " + hitTestItems.Count());
+            Point tL = _currentItemsItemsControl.Bounds.TopLeft;
+            Point bR = _currentItemsItemsControl.Bounds.BottomRight;
+            if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))  //  /*hitTestItems.Contains(_currentItemsItemsControl)*/)
             {
-                if (_currentItemsItemsControl.IsPointerOver)
-                {
-                    if (HoverItem != null)
-                        CurrentItems.Insert(CurrentItems.IndexOf(HoverItem)/*(CurrentItems.Last(x => x.TargetItem == HoverItems.Last()))*/, item.ToReference());
-                    else
-                        CurrentItems.Add(item.ToReference());
-                }
+                //Console.WriteLine("hitTestItems.Contains(_currentItemsItemsControl) == true");
+                var hoverItem = Avalonia.VisualTree.VisualExtensions.GetVisualDescendants(_currentItemsItemsControl).OfType<Visual>().FirstOrDefault(x => hitTestItems.Contains(x) && _currentItemsItemsControl.Items.OfType<object>().Contains(x.DataContext)).DataContext;
+                //(point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y)
+
+
+                /*var hoverItem = hitTestItems.FirstOrDefault(x => _currentItemsItemsControl.Items.OfType<object>().Contains(x));*/
+                if (hoverItem != null)
+                    CurrentItems.Insert(_currentItemsItemsControl.Items.OfType<object>().ToList().IndexOf(hoverItem), item.ToReference()); /*(CurrentItems.Last(x => x.TargetItem == HoverItems.Last()))*, item.ToReference());*/
+                else
+                    CurrentItems.Add(item.ToReference());
+            }
                 //_currentItemsItemsControl.ItemContainerGenerator.
-                Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
-            });
+                //Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
+            //});
         }
-        public void ValidateMoveOrRemoveFromToolStrip(ToolStripItemReference item)
+        internal void ValidateMoveOrRemoveFromToolStrip(ToolStripItemReference item, Visual sender, Vector cursor)
         {
-            WaitForPointer(() =>
+            Console.WriteLine("cursor: " + cursor);
+            var point = new Point(cursor.X, cursor.Y)/*.WithOffset(sender.Bounds.X, sender.Bounds.Y)*/.WithOffset(_currentItemsItemsControl.Bounds.X, _currentItemsItemsControl.Bounds.Y); // sender.Bounds.TopLeft.WithOffset(cursor.X, cursor.Y);
+            Console.WriteLine("point: " + point);
+            //var match = CurrentItems.FirstOrDefault(x => x.TargetItem == item);
+            if (CurrentItems.Contains(item))
+                CurrentItems.Remove(item);
+            /*foreach (ToolStripItemReference reference in matches)
             {
-                //var match = CurrentItems.FirstOrDefault(x => x.TargetItem == item);
-                if (CurrentItems.Contains(item))
-                    CurrentItems.Remove(item);
-                /*foreach (ToolStripItemReference reference in matches)
+                CurrentItems.Remove(reference);
+                break;
+            }*/
+            var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null);
+            
+            Point tL = _currentItemsItemsControl.Bounds.TopLeft;
+            Point bR = _currentItemsItemsControl.Bounds.BottomRight;
+            if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y)) //(VisualRoot.Renderer.HitTest(VisualRoot.TranslatePoint(new Point(cursor.X, cursor.Y), sender).Value, this, null).Contains(_currentItemsItemsControl))
+            {
+                var hoverItem = Avalonia.VisualTree.VisualExtensions.GetVisualDescendants(_currentItemsItemsControl).OfType<Visual>().FirstOrDefault(x => hitTestItems.Contains(x) && CurrentItems.Contains(x.DataContext));
+                if (hoverItem != null)
                 {
-                    CurrentItems.Remove(reference);
-                    break;
-                }*/
-
-                if (_currentItemsItemsControl.IsPointerOver)
-                {
-                    int hoverItemIndex = -1;
-                    if (HoverItem != null)
-                        hoverItemIndex = CurrentItems.IndexOf(HoverItem);
-
-                    if ((hoverItemIndex >= 0) && (hoverItemIndex < CurrentItems.Count))
-                        CurrentItems.Insert(hoverItemIndex, item);
+                    Console.WriteLine("hoverItem != null");
+                    if (hoverItem.DataContext is ToolStripItemReference tItem)
+                    {
+                        Console.WriteLine("hoverItem.DataContext is IToolStripItem tItem");
+                        CurrentItems.Insert(CurrentItems.IndexOf(tItem), item);
+                    }
                     else
-                        CurrentItems.Add(item);
+                        Console.WriteLine(hoverItem.DataContext.GetType().FullName);
                 }
-                Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
-            });
+                //CurrentItems.Remove(hoverItem);
+                /*int hoverItemIndex = -1;
+                if (HoverItem != null)
+                    hoverItemIndex = CurrentItems.IndexOf(HoverItem);
+
+                if ((hoverItemIndex >= 0) && (hoverItemIndex < CurrentItems.Count))
+                    CurrentItems.Insert(hoverItemIndex, item);
+                else
+                    CurrentItems.Add(item);*/
+            }
+            //Debug.WriteLine("Added: " + _currentItemsItemsControl.IsPointerOver);
+            //});
         }
 
-        void WaitForPointer(Action action)
+        /*void WaitForPointer(Action action)
         {
             Timer timer = new Timer(100);
             timer.Elapsed += (sneder, args) =>
@@ -324,7 +355,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 timer.Stop();
             };
             timer.Start();
-        }
+        }*/
 
         public void ResetToDefaults()
         {
@@ -362,9 +393,9 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         }*/
 
         ItemsControl _currentItemsItemsControl = null;
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             //e.NameScope.Get<MenuItem>("PART_CustomizeMenuItem").Click += (sneder, args) => IsCustomizing = true;
             _currentItemsItemsControl = e.NameScope.Get<ItemsControl>("PART_CurrentItemsItemsControl");
             /*_currentItemsItemsControl.PointerMoved += (sneder, args) =>
@@ -375,11 +406,8 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             Thumb defaultItemsDragThumb = e.NameScope.Get<Thumb>("PART_DefaultItemsThumb");
             defaultItemsDragThumb.DragCompleted += (sneder, args) =>
             {
-                WaitForPointer(() =>
-                {
-                    if (_currentItemsItemsControl.IsPointerOver)
-                        ResetToDefaults();
-                });
+                if (VisualRoot.Renderer.HitTest(VisualRoot.TranslatePoint(new Point(args.Vector.X, args.Vector.Y), defaultItemsDragThumb).Value, this, null).Contains(_currentItemsItemsControl))//_currentItemsItemsControl.IsPointerOver)
+                    ResetToDefaults();
             };
         }
 

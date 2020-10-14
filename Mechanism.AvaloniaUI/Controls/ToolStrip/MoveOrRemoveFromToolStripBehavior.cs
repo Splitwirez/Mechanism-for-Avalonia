@@ -46,7 +46,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         private void AssociatedObject_DragCompleted(object sender, Avalonia.Input.VectorEventArgs e)
         {
             Debug.WriteLine("Drag completed");
-            Owner.ValidateMoveOrRemoveFromToolStrip(Target);
+            Owner.ValidateMoveOrRemoveFromToolStrip(Target, sender as Visual, e.Vector);
         }
     }
 }
