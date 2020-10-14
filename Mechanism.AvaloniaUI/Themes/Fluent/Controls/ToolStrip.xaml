@@ -140,7 +140,7 @@
                   </ItemsControl>
                   <Thumb x:Name="PART_DefaultItemsThumb" Classes="DragThumb"/>
                 </Panel>
-                <Rectangle Margin="-20,20" Height="1" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                <Rectangle Margin="4,20" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.5"/>
                 <DockPanel LastChildFill="False">
                   <ToggleButton Content="Done" IsChecked="{Binding !IsCustomizing, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Right"/>
                 </DockPanel>
@@ -195,10 +195,10 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Panel Height="24">
-          <DockPanel IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}">
-            <Path Data="M 0 4 L 8 0 L 8 8 Z" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Width="8" Height="8" DockPanel.Dock="Left"/>
-            <Path Data="M 8 4 L 0 0 L 0 8 Z" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Width="8" Height="8" DockPanel.Dock="Right"/>
-            <Rectangle VerticalAlignment="Center" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+          <DockPanel IsVisible="{Binding IsCustomizing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}" Margin="0,0,12,0" Opacity="0.5">
+            <Path Data="M 6 0 L 0 6 L 6 12" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" StrokeThickness="2" Width="6" Height="12" DockPanel.Dock="Left"/>
+            <Path Data="M 0 0 L 6 6 L 0 12" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" StrokeThickness="2" Width="6" Height="12" DockPanel.Dock="Right"/>
+            <Rectangle VerticalAlignment="Center" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Margin="-5,0" />
           </DockPanel>
         </Panel>
       </ControlTemplate>

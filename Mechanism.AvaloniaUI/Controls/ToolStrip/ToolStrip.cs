@@ -282,8 +282,10 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
             var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null).OfType<Visual>();
             //Console.WriteLine("hitTestItems count: " + hitTestItems.Count());
-            Point tL = _currentItemsItemsControl.Bounds.TopLeft;
-            Point bR = _currentItemsItemsControl.Bounds.BottomRight;
+            //Point tL = _currentItemsItemsControl.Bounds.TopLeft;
+            //Point bR = _currentItemsItemsControl.Bounds.BottomRight;
+            Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+            Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
             if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))  //  /*hitTestItems.Contains(_currentItemsItemsControl)*/)
             {
                 //Console.WriteLine("hitTestItems.Contains(_currentItemsItemsControl) == true");
@@ -303,8 +305,8 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         }
         internal void ValidateMoveOrRemoveFromToolStrip(ToolStripItemReference item, Visual sender, Vector cursor)
         {
-            Console.WriteLine("cursor: " + cursor);
-            var point = new Point(cursor.X, cursor.Y)/*.WithOffset(sender.Bounds.X, sender.Bounds.Y)*/.WithOffset(_currentItemsItemsControl.Bounds.X, _currentItemsItemsControl.Bounds.Y); // sender.Bounds.TopLeft.WithOffset(cursor.X, cursor.Y);
+            //Console.WriteLine("cursor: " + cursor);
+            var point = sender.TranslatePoint(new Point(cursor.X, cursor.Y), VisualRoot).GetValueOrDefault(); ///*.WithOffset(sender.Bounds.X, sender.Bounds.Y)*/.WithOffset(_currentItemsItemsControl.Bounds.X, _currentItemsItemsControl.Bounds.Y); // sender.Bounds.TopLeft.WithOffset(cursor.X, cursor.Y);
             Console.WriteLine("point: " + point);
             //var match = CurrentItems.FirstOrDefault(x => x.TargetItem == item);
             if (CurrentItems.Contains(item))
@@ -316,8 +318,8 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             }*/
             var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null);
             
-            Point tL = _currentItemsItemsControl.Bounds.TopLeft;
-            Point bR = _currentItemsItemsControl.Bounds.BottomRight;
+            Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+            Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
             if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y)) //(VisualRoot.Renderer.HitTest(VisualRoot.TranslatePoint(new Point(cursor.X, cursor.Y), sender).Value, this, null).Contains(_currentItemsItemsControl))
             {
                 var hoverItem = Avalonia.VisualTree.VisualExtensions.GetVisualDescendants(_currentItemsItemsControl).OfType<Visual>().FirstOrDefault(x => hitTestItems.Contains(x) && CurrentItems.Contains(x.DataContext));
@@ -406,8 +408,24 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             Thumb defaultItemsDragThumb = e.NameScope.Get<Thumb>("PART_DefaultItemsThumb");
             defaultItemsDragThumb.DragCompleted += (sneder, args) =>
             {
-                if (VisualRoot.Renderer.HitTest(VisualRoot.TranslatePoint(new Point(args.Vector.X, args.Vector.Y), defaultItemsDragThumb).Value, this, null).Contains(_currentItemsItemsControl))//_currentItemsItemsControl.IsPointerOver)
+                var sender = sneder as Visual;
+                /*var point = (sneder as Visual).TranslatePoint(new Point(args.Vector.X, args.Vector.Y), VisualRoot).GetValueOrDefault();
+                
+                Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+                Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();*/
+                var popupRoot = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(sender);
+            
+                var point = VisualRoot.PointToClient(sender.PointToScreen(new Point(args.Vector.X, args.Vector.Y)));
+                //Console.WriteLine("point: " + point);
+
+                //var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null).OfType<Visual>();
+                //Console.WriteLine("hitTestItems count: " + hitTestItems.Count());
+                Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+                Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
+                if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))
+                {
                     ResetToDefaults();
+                }
             };
         }
 
