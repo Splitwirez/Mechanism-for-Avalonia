@@ -24,15 +24,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             get => GetValue(OwnerProperty);
             set => SetValue(OwnerProperty, value);
         }
-
-        /*public static readonly StyledProperty<IToolStripItem> TargetItemProperty =
-            AvaloniaProperty.Register<MoveOrRemoveFromToolStripBehavior, IToolStripItem>(nameof(TargetItem));
-
-        public IToolStripItem TargetItem
-        {
-            get => GetValue(TargetItemProperty);
-            set => SetValue(TargetItemProperty, value);
-        }*/
+        
         public static readonly StyledProperty<ToolStripItemReference> TargetProperty =
             AvaloniaProperty.Register<ToolStripItemPointerOverBehavior, ToolStripItemReference>(nameof(Target));
 
@@ -45,7 +37,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         protected override void OnAttached()
         {
             base.OnAttached();
-            Debug.WriteLine("MoveOrRemoveFromToolStripBehavior");
             AssociatedObject.DragStarted += AssociatedObject_DragStarted;
             AssociatedObject.DragDelta += AssociatedObject_DragDelta;
             AssociatedObject.DragCompleted += AssociatedObject_DragCompleted;
@@ -65,7 +56,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
             var tmplParent = AssociatedObject.Parent as Visual;
             var pxSize = new PixelSize((int)(tmplParent.Bounds.Width * visRoot.RenderScaling), (int)(tmplParent.Bounds.Height * visRoot.RenderScaling));
-            Console.WriteLine("pxSize: " + pxSize);
+            
             RenderTargetBitmap bmp = new RenderTargetBitmap(pxSize);
             bmp.Render(tmplParent);
             ImageBrush brush = null;
@@ -120,15 +111,11 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             if (windowLayer.Children.Contains(_windowDragMovePreview))
                 windowLayer.Children.Remove(_windowDragMovePreview);
 
-
-            Debug.WriteLine("Drag completed");
             Owner.ValidateMoveOrRemoveFromToolStrip(Target, sender as Visual, e.Vector);
         }
 
         Thickness WindowMarginToPopupMargin(Thickness popupMargin)
         {
-            /*if (Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner) is Window win)
-                win.OffScreenMargin*/
             var win = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner);
             var pnt = win.PointToScreen(Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner._customizePopup).PointToClient(new PixelPoint((int)(popupMargin.Left * win.RenderScaling), (int)(popupMargin.Top * win.RenderScaling))));
             return new Thickness(pnt.X, pnt.Y, -pnt.X, -pnt.Y);

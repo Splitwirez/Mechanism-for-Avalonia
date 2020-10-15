@@ -38,7 +38,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         protected override void OnAttached()
         {
             base.OnAttached();
-            Debug.WriteLine("AddToToolStripBehaviour");
             AssociatedObject.DragStarted += AssociatedObject_DragStarted;
             AssociatedObject.DragDelta += AssociatedObject_DragDelta;
             AssociatedObject.DragCompleted += AssociatedObject_DragCompleted;
@@ -59,7 +58,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
             var tmplParent = AssociatedObject.Parent as Visual;
             var pxSize = new PixelSize((int)(tmplParent.Bounds.Width * visRoot.RenderScaling), (int)(tmplParent.Bounds.Height * visRoot.RenderScaling));
-            Console.WriteLine("pxSize: " + pxSize);
+            
             RenderTargetBitmap bmp = new RenderTargetBitmap(pxSize);
             bmp.Render(tmplParent);
             ImageBrush brush = null;
@@ -88,25 +87,9 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 Fill = brush,
                 Margin = PopupMarginToWindowMargin(_popupDragMovePreview.Margin)
             };
-
-            Console.WriteLine("START: " + _dragMoveStartLeft + ", " + _dragMoveStartTop);
-
-            //Console.WriteLine("AdornerLayer.GetAdornerLayer(AssociatedObject) != null: " + ( != null));
-            /*if (visualRoot is TopLevel topLevel)
-            {
-                var presenter = topLevel.FindNameScope().Find<ContentPresenter>("PART_ContentPresenter");
-                if ((presenter != null) && (presenter.Parent != null) && (presenter.Parent is VisualLayerManager layerMgr))
-                {
-                    if (layerMgr.OverlayLayer == null)
-                    {
-                        
-                    }
-                        //layerMgr.AdornerLayer = new AdornerLayer();
-            */
+            
             AdornerLayer.GetAdornerLayer(AssociatedObject).Children.Add(_popupDragMovePreview);
             AdornerLayer.GetAdornerLayer(Owner).Children.Add(_windowDragMovePreview);
-                /*}
-            }*/
         }
 
         private void AssociatedObject_DragDelta(object sender, VectorEventArgs e)
@@ -131,15 +114,11 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
             _popupDragMovePreview = null;
 
-            Debug.WriteLine("Drag completed");
             Owner.ValidateAddToToolStrip(TargetItem, sender as Visual, e.Vector);
         }
 
         Thickness PopupMarginToWindowMargin(Thickness popupMargin)
         {
-            /*if (Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner) is Window win)
-                win.OffScreenMargin*/
-            
             var pnt = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner).PointToClient(Avalonia.VisualTree.VisualExtensions.GetVisualRoot(AssociatedObject).PointToScreen(new Point(popupMargin.Left, popupMargin.Top)));
             return new Thickness(pnt.X, pnt.Y, -pnt.X, -pnt.Y);
         }
