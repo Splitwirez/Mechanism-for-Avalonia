@@ -25,12 +25,22 @@ using System.Timers;
 
 namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 {
+    /// <summary>
+    /// A control which mimicks the customizable Toolbars found in many native macOS apps.
+    /// </summary>
     public class ToolStrip : ItemsControl, IItemsPresenterHost
     {
         ObservableCollection<ToolStripItemReference> _defaultItems = new ObservableCollection<ToolStripItemReference>();
+
+        /// <summary>
+        /// Defines the <see cref="DefaultItems"/> property.
+        /// </summary>
         public static readonly DirectProperty<ToolStrip, ObservableCollection<ToolStripItemReference>> DefaultItemsProperty =
             AvaloniaProperty.RegisterDirect<ToolStrip, ObservableCollection<ToolStripItemReference>>(nameof(DefaultItems), o => o.DefaultItems, (o, v) => o.DefaultItems = v);
-
+        
+        /// <summary>
+        /// Gets or sets a value indicating what items should be placed into the <see cref="ToolStrip"/> initially or when resetting the <see cref="CurrentItems"/>.
+        /// </summary>
         public ObservableCollection<ToolStripItemReference> DefaultItems
         {
             get => _defaultItems;
@@ -38,9 +48,16 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         }
 
         ObservableCollection<ToolStripItemReference> _currentItems = new ObservableCollection<ToolStripItemReference>();
+        
+        /// <summary>
+        /// Defines the <see cref="CurrentItems"/> property.
+        /// </summary>
         public static readonly DirectProperty<ToolStrip, ObservableCollection<ToolStripItemReference>> CurrentItemsProperty =
             AvaloniaProperty.RegisterDirect<ToolStrip, ObservableCollection<ToolStripItemReference>>(nameof(CurrentItems), o => o.CurrentItems, (o, v) => o.CurrentItems = v);
-
+        
+        /// <summary>
+        /// Gets or sets a value indicating what items are currently present in the <see cref="ToolStrip"/>.
+        /// </summary>
         public ObservableCollection<ToolStripItemReference> CurrentItems
         {
             get => _currentItems;
@@ -48,27 +65,46 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         }
 
         ObservableCollection<ToolStripItemReference> _availableItems = new ObservableCollection<ToolStripItemReference>();
+        
+        /// <summary>
+        /// Defines the <see cref="AvailableItems"/> property.
+        /// </summary>
         public static readonly DirectProperty<ToolStrip, ObservableCollection<ToolStripItemReference>> AvailableItemsProperty =
             AvaloniaProperty.RegisterDirect<ToolStrip, ObservableCollection<ToolStripItemReference>>(nameof(AvailableItems), o => o.AvailableItems, (o, v) => o.AvailableItems = v);
 
+        /// <summary>
+        /// Gets or sets a value indicating what items can be added to the <see cref="ToolStrip"/> when <see cref="IsCustomizing"/> is <see langword="true"/>.
+        /// </summary>
         public ObservableCollection<ToolStripItemReference> AvailableItems
         {
             get => _availableItems;
             set => SetAndRaise(AvailableItemsProperty, ref _availableItems, value);
         }
 
+        /// <summary>
+        /// Defines the <see cref="IsCustomizing"/> property.
+        /// </summary>
         public static readonly StyledProperty<bool> IsCustomizingProperty =
             AvaloniaProperty.Register<ToolStrip, bool>(nameof(IsCustomizing), false);
 
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the <see cref="ToolStrip"/>'s Customization <see cref="Popup"/> is currently open. Commands on the <see cref="ToolStrip"/> cannot be invoked by the user when this property is <see langword="true"/>, as mouse interaction is needed to rearrange the items.
+        /// </summary>
         public bool IsCustomizing
         {
             get => GetValue(IsCustomizingProperty);
             set => SetValue(IsCustomizingProperty, value);
         }
 
+        /// <summary>
+        /// Defines the <see cref="ShowLabels"/> property.
+        /// </summary>
         public static readonly StyledProperty<bool> ShowLabelsProperty =
             AvaloniaProperty.Register<ToolStrip, bool>(nameof(ShowLabels), false);
 
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the <see cref="ToolStrip"/>'s <see cref="CurrentItems"/> should show text-labels beneath themselves. The <see cref="AvailableItems"/> do not obey this property, and show text-labels regardless of its value.
+        /// </summary>
         public bool ShowLabels
         {
             get => GetValue(ShowLabelsProperty);
@@ -229,6 +265,9 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             }
         }
 
+        /// <summary>
+        /// Resets the <see cref="CurrentItems"/> to match the <see cref="DefaultItems"/>.
+        /// </summary>
         public void ResetToDefaults()
         {
             CurrentItems.Clear();
@@ -341,12 +380,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
         {   
             var pnt = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(this).PointToClient(Avalonia.VisualTree.VisualExtensions.GetVisualRoot(_defaultItemsDragThumb).PointToScreen(new Point(popupMargin.Left, popupMargin.Top)));
             return new Thickness(pnt.X, pnt.Y, -pnt.X, -pnt.Y);
-        }
-
-        public IItemsPresenter Presenter
-        {
-            get;
-            protected set;
         }
 
         void IItemsPresenterHost.RegisterItemsPresenter(IItemsPresenter presenter)
