@@ -328,42 +328,42 @@
         <StackPanel Orientation="Vertical" Spacing="4">
           <mets:ToolStrip x:Name="ToolStrip">
             <mets:ToolStrip.Items>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem" DisplayName="Test" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Red"/>
                   </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
               </mets:ButtonToolStripItem>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Test2" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Test2" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Green"/>
                   </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
               </mets:ButtonToolStripItem>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Test3" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Test3" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Blue"/>
                   </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
               </mets:ButtonToolStripItem>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Test4" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Test4" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Yellow"/>
                   </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
               </mets:ButtonToolStripItem>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Test5" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Test5" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Orange"/>
                   </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
               </mets:ButtonToolStripItem>
-              <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Test6" Command="{Binding OnClickCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+              <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Test6" Command="{Binding $parent[Window].WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <mecore:AttachedIcon.Icon>
                   <ControlTemplate>
                     <Rectangle Width="16" Height="16" Fill="Purple"/>

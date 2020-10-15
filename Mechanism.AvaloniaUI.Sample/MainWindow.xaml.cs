@@ -39,6 +39,11 @@ namespace Mechanism.AvaloniaUI.Sample
             };
         }
 
+        public void WriteToConsoleCommand(object parameter)
+        {
+            Console.WriteLine("parameter: " + parameter);
+        }
+
         public void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             Uri uri = null;
