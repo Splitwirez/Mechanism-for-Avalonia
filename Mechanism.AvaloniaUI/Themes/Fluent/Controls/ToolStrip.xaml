@@ -85,7 +85,7 @@
               </DataTemplate>
             </ItemsControl.DataTemplates>
           </ItemsControl>
-          <Popup IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="10">
+          <Popup x:Name="PART_CustomizeFlyout" IsOpen="{TemplateBinding IsCustomizing}" StaysOpen="True" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" MinHeight="10">
             <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3">
               <StackPanel Orientation="Vertical" Margin="20">
                 <TextBlock Text="Drag your favorite items into the Toolstrip..." Margin="0,0,0,10"/>
@@ -113,7 +113,7 @@
                 </ItemsControl>
                 <TextBlock Text="...or drag the default set into the Toolstrip." Margin="0,20,0,10"/>
                 <Panel>
-                  <ItemsControl Items="{TemplateBinding DefaultItems}" IsHitTestVisible="False">
+                  <ItemsControl x:Name="PART_DefaultItemsItemsControl" Items="{TemplateBinding DefaultItems}" IsHitTestVisible="False">
                     <ItemsControl.ItemsPanel>
                       <ItemsPanelTemplate>
                         <mets:ToolStripItemsPanel HorizontalAlignment="Stretch" Spacing="6" Margin="7,0"/>

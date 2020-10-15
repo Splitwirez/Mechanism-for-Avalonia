@@ -4,8 +4,12 @@ using Avalonia.Controls;
 using Avalonia.Controls.Generators;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Shapes;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.LogicalTree;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Metadata;
 using Avalonia.Threading;
 using System;
@@ -14,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Timers;
@@ -394,39 +399,142 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             ((ObservableCollection<ToolStripItemReference>)CurrentItems).Add(reference);
         }*/
 
+        Rectangle _popupDragMovePreview = null;
+        Rectangle _windowDragMovePreview = null;
+        double _dragMoveStartLeft = 0;
+        double _dragMoveStartTop = 0;
+
         ItemsControl _currentItemsItemsControl = null;
+        ItemsControl _defaultItemsItemsControl = null;
+        Thumb _defaultItemsDragThumb = null;
+        internal Popup _customizePopup = null;
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
             //e.NameScope.Get<MenuItem>("PART_CustomizeMenuItem").Click += (sneder, args) => IsCustomizing = true;
             _currentItemsItemsControl = e.NameScope.Get<ItemsControl>("PART_CurrentItemsItemsControl");
+            _defaultItemsItemsControl = e.NameScope.Get<ItemsControl>("PART_DefaultItemsItemsControl");
+            _customizePopup = e.NameScope.Get<Popup>("PART_CustomizeFlyout");
             /*_currentItemsItemsControl.PointerMoved += (sneder, args) =>
             {
                 var pnt = args.GetCurrentPoint(_currentItemsItemsControl);
                 Debug.WriteLine("Point: " + pnt.Position);
             };*/
-            Thumb defaultItemsDragThumb = e.NameScope.Get<Thumb>("PART_DefaultItemsThumb");
-            defaultItemsDragThumb.DragCompleted += (sneder, args) =>
-            {
-                var sender = sneder as Visual;
-                /*var point = (sneder as Visual).TranslatePoint(new Point(args.Vector.X, args.Vector.Y), VisualRoot).GetValueOrDefault();
-                
-                Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
-                Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();*/
-                var popupRoot = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(sender);
-            
-                var point = VisualRoot.PointToClient(sender.PointToScreen(new Point(args.Vector.X, args.Vector.Y)));
-                //Console.WriteLine("point: " + point);
+            _defaultItemsDragThumb = e.NameScope.Get<Thumb>("PART_DefaultItemsThumb");
+            _defaultItemsDragThumb.DragStarted += DefaultItemsDragThumb_DragStarted;
+            _defaultItemsDragThumb.DragDelta += DefaultItemsDragThumb_DragDelta;
+            _defaultItemsDragThumb.DragCompleted += DefaultItemsDragThumb_DragCompleted;
+        }
 
-                //var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null).OfType<Visual>();
-                //Console.WriteLine("hitTestItems count: " + hitTestItems.Count());
-                Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
-                Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
-                if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))
-                {
-                    ResetToDefaults();
-                }
+        private void DefaultItemsDragThumb_DragStarted(object sender, VectorEventArgs e)
+        {
+            var visRoot = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(_defaultItemsDragThumb);
+            var pnt = _defaultItemsItemsControl.TranslatePoint(new Point(0, 0), visRoot).GetValueOrDefault();
+            _dragMoveStartLeft = pnt.X;
+            _dragMoveStartTop = pnt.Y;
+
+
+            //var tmplParent = _defaultItemsDragThumb.Parent as Visual;
+            var pxSize = new PixelSize((int)(_defaultItemsItemsControl.Bounds.Width * visRoot.RenderScaling), (int)(_defaultItemsItemsControl.Bounds.Height * visRoot.RenderScaling));
+            Console.WriteLine("pxSize: " + pxSize);
+            RenderTargetBitmap bmp = new RenderTargetBitmap(pxSize);
+            bmp.Render(_defaultItemsItemsControl);
+            ImageBrush brush = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bmp.Save(stream);
+                stream.Position = 0;
+                brush = new ImageBrush(new Bitmap(stream));
+            }
+
+            _popupDragMovePreview = new Rectangle()
+            {
+                Width = _defaultItemsItemsControl.Bounds.Width,
+                Height = _defaultItemsItemsControl.Bounds.Height,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Fill = brush,
+                Margin = new Thickness(_dragMoveStartLeft, _dragMoveStartTop, -_dragMoveStartLeft, -_dragMoveStartTop)
             };
+            _windowDragMovePreview = new Rectangle()
+            {
+                Width = _defaultItemsItemsControl.Bounds.Width,
+                Height = _defaultItemsItemsControl.Bounds.Height,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Fill = brush,
+                Margin = PopupMarginToWindowMargin(_popupDragMovePreview.Margin)
+            };
+
+            Console.WriteLine("START: " + _dragMoveStartLeft + ", " + _dragMoveStartTop);
+
+            //Console.WriteLine("AdornerLayer.GetAdornerLayer(AssociatedObject) != null: " + ( != null));
+            /*if (visualRoot is TopLevel topLevel)
+            {
+                var presenter = topLevel.FindNameScope().Find<ContentPresenter>("PART_ContentPresenter");
+                if ((presenter != null) && (presenter.Parent != null) && (presenter.Parent is VisualLayerManager layerMgr))
+                {
+                    if (layerMgr.OverlayLayer == null)
+                    {
+                        
+                    }
+                        //layerMgr.AdornerLayer = new AdornerLayer();
+            */
+            AdornerLayer.GetAdornerLayer(_defaultItemsDragThumb).Children.Add(_popupDragMovePreview);
+            AdornerLayer.GetAdornerLayer(this).Children.Add(_windowDragMovePreview);
+                /*}
+            }*/
+        }
+
+        private void DefaultItemsDragThumb_DragDelta(object sender, VectorEventArgs e)
+        {
+            double x = _dragMoveStartLeft + e.Vector.X;
+            double y = _dragMoveStartTop + e.Vector.Y;
+            _popupDragMovePreview.Margin = new Thickness(x, y, -x, -y);
+            _windowDragMovePreview.Margin = PopupMarginToWindowMargin(_popupDragMovePreview.Margin);
+            Console.WriteLine("x, y: " + x + ", " + y);
+        }
+
+        private void DefaultItemsDragThumb_DragCompleted(object sender, VectorEventArgs e)
+        {
+            var popupLayer = AdornerLayer.GetAdornerLayer(_defaultItemsDragThumb);
+            
+            if (popupLayer.Children.Contains(_popupDragMovePreview))
+                popupLayer.Children.Remove(_popupDragMovePreview);
+
+            var windowLayer = AdornerLayer.GetAdornerLayer(this);
+            
+            if (windowLayer.Children.Contains(_windowDragMovePreview))
+                windowLayer.Children.Remove(_windowDragMovePreview);
+
+            _popupDragMovePreview = null;
+
+            /*var point = (sneder as Visual).TranslatePoint(new Point(args.Vector.X, args.Vector.Y), VisualRoot).GetValueOrDefault();
+            
+            Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+            Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();*/
+            var popupRoot = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(_defaultItemsDragThumb);
+        
+            var point = VisualRoot.PointToClient(_defaultItemsDragThumb.PointToScreen(new Point(e.Vector.X, e.Vector.Y)));
+            //Console.WriteLine("point: " + point);
+
+            //var hitTestItems = VisualRoot.Renderer.HitTest(point, VisualRoot, null).OfType<Visual>();
+            //Console.WriteLine("hitTestItems count: " + hitTestItems.Count());
+            Point tL = _currentItemsItemsControl.TranslatePoint(new Point(0, 0), VisualRoot).GetValueOrDefault();
+            Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
+            if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))
+            {
+                ResetToDefaults();
+            }
+        }
+
+        Thickness PopupMarginToWindowMargin(Thickness popupMargin)
+        {
+            /*if (Avalonia.VisualTree.VisualExtensions.GetVisualRoot(Owner) is Window win)
+                win.OffScreenMargin*/
+            
+            var pnt = Avalonia.VisualTree.VisualExtensions.GetVisualRoot(this).PointToClient(Avalonia.VisualTree.VisualExtensions.GetVisualRoot(_defaultItemsDragThumb).PointToScreen(new Point(popupMargin.Left, popupMargin.Top)));
+            return new Thickness(pnt.X, pnt.Y, -pnt.X, -pnt.Y);
         }
 
         public IItemsPresenter Presenter
