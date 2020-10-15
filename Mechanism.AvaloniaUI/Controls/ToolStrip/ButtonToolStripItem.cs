@@ -16,7 +16,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 {
     public class ButtonToolStripItem : Control, IStyleable, IToolStripItem
     {
-        private static readonly IControlTemplate DefaultTemplate = new FuncControlTemplate((tctrl, namescope) => new Button()
+        /*private static readonly IControlTemplate DefaultTemplate = new FuncControlTemplate((tctrl, namescope) => new Button()
         {
             Classes = new Classes("ToolStripButton"),
             DataContext = new Binding("."),
@@ -29,46 +29,27 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                     {
                         AncestorType = typeof(ButtonToolStripItem)
                     }
-                }//new TemplateBinding(IconProperty)
+                }
             }
         });
 
-        private static IControlTemplate DefaultTemplate2 => (IControlTemplate)Application.Current.FindResource("ButtonToolStripItemTemplate");
+        private static IControlTemplate DefaultTemplate2 => (IControlTemplate)Application.Current.FindResource("ButtonToolStripItemTemplate");*/
 
         public static readonly StyledProperty<IControlTemplate> TemplateProperty =
-            AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Template)/*, DefaultTemplate2*/);
+            AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Template));
 
         public IControlTemplate Template
         {
             get => GetValue(TemplateProperty);
             set => SetValue(TemplateProperty, value);
         }
-
-        /*public static readonly StyledProperty<IControlTemplate> IconProperty =
-            AvaloniaProperty.Register<ButtonToolStripItem, IControlTemplate>(nameof(Icon), null);
-
-        public IControlTemplate Icon
-        {
-            get => GetValue(IconProperty);
-            set => SetValue(IconProperty, value);
-        }*/
-
-        /*private static readonly ICommand DefaultCommand = new Func<object>(() =>
-        {
-            return null;
-        }).Method;*/
         public static readonly StyledProperty<ICommand> CommandProperty =
             AvaloniaProperty.Register<ButtonToolStripItem, ICommand>(nameof(Command), null);
-        /*private ICommand _command;
-        public static readonly DirectProperty<ButtonToolStripItem, ICommand> CommandProperty =
-            AvaloniaProperty.RegisterDirect<ButtonToolStripItem, ICommand>(nameof(Command), button => button.Command, (button, command) => button.Command = command, enableDataValidation: true);*/
 
         public ICommand Command
         {
             get => GetValue(CommandProperty);
             set => SetValue(CommandProperty, value);
-            /*get => _command;
-            set => SetAndRaise(CommandProperty, ref _command, value);*/
         }
 
         public static readonly StyledProperty<object> CommandParameterProperty =
@@ -135,41 +116,9 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
         Type IStyleable.StyleKey => typeof(ButtonToolStripItem);
 
-       /*static ButtonToolStripItem()
+        /*public ButtonToolStripItem()
         {
-            OwnerProperty.Changed.AddClassHandler<ButtonToolStripItem>(new Action<ButtonToolStripItem, AvaloniaPropertyChangedEventArgs>((sender, e) =>
-            {
-                if ((e.NewValue != null) && (e.NewValue is ToolStrip owner))
-                {
-                    sender.Command.CanExecute 
-                    //new Selector()
-                    //sender.Styles.Add((IStyle)owner.Styles[typeof(ButtonToolStripItem)]);
-                    //sender.Styles.Add((IStyle)owner.Styles.)
-                    //sender.Template = (IControlTemplate)owner.FindResource("ButtonToolStripItemTemplate");
-                    //(IControlTemplate)owner.Resources["ButtonToolStripItemTemplate"];
-                }
-            }));
-        }*/
-
-        public ButtonToolStripItem()
-        {
-            /*this.Template = new FuncControlTemplate((tctrl, namescope) => new Button()
-            {
-                DataContext = this,
-                Classes = new Classes("ToolStripButton"),
-                [!Button.CommandProperty] = new Binding("Command"),
-                [!Button.CommandParameterProperty] = new Binding("CommandParameter"),
-                Content = new TemplatedControl()
-                {
-                    [!TemplatedControl.TemplateProperty] = new Binding("Icon")
-                }
-            });*/
-            //Bind(TemplateProperty, );
-            //this[!ButtonToolStripItem.TemplateProperty] = new DynamicResourceExtension("ButtonToolStripItemTemplate");
             this.Bind(TemplateProperty, new DynamicResourceExtension("ButtonToolStripItemTemplate"));
-            //this.prop
-            //this.Template = (IControlTemplate)this.FindResource("ButtonToolStripItemTemplate");
-            
-        }
+        }*/
     }
 }

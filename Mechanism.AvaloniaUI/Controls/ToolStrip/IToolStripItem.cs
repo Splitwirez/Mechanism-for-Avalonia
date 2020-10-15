@@ -11,10 +11,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
     {
         IControlTemplate Template { get; set; }
 
-        ICommand Command { get; set; }
-
-        object CommandParameter { get; set; }
-
         string DisplayName { get; set; }
 
         bool AllowDuplicates { get; set; }

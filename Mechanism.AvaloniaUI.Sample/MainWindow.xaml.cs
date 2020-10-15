@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using Mechanism.AvaloniaUI.Controls.BlenderBar;
 using Mechanism.AvaloniaUI.Controls.CommandBar;
 using Mechanism.AvaloniaUI.Controls.ContentDialog;
+using Mechanism.AvaloniaUI.Controls.ToolStrip;
 using System;
 using System.Timers;
 
@@ -20,6 +21,9 @@ namespace Mechanism.AvaloniaUI.Sample
 #endif*/
         }
 
+        public string Greetongs { get; set; } = "Henlo world!";
+        TextBlock _lastItemTextBlock = null;
+        TextBlock _lastSegmentTextBlock = null;
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -37,11 +41,36 @@ namespace Mechanism.AvaloniaUI.Sample
                 if ((args.AddedItems != null) && (args.AddedItems.Count > 0) && (args.AddedItems[0] is BlenderBarItem item))
                     Console.WriteLine("Selected " + item.Header);
             };
+
+            _lastItemTextBlock = this.Find<TextBlock>("LastItemTextBlock");
+            _lastSegmentTextBlock = this.Find<TextBlock>("LastSegmentTextBlock");
+        }
+
+        public void TestSegmentedControlToolStripItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string val = "{x:Null}";
+            if ((e.AddedItems != null) && (e.AddedItems.Count > 0))
+            {
+                if (e.AddedItems[0] is SegmentedControlToolStripItemSegment segment)
+                    val = segment.DisplayName;
+                else if (e.AddedItems[0] is ContentControl ctrl)
+                    val = ctrl.ToString();
+                else
+                    val = e.AddedItems[0].ToString();
+            }
+            
+            _lastSegmentTextBlock.Text = val;
         }
 
         public void WriteToConsoleCommand(object parameter)
         {
             Console.WriteLine("parameter: " + parameter);
+
+            string val = "{x:Null}";
+            if (parameter != null)
+                val = parameter.ToString() + ", " + parameter.GetType().FullName;
+            
+            _lastItemTextBlock.Text = val;
         }
 
         public void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)

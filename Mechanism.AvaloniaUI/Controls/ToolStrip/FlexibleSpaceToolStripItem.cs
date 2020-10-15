@@ -19,18 +19,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             set => SetValue(TemplateProperty, value);
         }
 
-        public ICommand Command
-        {
-            get => null;
-            set { }
-        }
-
-        public object CommandParameter
-        {
-            get => null;
-            set { }
-        }
-
         public string DisplayName
         {
             get => "Flexible space";

@@ -9,7 +9,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
     public class ToolStripItemReference : AvaloniaObject
     {
         public static readonly StyledProperty<IToolStripItem> TargetItemProperty =
-            AvaloniaProperty.Register<ButtonToolStripItem, IToolStripItem>(nameof(TargetItem));
+            AvaloniaProperty.Register<ToolStripItemReference, IToolStripItem>(nameof(TargetItem));
 
         public IToolStripItem TargetItem
         {

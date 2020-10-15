@@ -175,7 +175,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
 
             if (e.NewItems != null)
             {
-                foreach (ToolStripItemReference rfrnc in e.NewItems)
+                foreach (ToolStripItemReference rfrnc in e.NewItems.OfType<ToolStripItemReference>().Where(x => x.TargetItem != null))
                 {
                     var item = rfrnc.TargetItem;
                     if (!item.AllowDuplicates)
