@@ -22,6 +22,7 @@ namespace Mechanism.AvaloniaUI.Sample
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow();
+                new ThemeDemoWindow().Show();
             }
 
             base.OnFrameworkInitializationCompleted();

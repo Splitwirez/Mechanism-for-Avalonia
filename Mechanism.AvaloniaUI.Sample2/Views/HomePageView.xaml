@@ -1,0 +1,164 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:Mechanism.AvaloniaUI.Sample2.Views;assembly=Mechanism.AvaloniaUI.Sample2"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample2.Views.HomePageView">
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Width" Value="128" />
+            <Setter Property="Height" Value="128" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow" />
+        </Style>
+    </UserControl.Styles>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
+            <Button Command="{Binding GoToView}">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <Border Width="64" Height="64" CornerRadius="3" BoxShadow="0 2 8 #5F000000">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
+                                <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel Orientation="Vertical">
+                            <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeDisabledLowBrush}" CornerRadius="3,3,0,0">
+                                <StackPanel Spacing="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Ellipse Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeHighBrush}">
+                                <StackPanel Spacing="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4">
+                                    <Ellipse Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Ellipse Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Text="ToolBarTray" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+                <Button.CommandParameter>
+                    <v:ToolBarTrayPageView/>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding GoToView}">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <Border Width="64" Height="64" CornerRadius="3" BoxShadow="0 2 8 #5F000000">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
+                                <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3,3,0,0">
+                            <StackPanel Spacing="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4">
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                    <TextBlock Text="CommandBar" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+                <Button.CommandParameter>
+                    <v:CommandBarPageView/>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding GoToView}">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <Border Width="64" Height="64" CornerRadius="3" BoxShadow="0 2 8 #5F000000">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
+                                <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3,3,0,0">
+                            <Panel HorizontalAlignment="Stretch" Margin="4">
+                                <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Left"/>
+                                <Ellipse Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Center"/>
+                                <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Right"/>
+                            </Panel>
+                        </Border>
+                    </Border>
+                    <TextBlock Text="ToolStrip" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+                <Button.CommandParameter>
+                    <v:ToolStripPageView/>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding GoToView}" IsVisible="False">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <DockPanel Width="64" Height="64">
+                        <Border Height="16" CornerRadius="3" BoxShadow="0 2 8 #5F000000" DockPanel.Dock="Top">
+                            <DockPanel>
+                                <Border x:Name="SplitButtonIconRightSegmentBorder" DockPanel.Dock="Right" Width="16" CornerRadius="0,3,0,0">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
+                                            <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Path Data="M 0 0 L 3 3 L 6 0" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <Border Background="{Binding #SplitButtonIconRightSegmentBorder.Background}" CornerRadius="3,0,0,3" Margin="0,0,1,0">
+                                    <Rectangle HorizontalAlignment="Left" Width="32" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                </Border>
+                            </DockPanel>
+                        </Border>
+                        <Border Margin="16,0,0,0" Background="{DynamicResource MenuFlyoutPresenterBackground}" BoxShadow="0 2 8 #5F000000" CornerRadius="3,0,3,3">
+                            <UniformGrid Columns="1">
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Left"/>
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Left"/>
+                                <Rectangle Width="12" Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" HorizontalAlignment="Left"/>
+                            </UniformGrid>
+                        </Border>
+                    </DockPanel>
+                    <TextBlock Text="FlyoutButton" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+                <Button.CommandParameter>
+                    <v:ToolBarTrayPageView/>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding GoToView}">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <Border Width="64" Height="64" CornerRadius="3" BoxShadow="0 2 8 #5F000000">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
+                                <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border HorizontalAlignment="Left" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3,0,0,3">
+                            <StackPanel HorizontalAlignment="Stretch" Margin="4" Spacing="4">
+                                <StackPanel HorizontalAlignment="Stretch" Spacing="1">
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="3,3,0,0"/>
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="0,0,3,3"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Stretch" Spacing="1">
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="3,3,0,0"/>
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                    <Border Width="16" Height="6" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="0,0,3,3"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                    <TextBlock Text="BlenderBar" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+                <Button.CommandParameter>
+                    <v:BlenderBarPageView/>
+                </Button.CommandParameter>
+            </Button>
+        </WrapPanel>
+    </ScrollViewer>
+</UserControl>

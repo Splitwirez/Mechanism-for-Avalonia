@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputPath>..\..\bin</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="*.xaml" />
@@ -8,8 +9,8 @@
 	  <AvaloniaResource Include="Themes/Controls/*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-preview5" />
-    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0-preview5" />
+    <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0-rc1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mechanism.AvaloniaUI\Mechanism.AvaloniaUI.csproj" />
