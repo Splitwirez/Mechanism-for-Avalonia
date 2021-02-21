@@ -8,13 +8,13 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 ### Currently-available Controls
 - `ToolBarTray` and `ToolBar` (nearly feature-complete)<br/>![ToolBar and ToolBarTray in action](/ReadmeImages/ToolBar-ToolBarTray.gif)
 - `CommandBar` (feature-complete, in need of testing)<br/>![CommandBar in action](/ReadmeImages/CommandBar.gif)
-- `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
+<!--- `FlyoutButton` (feature-complete, in need of testing)<br/>![FlyoutButton](/ReadmeImages/FlyoutButton.png)
 - `SplitButton` (feature-complete, in need of testing)
 - `SplitToggleButton` (feature-complete, in need of testing)
 - `ContentDialog` (under construction)<br/>![ContentDialog](/ReadmeImages/ContentDialog.png)
-- `StyleableWindow` (shelved)
+- `StyleableWindow` (shelved)-->
 - `ToolStrip` (functional but lacks visual polish, in need of testing)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
-- `BlenderBar` (feature-complete, in need of testing)<br/>![BlenderBar](/ReadmeImages/BlenderBar.gif)
+<!--- `BlenderBar` (feature-complete, in need of testing)<br/>![BlenderBar](/ReadmeImages/BlenderBar.gif)-->
 
 ### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
