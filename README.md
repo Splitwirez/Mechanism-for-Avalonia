@@ -16,13 +16,13 @@ At this early stage, I cannot promise that all of Mechanism for Avalonia is prod
 - `ToolStrip` (functional but lacks visual polish, in need of testing)<br/>![ToolStrip](/ReadmeImages/ToolStrip.gif)
 <!--- `BlenderBar` (feature-complete, in need of testing)<br/>![BlenderBar](/ReadmeImages/BlenderBar.gif)-->
 
-### Currently-available Themes
+<!--### Currently-available Themes
 ##### (Note that all of these themes are currently very incomplete)
 - Windows Aero
 - Windows Fluent
 - macOS Human
 - Jade (shelved)
-- Slate (shelved)
+- Slate (shelved)-->
 
 ### Currently-available tools
 - `PerPlatformUI` (under construction)
