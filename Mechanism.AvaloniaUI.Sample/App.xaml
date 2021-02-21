@@ -1,15 +1,15 @@
-﻿<Application xmlns="https://github.com/avaloniaui"
+<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample"
              x:Class="Mechanism.AvaloniaUI.Sample.App">
-    <Application.Styles>
-        <FluentTheme Mode="Light"/>
-        <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Fluent/FluentTheme.xaml"/>
-        <!--StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-        <StyleInclude Source="avares://Mechanism.AvaloniaUI/Themes/Default/DefaultTheme.xaml"/-->
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
 
-        <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Aero.NormalColor/Themes/Aero.NormalColor.xaml"/-->
-        <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Slate/Themes/Slate.xaml"/-->
-        <!--StyleInclude Source="avares://Mechanism.AvaloniaUI.Themes.Jade/Themes/Jade.xaml"/-->
+    <Application.Styles>
+        <!--StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/-->
+        <FluentTheme Mode="Light"/>
+        <StyleInclude Source="avares://Mechanism.AvaloniaUI.Controls/Styles/Fluent/FluentTheme.xaml"/>
     </Application.Styles>
 </Application>

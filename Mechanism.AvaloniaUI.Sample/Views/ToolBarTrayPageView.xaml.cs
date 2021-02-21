@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Mechanism.AvaloniaUI.Sample
+namespace Mechanism.AvaloniaUI.Sample.Views
 {
-    public class MainWindow : Window
+    public class ToolBarTrayPageView : UserControl
     {
-        public MainWindow()
+        public ToolBarTrayPageView()
         {
             InitializeComponent();
         }

@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample.Views.ToolStripPageView">
+    <UserControl.DataContext>
+        <vm:DemoPageViewModel/>
+    </UserControl.DataContext>
+    <StackPanel Orientation="Vertical" Spacing="4">
+        <mets:ToolStrip x:Name="ToolStrip">
+            <mets:ToolStrip.Items>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Button 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Button 3" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Button 4" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Button 5" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Button 6 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="16" Height="16" Fill="Purple"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </mets:ButtonToolStripItem>
+                <mets:SegmentedControlToolStripItem x:Name="TestSegmentedControlToolStripItem" SelectionChanged="TestSegmentedControlToolStripItem_SelectionChanged">
+                <!-- -->
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="Pink">
+                <!-- Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}"-->
+                    <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Ellipse Width="16" Height="16" Fill="Pink"/>
+                    </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </mets:SegmentedControlToolStripItemSegment>
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="Maroon">
+                    <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Ellipse Width="16" Height="16" Fill="Maroon"/>
+                    </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </mets:SegmentedControlToolStripItemSegment>
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="Aquamarine">
+                    <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Ellipse Width="16" Height="16" Fill="Aquamarine"/>
+                    </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </mets:SegmentedControlToolStripItemSegment>
+                </mets:SegmentedControlToolStripItem>
+            </mets:ToolStrip.Items>
+            <mets:ToolStrip.DefaultItems>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem1}"/>
+                <mets:ToolStripFlexibleSpaceReference/>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
+                <mets:ToolStripFlexibleSpaceReference/>
+                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestSegmentedControlToolStripItem}"/>
+            </mets:ToolStrip.DefaultItems>
+        </mets:ToolStrip>
+        <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip, Mode=TwoWay}"/>
+        <CheckBox Content="ShowLabels" IsChecked="{Binding ShowLabels, ElementName=ToolStrip}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock Text="Last clicked Button item: "/>
+            <TextBlock x:Name="LastItemTextBlock"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <TextBlock Text="Last selected SegmentControl item segment: "/>
+        <TextBlock x:Name="LastSegmentTextBlock"/>
+    </StackPanel>
+</StackPanel>
+</UserControl>

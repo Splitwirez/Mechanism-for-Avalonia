@@ -1,12 +1,14 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 
-namespace Mechanism.AvaloniaUI.Sample
+namespace Mechanism.AvaloniaUI.Sample.Views
 {
-    public class MainWindow : Window
+    public class HomePageView : UserControl, IStyleable
     {
-        public MainWindow()
+        public HomePageView()
         {
             InitializeComponent();
         }

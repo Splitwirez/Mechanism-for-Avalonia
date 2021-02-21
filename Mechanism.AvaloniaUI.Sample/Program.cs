@@ -1,8 +1,7 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Dialogs;
 using Avalonia.Controls.ApplicationLifetimes;
-//using Avalonia.Logging.Serilog;
+using Avalonia.ReactiveUI;
 
 namespace Mechanism.AvaloniaUI.Sample
 {
@@ -16,20 +15,8 @@ namespace Mechanism.AvaloniaUI.Sample
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-        {
-            var builder = AppBuilder.Configure<App>()
+            => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                //.UseDirect2D1()
-                //.UseManagedSystemDialogs()
-                //.UseManagedDialogs()
-                //.With(new AvaloniaNativePlatformOptions() { UseDeferredRendering = false })
-/*#if DEBUG
-                .LogToDebug()
-#endif*/
-                ;
-            ManagedFileDialogExtensions.UseManagedSystemDialogs(builder);
-            return builder;
-        }
-        
+                .UseReactiveUI();
     }
 }
