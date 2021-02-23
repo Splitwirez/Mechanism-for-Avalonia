@@ -40,98 +40,126 @@
                 </MenuItem>
                 </Menu>
             </metb:ToolBar>
-            <metb:ToolBar Width="202" Band="1">
+            <metb:ToolBar Width="282" Band="1">
                 <Button Content="Back">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Path Data="M 11 4 L 3 12 L 11 20 M 3 12 L 23 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </Button>
                 <Button Content="Forward">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Path Data="M 13 4 L 21 12 L 13 20 M 21 12 L 1 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </Button>
                 <Button Content="Cancel">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Path Data="M 2 2 L 22 22 M 22 2 L 2 22" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </Button>
-            </metb:ToolBar>
-            <metb:ToolBar Band="1" Width="279">
-                <Button Content="Button">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </Button>
-                <ToggleButton Content="ToggleButton">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <!--Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/-->
-                        <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </ToggleButton>
-                <RepeatButton Content="RepeatButton">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </RepeatButton>
             </metb:ToolBar>
             <metb:ToolBar Band="1">
+                <Button Content="Button">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[Button].Foreground}">Btn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </Button>
+                <ToggleButton Content="ToggleButton">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <!-Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/->
+                                <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[ToggleButton].Foreground}">TglBtn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </ToggleButton>
+                <RepeatButton Content="RepeatButton">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel-->
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[RepeatButton].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[RepeatButton].Foreground}">RptBtn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </RepeatButton>
+            </metb:ToolBar>
+            <!--metb:ToolBar Band="1">
                 <Button Content="Button1">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!-Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 0 8 L 16 8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel->
+                            <Border Width="24" Height="24" BoxShadow="0 2 8 #5F000000" CornerRadius="12">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FF496EFF"/>
+                                        <GradientStop Offset="1" Color="#FF3E5ED9"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </Button>
                 <Button Content="Button2">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Panel Width="24" Height="24">
-                        <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                        <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Panel>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!-Panel Width="24" Height="24">
+                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
+                                <Path Data="M 8 0 L 8 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Panel->
+                            <Border Width="24" Height="24" BoxShadow="0 2 8 #5F000000" CornerRadius="12">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FF49FF6E"/>
+                                        <GradientStop Offset="1" Color="#FF3ED95E"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </Button>
-            </metb:ToolBar>
+            </metb:ToolBar-->
             <metb:ToolBar Band="2" UseOverflow="False">
                 <metb:ToolBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel/>
-                </ItemsPanelTemplate>
+                    <ItemsPanelTemplate>
+                        <DockPanel/>
+                    </ItemsPanelTemplate>
                 </metb:ToolBar.ItemsPanel>
                 <TextBlock Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
                 <Button DockPanel.Dock="Right">Go</Button>

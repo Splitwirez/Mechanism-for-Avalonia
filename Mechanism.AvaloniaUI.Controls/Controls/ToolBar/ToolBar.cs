@@ -88,7 +88,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
         double _localY = -1;
         private void GripThumb_DragStarted(object sender, VectorEventArgs e)
         {
-            Debug.WriteLine("Drag started");
+            //Debug.WriteLine("Drag started");
             _localX = e.Vector.X;
             _localY = e.Vector.Y;
         }
@@ -103,7 +103,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             {
                 Dispatcher.UIThread.Post(new Action(() =>
                 {
-                    Debug.WriteLine("Dispatcher...");
+                    //Debug.WriteLine("Dispatcher...");
                     if (!_pointerDown)
                         timer.Stop();
                     else
@@ -111,14 +111,14 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
                         ToolBar t = null;
                         foreach (ToolBar bar in parent.Items.OfType<ToolBar>())
                         {
-                            Debug.WriteLine("Iterating...");
+                            //Debug.WriteLine("Iterating...");
                             var point = e.GetPosition(bar);
                             point = point.WithX(point.X + 1);
                             point = point.WithY(point.Y + 1);
                             if (VisualRoot.Renderer.HitTest(point, bar, null).Contains(bar))
                             {
                                 t = bar;
-                                Debug.WriteLine("bar found!");
+                                //Debug.WriteLine("bar found!");
                             }
                         }
                         if (t != null) //foreach (ToolBar t in parent.Items.OfType<ToolBar>())
@@ -154,7 +154,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             ToolBar mouseOverBar = null;
             var parent = Parent as ToolBarTray;
             //PixelPoint cursorPoint = _gripThumb.PointToScreen(new Point(localX, localY))/*.ToPoint(VisualRoot.RenderScaling)*/;
-            Debug.WriteLine("VisualRoot.RenderScaling: " + VisualRoot.RenderScaling);
+            //Debug.WriteLine("VisualRoot.RenderScaling: " + VisualRoot.RenderScaling);
             var cursorPoint = _gripThumb.PointToScreen(new Point(localX, localY)).ToPoint(VisualRoot.RenderScaling);
             var items = parent.Items.OfType<ToolBar>();
             /*bool swapLeft = false;
@@ -162,7 +162,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             bool leftHalf = false;
             foreach (ToolBar bar in items)
             {
-                Debug.WriteLine("INDEX: " + items.ToList().IndexOf(bar));
+                //Debug.WriteLine("INDEX: " + items.ToList().IndexOf(bar));
 
                 /*var barPoint = bar.PointToScreen(new Point(0, 0));
                 Debug.WriteLine("points: " + cursorPoint.ToString() + "; " + barPoint.ToString());
@@ -178,7 +178,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
                 bool bottom = (barPoint.Y + bar.Bounds.Height) >= cursorPoint.Y;
                 leftHalf = (barPoint.X + (bar.Bounds.Width / 2)) >= cursorPoint.X;
 
-                Debug.WriteLine("Bounds comparison: " + left + ", " + top + ", " + right + ", " + bottom);
+                //Debug.WriteLine("Bounds comparison: " + left + ", " + top + ", " + right + ", " + bottom);
                 if (left && top && right && bottom)
                 {
                     mouseOverBar = bar;
@@ -199,7 +199,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             }
 
             var trayPoint = parent.PointToScreen(new Point(0, 0));
-            Debug.WriteLine("points: " + cursorPoint.ToString() + "; " + trayPoint.ToString());
+            //Debug.WriteLine("points: " + cursorPoint.ToString() + "; " + trayPoint.ToString());
             //bool left = trayPoint.X <= cursorPoint.X;
             bool aboveTop = trayPoint.Y > cursorPoint.Y;
             //bool right = (trayPoint.X + (parent.Bounds.Width / VisualRoot.RenderScaling)) >= cursorPoint.X;

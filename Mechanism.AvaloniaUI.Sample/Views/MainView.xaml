@@ -15,6 +15,10 @@
                 <Button HorizontalAlignment="Left" IsVisible="{Binding CanGoHome}" Command="{Binding GoHome}" Width="50" VerticalAlignment="Stretch" Margin="2">
                     <Path Data="M 0 5 L 5 0 L 7 0 L 2 5 L 12 5 L 12 7 L 2 7 L 7 12 L 5 12 Z" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button>
+                <!--StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="15">
+                    <TextBlock Text="Lights" VerticalAlignment="Center"/-->
+                <ToggleSwitch x:Name="LightsToggleSwitch" HorizontalAlignment="Right" IsChecked="True" OnContent="Lights on" OffContent="Lights off" Margin="5,0"/>
+                <!--/StackPanel-->
                 <TextBlock Text="{Binding CurrentTitle}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"/>
             </Panel>
         </Border>

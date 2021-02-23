@@ -36,35 +36,38 @@ namespace Mechanism.AvaloniaUI.Behaviors
         static CornerCurves _allCurves = new CornerCurves(true);
         public void ResetCornerCurves()
         {
-            if (AssociatedObject.Children.Count > 2)
+            if (AssociatedObject != null)
             {
-                CornerCurves noCurves = _noCurves;
-                foreach (Visual vis in AssociatedObject.Children.Skip(1))
+                if (AssociatedObject.Children.Count > 2)
                 {
-                    CornerCurves.SetCornerCurves(vis, noCurves);
-                    /*string typeName = vis.GetType().FullName;
-                    if ((vis is IContentControl ctrl) && (ctrl.Content != null))
-                        typeName += ", " + ctrl.Content.GetType().FullName;
-                    
-                    Console.WriteLine("CHILD TYPE: " + typeName);*/
+                    CornerCurves noCurves = _noCurves;
+                    foreach (Visual vis in AssociatedObject.Children.Skip(1))
+                    {
+                        CornerCurves.SetCornerCurves(vis, noCurves);
+                        /*string typeName = vis.GetType().FullName;
+                        if ((vis is IContentControl ctrl) && (ctrl.Content != null))
+                            typeName += ", " + ctrl.Content.GetType().FullName;
+                        
+                        Console.WriteLine("CHILD TYPE: " + typeName);*/
+                    }
                 }
-            }
 
-            if (AssociatedObject.Children.Count >= 2)
-            {
-                if (AssociatedObject.Orientation == Orientation.Vertical)
+                if (AssociatedObject.Children.Count >= 2)
                 {
-                    CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _vertFirst);
-                    CornerCurves.SetCornerCurves(AssociatedObject.Children.Last(), _vertLast);
+                    if (AssociatedObject.Orientation == Orientation.Vertical)
+                    {
+                        CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _vertFirst);
+                        CornerCurves.SetCornerCurves(AssociatedObject.Children.Last(), _vertLast);
+                    }
+                    else
+                    {
+                        CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _horizFirst);
+                        CornerCurves.SetCornerCurves(AssociatedObject.Children.Last(), _horizLast);
+                    }
                 }
-                else
-                {
-                    CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _horizFirst);
-                    CornerCurves.SetCornerCurves(AssociatedObject.Children.Last(), _horizLast);
-                }
+                else if (AssociatedObject.Children.Count == 1)
+                    CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _allCurves);
             }
-            else if (AssociatedObject.Children.Count == 1)
-                CornerCurves.SetCornerCurves(AssociatedObject.Children.First(), _allCurves);
         }
     }
 }

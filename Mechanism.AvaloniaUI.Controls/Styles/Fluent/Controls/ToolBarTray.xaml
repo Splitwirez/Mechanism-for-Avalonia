@@ -7,36 +7,68 @@
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI.Controls">
   <Style Selector="metb|ToolBar">
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/> 
     <Setter Property="MinWidth" Value="75"/>
     <Setter Property="BaseWidth" Value="16"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <DockPanel>
-          <Thumb x:Name="PART_GripThumb" Width="10" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left">
-            <Thumb.Template>
-              <ControlTemplate>
-                <Panel Background="#01000000" Margin="2,0,0,0">
-                  <Border BorderThickness="1,0,0,1" CornerRadius="0,0,0,3" BorderBrush="{Binding $parent[metb:ToolBar].BorderBrush}" Margin="0,5,0,0"/>
-                  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
-                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
-                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
-                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[metb:ToolBar].Foreground}" StrokeThickness="0"/>
-                  </StackPanel>
-                </Panel>
-              </ControlTemplate>
-            </Thumb.Template>
-          </Thumb>
-          <Panel>
-            <DockPanel Height="1" VerticalAlignment="Bottom">
-              <Rectangle Width="5" IsVisible="{Binding $parent[metb:ToolBarTray].IsLocked}" DockPanel.Dock="Left"/>
-              <Rectangle Width="5" DockPanel.Dock="Right"/>
-              <Rectangle Fill="{TemplateBinding BorderBrush}"/>
-            </DockPanel>
-            <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True"/>
-            <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
-          </Panel>
-        </DockPanel>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" Margin="2">
+          <DockPanel>
+            <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left">
+              <Thumb.Template>
+                <ControlTemplate>
+                  <Panel Background="#01000000">
+                    <!--Border BorderThickness="1,0,0,1" CornerRadius="0,0,0,3" BorderBrush="{Binding $parent[metb:ToolBar].BorderBrush}" Margin="0,5,0,0"/-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4" Margin="5,3">
+                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
+                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
+                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
+                    </StackPanel>
+                  </Panel>
+                </ControlTemplate>
+              </Thumb.Template>
+            </Thumb>
+            <Panel>
+              <!--DockPanel Height="1" VerticalAlignment="Bottom">
+                <Rectangle Width="5" IsVisible="{Binding $parent[metb:ToolBarTray].IsLocked}" DockPanel.Dock="Left"/>
+                <Rectangle Width="5" DockPanel.Dock="Right"/>
+                <Rectangle Fill="{TemplateBinding BorderBrush}"/>
+              </DockPanel-->
+              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True">
+                <mectrl:OverflowFlyoutItemsControl.Template>
+                  <ControlTemplate>
+                    <Panel Name="RootPanel">
+                      <DockPanel Margin="{TemplateBinding Padding}">
+                        <Panel Width="56" DockPanel.Dock="Right">
+                          <ToggleButton x:Name="PART_FlyoutToggleButton" Padding="0" Margin="4" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" Background="Transparent">
+                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                              <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                              <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                              <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                            </StackPanel>
+                          </ToggleButton>
+                        </Panel>
+                        <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
+                          <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                              <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="Left" />
+                            </ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                      </DockPanel>
+                      <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
+                        <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3" Padding="-8,0,0,0">
+                          <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
+                        </Border>
+                      </Popup>
+                    </Panel>
+                  </ControlTemplate>
+                </mectrl:OverflowFlyoutItemsControl.Template>
+              </mectrl:OverflowFlyoutItemsControl>
+              <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+            </Panel>
+          </DockPanel>
+        </Border>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
@@ -112,7 +144,7 @@
   </Style>
 
   <Style Selector="metb|ToolBarTray">
-    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Template">

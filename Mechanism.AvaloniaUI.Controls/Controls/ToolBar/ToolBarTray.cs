@@ -114,7 +114,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
             {
                 newBars.ElementAt(i).Band = GetBandCount();
                 //newBars.ElementAt(i).BandIndex = i + lastBandIndex;
-                Debug.WriteLine("Band info set!");
+                //Debug.WriteLine("Band info set!");
             }
             base.ItemsChanged(e);
         }
