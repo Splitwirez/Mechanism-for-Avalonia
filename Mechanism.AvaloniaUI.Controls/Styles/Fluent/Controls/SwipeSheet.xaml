@@ -1,0 +1,35 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mess="clr-namespace:Mechanism.AvaloniaUI.Controls.SwipeSheet;assembly=Mechanism.AvaloniaUI.Controls">
+  <Style Selector="mess|SwipeSheet">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+  </Style>
+  <Style Selector="mess|SwipeSheet[SwipeFromEdge=Bottom]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel x:Name="rootPanel">
+          <LayoutTransformControl x:Name="PART_ContentArea">
+            <Border Background="White" BorderBrush="Green" BorderThickness="2" Margin="30">
+              <ContentPresenter x:Name="PART_ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+          </LayoutTransformControl>
+          <Thumb x:Name="PART_SwipeEdge" Height="10" VerticalAlignment="Bottom">
+            <Thumb.Template>
+              <ControlTemplate>
+                <Rectangle Fill="#01000000"/>
+              </ControlTemplate>
+            </Thumb.Template>
+          </Thumb>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

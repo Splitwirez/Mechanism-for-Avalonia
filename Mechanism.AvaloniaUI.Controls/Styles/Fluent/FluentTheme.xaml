@@ -5,4 +5,5 @@
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Controls/Styles/Fluent/Controls/CommandBar.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Controls/Styles/Fluent/Controls/ToolBarTray.xaml"/>
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Controls/Styles/Fluent/Controls/ToolStrip.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Controls/Styles/Fluent/Controls/SwipeSheet.xaml"/>
 </Styles>

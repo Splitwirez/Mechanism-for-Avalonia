@@ -11,12 +11,12 @@
     </UserControl.DataContext>
     <DockPanel>
         <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" DockPanel.Dock="Top" Height="32">
-            <StackPanel Orientation="Horizontal">
-                <Button DockPanel.Dock="Left" IsVisible="{Binding CanGoHome}" Command="{Binding GoHome}" Width="50" VerticalAlignment="Stretch" Margin="2">
+            <Panel>
+                <Button HorizontalAlignment="Left" IsVisible="{Binding CanGoHome}" Command="{Binding GoHome}" Width="50" VerticalAlignment="Stretch" Margin="2">
                     <Path Data="M 0 5 L 5 0 L 7 0 L 2 5 L 12 5 L 12 7 L 2 7 L 7 12 L 5 12 Z" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button>
-                <TextBlock Text="{Binding CurrentTitle}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            </StackPanel>
+                <TextBlock Text="{Binding CurrentTitle}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"/>
+            </Panel>
         </Border>
         <Panel>
             <ContentControl Classes="contentContainer" Content="{Binding CurrentView}" IsVisible="{Binding CanGoHome}"/>

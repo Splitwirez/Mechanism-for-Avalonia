@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
+             xmlns:mess="clr-namespace:Mechanism.AvaloniaUI.Controls.SwipeSheet;assembly=Mechanism.AvaloniaUI.Controls"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample.Views.SwipeSheetPageView">
+    <UserControl.DataContext>
+        <mes:SwipeSheetPageViewModel/>
+    </UserControl.DataContext>
+    <Panel>
+        <TextBlock Text="Swipe from below!"/>
+        <mess:SwipeSheet Content="Henlo world"/>
+    </Panel>
+</UserControl>

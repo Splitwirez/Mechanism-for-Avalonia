@@ -20,50 +20,58 @@
             <Button Content="Always visible">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </ToggleButton>
             <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
                 </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </RepeatButton>
             <mecb:CommandBar.EndItems>
                 <Button>
                     <Panel Width="16" Height="16">
-                        <Ellipse Fill="{Binding $parent[Button].BorderBrush}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
-                        <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding $parent[Button].Foreground}"/>
+                        <Border BoxShadow="0 2 8 #5F000000" CornerRadius="8">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Offset="0" Color="#FF496EFF"/>
+                                    <GradientStop Offset="1" Color="#FF3E5ED9"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <!-- Fill="{Binding $parent[Button].Foreground}"/-->
+                        <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
                     </Panel>
                 </Button>
             </mecb:CommandBar.EndItems>
