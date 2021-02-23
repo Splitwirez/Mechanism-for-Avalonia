@@ -7,7 +7,7 @@
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI.Controls">
   <Style Selector="metb|ToolBar">
-    <Setter Property="BorderBrush" Value="{Binding $parent[metb:ToolBarTray].BorderBrush}" />
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="MinWidth" Value="75"/>
     <Setter Property="BaseWidth" Value="16"/>
     <Setter Property="Template">

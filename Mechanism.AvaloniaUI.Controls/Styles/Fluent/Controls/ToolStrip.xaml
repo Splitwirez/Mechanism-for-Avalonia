@@ -32,10 +32,11 @@
     </ControlTemplate-->
   </Styles.Resources>
   <Style Selector="mets|ToolStrip">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="MinHeight" Value="40"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel>
+        <Panel Background="{TemplateBinding Background}">
           <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" IsVisible="False"/>
           <ItemsControl x:Name="PART_CurrentItemsItemsControl" Items="{TemplateBinding CurrentItems}" Background="#01000000">
             <ItemsControl.ItemsPanel>

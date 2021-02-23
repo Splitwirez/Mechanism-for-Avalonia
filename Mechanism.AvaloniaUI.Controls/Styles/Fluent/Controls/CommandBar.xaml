@@ -8,8 +8,6 @@
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
   <Style Selector="mecb|CommandBar">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-    <Setter Property="BorderThickness" Value="{DynamicResource ListBoxBorderThemeThickness}" />
     <Setter Property="BaseWidth" Value="56"/>
     <Setter Property="Padding" Value="3"/>
     <Setter Property="Margin" Value="0"/>
