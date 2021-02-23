@@ -3,8 +3,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:Mechanism.AvaloniaUI.Sample.Views;assembly=Mechanism.AvaloniaUI.Sample"
+             xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.MainView">
+    <UserControl.DataContext>
+        <vm:MainViewModel/>
+    </UserControl.DataContext>
+    <DockPanel>
+        <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" DockPanel.Dock="Top" Height="32">
+            <StackPanel Orientation="Horizontal">
+                <Button DockPanel.Dock="Left" IsVisible="{Binding CanGoHome}" Command="{Binding GoHome}" Width="50" VerticalAlignment="Stretch" Margin="2">
+                    <Path Data="M 0 5 L 5 0 L 7 0 L 2 5 L 12 5 L 12 7 L 2 7 L 7 12 L 5 12 Z" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <TextBlock Text="{Binding CurrentTitle}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </StackPanel>
+        </Border>
+        <Panel>
+            <ContentControl Classes="contentContainer" Content="{Binding CurrentView}" IsVisible="{Binding CanGoHome}"/>
+            <v:HomePageView IsVisible="{Binding !CanGoHome}"/>
+        </Panel>
+    </DockPanel>
   <!--UserControl.Styles>
       <Style Selector="ContentControl.contentContainer">
           <Setter Property="RenderTransform">
@@ -89,16 +107,4 @@
           </Style.Animations>
       </Style>
   </UserControl.Styles-->
-  <DockPanel>
-    <DockPanel DockPanel.Dock="Bottom">
-      <Button DockPanel.Dock="Left" IsVisible="{Binding CanGoHome}" Command="{Binding GoHome}">
-        <Path Data="M 0 5 L 5 0 L 7 0 L 2 5 L 12 5 L 12 7 L 2 7 L 7 12 L 5 12 Z" Fill="{Binding $parent[Button].Foreground}"/>
-      </Button>
-      <TextBlock/>
-    </DockPanel>
-    <Panel>
-      <ContentControl Classes="contentContainer" Content="{Binding CurrentView}" IsVisible="{Binding CanGoHome}"/>
-      <v:HomePageView IsVisible="{Binding !CanGoHome}"/>
-    </Panel>
-  </DockPanel>
 </UserControl>

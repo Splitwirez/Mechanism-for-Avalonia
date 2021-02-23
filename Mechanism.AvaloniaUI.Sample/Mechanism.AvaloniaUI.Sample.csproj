@@ -21,5 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Core\Mechanism.AvaloniaUI.Core.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Controls\Mechanism.AvaloniaUI.Controls.csproj" />
+    <ProjectReference Include="..\Mechanism.AvaloniaUI.Extras\Mechanism.AvaloniaUI.Extras.csproj" />
   </ItemGroup>
 </Project>

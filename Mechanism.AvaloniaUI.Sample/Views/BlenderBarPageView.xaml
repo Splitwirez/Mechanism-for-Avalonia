@@ -1,0 +1,210 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample.Views.BlenderBarPageView">
+    <UserControl.DataContext>
+        <mes:BlenderBarPageViewModel/>
+    </UserControl.DataContext>
+    <Panel>
+        <!--ExperimentalAcrylicBorder DockPanel.Dock="Left">
+        <ExperimentalAcrylicBorder.Material>
+            <ExperimentalAcrylicMaterial
+            TintColor="{DynamicResource SystemChromeMediumLowColor}"
+            TintOpacity="0.625"
+            MaterialOpacity="0.625"
+            BackgroundSource="Digger" />
+        </ExperimentalAcrylicBorder.Material-->
+        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False" HorizontalAlignment="Left">
+            <meec:BlenderBarItem Header="With Sub-items" GroupIndex="0">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Ellipse Width="24" Height="24" Fill="Cyan"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                <meec:BlenderBarItem Header="Yellow" GroupIndex="1">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Yellow"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </meec:BlenderBarItem>
+                <meec:BlenderBarItem Header="Cyan" GroupIndex="1">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Cyan"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </meec:BlenderBarItem>
+                <meec:BlenderBarItem Header="Pink" GroupIndex="1">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Pink"/>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                </meec:BlenderBarItem>
+            </meec:BlenderBarItem>
+
+            <meec:BlenderBarItem Header="On" GroupIndex="1">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Rectangle Width="4" Margin="10,0" Height="24" Fill="{Binding $parent[meec:BlenderBarItem].Foreground}"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Off" GroupIndex="1">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Ellipse Width="24" Height="24" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="4"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            
+
+            <meec:BlenderBarItem Header="Red" GroupIndex="2">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Red"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Green" GroupIndex="2">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Green"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Blue" GroupIndex="2">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="Blue"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+
+            <meec:BlenderBarItem Header="Square" GroupIndex="3">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Circle" GroupIndex="3">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Triangle" GroupIndex="3">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+            <meec:BlenderBarItem Header="Hourglass" GroupIndex="3">
+                <mecore:AttachedIcon.Icon>
+                <ControlTemplate>
+                    <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+            </meec:BlenderBarItem>
+        </meec:BlenderBar>
+        <!--/ExperimentalAcrylicBorder-->
+        <StackPanel Orientation="Vertical" Margin="280,10,10,10">
+            <TextBlock Text="Drag the rightmost edge of the BlenderBar to the left or right to resize it!"/>
+            <StackPanel>
+                <Panel>
+                    <Border Height="50" CornerRadius="{DynamicResource ControlCornerRadius}">
+                        <Border.Background>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <DockPanel Height="50" Width="256">
+                                        <!--LayoutTransformControl>
+                                            <LayoutTransformControl.LayoutTransform>
+                                                <ScaleTransform ScaleX="1.5" ScaleY="1"/>
+                                            </LayoutTransformControl.LayoutTransform>
+                                        </LayoutTransformControl-->
+                                        <Rectangle Fill="#40FF0000" DockPanel.Dock="Left" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}"/>
+                                        <Rectangle Fill="#4000FF00" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}" DockPanel.Dock="Left"/>
+                                        <Rectangle Fill="#400000FF"/>
+                                    </DockPanel>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.Background>
+                    </Border>
+                    <Slider Orientation="Horizontal" Value="{Binding #BlenderBar.ResizeWidth, Mode=TwoWay}" Minimum="0" Maximum="256" IsHitTestVisible="False" VerticalAlignment="Bottom" Margin="-10,0">
+                        <Slider.Template>
+                            <ControlTemplate>
+                                <DataValidationErrors>
+                                    <Grid x:Name="grid" Margin="{TemplateBinding Padding}" RowDefinitions="Auto, *" VerticalAlignment="Bottom">
+                                        <ContentPresenter x:Name="HeaderContentPresenter" Grid.Row="0" TextBlock.FontWeight="{DynamicResource SliderHeaderThemeFontWeight}" TextBlock.Foreground="{DynamicResource SliderHeaderForeground}" Margin="{DynamicResource SliderTopHeaderMargin}" />
+                                        <Grid x:Name="SliderContainer" Grid.Row="1" VerticalAlignment="Bottom">
+                                            <Grid.Styles>
+                                                <Style Selector="TickBar">
+                                                    <Setter Property="ReservedSpace" Value="{Binding #PART_Track.Thumb.Bounds}" />
+                                                </Style>
+                                            </Grid.Styles>
+                                            <Grid x:Name="HorizontalTemplate" ColumnDefinitions="Auto,Auto,*" MinHeight="{DynamicResource SliderHorizontalHeight}" VerticalAlignment="Bottom">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="{DynamicResource SliderPreContentMargin}" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="{DynamicResource SliderPostContentMargin}" />
+                                                </Grid.RowDefinitions>
+                                                <!--TickBar Name="TopTickBar" Placement="Top" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Bottom" Margin="0,0,0,4" Grid.ColumnSpan="3" />
+                                                <TickBar Name="BottomTickBar" Placement="Bottom" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Top" Margin="0,4,0,0" Grid.Row="2" Grid.ColumnSpan="3" /-->
+                                                <Track Name="PART_Track" Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                    <!--Track.DecreaseButton>
+                                                        <RepeatButton Name="PART_DecreaseButton" Background="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                            <RepeatButton.Template>
+                                                                <ControlTemplate>
+                                                                    <Grid>
+                                                                    <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
+                                                                    <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
+                                                                    </Grid>
+                                                                </ControlTemplate>
+                                                            </RepeatButton.Template>
+                                                        </RepeatButton>
+                                                    </Track.DecreaseButton>
+                                                    <Track.IncreaseButton>
+                                                        <RepeatButton Name="PART_IncreaseButton" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                            <RepeatButton.Template>
+                                                                <ControlTemplate>
+                                                                    <Grid>
+                                                                        <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
+                                                                        <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
+                                                                    </Grid>
+                                                                </ControlTemplate>
+                                                            </RepeatButton.Template>
+                                                        </RepeatButton>
+                                                    </Track.IncreaseButton-->
+                                                    <Thumb x:Name="thumb" Margin="0" Padding="0" DataContext="{TemplateBinding Value}" Height="{DynamicResource SliderHorizontalThumbHeight}" Width="{DynamicResource SliderHorizontalThumbWidth}" VerticalAlignment="Bottom">
+                                                        <Thumb.Template>
+                                                            <ControlTemplate>
+                                                                <Path Data="M 0 20 L 10 0 L 20 20 Z" Fill="{DynamicResource ButtonForeground}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                                            </ControlTemplate>
+                                                        </Thumb.Template>
+                                                    </Thumb>
+                                                </Track>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </DataValidationErrors>
+                            </ControlTemplate>
+                        </Slider.Template>
+                    </Slider>
+                </Panel>
+                <TextBlock Text="Icons only, single column" Foreground="#FFFF0000" VerticalAlignment="Bottom" Margin="0,5"/>
+                <TextBlock Text="Icons only, two columns" Foreground="#FF00FF00" VerticalAlignment="Bottom" Margin="0,5"/>
+                <TextBlock Text="Show labels" Foreground="#FF0000FF" VerticalAlignment="Bottom" Margin="0,5"/>
+            </StackPanel>
+        </StackPanel>
+    </Panel>
+</UserControl>

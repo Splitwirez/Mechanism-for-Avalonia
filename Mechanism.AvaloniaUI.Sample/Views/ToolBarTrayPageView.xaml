@@ -5,8 +5,12 @@
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.ToolBarTrayPageView">
+    <UserControl.DataContext>
+        <mes:ToolBarTrayPageViewModel/>
+    </UserControl.DataContext>
     <StackPanel Orientation="Vertical" Spacing="4">
         <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
             <metb:ToolBar UseOverflow="False">

@@ -9,8 +9,5 @@
         Icon="/Assets/avalonia-logo.ico"
         Width="800" Height="450"
         Title="Mechanism for Avalonia Sample">
-    <Design.DataContext>
-        <vm:MainViewModel/>
-    </Design.DataContext>
     <v:MainView/>
 </Window>

@@ -8,9 +8,6 @@ namespace Mechanism.AvaloniaUI.Sample.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public string Greeting => "Hello World!";
-
-
         bool _canGoHome = false;
         public bool CanGoHome
         {
@@ -18,6 +15,19 @@ namespace Mechanism.AvaloniaUI.Sample.ViewModels
             set
             {
                 _canGoHome = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        static readonly string HOME_TITLE = "Home";
+        string _currentTitle = HOME_TITLE;
+        public string CurrentTitle
+        {
+            get => _currentTitle;
+            set
+            {
+                _currentTitle = value;
                 NotifyPropertyChanged();
             }
         }
@@ -36,7 +46,16 @@ namespace Mechanism.AvaloniaUI.Sample.ViewModels
                 _currentView = value;
                 NotifyPropertyChanged();
 
-                CanGoHome = _currentView != null;
+                bool newValNotNull = _currentView != null;
+                CanGoHome = newValNotNull;
+
+                if (newValNotNull)
+                {
+                    if (_currentView.DataContext is DemoPageViewModel demoVm)
+                        CurrentTitle = demoVm.Title;
+                }
+                else
+                    CurrentTitle = HOME_TITLE;
             }
         }
 

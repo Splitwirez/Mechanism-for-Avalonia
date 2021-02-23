@@ -6,11 +6,15 @@
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.ToolStripPageView">
     <UserControl.DataContext>
-        <vm:DemoPageViewModel/>
+        <mes:ToolStripPageViewModel/>
     </UserControl.DataContext>
+    <!--UserControl.DataContext>
+        <vm:DemoPageViewModel/>
+    </UserControl.DataContext-->
     <StackPanel Orientation="Vertical" Spacing="4">
         <mets:ToolStrip x:Name="ToolStrip">
             <mets:ToolStrip.Items>
