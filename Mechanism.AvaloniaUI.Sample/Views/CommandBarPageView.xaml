@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <mes:CommandBarPageViewModel/>
     </UserControl.DataContext>
-    <StackPanel Orientation="Vertical" Spacing="4">
+    <StackPanel Orientation="Vertical">
         <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <mecb:CommandBar.Layers>
                 <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
@@ -76,11 +76,19 @@
                 </Button>
             </mecb:CommandBar.EndItems>
         </mecb:CommandBar>
-        <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
-        <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
-        <StackPanel Margin="10,0,0,0" Spacing="4">
-            <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
-            <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment">Align items to right</RadioButton>
+        <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="Layers">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer1}">LayerOne.IsVisible</CheckBox>
+                    <CheckBox IsChecked="{Binding IsVisible, ElementName=Layer2}">LayerTwo.IsVisible</CheckBox>
+                </StackPanel>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Alignment">
+                <StackPanel Orientation="Vertical">
+                    <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
+                    <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment">Align items to right</RadioButton>
+                </StackPanel>
+            </HeaderedContentControl>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <mes:BlenderBarPageViewModel/>
     </UserControl.DataContext>
-    <Panel>
+    <DockPanel>
         <!--ExperimentalAcrylicBorder DockPanel.Dock="Left">
         <ExperimentalAcrylicBorder.Material>
             <ExperimentalAcrylicMaterial
@@ -20,7 +20,7 @@
             MaterialOpacity="0.625"
             BackgroundSource="Digger" />
         </ExperimentalAcrylicBorder.Material-->
-        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False" HorizontalAlignment="Left">
+        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False" DockPanel.Dock="Left">
             <meec:BlenderBarItem Header="With Sub-items" GroupIndex="0">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>
@@ -118,93 +118,97 @@
             </meec:BlenderBarItem>
         </meec:BlenderBar>
         <!--/ExperimentalAcrylicBorder-->
-        <StackPanel Orientation="Vertical" Margin="280,10,10,10">
-            <TextBlock Text="Drag the rightmost edge of the BlenderBar to the left or right to resize it!"/>
-            <StackPanel>
-                <Panel>
-                    <Border Height="50" CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <Border.Background>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <DockPanel Height="50" Width="256">
-                                        <!--LayoutTransformControl>
-                                            <LayoutTransformControl.LayoutTransform>
-                                                <ScaleTransform ScaleX="1.5" ScaleY="1"/>
-                                            </LayoutTransformControl.LayoutTransform>
-                                        </LayoutTransformControl-->
-                                        <Rectangle Fill="#40FF0000" DockPanel.Dock="Left" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}"/>
-                                        <Rectangle Fill="#4000FF00" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}" DockPanel.Dock="Left"/>
-                                        <Rectangle Fill="#400000FF"/>
-                                    </DockPanel>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Border.Background>
-                    </Border>
-                    <Slider Orientation="Horizontal" Value="{Binding #BlenderBar.ResizeWidth, Mode=TwoWay}" Minimum="0" Maximum="256" IsHitTestVisible="False" VerticalAlignment="Bottom" Margin="-10,0">
-                        <Slider.Template>
-                            <ControlTemplate>
-                                <DataValidationErrors>
-                                    <Grid x:Name="grid" Margin="{TemplateBinding Padding}" RowDefinitions="Auto, *" VerticalAlignment="Bottom">
-                                        <ContentPresenter x:Name="HeaderContentPresenter" Grid.Row="0" TextBlock.FontWeight="{DynamicResource SliderHeaderThemeFontWeight}" TextBlock.Foreground="{DynamicResource SliderHeaderForeground}" Margin="{DynamicResource SliderTopHeaderMargin}" />
-                                        <Grid x:Name="SliderContainer" Grid.Row="1" VerticalAlignment="Bottom">
-                                            <Grid.Styles>
-                                                <Style Selector="TickBar">
-                                                    <Setter Property="ReservedSpace" Value="{Binding #PART_Track.Thumb.Bounds}" />
-                                                </Style>
-                                            </Grid.Styles>
-                                            <Grid x:Name="HorizontalTemplate" ColumnDefinitions="Auto,Auto,*" MinHeight="{DynamicResource SliderHorizontalHeight}" VerticalAlignment="Bottom">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="{DynamicResource SliderPreContentMargin}" />
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="{DynamicResource SliderPostContentMargin}" />
-                                                </Grid.RowDefinitions>
-                                                <!--TickBar Name="TopTickBar" Placement="Top" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Bottom" Margin="0,0,0,4" Grid.ColumnSpan="3" />
-                                                <TickBar Name="BottomTickBar" Placement="Bottom" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Top" Margin="0,4,0,0" Grid.Row="2" Grid.ColumnSpan="3" /-->
-                                                <Track Name="PART_Track" Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom">
-                                                    <!--Track.DecreaseButton>
-                                                        <RepeatButton Name="PART_DecreaseButton" Background="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                            <RepeatButton.Template>
-                                                                <ControlTemplate>
-                                                                    <Grid>
-                                                                    <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
-                                                                    <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
-                                                                    </Grid>
-                                                                </ControlTemplate>
-                                                            </RepeatButton.Template>
-                                                        </RepeatButton>
-                                                    </Track.DecreaseButton>
-                                                    <Track.IncreaseButton>
-                                                        <RepeatButton Name="PART_IncreaseButton" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                            <RepeatButton.Template>
-                                                                <ControlTemplate>
-                                                                    <Grid>
-                                                                        <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
-                                                                        <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
-                                                                    </Grid>
-                                                                </ControlTemplate>
-                                                            </RepeatButton.Template>
-                                                        </RepeatButton>
-                                                    </Track.IncreaseButton-->
-                                                    <Thumb x:Name="thumb" Margin="0" Padding="0" DataContext="{TemplateBinding Value}" Height="{DynamicResource SliderHorizontalThumbHeight}" Width="{DynamicResource SliderHorizontalThumbWidth}" VerticalAlignment="Bottom">
-                                                        <Thumb.Template>
-                                                            <ControlTemplate>
-                                                                <Path Data="M 0 20 L 10 0 L 20 20 Z" Fill="{DynamicResource ButtonForeground}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Stretch="Fill" VerticalAlignment="Bottom"/>
-                                                            </ControlTemplate>
-                                                        </Thumb.Template>
-                                                    </Thumb>
-                                                </Track>
+        <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="Customization">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Drag the rightmost edge of the BlenderBar to the left or right to resize it!" TextWrapping="Wrap"/>
+                    <StackPanel>
+                        <Panel>
+                            <Border Height="50" CornerRadius="{DynamicResource ControlCornerRadius}">
+                                <Border.Background>
+                                    <VisualBrush Stretch="Fill">
+                                        <VisualBrush.Visual>
+                                            <DockPanel Height="50" Width="256">
+                                                <!--LayoutTransformControl>
+                                                    <LayoutTransformControl.LayoutTransform>
+                                                        <ScaleTransform ScaleX="1.5" ScaleY="1"/>
+                                                    </LayoutTransformControl.LayoutTransform>
+                                                </LayoutTransformControl-->
+                                                <Rectangle Fill="#40FF0000" DockPanel.Dock="Left" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}"/>
+                                                <Rectangle Fill="#4000FF00" Width="{Binding #BlenderBar.IconsOnlyItemWidth, Mode=OneWay}" DockPanel.Dock="Left"/>
+                                                <Rectangle Fill="#400000FF"/>
+                                            </DockPanel>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Border.Background>
+                            </Border>
+                            <Slider Orientation="Horizontal" Value="{Binding #BlenderBar.ResizeWidth, Mode=TwoWay}" Minimum="0" Maximum="256" IsHitTestVisible="False" VerticalAlignment="Bottom" Margin="-10,0">
+                                <Slider.Template>
+                                    <ControlTemplate>
+                                        <DataValidationErrors>
+                                            <Grid x:Name="grid" Margin="{TemplateBinding Padding}" RowDefinitions="Auto, *" VerticalAlignment="Bottom">
+                                                <ContentPresenter x:Name="HeaderContentPresenter" Grid.Row="0" TextBlock.FontWeight="{DynamicResource SliderHeaderThemeFontWeight}" TextBlock.Foreground="{DynamicResource SliderHeaderForeground}" Margin="{DynamicResource SliderTopHeaderMargin}" />
+                                                <Grid x:Name="SliderContainer" Grid.Row="1" VerticalAlignment="Bottom">
+                                                    <Grid.Styles>
+                                                        <Style Selector="TickBar">
+                                                            <Setter Property="ReservedSpace" Value="{Binding #PART_Track.Thumb.Bounds}" />
+                                                        </Style>
+                                                    </Grid.Styles>
+                                                    <Grid x:Name="HorizontalTemplate" ColumnDefinitions="Auto,Auto,*" MinHeight="{DynamicResource SliderHorizontalHeight}" VerticalAlignment="Bottom">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="{DynamicResource SliderPreContentMargin}" />
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="{DynamicResource SliderPostContentMargin}" />
+                                                        </Grid.RowDefinitions>
+                                                        <!--TickBar Name="TopTickBar" Placement="Top" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Bottom" Margin="0,0,0,4" Grid.ColumnSpan="3" />
+                                                        <TickBar Name="BottomTickBar" Placement="Bottom" Height="{DynamicResource SliderOutsideTickBarThemeHeight}" VerticalAlignment="Top" Margin="0,4,0,0" Grid.Row="2" Grid.ColumnSpan="3" /-->
+                                                        <Track Name="PART_Track" Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                            <!--Track.DecreaseButton>
+                                                                <RepeatButton Name="PART_DecreaseButton" Background="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                    <RepeatButton.Template>
+                                                                        <ControlTemplate>
+                                                                            <Grid>
+                                                                            <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
+                                                                            <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </RepeatButton.Template>
+                                                                </RepeatButton>
+                                                            </Track.DecreaseButton>
+                                                            <Track.IncreaseButton>
+                                                                <RepeatButton Name="PART_IncreaseButton" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                    <RepeatButton.Template>
+                                                                        <ControlTemplate>
+                                                                            <Grid>
+                                                                                <Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
+                                                                                <Border Name="TrackBackground" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </RepeatButton.Template>
+                                                                </RepeatButton>
+                                                            </Track.IncreaseButton-->
+                                                            <Thumb x:Name="thumb" Margin="0" Padding="0" DataContext="{TemplateBinding Value}" Height="{DynamicResource SliderHorizontalThumbHeight}" Width="{DynamicResource SliderHorizontalThumbWidth}" VerticalAlignment="Bottom">
+                                                                <Thumb.Template>
+                                                                    <ControlTemplate>
+                                                                        <Path Data="M 0 20 L 10 0 L 20 20 Z" Fill="{DynamicResource ButtonForeground}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                                                    </ControlTemplate>
+                                                                </Thumb.Template>
+                                                            </Thumb>
+                                                        </Track>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </DataValidationErrors>
-                            </ControlTemplate>
-                        </Slider.Template>
-                    </Slider>
-                </Panel>
-                <TextBlock Text="Icons only, single column" Foreground="#FFFF0000" VerticalAlignment="Bottom" Margin="0,5"/>
-                <TextBlock Text="Icons only, two columns" Foreground="#FF00FF00" VerticalAlignment="Bottom" Margin="0,5"/>
-                <TextBlock Text="Show labels" Foreground="#FF0000FF" VerticalAlignment="Bottom" Margin="0,5"/>
-            </StackPanel>
+                                        </DataValidationErrors>
+                                    </ControlTemplate>
+                                </Slider.Template>
+                            </Slider>
+                        </Panel>
+                        <TextBlock Text="Icons only, single column" Foreground="#FFFF0000" VerticalAlignment="Bottom" Margin="0,5" TextWrapping="Wrap"/>
+                        <TextBlock Text="Icons only, two columns" Foreground="#FF00FF00" VerticalAlignment="Bottom" Margin="0,5" TextWrapping="Wrap"/>
+                        <TextBlock Text="Show labels" Foreground="#FF0000FF" VerticalAlignment="Bottom" Margin="0,5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </HeaderedContentControl>
         </StackPanel>
-    </Panel>
+    </DockPanel>
 </UserControl>

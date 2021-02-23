@@ -14,6 +14,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Presenters;
 using System.Diagnostics;
 using Avalonia.Media;
+using Avalonia.Input;
 
 namespace Mechanism.AvaloniaUI.Controls.SwipeSheet
 {
@@ -59,117 +60,125 @@ namespace Mechanism.AvaloniaUI.Controls.SwipeSheet
 
 
         Thumb _swipeThumb = null;
-        LayoutTransformControl _contentArea = null;
+        Thumb _swipePanelThumb = null;
+        ContentControl _contentArea = null;
 
         //TranslateTransform _transform = new TranslateTransform(0, -10);
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
 
-            _swipeThumb = e.NameScope.Find<Thumb>("PART_SwipeEdge");
-            
-            
-            _contentArea = e.NameScope.Find<LayoutTransformControl>("PART_ContentArea");
+            _contentArea = e.NameScope.Find<ContentControl>("PART_ContentArea");
             _contentArea.IsVisible = false;
             Debug.WriteLine("Margin: " + _contentArea.Margin);
             //_contentArea.LayoutTransform = _transform;
 
-            _swipeThumb.DragStarted += (sneder, args) =>
-            {
-                _contentArea.IsVisible = true;
-                _contentArea.Margin = GetMarginForOffset(GetSwipeOffset(Vector.Zero, SwipeFromEdge), SwipeFromEdge);
-            };
+            _swipeThumb = e.NameScope.Find<Thumb>("PART_SwipeEdge");
+            _swipeThumb.DragStarted += Thumb_DragStarted;
+            _swipeThumb.DragDelta += Thumb_DragDelta;
+            _swipeThumb.DragCompleted += Thumb_DragCompleted;
 
-            _swipeThumb.DragDelta += (sneder, args) =>
-            {
-                Debug.WriteLine("DragDelta: \n  " + args.Vector + "\n   " + _contentArea.Margin); //: " + (_contentArea.LayoutTransform as TranslateTransform).X + ", " + (_contentArea.LayoutTransform as TranslateTransform).Y);
+            _swipePanelThumb = e.NameScope.Find<Thumb>("PART_SwipePanelThumb");
+            _swipePanelThumb.DragStarted += Thumb_DragStarted;
+            _swipePanelThumb.DragDelta += Thumb_DragDelta;
+            _swipePanelThumb.DragCompleted += Thumb_DragCompleted;
+        }
 
-                _contentArea.Margin =  GetMarginForOffset(GetSwipeOffset(args.Vector, SwipeFromEdge), SwipeFromEdge);
-            };
+        void Thumb_DragStarted(object sender, VectorEventArgs e)
+        {
+            _contentArea.IsVisible = true;
+            _contentArea.Margin = GetMarginForOffset(GetSwipeOffset(Vector.Zero, SwipeFromEdge), SwipeFromEdge);
+        }
 
-            _swipeThumb.DragCompleted += (sneder, args) =>
+        void Thumb_DragDelta(object sender, VectorEventArgs e)
+        {
+            Debug.WriteLine("DragDelta: \n  " + e.Vector + "\n   " + _contentArea.Margin); //: " + (_contentArea.LayoutTransform as TranslateTransform).X + ", " + (_contentArea.LayoutTransform as TranslateTransform).Y);
+
+            _contentArea.Margin =  GetMarginForOffset(GetSwipeOffset(e.Vector, SwipeFromEdge), SwipeFromEdge);
+        }
+
+        void Thumb_DragCompleted(object sender, VectorEventArgs e)
+        {
+            if (
+                    ((SwipeToOpenThreshold.Unit == RelativeUnit.Absolute) && (Math.Abs(_contentArea.Margin.Bottom) < SwipeToOpenThreshold.Point.Y)) ||
+                    ((SwipeToOpenThreshold.Unit == RelativeUnit.Relative) && (Math.Abs(_contentArea.Margin.Bottom) < (SwipeToOpenThreshold.Point.Y * Bounds.Height)))
+                )
             {
-                if (
-                        ((SwipeToOpenThreshold.Unit == RelativeUnit.Absolute) && (Math.Abs(_contentArea.Margin.Bottom) < SwipeToOpenThreshold.Point.Y)) ||
-                        ((SwipeToOpenThreshold.Unit == RelativeUnit.Relative) && (Math.Abs(_contentArea.Margin.Bottom) < (SwipeToOpenThreshold.Point.Y * Bounds.Height)))
-                    )
+                _contentArea.Margin = new Thickness(0);
+            }
+            else
+            {
+                _contentArea.IsVisible = false;
+            }
+            /*double threshold = 0;
+            double movement = 0;
+            if (IsHorizontal)
+            {
+                movement = _transform.X;
+
+                if (SwipeToOpenThreshold.Unit == RelativeUnit.Absolute)
+                    threshold = SwipeToOpenThreshold.Point.X;
+                else
+                    threshold = Bounds.Width * SwipeToOpenThreshold.Point.X;
+                
+                if (SwipeFromEdge == Dock.Right)
                 {
-                    _contentArea.Margin = new Thickness(0);
+                    threshold = Bounds.Width - threshold;
+                    movement = Bounds.Width - _transform.X;
+                }
+            }
+            else
+            {
+                if (SwipeToOpenThreshold.Unit == RelativeUnit.Absolute)
+                    threshold = SwipeToOpenThreshold.Point.Y;
+                else
+                    threshold = Bounds.Height * SwipeToOpenThreshold.Point.Y;
+                
+                if (SwipeFromEdge == Dock.Bottom)
+                {
+                    threshold = Bounds.Height - threshold;
+                    movement = Bounds.Height - _transform.Y;
+                }
+            }
+
+            if (movement < threshold)
+            {
+                if (SwipeFromEdge == Dock.Left)
+                {
+                    _transform.X = -Bounds.Width;
+                }
+                else if (SwipeFromEdge == Dock.Top)
+                {
+                    _transform.Y = -Bounds.Height;
+                }
+                else if (SwipeFromEdge == Dock.Right)
+                {
+                    _transform.X = 0;
                 }
                 else
                 {
-                    _contentArea.IsVisible = false;
-                }
-                /*double threshold = 0;
-                double movement = 0;
-                if (IsHorizontal)
-                {
-                    movement = _transform.X;
 
-                    if (SwipeToOpenThreshold.Unit == RelativeUnit.Absolute)
-                        threshold = SwipeToOpenThreshold.Point.X;
-                    else
-                        threshold = Bounds.Width * SwipeToOpenThreshold.Point.X;
+                }
+            }
+            else
+            {
+                if (SwipeFromEdge == Dock.Left)
+                {
+
+                }
+                else if (SwipeFromEdge == Dock.Top)
+                {
                     
-                    if (SwipeFromEdge == Dock.Right)
-                    {
-                        threshold = Bounds.Width - threshold;
-                        movement = Bounds.Width - _transform.X;
-                    }
                 }
-                else
+                else if (SwipeFromEdge == Dock.Right)
                 {
-                    if (SwipeToOpenThreshold.Unit == RelativeUnit.Absolute)
-                        threshold = SwipeToOpenThreshold.Point.Y;
-                    else
-                        threshold = Bounds.Height * SwipeToOpenThreshold.Point.Y;
                     
-                    if (SwipeFromEdge == Dock.Bottom)
-                    {
-                        threshold = Bounds.Height - threshold;
-                        movement = Bounds.Height - _transform.Y;
-                    }
-                }
-
-                if (movement < threshold)
-                {
-                    if (SwipeFromEdge == Dock.Left)
-                    {
-                        _transform.X = -Bounds.Width;
-                    }
-                    else if (SwipeFromEdge == Dock.Top)
-                    {
-                        _transform.Y = -Bounds.Height;
-                    }
-                    else if (SwipeFromEdge == Dock.Right)
-                    {
-                        _transform.X = 0;
-                    }
-                    else
-                    {
-
-                    }
                 }
                 else
                 {
-                    if (SwipeFromEdge == Dock.Left)
-                    {
 
-                    }
-                    else if (SwipeFromEdge == Dock.Top)
-                    {
-                        
-                    }
-                    else if (SwipeFromEdge == Dock.Right)
-                    {
-                        
-                    }
-                    else
-                    {
-
-                    }
-                }*/
-            };
+                }
+            }*/
         }
 
         bool IsHorizontal => (SwipeFromEdge == Dock.Left) || (SwipeFromEdge == Dock.Right);
@@ -193,6 +202,29 @@ namespace Mechanism.AvaloniaUI.Controls.SwipeSheet
                 offset = Math.Max(0, distance) + Bounds.Width;
             else //Bottom
                 offset = Math.Min(0, distance) + Bounds.Height;
+            
+            return offset;
+        }
+
+        protected double GetSwipeOffset(Thumb  thumb, Vector vector, Dock edge)
+        {
+            if ((edge == Dock.Left) || (edge == Dock.Right))
+                return GetSwipeOffset(thumb, vector.X, edge);
+            else
+                return GetSwipeOffset(thumb, vector.Y, edge);
+        }
+
+        protected double GetSwipeOffset(Thumb thumb, double distance, Dock edge)
+        {
+            double offset = 0;
+            if (edge == Dock.Left)
+                offset = Math.Max(0, distance) + (Bounds.Right - thumb.Bounds.Right);
+            else if (edge == Dock.Top)
+                offset = Math.Max(0, distance) + (Bounds.Bottom - thumb.Bounds.Bottom);
+            else if (edge == Dock.Right)
+                offset = Math.Max(0, distance) + (Bounds.Right - thumb.Bounds.Right);
+            else //Bottom
+                offset = Math.Min(0, distance) + (Bounds.Bottom - thumb.Bounds.Bottom);
             
             return offset;
         }

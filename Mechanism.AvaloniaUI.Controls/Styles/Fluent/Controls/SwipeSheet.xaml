@@ -7,28 +7,47 @@
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:mess="clr-namespace:Mechanism.AvaloniaUI.Controls.SwipeSheet;assembly=Mechanism.AvaloniaUI.Controls">
   <Style Selector="mess|SwipeSheet">
-    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="{DynamicResource SystemControlPageBackgroundChromeLowBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="10"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
   </Style>
   <Style Selector="mess|SwipeSheet[SwipeFromEdge=Bottom]">
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel x:Name="rootPanel">
-          <LayoutTransformControl x:Name="PART_ContentArea">
-            <Border Background="White" BorderBrush="Green" BorderThickness="2" Margin="30">
-              <ContentPresenter x:Name="PART_ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        <Panel x:Name="rootPanel" ClipToBounds="True">
+          <ContentControl x:Name="PART_ContentArea" Background="#4D000000">
+            <!--Border Background="White" BorderBrush="Green" BorderThickness="2" Margin="30">
+              <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border-->
+            <Border CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="30" BoxShadow="0 4 16 #7F000000" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+              <Panel>
+                <Thumb x:Name="PART_SwipePanelThumb" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <DockPanel>
+                    <Border CornerRadius="4,4,0,0" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" DockPanel.Dock="Top" IsHitTestVisible="False">
+                        <ContentPresenter Margin="6,4" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Header, Mode=OneWay}" ContentTemplate="{TemplateBinding HeaderTemplate}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"/>
+                    </Border>
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0,0,4,4">
+                        <ContentPresenter Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </Border>
+                </DockPanel>
+              </Panel>
             </Border>
-          </LayoutTransformControl>
-          <Thumb x:Name="PART_SwipeEdge" Height="10" VerticalAlignment="Bottom">
-            <Thumb.Template>
-              <ControlTemplate>
-                <Rectangle Fill="#01000000"/>
-              </ControlTemplate>
-            </Thumb.Template>
-          </Thumb>
+          </ContentControl>
+          <Thumb x:Name="PART_SwipeEdge" Height="10" VerticalAlignment="Bottom"/>
         </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="mess|SwipeSheet /template/ Thumb">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Rectangle Fill="#01000000"/>
       </ControlTemplate>
     </Setter>
   </Style>

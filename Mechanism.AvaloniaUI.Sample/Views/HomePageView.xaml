@@ -7,33 +7,6 @@
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.HomePageView">
     <UserControl.Styles>
-        <Style Selector="HeaderedContentControl.groupBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <DockPanel>
-                            <Border CornerRadius="4,4,0,0" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" DockPanel.Dock="Top">
-                                <ContentPresenter Margin="6,4" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Header, Mode=OneWay}" ContentTemplate="{TemplateBinding HeaderTemplate}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"/>
-                            </Border>
-                            <Border Background="{TemplateBinding Background}" CornerRadius="0,0,4,4">
-                                <ContentPresenter Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                            </Border>
-                        </DockPanel>
-                    </Border>
-                </ControlTemplate>  			
-            </Setter>
-        </Style>
-        <!--Style Selector="TextBlock.groupHeader">
-            <Setter Property="Margin" Value="20,20,20,10"/>
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        </Style-->
-
-
         <Style Selector="Button">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>

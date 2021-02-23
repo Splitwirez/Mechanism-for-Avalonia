@@ -15,7 +15,7 @@
     <!--UserControl.DataContext>
         <vm:DemoPageViewModel/>
     </UserControl.DataContext-->
-    <StackPanel Orientation="Vertical" Spacing="4">
+    <StackPanel Orientation="Vertical">
         <mets:ToolStrip x:Name="ToolStrip">
             <mets:ToolStrip.Items>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
@@ -62,7 +62,7 @@
                 </mets:ButtonToolStripItem>
                 <mets:SegmentedControlToolStripItem x:Name="TestSegmentedControlToolStripItem" SelectionChanged="TestSegmentedControlToolStripItem_SelectionChanged">
                 <!-- -->
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="Pink">
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                 <!-- Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}"-->
                     <mecore:AttachedIcon.Icon>
                     <ControlTemplate>
@@ -70,14 +70,14 @@
                     </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
                 </mets:SegmentedControlToolStripItemSegment>
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="Maroon">
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                     <mecore:AttachedIcon.Icon>
                     <ControlTemplate>
                         <Ellipse Width="16" Height="16" Fill="Maroon"/>
                     </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
                 </mets:SegmentedControlToolStripItemSegment>
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="Aquamarine">
+                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                     <mecore:AttachedIcon.Icon>
                     <ControlTemplate>
                         <Ellipse Width="16" Height="16" Fill="Aquamarine"/>
@@ -94,15 +94,27 @@
                 <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestSegmentedControlToolStripItem}"/>
             </mets:ToolStrip.DefaultItems>
         </mets:ToolStrip>
-        <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip, Mode=TwoWay}"/>
-        <CheckBox Content="ShowLabels" IsChecked="{Binding ShowLabels, ElementName=ToolStrip}"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <TextBlock Text="Last clicked Button item: "/>
-            <TextBlock x:Name="LastItemTextBlock"/>
+        <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="Customization">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip, Mode=TwoWay}"/>
+                    <CheckBox Content="ShowLabels" IsChecked="{Binding ShowLabels, ElementName=ToolStrip}"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Item interaction">
+                <StackPanel Orientation="Vertical" Spacing="5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="Last clicked Button item: "/>
+                        <TextBlock x:Name="LastItemTextBlock" Text="{Binding LastCommandText}"/>
+                    </StackPanel>
+                    <HeaderedContentControl Classes="groupBox" Header="SegmentControl"  HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Last selected SegmentControl item segment: "/>
+                            <TextBlock x:Name="LastSegmentTextBlock"/>
+                        </StackPanel>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </HeaderedContentControl>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-        <TextBlock Text="Last selected SegmentControl item segment: "/>
-        <TextBlock x:Name="LastSegmentTextBlock"/>
     </StackPanel>
-</StackPanel>
 </UserControl>

@@ -13,7 +13,25 @@
         <mes:SwipeSheetPageViewModel/>
     </UserControl.DataContext>
     <Panel>
-        <TextBlock Text="Swipe from below!"/>
-        <mess:SwipeSheet Content="Henlo world"/>
+        <StackPanel Orientation="Vertical" Spacing="5">
+            <TextBlock Foreground="Red" Text="Dismissing the SwipeSheet may cause rapid flashing. Turn back now if you respond badly to flashing lights or other such visual stimuli." TextWrapping="Wrap" FontSize="18"/>
+            <TextBlock Foreground="#FF400000" Text="(Yes, I'm working on trying to fix this. You'll know it's fixed when this warning isn't present anymore)" TextWrapping="Wrap"/>
+            <TextBlock Text="Swipe from below!" Margin="0,15,0,0"/>
+        </StackPanel>
+        <mess:SwipeSheet Header="SwipeSheet">
+            <ListBox>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem Content="Delete"/>
+                <ListBoxItem Content="Share via..."/>
+                <ListBoxItem Content="Move"/>
+                <ListBoxItem Content="Copy"/>
+                <ListBoxItem Content="Rename"/>
+                <ListBoxItem Content="Details"/>
+            </ListBox>
+        </mess:SwipeSheet>
     </Panel>
 </UserControl>

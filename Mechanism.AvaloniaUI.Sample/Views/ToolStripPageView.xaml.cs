@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Mechanism.AvaloniaUI.Controls.ToolStrip;
 
@@ -8,6 +9,7 @@ namespace Mechanism.AvaloniaUI.Sample.Views
     public class ToolStripPageView : UserControl
     {
         TextBlock _lastSegmentTextBlock = null;
+        TextBlock _lastItemTextBlock = null;
         
         public ToolStripPageView()
         {
@@ -17,6 +19,7 @@ namespace Mechanism.AvaloniaUI.Sample.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            _lastItemTextBlock = this.Find<TextBlock>("LastItemTextBlock");
             _lastSegmentTextBlock = this.Find<TextBlock>("LastSegmentTextBlock");
         }
 
@@ -35,6 +38,15 @@ namespace Mechanism.AvaloniaUI.Sample.Views
             }
             
             _lastSegmentTextBlock.Text = val;
+        }
+
+        public void ButtonToolStripItem_Click(object sender, RoutedEventArgs e)
+        {
+            string val = "{x:Null}";
+            if (sender is ContentControl ctrl)
+                val = ctrl.ToString();
+            
+            _lastItemTextBlock.Text = val;
         }
     }
 }

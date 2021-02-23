@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <mes:ToolBarTrayPageViewModel/>
     </UserControl.DataContext>
-    <StackPanel Orientation="Vertical" Spacing="4">
+    <StackPanel Orientation="Vertical">
         <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
             <metb:ToolBar UseOverflow="False">
                 <Menu>
@@ -166,6 +166,12 @@
                 <TextBox Margin="2">http://avaloniaui.net/</TextBox>
             </metb:ToolBar>
         </metb:ToolBarTray>
-        <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+        <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="Customization">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+                </StackPanel>
+            </HeaderedContentControl>
+        </StackPanel>
     </StackPanel>
 </UserControl>

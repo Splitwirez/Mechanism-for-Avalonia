@@ -148,7 +148,7 @@ namespace Mechanism.AvaloniaUI.Extras
             var doubleColumnWidth = (IconsOnlyItemWidth * 2);
             var labelledWidth = (IconsOnlyItemWidth * 3);
             
-            Debug.WriteLine("RefreshBarMode from mode " + BarMode + " by width: " + width); //+ ", " + adjustedWidth);
+            //Debug.WriteLine("RefreshBarMode from mode " + BarMode + " by width: " + width); //+ ", " + adjustedWidth);
 
 
             if (width <= singleColumnWidth)
