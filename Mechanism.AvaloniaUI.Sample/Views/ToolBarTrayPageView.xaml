@@ -40,7 +40,7 @@
                 </MenuItem>
                 </Menu>
             </metb:ToolBar>
-            <metb:ToolBar Width="282" Band="1">
+            <metb:ToolBar Width="272" Band="1">
                 <Button Content="Back">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
