@@ -20,7 +20,7 @@
             MaterialOpacity="0.625"
             BackgroundSource="Digger" />
         </ExperimentalAcrylicBorder.Material-->
-        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False" DockPanel.Dock="Left">
+        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False,False,True,False" mecore:CornerCurves.CornerCurves="False" DockPanel.Dock="Left">
             <meec:BlenderBarItem Header="With Sub-items" GroupIndex="0">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>

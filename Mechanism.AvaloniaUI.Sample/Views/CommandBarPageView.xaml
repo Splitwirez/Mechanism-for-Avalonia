@@ -12,57 +12,323 @@
         <mes:CommandBarPageViewModel/>
     </UserControl.DataContext>
     <StackPanel Orientation="Vertical">
-        <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
+        <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" HorizontalItemsAlignment="{Binding ItemsAlignment}" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <mecb:CommandBar.Layers>
                 <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
                 <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
             </mecb:CommandBar.Layers>
             <Button Content="Always visible">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
+                        <Border Width="28" Height="28" RenderTransformOrigin="50%,50%">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="0.666666666667"/>
+                            </Border.RenderTransform>
+                            <Border Width="22" Height="24" BoxShadow="0 2 6 #9F000000" CornerRadius="12" BorderBrush="#40000000" BorderThickness="1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="White"/>
+                                        <GradientStop Offset="1" Color="#FFF2F2F2"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                    <Border Width="12" Height="12" CornerRadius="6" RenderTransformOrigin="50%,50%">
+                                        <Border.RenderTransform>
+                                            <ScaleTransform ScaleX="1" ScaleY="1.5"/>
+                                        </Border.RenderTransform>
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF7D97FF"/>
+                                                <GradientStop Offset="1" Color="#FF496EFF"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border Width="6" Height="6" CornerRadius="3" Background="Black"/>
+                                    </Border>
+                                <!--DockPanel>
+                                    <Border Height="6" DockPanel.Dock="Top" ClipToBounds="True">
+                                        <Border Height="12" CornerRadius="12,12,0,0" VerticalAlignment="Top">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                    <GradientStop Offset="0" Color="#FF99622B"/>
+                                                    <GradientStop Offset="1" Color="#FF805225"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                    </Border>
+                                    <Border Height="6" CornerRadius="0,0,4,4" DockPanel.Dock="Bottom">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF805225"/>
+                                                <GradientStop Offset="1" Color="#FF66411D"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Border Width="8" Height="8" CornerRadius="4">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF496EFF"/>
+                                                <GradientStop Offset="1" Color="#FF3E5ED9"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border Width="4" Height="4" CornerRadius="2" Background="Black"/>
+                                    </Border>
+                                </DockPanel-->
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
+                        <!--Border Width="22" Height="24" BoxShadow="0 2 6 #9F000000" CornerRadius="12" BorderBrush="#40000000" BorderThickness="1"-->
+                        <!--Panel Width="28" Height="28">
+                            <Canvas Width="6.3499999" Height="6.3500002">
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="0.00133646" Y="-5.2886043"/>
+                                        <ScaleTransform ScaleX="3.77952755905" ScaleY="3.77952755905"/>
+                                    </TransformGroup>
+                                </Canvas.RenderTransform>
+                                <!-Path Data="m 11.762203 1.8534356 c -0.65745 0.025512 -1.17887 0.414149 -1.17887 1.321614 0 1.8149307 2.085103 1.5539487 3.175 0.465445 1.089898 1.0885037 3.175001 1.3494857 3.175001 -0.465445 0 -1.81493 -2.085103 -1.553949 -3.175001 -0.465445 -0.544948 -0.544252 -1.338679 -0.881682 -1.99613 -0.856169 z m 0.158465 0.525117 c 0.473657 0.0165 1.072173 0.298672 1.571653 0.796497 -0.998961 0.99565 -2.394109 1.127678 -2.394109 0 0 -0.563839 0.348798 -0.813 0.822456 -0.796497 z m 3.675331 0 c 0.473657 -0.0165 0.822456 0.232658 0.822456 0.796497 0 1.127678 -1.395148 0.99565 -2.39411 0 0.499481 -0.497825 1.097997 -0.779994 1.571654 -0.796497 z" Fill="#40000000" Stroke="#20000000" StrokeThickness="3">
+                                    <Path.RenderTransform>
+                                        <TranslateTransform X="0" Y="2"/>
+                                    </Path.RenderTransform>
+                                </Path->
+                                <Path Data="M 1.3373345 4.0378169 C 0.86367732 4.0543221 0.22906882 4.0299542 2.4999999e-8 3.1749953 2.4999999e-8 4.9900589 2.0849924 4.728948 3.1750001 3.6404743 3.6740219 3.1421548 4.5390084 2.3288535 5.0126655 2.3123489 5.4863227 2.2958437 6.1209312 2.3200444 6.35 3.1750002 6.35 1.3599435 4.2650063 1.6210522 3.1749999 2.7095229 2.6759767 3.207843 1.8109916 4.0213121 1.3373345 4.0378169 Z">
+                                    <Path.Fill>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="#FF138DD0"/>
+                                            <GradientStop Offset="1" Color="#FF047ED3"/>
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                </Path>
+                                <Path Data="M 1.3373343 2.3121831 C 0.86367713 2.2956781 0.52916653 2.5178854 0.52916653 3.1750047 c 0 0.6571193 0.3345106 0.8793268 0.80816777 0.8628216 L 1.860691 4.038017 c 0 0 0.2461064 0.2932277 -0.3258078 0.3731164 C 0.71993918 4.5249701 -1.4083333e-7 4.2415703 -1.4083333e-7 3.1750047 -1.4083333e-7 1.3599411 2.0849924 1.6210518 3.1750002 2.709529 3.674024 3.2078521 4.539009 4.0213215 5.0126661 4.0378263 5.4863233 4.0543313 5.8208339 3.832124 5.8208339 3.1750047 c 0 -0.6571193 -0.3345106 -0.8793268 -0.8081678 -0.8628216 L 4.4893094 2.3119924 c 0 0 -0.2461064 -0.293237 0.3258078 -0.3731257 0.814944 -0.1138367 1.5348834 0.1695724 1.5348834 1.236138 0 1.8150636 -2.0849926 1.5539529 -3.1750004 0.4654757 C 2.6759764 3.1421572 1.8109914 2.3286879 1.3373343 2.3121831 Z">
+                                    <Path.Fill>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="#FF36C752"/>
+                                            <GradientStop Offset="1" Color="#FF34C1EF"/>
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                </Path>
+                                <Path Data="M 1.3373345 4.0378169 C 0.86367732 4.0543221 0.22906882 4.0299542 2.4999999e-8 3.1749953 2.4999999e-8 4.9900589 2.0849924 4.728948 3.1750001 3.6404743 3.6740219 3.1421548 4.5390084 2.3288535 5.0126655 2.3123489 5.4863227 2.2958437 6.1209312 2.3200444 6.35 3.1750002 6.35 1.3599435 4.2650063 1.6210522 3.1749999 2.7095229 2.6759767 3.207843 1.8109916 4.0213121 1.3373345 4.0378169 Z">
+                                    <Path.Fill>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="#FF138DD0"/>
+                                            <GradientStop Offset="1" Color="#FF047ED3"/>
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                </Path>
+                            </Canvas>
+                        </Panel-->
+                        <Border Width="28" Height="28" RenderTransformOrigin="50%,50%">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="0.666666666667"/>
+                            </Border.RenderTransform>
+                            <Border Width="22" Height="24" BoxShadow="0 2 6 #9F000000" CornerRadius="12" BorderBrush="#40000000" BorderThickness="1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="White"/>
+                                        <GradientStop Offset="1" Color="#FFF2F2F2"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                    <Border Width="12" Height="12" CornerRadius="6" RenderTransformOrigin="50%,50%">
+                                        <Border.RenderTransform>
+                                            <ScaleTransform ScaleX="1" ScaleY="1.5"/>
+                                        </Border.RenderTransform>
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FFFF977D"/>
+                                                <GradientStop Offset="1" Color="#FFFF6E49"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border Width="6" Height="6" CornerRadius="3" Background="Black"/>
+                                    </Border>
+                                <!--DockPanel>
+                                    <Border Height="6" DockPanel.Dock="Top" ClipToBounds="True">
+                                        <Border Height="12" CornerRadius="12,12,0,0" VerticalAlignment="Top">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                    <GradientStop Offset="0" Color="#FF99622B"/>
+                                                    <GradientStop Offset="1" Color="#FF805225"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                    </Border>
+                                    <Border Height="6" CornerRadius="0,0,4,4" DockPanel.Dock="Bottom">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF805225"/>
+                                                <GradientStop Offset="1" Color="#FF66411D"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Border Width="8" Height="8" CornerRadius="4">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF496EFF"/>
+                                                <GradientStop Offset="1" Color="#FF3E5ED9"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border Width="4" Height="4" CornerRadius="2" Background="Black"/>
+                                    </Border>
+                                </DockPanel-->
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Canvas Width="24" Height="24">
+                            <Border Canvas.Left="7" Canvas.Top="0" Width="10" Height="24" CornerRadius="2.5" Background="#0A000000"/>
+                            <Border Canvas.Left="8" Canvas.Top="0.5" Width="8" Height="22" CornerRadius="2.125" Background="#14000000"/>
+                            <Border Canvas.Left="9" Canvas.Top="1" Width="6" Height="20" CornerRadius="1.75" Background="#1D000000"/>
+                            <!-Path Data="m 11 1 c -0.259018 0 -0.502817 0.088754 -0.671875 0.2578125 l -5.65625 5.65625 c -0.391737 0.3917372 -0.391737 1.0223255 0 1.4140625 l 0.707031 0.707031 c 0.391737 0.391737 1.022326 0.391737 1.414063 0 L 10 5.828125 V 20 c 0 0.554 0.446 1 1 1 h 2 c 0.554 0 1 -0.446 1 -1 V 2 C 14 1.446 13.554 1 13 1 Z">
+                                <Path.Fill->
+                            <Border Canvas.Left="10" Canvas.Top="2" Width="4" Height="18" CornerRadius="1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FFC08040"/>
+                                        <!-B08040->
+                                        <!-BF8040->
+                                        <GradientStop Offset="1" Color="#FF906030"/>
+                                        <!-806030->
+                                        <!-604020->
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                                <!-/Path.Fill>
+                            </Path->
+                        </Canvas-->
+                        <Panel Width="24" Height="24">
+                            <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FFC08040"/>
+                                        <GradientStop Offset="1" Color="#FF906030"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <TextBlock Text="1" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
+                            </Border>
+                        </Panel>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
+                        <Panel Width="24" Height="24">
+                            <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FF4080C0"/>
+                                        <GradientStop Offset="1" Color="#FF306090"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <TextBlock Text="2" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
+                            </Border>
+                        </Panel>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </Button>
             <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
+                        <Panel Width="24" Height="24">
+                            <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9" BorderThickness="3">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FFBB0000"/>
+                                        <GradientStop Offset="1" Color="#FF880000"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Border.Clip>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="-6,-6" IsClosed="True">
+                                            <!--M 0 0 L 5 0 L 5 9 L 13 9 L 13 0 L 18 0 L 18 18 L 0 18 Z-->
+                                            <LineSegment Point="5,-6"/>
+                                            <LineSegment Point="5,9"/>
+                                            <LineSegment Point="13,9"/>
+                                            <LineSegment Point="13,-6"/>
+                                            <LineSegment Point="24,-6"/>
+                                            <LineSegment Point="24,24"/>
+                                            <LineSegment Point="-6,24"/>
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <Border Width="2" Height="14" BoxShadow="0 2 6 #9F000000" CornerRadius="1" Margin="0,-5,0,5">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Offset="0" Color="#FFCC0000"/>
+                                        <GradientStop Offset="1" Color="#FF990000"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <!--Border Width="18" Height="14" BoxShadow="0 2 6 #5F000000" CornerRadius="2">
+                                <UniformGrid Rows="1">
+                                    <Border CornerRadius="2,0,0,2">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FF606060"/>
+                                                <GradientStop Offset="1" Color="#FF303030"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Border CornerRadius="0,2,2,0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="#FFF0F0F0"/>
+                                                <GradientStop Offset="1" Color="#FFC0C0C0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </UniformGrid>
+                            </Border-->
+                        </Panel>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </ToggleButton>
             <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton">
                 <mecore:AttachedIcon.Icon>
-                <ControlTemplate>
-                    <Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/>
-                </ControlTemplate>
+                    <ControlTemplate>
+                        <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
+                        <Canvas Width="24" Height="24">
+                            <Path Fill="#47000000" Data="M 5.7324219 10.337891 C 4.7901069 10.3745 3.9969018 10.663942 3.4335938 11.230469 2.8702856 11.796996 2.5 12.666626 2.5 14 c 0 1.333392 0.3703378 2.202905 0.9335938 2.769531 0.5632558 0.566626 1.3565263 0.855879 2.2988281 0.892578 1.8846036 0.0734 4.2961791 -0.933292 5.9140621 -2.548828 L 12 14.759766 l 0.353516 0.353515 c 1.617884 1.615542 4.029459 2.622228 5.914062 2.548828 0.942302 -0.0367 1.735572 -0.325951 2.298828 -0.892578 C 21.129662 16.202904 21.5 15.333392 21.5 14 c 0 -1.333386 -0.370338 -2.202907 -0.933594 -2.769531 -0.563256 -0.566625 -1.356526 -0.855878 -2.298828 -0.892578 -1.884604 -0.0734 -4.296181 0.933296 -5.914062 2.548828 L 12 13.240234 11.646484 12.886719 C 10.02863 11.271205 7.6171788 10.264661 5.7324219 10.337891 Z m 0.4980469 0.445312 c 0.7365811 0.02567 1.4653405 0.428978 2.2421874 0.958985 0.7768471 0.530005 1.5811528 1.212864 2.3222658 1.888671 L 11.201172 14 10.794922 14.369141 C 10.053809 15.044946 9.2495033 15.727807 8.4726562 16.257812 7.6958093 16.787819 6.9670511 17.191127 6.2304688 17.216797 5.40248 17.245648 4.6104131 17.063142 4.0351562 16.517578 3.4598995 15.972014 3.1660156 15.119753 3.1660156 14 c 0 -1.119753 0.2938839 -1.972014 0.8691406 -2.517578 C 4.610413 10.936858 5.40248 10.754354 6.2304688 10.783203 Z m 11.5390622 0 c 0.827988 -0.02885 1.620056 0.153655 2.195313 0.699219 0.575257 0.545564 0.86914 1.397825 0.86914 2.517578 0 1.119753 -0.293883 1.972014 -0.86914 2.517578 -0.575257 0.545564 -1.367325 0.728069 -2.195313 0.699219 -0.736581 -0.02567 -1.46534 -0.428978 -2.242187 -0.958985 -0.776847 -0.530005 -1.581153 -1.212864 -2.322266 -1.888671 L 12.798828 14 l 0.40625 -0.369141 c 0.741099 -0.675714 1.545425 -1.358651 2.322266 -1.888671 0.776839 -0.530022 1.505581 -0.933315 2.242187 -0.958985 z"/>
+                            <Path Fill="#14000000" Data="m 5.6933594 9.337891 c -1.1285485 0.04384 -2.1933286 0.407647 -2.96875 1.1875 C 1.9491879 11.305243 1.5 12.47513 1.5 14 c 0 1.524852 0.4492861 2.694647 1.2246094 3.474609 0.7753232 0.779962 1.8401885 1.143547 2.96875 1.1875 2.131069 0.083 4.5145756 -0.967022 6.3066406 -2.603515 1.792066 1.636499 4.175572 2.686514 6.306641 2.603515 1.128561 -0.04395 2.193427 -0.407537 2.96875 -1.1875 C 22.050714 16.694646 22.5 15.524852 22.5 14 22.5 12.475153 22.050714 11.305351 21.275391 10.525391 20.500067 9.74543 19.435202 9.381845 18.306641 9.337891 16.175608 9.254893 13.792055 10.304966 12 11.941406 10.207942 10.305008 7.8242472 9.255104 5.6933594 9.337891 Z m 0.019531 0.5 C 7.7837537 9.757436 10.283453 10.81914 12 12.533203 15.433091 9.105098 22 8.283534 22 14 22 19.716488 15.433096 18.894922 12 15.466797 8.5669061 18.89491 2 19.716488 2 14 2 11.141756 3.6420276 9.918346 5.7128904 9.837891 Z m 0.5 1.445312 C 4.7210572 11.231223 3.6660156 11.930423 3.6660156 14 c 0 2.069577 1.0550416 2.768779 2.546875 2.716797 C 7.2881037 16.679332 8.9962621 15.333826 10.458984 14 8.9962614 12.66617 7.2881038 11.320668 6.2128904 11.283203 Z m 11.5742186 0 c -1.075213 0.03746 -2.78337 1.383125 -4.246093 2.716797 1.462723 1.33383 3.17088 2.679332 4.246093 2.716797 1.491833 0.05198 2.546875 -0.64722 2.546875 -2.716797 0 -2.069577 -1.055042 -2.768777 -2.546875 -2.716797 z m -11.5917967 0.5 c 0.3386315 0.0118 1.001175 0.299587 1.7128906 0.785156 C 8.4741972 12.95451 9.0812859 13.482623 9.6699219 14 9.0812859 14.517376 8.4741979 15.045489 7.9082031 15.431641 7.1964873 15.917211 6.5339433 16.204998 6.1953125 16.216797 5.5314677 16.239928 5.0498318 16.099451 4.7246094 15.791016 4.399387 15.48258 4.1660156 14.949824 4.1660156 14 c 0 -0.949824 0.2333714 -1.48258 0.5585938 -1.791016 0.3252224 -0.308435 0.8068575 -0.448911 1.4707029 -0.425781 z m 11.6093757 0 c 0.663844 -0.02313 1.14548 0.117346 1.470703 0.425781 0.325222 0.308436 0.558593 0.841192 0.558593 1.791016 0 0.949824 -0.233371 1.48258 -0.558593 1.791016 -0.325223 0.308435 -0.806859 0.448911 -1.470703 0.425781 -0.338633 -0.0118 -1.001176 -0.299587 -1.712891 -0.785156 C 15.525802 15.04549 14.918714 14.517377 14.330078 14 c 0.588646 -0.517347 1.195719 -1.045471 1.761719 -1.431641 0.711722 -0.485592 1.374284 -0.773357 1.712891 -0.785156 z"/>
+                            <Path Fill="#2E000000" Data="M 5.7128906 9.837891 C 3.6420276 9.918346 2 11.141756 2 14 2 19.716488 8.5669061 18.89491 12 15.466797 15.433096 18.894922 22 19.716488 22 14 22 8.283534 15.433091 9.105098 12 12.533203 10.283453 10.81914 7.7837537 9.757436 5.7128906 9.837891 Z m 0.019531 0.5 c 1.8847569 -0.07323 4.2962084 0.933314 5.9140624 2.548828 L 12 13.240234 12.353516 12.886719 c 1.617881 -1.615532 4.029458 -2.622228 5.914062 -2.548828 0.942302 0.0367 1.735572 0.325953 2.298828 0.892578 C 21.129662 11.797093 21.5 12.666614 21.5 14 c 0 1.333392 -0.370338 2.202904 -0.933594 2.769531 -0.563256 0.566627 -1.356526 0.855879 -2.298828 0.892578 -1.884603 0.0734 -4.296178 -0.933286 -5.914062 -2.548828 L 12 14.759766 11.646484 15.113281 C 10.028601 16.728817 7.6170255 17.735508 5.7324219 17.662109 4.7901201 17.62541 3.9968496 17.336157 3.4335938 16.769531 2.8703378 16.202905 2.5 15.333392 2.5 14 2.5 12.666626 2.8702856 11.796996 3.4335938 11.230469 3.9969018 10.663942 4.7901069 10.3745 5.7324216 10.337891 Z m 0.4980469 0.445312 C 5.40248 10.754354 4.610413 10.936858 4.0351562 11.482422 3.4598995 12.027986 3.1660156 12.880247 3.1660156 14 c 0 1.119753 0.2938839 1.972014 0.8691406 2.517578 0.5752569 0.545564 1.3673238 0.72807 2.1953126 0.699219 0.7365823 -0.02567 1.4653405 -0.428978 2.2421874 -0.958985 0.7768471 -0.530005 1.5811528 -1.212866 2.3222658 -1.888671 L 11.201172 14 10.794922 13.630859 C 10.053809 12.955052 9.2495033 12.272193 8.4726562 11.742188 7.6958093 11.212181 6.9670499 10.808869 6.2304685 10.783203 Z m 11.5390625 0 c -0.736606 0.02567 -1.465348 0.428963 -2.242187 0.958985 -0.776841 0.53002 -1.581167 1.212957 -2.322266 1.888671 L 12.798828 14 l 0.40625 0.369141 c 0.741113 0.675807 1.545419 1.358666 2.322266 1.888671 0.776847 0.530007 1.505606 0.933319 2.242187 0.958985 0.827988 0.02885 1.620056 -0.153655 2.195313 -0.699219 0.575257 -0.545564 0.86914 -1.397825 0.86914 -2.517578 0 -1.119753 -0.293883 -1.972014 -0.86914 -2.517578 -0.575257 -0.545564 -1.367325 -0.728068 -2.195313 -0.699219 z m -11.5566407 0.5 C 7.2881038 11.320668 8.9962614 12.66617 10.458984 14 8.9962621 15.333826 7.2881037 16.679332 6.2128906 16.716797 4.7210572 16.768779 3.6660156 16.069577 3.6660156 14 c 0 -2.069577 1.0550416 -2.768777 2.5468747 -2.716797 z m 11.5742187 0 c 1.491833 -0.05198 2.546875 0.64722 2.546875 2.716797 0 2.069577 -1.055042 2.768777 -2.546875 2.716797 C 16.711896 16.679332 15.003739 15.33383 13.541016 14 c 1.462723 -1.333672 3.17088 -2.679332 4.246093 -2.716797 z"/>
+                            <Path Stroke="{Binding Fill, RelativeSource={RelativeSource Mode=Self}}" StrokeThickness="2" Data="m 6.2120768 9.2825847 c -1.4918334 -0.051982 -2.5454099 0.647853 -2.5454099 2.7174303 0 2.069577 1.0535765 2.769412 2.5454099 2.71743 l 1.6483673 6.01e-4 c 0 0 0.7751382 0.923512 -1.0261662 1.175118 -2.5667524 0.358525 -4.8342775 -0.534033 -4.8342775 -3.893149 0 -5.7164875 6.5669047 -4.8941274 9.9999996 -1.466001 1.571729 1.569453 4.296091 4.13145 5.787924 4.183431 1.491833 0.05198 2.54541 -0.647853 2.54541 -2.71743 0 -2.0695773 -1.053577 -2.7694129 -2.54541 -2.7174303 L 16.139556 9.281984 c 0 0 -0.775138 -0.9235409 1.026167 -1.1751479 C 19.732475 7.7483109 22 8.6408992 22 12.000015 22 17.716503 15.433096 16.894142 12 13.466017 10.428272 11.896563 7.7039099 9.334566 6.2120768 9.2825847 Z">
+                                <!-- Fill="Red"-->
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                        <GradientStop Offset="0" Color="#FF138DD0"/>
+                                        <GradientStop Offset="1" Color="#FF047ED3"/>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+                            <Path Stroke="{Binding Fill, RelativeSource={RelativeSource Mode=Self}}" StrokeThickness="2" StrokeJoin="Round" Data="m 6.2120775 14.717416 c -1.4918335 0.05198 -3.4906001 -0.02476 -4.2120765 -2.717431 0 5.716488 6.5669041 4.894126 9.999998 1.466013 1.571724 -1.569442 4.29609 -4.1309105 5.787923 -4.1828912 1.491833 -0.051983 3.490601 0.024236 4.212075 2.7168942 0 -5.7164659 -6.566907 -4.8941121 -9.999998 -1.466007 -1.571726 1.569444 -4.2960885 4.13144 -5.7879215 4.183422 z">
+                                <!-- Fill="Green"-->
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                        <GradientStop Offset="0" Color="#FF36C752"/>
+                                        <GradientStop Offset="1" Color="#FF34EF59"/>
+                                        <!--FF34C1EF-->
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+                        </Canvas>
+                    </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
             </RepeatButton>
             <mecb:CommandBar.EndItems>
                 <Button>
-                    <Panel Width="16" Height="16">
-                        <Border BoxShadow="0 2 8 #5F000000" CornerRadius="8">
+                    <Panel Width="24" Height="24">
+                        <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
                                     <GradientStop Offset="0" Color="#FF496EFF"/>
@@ -71,7 +337,7 @@
                             </Border.Background>
                         </Border>
                         <!-- Fill="{Binding $parent[Button].Foreground}"/-->
-                        <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
+                        <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
                     </Panel>
                 </Button>
             </mecb:CommandBar.EndItems>
@@ -86,7 +352,7 @@
             <HeaderedContentControl Classes="groupBox" Header="Alignment">
                 <StackPanel Orientation="Vertical">
                     <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
-                    <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment">Align items to right</RadioButton>
+                    <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="{Binding ItemsAlignmentIsRight}">Align items to right</RadioButton>
                 </StackPanel>
             </HeaderedContentControl>
         </StackPanel>

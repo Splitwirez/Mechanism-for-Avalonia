@@ -3,17 +3,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:Mechanism.AvaloniaUI.Sample.Views;assembly=Mechanism.AvaloniaUI.Sample"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.HomePageView">
+    <UserControl.Resources>
+        <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
+        <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
+    </UserControl.Resources>
     <UserControl.Styles>
-        <Style Selector="Button">
+        <Style Selector="HeaderedContentControl.groupBox Button">
+        <!--Style Selector="Button"-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow" />
             <Setter Property="Margin" Value="10" />
             <Setter Property="Width" Value="128" />
             <Setter Property="Height" Value="128" />
+            <Setter Property="mecore:AttachedIcon.IconGap" Value="4" />
             <!--Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}"/-->
             <!--Setter Property="Background">
                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
@@ -21,6 +28,34 @@
                     <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
                 </LinearGradientBrush>
             </Setter-->
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}">
+                        <StackPanel Orientation="Vertical" Spacing="{Binding (mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="HeaderedContentControl.groupBox Button /template/ Border#BackgroundBorder">
+            <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+        </Style>
+        <Style Selector="HeaderedContentControl.groupBox Button:pointerover /template/ Border#BackgroundBorder">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+        </Style>
+        <Style Selector="HeaderedContentControl.groupBox Button:pressed /template/ Border#BackgroundBorder">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
+        </Style>
+        <Style Selector="HeaderedContentControl.groupBox Button:disabled /template/ Border#BackgroundBorder">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
         </Style>
         <!--Style Selector="Button:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
         </Style-->

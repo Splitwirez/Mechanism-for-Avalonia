@@ -12,7 +12,7 @@
         <mes:ToolBarTrayPageViewModel/>
     </UserControl.DataContext>
     <StackPanel Orientation="Vertical">
-        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="True,True,False,False">
+        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <metb:ToolBar UseOverflow="False">
                 <Menu>
                 <MenuItem Header="File">

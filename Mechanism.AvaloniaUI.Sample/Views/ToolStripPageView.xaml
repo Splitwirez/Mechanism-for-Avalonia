@@ -16,74 +16,163 @@
         <vm:DemoPageViewModel/>
     </UserControl.DataContext-->
     <StackPanel Orientation="Vertical">
-        <mets:ToolStrip x:Name="ToolStrip">
+        <mets:ToolStrip x:Name="ToolStrip" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <mets:ToolStrip.Items>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Red"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Red"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Red"/>
+                                            <GradientStop Offset="1" Color="#FFC00000"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Button 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Green"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Green"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Green"/>
+                                            <GradientStop Offset="1" Color="#FF006000"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Button 3" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Blue"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Blue"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Blue"/>
+                                            <GradientStop Offset="1" Color="#FF0000C0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Button 4" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Yellow"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Yellow"/>
+                                            <GradientStop Offset="1" Color="#FFC0C000"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Button 5" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Orange"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Orange"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Orange"/>
+                                            <GradientStop Offset="1" Color="#FFC06000"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Button 6 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                    <Rectangle Width="16" Height="16" Fill="Purple"/>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <!--Rectangle Width="16" Height="16" Fill="Purple"/-->
+                            <Panel Width="20" Height="20" Margin="-2">
+                                <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                            <GradientStop Offset="0" Color="Purple"/>
+                                            <GradientStop Offset="1" Color="#FF600060"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Panel>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
                 </mets:ButtonToolStripItem>
                 <mets:SegmentedControlToolStripItem x:Name="TestSegmentedControlToolStripItem" SelectionChanged="TestSegmentedControlToolStripItem_SelectionChanged">
-                <!-- -->
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                <!-- Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}"-->
-                    <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                        <Ellipse Width="16" Height="16" Fill="Pink"/>
-                    </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:SegmentedControlToolStripItemSegment>
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                        <Ellipse Width="16" Height="16" Fill="Maroon"/>
-                    </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:SegmentedControlToolStripItemSegment>
-                <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
-                    <ControlTemplate>
-                        <Ellipse Width="16" Height="16" Fill="Aquamarine"/>
-                    </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:SegmentedControlToolStripItemSegment>
+                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <!-- Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}"-->
+                        <mecore:AttachedIcon.Icon>
+                            <ControlTemplate>
+                                <!--Ellipse Width="16" Height="16" Fill="Pink"/-->
+                                <Panel Width="20" Height="20" Margin="-2">
+                                    <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="6">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="Pink"/>
+                                                <GradientStop Offset="1" Color="#FFC090C0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </Panel>
+                            </ControlTemplate>
+                        </mecore:AttachedIcon.Icon>
+                    </mets:SegmentedControlToolStripItemSegment>
+                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                        <mecore:AttachedIcon.Icon>
+                            <ControlTemplate>
+                                <!--Ellipse Width="16" Height="16" Fill="Maroon"/-->
+                                <Panel Width="20" Height="20" Margin="-2">
+                                    <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="6">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="Maroon"/>
+                                                <GradientStop Offset="1" Color="#FF400000"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </Panel>
+                            </ControlTemplate>
+                        </mecore:AttachedIcon.Icon>
+                    </mets:SegmentedControlToolStripItemSegment>
+                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                        <mecore:AttachedIcon.Icon>
+                            <ControlTemplate>
+                                <!--Ellipse Width="16" Height="16" Fill="Aquamarine"/-->
+                                <Panel Width="20" Height="20" Margin="-2">
+                                    <Border Width="12" Height="12" BoxShadow="0 2 6 #9F000000" CornerRadius="6">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                <GradientStop Offset="0" Color="Aquamarine"/>
+                                                <GradientStop Offset="1" Color="#FF65CCA9"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </Panel>
+                            </ControlTemplate>
+                        </mecore:AttachedIcon.Icon>
+                    </mets:SegmentedControlToolStripItemSegment>
                 </mets:SegmentedControlToolStripItem>
             </mets:ToolStrip.Items>
             <mets:ToolStrip.DefaultItems>

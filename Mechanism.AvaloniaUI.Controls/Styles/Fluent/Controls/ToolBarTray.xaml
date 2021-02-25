@@ -12,7 +12,7 @@
     <Setter Property="BaseWidth" Value="16"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" Margin="2">
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}" Margin="2">
           <DockPanel>
             <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left">
               <Thumb.Template>
@@ -143,12 +143,20 @@
 
   <Style Selector="metb|ToolBarTray">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
+    <Setter Property="mecore:BorderPresence.BorderPresence" Value="False" />
+    <Setter Property="mecore:CornerCurves.CornerCurves" Value="False" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}">
+            <Border.BorderThickness>
+              <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
+                <Binding.Converter>
+                  <mecore:BorderPresenceToThicknessesConverter/>
+                </Binding.Converter>
+              </Binding>
+            </Border.BorderThickness>
             <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" HorizontalAlignment="Stretch">
               <ItemsPresenter.ItemsPanel>
                 <ItemsPanelTemplate>
