@@ -235,7 +235,12 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
             Point bR = _currentItemsItemsControl.TranslatePoint(new Point(_currentItemsItemsControl.Bounds.Size.Width, _currentItemsItemsControl.Bounds.Size.Height), VisualRoot).GetValueOrDefault();
             if ((point.X > tL.X) && (point.Y > tL.Y) && (point.X < bR.X) && (point.Y < bR.Y))
             {
-                var hoverItem = Avalonia.VisualTree.VisualExtensions.GetVisualDescendants(_currentItemsItemsControl).OfType<Visual>().FirstOrDefault(x => hitTestItems.Contains(x) && _currentItemsItemsControl.Items.OfType<object>().Contains(x.DataContext)).DataContext;
+                object hoverItem = null;
+                try
+                {
+                    hoverItem = Avalonia.VisualTree.VisualExtensions.GetVisualDescendants(_currentItemsItemsControl).OfType<Visual>().FirstOrDefault(x => hitTestItems.Contains(x) && _currentItemsItemsControl.Items.OfType<object>().Contains(x.DataContext)).DataContext;
+                }
+                catch { }
 
                 if (hoverItem != null)
                     CurrentItems.Insert(_currentItemsItemsControl.Items.OfType<object>().ToList().IndexOf(hoverItem), item.ToReference()); /*(CurrentItems.Last(x => x.TargetItem == HoverItems.Last()))*, item.ToReference());*/
