@@ -1,0 +1,61 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
+  <Style Selector="mectrl|OverflowFlyoutItemsPresenter">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <!--Setter Property="FlyoutDataTemplates">
+      <DataTemplates>
+        <DataTemplate>
+          <TextBlock Text="{Binding Title}" Foreground="Red"/>
+        </DataTemplate>
+      </DataTemplates>
+    </Setter-->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!-- Height="{Binding Path=Bounds.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Mode=OneWay}"-->
+          <!--mectrl:OverflowFlyoutItemsPresenterSplitPanel Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Mode=OneWay}"-->
+          <DockPanel HorizontalAlignment="Stretch">
+          <!-- MaxWidth="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"-->
+          <!--Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"-->
+            <Panel Width="45" DockPanel.Dock="Right" ZIndex="2">
+              <ToggleButton x:Name="FlyoutToggleButton" Margin="4,0,0,0" IsVisible="{TemplateBinding HasFlyoutItems}" HorizontalAlignment="Stretch" IsChecked="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                  <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                    <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
+                  </StackPanel>
+              </ToggleButton>
+            </Panel>
+            <StackPanel x:Name="PART_MainItemsPanel" Orientation="Horizontal"/>
+          </DockPanel>
+          <Popup PlacementTarget="{Binding #FlyoutToggleButton}" PlacementMode="Left" StaysOpen="False"
+                 IsOpen="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                 HorizontalOffset="{Binding #FlyoutToggleButton.Bounds.Width}"
+                 VerticalOffset="{Binding #FlyoutToggleButton.Bounds.Height}">
+            <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource DynamicResource MenuFlyoutPresenterThemePadding}">
+              <!--i:Interaction.Behaviors>
+                <mectrl:OverflowFlyoutItemsPresenterFlyoutDataTemplatesBehavior FlyoutDataTemplates="{Binding FlyoutDataTemplates, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+              </i:Interaction.Behaviors-->
+              <WrapPanel x:Name="PART_FlyoutItemsPanel"/>
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="mectrl|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:not(:pointerover):not(:pressed) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="mectrl|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+  </Style>
+</Styles>

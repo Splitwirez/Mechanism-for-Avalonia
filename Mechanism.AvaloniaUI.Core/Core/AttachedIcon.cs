@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using Avalonia.Data.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Mechanism.AvaloniaUI.Core
@@ -47,6 +49,19 @@ namespace Mechanism.AvaloniaUI.Core
         public static void SetIconGap(IAvaloniaObject obj, double value)
         {
             obj.SetValue(IconGapProperty, value);
+        }
+    }
+
+    public class ValueToIsNullBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

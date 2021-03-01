@@ -16,7 +16,7 @@ using System.Diagnostics;
 
 namespace Mechanism.AvaloniaUI.Controls.CommandBar
 {
-    public class CommandBar : OverflowFlyoutItemsControl
+    public class CommandBar : HeaderedItemsControl //OverflowFlyoutItemsControl
     {
         /*public static readonly StyledProperty<object> FarEndContentProperty = AvaloniaProperty.Register<CommandBar, object>(nameof(FarEndContent));
 
@@ -26,7 +26,7 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
             set => SetValue(FarEndContentProperty, value);
         }*/
 
-        public static readonly DirectProperty<CommandBar, IEnumerable> EndItemsProperty =
+        /*public static readonly DirectProperty<CommandBar, IEnumerable> EndItemsProperty =
             AvaloniaProperty.RegisterDirect<CommandBar, IEnumerable>(nameof(EndItems), o => o.EndItems, (o, v) => o.EndItems = v);
 
         private IEnumerable _endItems = new AvaloniaList<object>();
@@ -56,26 +56,48 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
         {
             get => GetValue(EndItemsPanelProperty);
             set => SetValue(EndItemsPanelProperty, value);
-        }
+        }*/
 
+        
+        /*static ObservableCollection<CommandBarLayer> DefaultLayersCollection => new ObservableCollection<CommandBarLayer>();
         public static readonly StyledProperty<ObservableCollection<CommandBarLayer>> LayersProperty =
-        AvaloniaProperty.Register<OverflowFlyoutItemsControl, ObservableCollection<CommandBarLayer>>(nameof(Layers), defaultValue: new ObservableCollection<CommandBarLayer>());
+        AvaloniaProperty.Register<CommandBar, ObservableCollection<CommandBarLayer>>(nameof(Layers), defaultValue: DefaultLayersCollection);
 
         public ObservableCollection<CommandBarLayer> Layers
         {
             get => GetValue(LayersProperty);
             set => SetValue(LayersProperty, value);
+        }*/
+        public static readonly DirectProperty<CommandBar, ObservableCollection<CommandBarLayer>> LayersProperty =
+            AvaloniaProperty.RegisterDirect<CommandBar, ObservableCollection<CommandBarLayer>>(nameof(Layers), o => o.Layers, (o, v) => o.Layers = v);
+
+        private ObservableCollection<CommandBarLayer> _layers = new ObservableCollection<CommandBarLayer>();
+        public ObservableCollection<CommandBarLayer> Layers
+        {
+            get => _layers;
+            set => SetAndRaise(LayersProperty, ref _layers, value);
         }
 
-        public static readonly AttachedProperty<string> VisibleOnLayersProperty =
-        AvaloniaProperty.RegisterAttached<CommandBar, Control, string>("VisibleOnLayers", defaultValue: null);
 
-        public static string GetVisibleOnLayers(Control element)
+        public static readonly StyledProperty<ChildrenHorizontalAlignment> HorizontalItemsAlignmentProperty =
+            AvaloniaProperty.Register<CommandBar, ChildrenHorizontalAlignment>(nameof(HorizontalItemsAlignment), defaultValue: ChildrenHorizontalAlignment.Left);
+
+        public ChildrenHorizontalAlignment HorizontalItemsAlignment
+        {
+            get => GetValue(HorizontalItemsAlignmentProperty);
+            set => SetValue(HorizontalItemsAlignmentProperty, value);
+        }
+
+
+        public static readonly AttachedProperty<string> VisibleOnLayersProperty =
+        AvaloniaProperty.RegisterAttached<CommandBar, IControl, string>("VisibleOnLayers", defaultValue: null);
+
+        public static string GetVisibleOnLayers(IControl element)
         {
             return element.GetValue(VisibleOnLayersProperty);
         }
 
-        public static void SetVisibleOnLayers(Control element, string value)
+        public static void SetVisibleOnLayers(IControl element, string value)
         {
             element.SetValue(VisibleOnLayersProperty, value);
         }
@@ -97,7 +119,7 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
         static string _endItemsClass = "EndItem";
         static CommandBar()
         {
-            LayersProperty.Changed.AddClassHandler<CommandBar>(new Action<CommandBar, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
+            LayersProperty.Changed.AddClassHandler<CommandBar>(((sneder, args) =>
             {
                 if (args.OldValue != null)
                     (args.NewValue as ObservableCollection<CommandBarLayer>).CollectionChanged -= Layers_CollectionChanged;
@@ -105,7 +127,7 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
                     (args.NewValue as ObservableCollection<CommandBarLayer>).CollectionChanged += Layers_CollectionChanged;
                 sneder.UpdateChildrenVisibity();
             }));
-            FlyoutItemsPanelProperty.OverrideDefaultValue<CommandBar>(FlyoutDefaultPanel);
+            //FlyoutItemsPanelProperty.OverrideDefaultValue<CommandBar>(FlyoutDefaultPanel);
 
             /*EndItemsProperty.Changed.AddClassHandler<CommandBar>(new Action<CommandBar, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
             {
@@ -128,36 +150,70 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
 
         void UpdateEndItems()
         {
-            //Debug.WriteLine("EndItems.OfType<object>() count: " + EndItems.OfType<object>().Count());
-            var enumerator = EndItems.GetEnumerator();
-            //foreach (StyledElement el in EndItems.OfType<StyledElement>())
-            while (enumerator.MoveNext())
-            {
-                if (enumerator.Current is StyledElement el)
+            /*
+                //Debug.WriteLine("EndItems.OfType<object>() count: " + EndItems.OfType<object>().Count());
+                var enumerator = EndItems.GetEnumerator();
+                //foreach (StyledElement el in EndItems.OfType<StyledElement>())
+                while (enumerator.MoveNext())
                 {
-                    string adding = "Adding _endItemsClass? ";
-                    if (!el.Classes.Contains(_endItemsClass))
+                    if (enumerator.Current is StyledElement el)
                     {
-                        el.Classes.Add(_endItemsClass);
-                        adding += "Yes";
+                        string adding = "Adding _endItemsClass? ";
+                        if (!el.Classes.Contains(_endItemsClass))
+                        {
+                            el.Classes.Add(_endItemsClass);
+                            adding += "Yes";
+                        }
+                        else
+                            adding += "No";
+                        Debug.WriteLine(adding);
                     }
                     else
-                        adding += "No";
-                    Debug.WriteLine(adding);
+                        Debug.WriteLine("Not a StyledElement!");
                 }
-                else
-                    Debug.WriteLine("Not a StyledElement!");
             }
+            */
         }
 
         public CommandBar()
         {
+            _setChildrenVisibility = new Action<IControl>((c) =>
+            {
+                /*string visibleOnLayers = GetVisibleOnLayers(c);
+                if (string.IsNullOrEmpty(visibleOnLayers) || string.IsNullOrWhiteSpace(visibleOnLayers))
+                {
+                    var child = Avalonia.VisualTree.VisualExtensions.FindDescendantOfType<IControl>(c);
+                    if (child != null)
+                        visibleOnLayers = GetVisibleOnLayers(child);
+                }
+                Debug.WriteLine("" + c + " visibleOnLayers: " + visibleOnLayers);
+                if ((!string.IsNullOrEmpty(visibleOnLayers)) && (!string.IsNullOrWhiteSpace(visibleOnLayers)))
+                {
+                    string[] strings = visibleOnLayers.Replace(" ", string.Empty).Split(',');
+                    bool wasVisible = c.IsVisible;
+                    if (Layers.Where(x => (!string.IsNullOrEmpty(x.Identifier)) && (!string.IsNullOrWhiteSpace(x.Identifier))).Any(x => x.IsVisible && strings.Contains(x.Identifier)))
+                        (c as Control).IsVisible = true;
+                    else
+                        (c as Control).IsVisible = false;
+                    
+                    //Debug.WriteLine("IsVisible go from " + wasVisible + " to " + c.IsVisible);
+                }*/
+                c.IsVisible = ShouldAddItemToPanels(c);
+            });
+
             CommandBarLayer.IsLayerVisibleChanged += (sneder, args) =>
             {
                 if (Layers.Contains(sneder))
                     UpdateChildrenVisibity();
             };
-            //UpdateEndItems();
+        }
+
+        Action<IControl> _setChildrenVisibility = null;
+
+        public void UpdateChildrenVisibity()
+        {
+            //_itemsPresenter?.RunOnItemContainers(_setChildrenVisibility);
+            _itemsPresenter?.ItemsChanged();
         }
 
         protected override void ItemsChanged(AvaloniaPropertyChangedEventArgs e)
@@ -177,34 +233,64 @@ namespace Mechanism.AvaloniaUI.Controls.CommandBar
             (sender as CommandBar).UpdateChildrenVisibity();
         }
 
-        public void UpdateChildrenVisibity()
-        {
-            foreach (Control c in Items.OfType<Control>()/*.Where(x => (!string.IsNullOrEmpty(GetVisibleOnLayers(x))) && (!string.IsNullOrWhiteSpace(GetVisibleOnLayers(x))))*/)
-            {
-                string visibleOnLayers = GetVisibleOnLayers(c);
-                if ((!string.IsNullOrEmpty(visibleOnLayers)) && (!string.IsNullOrWhiteSpace(visibleOnLayers)))
-                {
-                    string[] strings = visibleOnLayers.Replace(" ", string.Empty).Split(',');
+        //ItemsPresenter _endItemsPresenter = null;
+        OverflowFlyoutItemsPresenter _itemsPresenter = null;
 
-                    if (Layers.Where(x => (!string.IsNullOrEmpty(x.Identifier)) && (!string.IsNullOrWhiteSpace(x.Identifier))).Any(x => x.IsVisible && strings.Contains(x.Identifier)))
-                        c.IsVisible = true;
-                    else
-                        c.IsVisible = false;
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
+            base.OnApplyTemplate(e);
+            //_endItemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_EndItemsPresenter");
+            _itemsPresenter = e.NameScope.Find<OverflowFlyoutItemsPresenter>("PART_ItemsPresenter");
+            _itemsPresenter.ShouldAddToPanels = ShouldAddItemToPanels;
+        }
+
+        bool ShouldAddItemToPanels(IControl ctrl)
+        {
+            IControl c = ctrl;
+            /*_setChildrenVisibility(ctrl);
+            return ctrl.IsVisible;*/
+            //string visibleOnLayers = GetVisibleOnLayers(c);
+            string visibleOnLayers = GetVisibleOnLayers(c);
+
+            //bool doChild = string.IsNullOrEmpty(visibleOnLayers) || string.IsNullOrWhiteSpace(visibleOnLayers);
+            //Debug.WriteLine("doChild: " + doChild);
+            ctrl.Measure(Bounds.Size);
+            if (ctrl is ContentPresenter pres)
+            {
+                c = Avalonia.VisualTree.VisualExtensions.FindDescendantOfType<IControl>(pres);
+                //c = Avalonia.LogicalTree.LogicalExtensions.GetLogicalDescendants(c).OfType<IControl>().FirstOrDefault(); //.FindDescendantOfType<IControl>(c);
+                //Debug.WriteLine("" + c);
+                if (c != null)
+                {
+                    string newVisibleOnLayers = GetVisibleOnLayers(c);
+                    if ((!string.IsNullOrEmpty(newVisibleOnLayers)) && (!string.IsNullOrWhiteSpace(newVisibleOnLayers)))
+                        visibleOnLayers = newVisibleOnLayers;
+                    //Debug.WriteLine("Yes: " + visibleOnLayers);
+                }
+                else
+                {
+                    c = ctrl;
+                    //Debug.WriteLine("No");
                 }
             }
+            if (string.IsNullOrEmpty(visibleOnLayers) || string.IsNullOrWhiteSpace(visibleOnLayers))
+                return true;
+            
+            //Debug.WriteLine("" + c + " visibleOnLayers: " + visibleOnLayers);
+            if ((!string.IsNullOrEmpty(visibleOnLayers)) && (!string.IsNullOrWhiteSpace(visibleOnLayers)))
+            {
+                string[] strings = visibleOnLayers.Replace(" ", string.Empty).Split(',');
+                bool wasVisible = c.IsVisible;
+                if (Layers.Where(x => (!string.IsNullOrEmpty(x.Identifier)) && (!string.IsNullOrWhiteSpace(x.Identifier))).Any(x => x.IsVisible && strings.Contains(x.Identifier)))
+                    return true;
+            }
+            return false;
         }
 
-        ItemsPresenter _endItemsPresenter = null;
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
-        {
-            base.OnTemplateApplied(e);
-            _endItemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_CommandBarEndItemsPresenter");
-        }
-
-        protected override double GetBaseWidth()
+        /*protected override double GetBaseWidth()
         {
             return base.GetBaseWidth() + _endItemsPresenter.DesiredSize.Width;
-        }
+        }*/
 
         /*protected override void LogicalChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
