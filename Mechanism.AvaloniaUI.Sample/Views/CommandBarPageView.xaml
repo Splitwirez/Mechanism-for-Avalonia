@@ -404,13 +404,16 @@
                 </UniformGrid>
             </HeaderedContentControl>
         </StackPanel>
-        <StackPanel Margin="5" Spacing="5" VerticalAlignment="Center">
-            <HeaderedContentControl Classes="groupBox" Header="Alignment">
+        <UniformGrid Margin="5" Rows="1" VerticalAlignment="Center">
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <TextBlock Text="The CommandBar displays context-relevant commands in togglable 'layers', similarly to the CommandBar seen in Windows 7's File Explorer. Also moves items which don't fit into an overflow menu. The one on the top has its items defined in XAML, while the one on the bottom has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Alignment" Margin="5,0,0,0">
                 <UniformGrid Rows="1">
                     <RadioButton x:Name="CommandBarLeftRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="True">Align items to left</RadioButton>
                     <RadioButton x:Name="CommandBarRightRadioButton" GroupName="CommandBarHorizontalItemsAlignment" IsChecked="{Binding ItemsAlignmentIsRight}">Align items to right</RadioButton>
                 </UniformGrid>
             </HeaderedContentControl>
-        </StackPanel>
+        </UniformGrid>
     </DockPanel>
 </UserControl>

@@ -119,6 +119,9 @@
         </meec:BlenderBar>
         <!--/ExperimentalAcrylicBorder-->
         <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <TextBlock Text="The BlenderBar displays modes and sets of related modes in linked groups, allowing the user to switch to one mode at a time, similarly to Blender 2.8 (or, to a lesser extent, some of the Adobe CC programs)." TextWrapping="Wrap"/>
+            </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="Customization">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Drag the rightmost edge of the BlenderBar to the left or right to resize it!" TextWrapping="Wrap"/>

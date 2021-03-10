@@ -167,6 +167,9 @@
             </metb:ToolBar>
         </metb:ToolBarTray>
         <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <TextBlock Text="The ToolBarTray displays controls in draggable ToolBars, similarly to many older Windows programs. Also moves items which don't fit into an overflow menu." TextWrapping="Wrap"/>
+            </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="Customization">
                 <StackPanel Orientation="Vertical">
                     <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>

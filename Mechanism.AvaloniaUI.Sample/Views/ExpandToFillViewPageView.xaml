@@ -1,0 +1,169 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample.Views.ExpandToFillViewPageView">
+    <UserControl.DataContext>
+        <mes:ExpandToFillViewPageViewModel/>
+    </UserControl.DataContext>
+    <!--UserControl.Resources>
+        <ControlTemplate x:Key="RedEllipse">
+            <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="8" Margin="4">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="Red"/>
+                        <GradientStop Offset="1" Color="#FFC00000"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="GreenEllipse">
+            <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="8" Margin="4">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="Green"/>
+                        <GradientStop Offset="1" Color="#FF006000"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="BlueEllipse">
+            <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="8" Margin="4">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="Blue"/>
+                        <GradientStop Offset="1" Color="#FF0000C0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Resources-->
+    <Grid ColumnDefinitions="*,*,*">
+        <meec:ExpandToFillView x:Name="ExpandToFillView" Grid.Column="0" mecore:BorderPresence.BorderPresence="False,False,True,False">
+            <meec:ExpandToFillViewItem Header="Base">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Offset="0" Color="Red"/>
+                                    <GradientStop Offset="1" Color="#FFC00000"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                <UniformGrid Columns="3">
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                    <Rectangle Fill="DarkRed" Margin="10"/>
+                </UniformGrid>
+            </meec:ExpandToFillViewItem>
+            <meec:ExpandToFillViewItem Header="Coat">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Offset="0" Color="Green"/>
+                                    <GradientStop Offset="1" Color="#FF006000"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                <UniformGrid Columns="3">
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                    <Rectangle Fill="DarkGreen" Margin="10"/>
+                </UniformGrid>
+            </meec:ExpandToFillViewItem>
+            <meec:ExpandToFillViewItem Header="Detail">
+                <mecore:AttachedIcon.Icon>
+                    <ControlTemplate>
+                        <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Offset="0" Color="Blue"/>
+                                    <GradientStop Offset="1" Color="#FF0000C0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </ControlTemplate>
+                </mecore:AttachedIcon.Icon>
+                <UniformGrid Columns="3">
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                    <Rectangle Fill="DarkBlue" Margin="10"/>
+                </UniformGrid>
+            </meec:ExpandToFillViewItem>
+        </meec:ExpandToFillView>
+        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" Grid.Column="2" mecore:BorderPresence.BorderPresence="True,False,False,False">
+            <!--meec:ExpandToFillView.Styles>
+                <Style Selector="meec|ExpandToFillView#BoundExpandToFillView meec|ExpandToFillViewItem">
+                    <Setter Property="mecore:AttachedIcon.Icon" Value="{DynamicResource ResourceKey={Binding Path=DataContext.IconKey, RelativeSource={RelativeSource Mode=Self}}}}"/>
+                </Style>
+            </meec:ExpandToFillView.Styles-->
+            <meec:ExpandToFillView.ItemHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </meec:ExpandToFillView.ItemHeaderTemplate>
+            <meec:ExpandToFillView.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="3">
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
+                    </UniformGrid>
+                </DataTemplate>
+            </meec:ExpandToFillView.ItemTemplate>
+        </meec:ExpandToFillView>
+        <StackPanel Orientation="Vertical" Margin="5" Spacing="5" Grid.Column="1" VerticalAlignment="Top">
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <TextBlock Text="The ExpandToFillView displays multiple items in frames, only displaying the contents of one item at a time, and allowing the user to switch between them freely. The one on the left has its items defined in XAML, while the one on the right has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>
+            </HeaderedContentControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

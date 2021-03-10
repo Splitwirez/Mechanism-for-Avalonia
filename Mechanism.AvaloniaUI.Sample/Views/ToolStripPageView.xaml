@@ -184,6 +184,9 @@
             </mets:ToolStrip.DefaultItems>
         </mets:ToolStrip>
         <StackPanel Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <TextBlock Text="The ToolStrip exposes commands and manages rearranging them in a manner similar to macOS Toolbars." TextWrapping="Wrap"/>
+            </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="Customization">
                 <StackPanel Orientation="Vertical">
                     <CheckBox Content="IsCustomizing" IsChecked="{Binding IsCustomizing, ElementName=ToolStrip, Mode=TwoWay}"/>

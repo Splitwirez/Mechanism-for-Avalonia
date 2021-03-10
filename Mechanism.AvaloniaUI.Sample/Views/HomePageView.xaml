@@ -20,7 +20,7 @@
             <Setter Property="Margin" Value="10" />
             <Setter Property="Width" Value="128" />
             <Setter Property="Height" Value="128" />
-            <Setter Property="mecore:AttachedIcon.IconGap" Value="4" />
+            <Setter Property="mecore:AttachedIcon.IconGap" Value="10" />
             <!--Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}"/-->
             <!--Setter Property="Background">
                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
@@ -260,6 +260,26 @@
                             <v:BlenderBarPageView/>
                         </Button.CommandParameter>
                     </Button>
+                    <Panel>
+                        <Button Command="{Binding GoToView}">
+                            <StackPanel Orientation="Vertical" Spacing="10">
+                                <Border Classes="iconRoot">
+                                    <Border HorizontalAlignment="Right" Width="24" Background="{DynamicResource SystemControlDisabledChromeHighBrush}"  CornerRadius="0,3,3,0">
+                                        <DockPanel Margin="4">
+                                            <Border Height="7" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="2" Margin="0,0,0,1" DockPanel.Dock="Top" />
+                                            <Border Height="7" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="2" Margin="0,1,0,0" DockPanel.Dock="Bottom" />
+                                            <Border Background="{DynamicResource SystemControlForegroundBaseHighBrush}" CornerRadius="2" />
+                                        </DockPanel>
+                                    </Border>
+                                </Border>
+                                <TextBlock Text="ExpandToFillView"/>
+                            </StackPanel>
+                            <Button.CommandParameter>
+                                <v:ExpandToFillViewPageView/>
+                            </Button.CommandParameter>
+                        </Button>
+                        <TextBlock Classes="wip" Text="under construction"/>
+                    </Panel>
                 </WrapPanel>
             </HeaderedContentControl>
             <!--HeaderedContentControl Classes="groupBox" Header="Testing stuff">

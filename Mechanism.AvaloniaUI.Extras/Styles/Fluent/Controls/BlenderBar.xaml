@@ -13,13 +13,17 @@
   <Style Selector="meec|BlenderBar">
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
     <Setter Property="BorderThickness" Value="{DynamicResource ListBoxBorderThemeThickness}" />
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+    <Setter Property="mecore:CornerCurves.CornerCurves" Value="False" />
+    <Setter Property="mecore:BorderPresence.BorderPresence" Value="False" />
     <Setter Property="Padding" Value="3"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border x:Name="RootBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+        <Border x:Name="RootBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"
+                CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}">
           <Panel>
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
               <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" Margin="{TemplateBinding Padding}">
@@ -60,7 +64,7 @@
     </Setter-->
     <Setter Property="Template">
       <ControlTemplate>
-          <Border Name="selectionBorder" Focusable="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" TextBlock.Foreground="{TemplateBinding Foreground}" Padding="0" BorderThickness="0"
+          <Border Name="selectionBorder" Focusable="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" TextBlock.Foreground="{TemplateBinding Foreground}" Padding="0" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"
           CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}"
           TemplatedControl.IsTemplateFocusTarget="True">
           <!--BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='5;0'}"-->

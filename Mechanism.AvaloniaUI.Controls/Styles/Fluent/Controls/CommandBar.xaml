@@ -7,6 +7,8 @@
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
   <Styles.Resources>
+    <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
+    <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
     <mecore:ValueToIsNullBoolConverter x:Key="ValueToIsNullBoolConverter"/>
   </Styles.Resources>
   <Style Selector="mecb|CommandBar">
@@ -15,18 +17,12 @@
     <Setter Property="mecore:CornerCurves.CornerCurves" Value="False" />
     <Setter Property="mecore:BorderPresence.BorderPresence" Value="False" />
     <Setter Property="Padding" Value="4"/>
-    <Setter Property="Margin" Value="0"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
-          <Border.BorderThickness>
-            <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
-              <Binding.Converter>
-                <mecore:BorderPresenceToThicknessesConverter/>
-              </Binding.Converter>
-            </Binding>
-          </Border.BorderThickness>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}"
+                CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}">
           <!--Panel Name="RootPanel">
             <DockPanel Margin="{TemplateBinding Padding}">
               <ItemsPresenter x:Name="PART_CommandBarEndItemsPresenter" Items="{TemplateBinding EndItems}" ItemTemplate="{TemplateBinding EndItemTemplate}" ItemsPanel="{TemplateBinding EndItemsPanel}" Margin="4,0,0,0" DockPanel.Dock="Right"/>

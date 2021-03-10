@@ -3,4 +3,5 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <StyleInclude Source="avares://Mechanism.AvaloniaUI.Extras/Styles/Fluent/Controls/BlenderBar.xaml"/>
+  <StyleInclude Source="avares://Mechanism.AvaloniaUI.Extras/Styles/Fluent/Controls/ExpandToFillView.xaml"/>
 </Styles>
