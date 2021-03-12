@@ -12,22 +12,89 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
     {
         protected override Size ArrangeOverride(Size finalSize)
         {
-            return LayoutToolBars(finalSize);
+            
+            var retVal = base.ArrangeOverride(finalSize);
+            var children = Children.OfType<ToolBar>();
+            //LayoutToolBars(retVal);
+            foreach (ToolBar bar in children.Where(x => double.IsNaN(x.BandLength)))
+            {
+                bar.Measure(Size.Infinity);
+                bar.BandLength = bar.DesiredSize.Width;
+                //Debug.WriteLine("LENGTH SET IN PANEL: " + bar.BandLength);
+            }
+
+
+            int bandCount = children.Max(x => x.Band) + 1;
+            
+            double topOffset = 0;
+            for (int band = 0; band < bandCount; band++)
+            {
+                var bandBars = children.Where(x => x.Band == band);
+                if (bandBars.Count() > 0)
+                {
+                    double bandHeight = bandBars.Max(x => x.DesiredSize.Height);
+
+                    /*int nIndex = Math.Max(-1, bandBars.Max(x => x.BandIndex));
+                    foreach (ToolBar bar in bandBars.Where(x => x.BandIndex < 0))
+                    {
+                        nIndex++;
+                        bar.BandIndex = nIndex;
+                    }*/
+
+                    bandBars = bandBars.OrderBy(x => x.BandIndex);
+                    double leftOffset = 0;
+                    var lastBar = bandBars.Last();
+                    
+                    if (bandBars.Count() > 1)
+                    {
+                        bandBars = bandBars.Take(bandBars.Count() - 1);
+                        foreach (ToolBar bar in bandBars)
+                        {
+                            double width = bar.BandLength;
+                            if ((leftOffset + width) > (finalSize.Width - lastBar.MinWidth))
+                            {
+                                width -= lastBar.MinWidth;
+                            }
+                            bar.Arrange(new Rect(leftOffset, topOffset, Math.Max(0, width), bandHeight));
+                            leftOffset += width;
+                        }
+                    }
+
+                    lastBar.Arrange(new Rect(leftOffset, topOffset, Math.Max(0, retVal.Width - leftOffset), bandHeight));
+
+                    topOffset += bandHeight;
+                }
+            }
+
+            return retVal;
         }
 
-        public Size LayoutToolBars(Size finalSize)
+        public void LayoutToolBars(Size finalSize)
         {
             //double ctrlWidth = 0;
             //double ctrlHeight = 0;
-            var retVal = base.ArrangeOverride(finalSize);
             ////Debug.WriteLine("ArrangeOverride");
-            IEnumerable<ToolBar> unsortedItems = LogicalChildren.OfType<ToolBar>(); //.Where(x => x is ToolBar).Cast<ToolBar>();
+            IEnumerable<ToolBar> unsortedItems = Children.OfType<ToolBar>(); //.Where(x => x is ToolBar).Cast<ToolBar>();
+            
             int bandCount = unsortedItems.Max(x => x.Band) + 1;
             double top = 0;
             //int prevBandsCount = 0;
             for (int i = 0; i <= bandCount; i++)
             {
-                List<ToolBar> bandItems = unsortedItems.Where(x => x.Band == i).OrderBy(x => x.BandIndex).ToList();
+                IEnumerable<ToolBar> iBandItems = unsortedItems.Where(x => x.Band == i);
+                
+                if (iBandItems.Count() > 0)
+                {
+                    int nIndex = iBandItems.Max(x => x.BandIndex);
+                    foreach (ToolBar bar in iBandItems.Where(x => x.BandIndex < 0))
+                    {
+                        nIndex++;
+                        bar.BandIndex = nIndex;
+                    }
+                }
+
+                
+                List<ToolBar> bandItems = iBandItems.OrderBy(x => x.BandIndex).ToList();
                 double bandThickness = 0;
                 if (unsortedItems.Where(x => x.Band == i).Count() > 0)
                 {
@@ -63,27 +130,29 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
                 }
                 //prevBandsCount += bandItems.Count();
             }
-            return retVal;
         }
 
         protected override Size MeasureOverride(Size availableSize)
         {
             Size retVal = base.MeasureOverride(availableSize);
 
-            IEnumerable<ToolBar> unsortedItems = LogicalChildren.OfType<ToolBar>(); //.Where(x => x is ToolBar).Cast<ToolBar>();
-            int bandCount = unsortedItems.Max(x => x.Band) + 1;
+            IEnumerable<ToolBar> unsortedItems = Children.OfType<ToolBar>(); //.Where(x => x is ToolBar).Cast<ToolBar>();
             double bandThickness = 0;
-            while (unsortedItems.Where(x => x.Band == 0).Count() == 0)
+            if (unsortedItems.Count() > 0)
             {
-                foreach (ToolBar t in unsortedItems)
-                    t.Band--;
-            }
-            for (int i = 0; i <= bandCount; i++)
-            {
-                IEnumerable<ToolBar> bandItems = unsortedItems.Where(x => x.Band == i)/*.OrderBy(x => x.BandIndex)*/;
-                if (bandItems/*.Where(x => x.Band == i)*/.Count() > 0)
+                int bandCount = unsortedItems.Max(x => x.Band) + 1;
+                while (unsortedItems.Where(x => x.Band == 0).Count() == 0)
                 {
-                    bandThickness += bandItems.Max(x => x.DesiredSize.Height);
+                    foreach (ToolBar t in unsortedItems)
+                        t.Band--;
+                }
+                for (int i = 0; i <= bandCount; i++)
+                {
+                    IEnumerable<ToolBar> bandItems = unsortedItems.Where(x => x.Band == i)/*.OrderBy(x => x.BandIndex)*/;
+                    if (bandItems/*.Where(x => x.Band == i)*/.Count() > 0)
+                    {
+                        bandThickness += bandItems.Max(x => x.DesiredSize.Height);
+                    }
                 }
             }
 
@@ -92,19 +161,7 @@ namespace Mechanism.AvaloniaUI.Controls.ToolBar
 
         static ToolBarTrayPanel()
         {
-            BoundsProperty.Changed.AddClassHandler<ToolBarTrayPanel>(new Action<ToolBarTrayPanel, AvaloniaPropertyChangedEventArgs>((sneder, args) => sneder.LayoutToolBars(sneder.Bounds.Size)));
-        }
-
-        public ToolBarTrayPanel()
-        {
-            ToolBar.ToolbarResized += (sneder, args) =>
-            {
-                if (Children.Contains(sneder))
-                {
-                    LayoutToolBars(Bounds.Size);
-                    InvalidateMeasure();
-                }
-            };
+            //BoundsProperty.Changed.AddClassHandler<ToolBarTrayPanel>(new Action<ToolBarTrayPanel, AvaloniaPropertyChangedEventArgs>((sneder, args) => sneder.LayoutToolBars(sneder.Bounds.Size)));
         }
     }
 }

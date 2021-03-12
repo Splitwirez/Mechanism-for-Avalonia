@@ -5,14 +5,129 @@
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
              xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:metb="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolBar;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.ToolBarTrayPageView">
     <UserControl.DataContext>
         <mes:ToolBarTrayPageViewModel/>
     </UserControl.DataContext>
-    <StackPanel Orientation="Vertical">
-        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
+    <DockPanel>
+        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False" IsLocked="{Binding #IsLockedCheckBox.IsChecked}">
+            <!--ItemsControl>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+            </ItemsControl-->
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" IsEnabled="False"/>
+                    <MenuItem Header="Save" IsEnabled="False"/>
+                    <MenuItem Header="Save as..." IsEnabled="False"/>
+                    <Separator/>
+                    <MenuItem Header="Exit" Command="{Binding $parent[Window].CloseCommand}"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Cut" IsEnabled="False"/>
+                    <MenuItem Header="Copy" IsEnabled="False"/>
+                    <MenuItem Header="Paste" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Icons" IsEnabled="False"/>
+                    <MenuItem Header="List" IsEnabled="False"/>
+                    <MenuItem Header="Details" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem Header="Options" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About" IsEnabled="False"/>
+                </MenuItem>
+            </Menu>
+            <ItemsControl metb:ToolBar.Band="1">
+                <Button Content="Back">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Path Data="M 11 4 L 3 12 L 11 20 M 3 12 L 23 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </Button>
+                <Button Content="Forward">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Path Data="M 13 4 L 21 12 L 13 20 M 21 12 L 1 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </Button>
+                <Button Content="Cancel">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Path Data="M 2 2 L 22 22 M 22 2 L 2 22" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </Button>
+            </ItemsControl>
+            <ItemsControl metb:ToolBar.Band="1">
+                <Button Content="Button">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[Button].Foreground}">Btn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </Button>
+                <ToggleButton Content="ToggleButton">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[ToggleButton].Foreground}">TglBtn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </ToggleButton>
+                <RepeatButton Content="RepeatButton">
+                    <mecore:AttachedIcon.Icon>
+                        <ControlTemplate>
+                            <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[RepeatButton].Foreground}" BorderThickness="2">
+                                <TextBlock Foreground="{Binding $parent[RepeatButton].Foreground}">RptBtn</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </mecore:AttachedIcon.Icon>
+                </RepeatButton>
+            </ItemsControl>
+            <DockPanel metb:ToolBar.Band="2">
+                <TextBlock Text="Address" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                <Button DockPanel.Dock="Right">Go</Button>
+                <TextBox Margin="2">https://github.com/Splitwirez/Mechanism-for-Avalonia</TextBox>
+            </DockPanel>
+            <ItemsControl metb:ToolBar.Band="2">
+                <Button>Yes</Button>
+                <Button>No</Button>
+                <Button>Maybe so</Button>
+                <Button>What</Button>
+                <Button>How</Button>
+                <Button>u wot m8</Button>
+                <Button>help im running out of silly button labels</Button>
+            </ItemsControl>
+        </metb:ToolBarTray>
+        <metb:ToolBarTray x:Name="BoundToolBarTray" DockPanel.Dock="Bottom" mecore:BorderPresence.BorderPresence="False,True,False,False" mecore:CornerCurves.CornerCurves="False" IsLocked="{Binding #IsLockedCheckBox.IsChecked}" Items="{Binding Items}">
+            <metb:ToolBarTray.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl Items="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Title}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </metb:ToolBarTray.ItemTemplate>
+        </metb:ToolBarTray>
+        <!--metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
             <metb:ToolBar UseOverflow="False">
                 <Menu>
                 <MenuItem Header="File">
@@ -44,10 +159,6 @@
                 <Button Content="Back">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <Path Data="M 8 0 L 0 8 L 8 16 L 11 16 L 3 8 L 11 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Path Data="M 11 4 L 3 12 L 11 20 M 3 12 L 23 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
                         </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
@@ -55,10 +166,6 @@
                 <Button Content="Forward">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <Path Data="M 0 0 L 8 8 L 0 16 L 3 16 L 11 8 L 3 0 Z" Fill="{Binding $parent[Button].Foreground}" Stretch="None" Width="11" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Path Data="M 13 4 L 21 12 L 13 20 M 21 12 L 1 12" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
                         </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
@@ -66,10 +173,6 @@
                 <Button Content="Cancel">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Path Data="M 2 2 L 22 22 M 22 2 L 2 22" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="24" Height="24" Stretch="None"/>
                         </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
@@ -79,10 +182,6 @@
                 <Button Content="Button">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="#FFC00000" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2">
                                 <TextBlock Foreground="{Binding $parent[Button].Foreground}">Btn</TextBlock>
                             </Border>
@@ -92,11 +191,6 @@
                 <ToggleButton Content="ToggleButton">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <!-Path Data="M 0 0 L 16 16 M 16 0 L 0 16" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/->
-                                <Border BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[ToggleButton].Foreground}" BorderThickness="2">
                                 <TextBlock Foreground="{Binding $parent[ToggleButton].Foreground}">TglBtn</TextBlock>
                             </Border>
@@ -106,17 +200,13 @@
                 <RepeatButton Content="RepeatButton">
                     <mecore:AttachedIcon.Icon>
                         <ControlTemplate>
-                            <!--Panel Width="24" Height="24">
-                                <Ellipse Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{DynamicResource ThemeBorderMidBrush}" StrokeThickness="1"/>
-                                <Path Data="M 0 8 L 16 8 M 8 0 L 8 16" Stroke="{Binding $parent[RepeatButton].Foreground}" StrokeThickness="3" Stretch="None" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Panel-->
                             <Border Width="24" Height="24" CornerRadius="{DynamicResource ControlCornerRadius}" BorderBrush="{Binding $parent[RepeatButton].Foreground}" BorderThickness="2">
                                 <TextBlock Foreground="{Binding $parent[RepeatButton].Foreground}">RptBtn</TextBlock>
                             </Border>
                         </ControlTemplate>
                     </mecore:AttachedIcon.Icon>
                 </RepeatButton>
-            </metb:ToolBar>
+            </metb:ToolBar-->
             <!--metb:ToolBar Band="1">
                 <Button Content="Button1">
                     <mecore:AttachedIcon.Icon>
@@ -155,7 +245,7 @@
                     </mecore:AttachedIcon.Icon>
                 </Button>
             </metb:ToolBar-->
-            <metb:ToolBar Band="2" UseOverflow="False">
+            <!--metb:ToolBar Band="2" UseOverflow="False">
                 <metb:ToolBar.ItemsPanel>
                     <ItemsPanelTemplate>
                         <DockPanel/>
@@ -165,16 +255,16 @@
                 <Button DockPanel.Dock="Right">Go</Button>
                 <TextBox Margin="2">http://avaloniaui.net/</TextBox>
             </metb:ToolBar>
-        </metb:ToolBarTray>
-        <StackPanel Margin="5" Spacing="5">
+        </metb:ToolBarTray-->
+        <StackPanel Margin="5" Spacing="5" VerticalAlignment="Center">
             <HeaderedContentControl Classes="groupBox" Header="About">
-                <TextBlock Text="The ToolBarTray displays controls in draggable ToolBars, similarly to many older Windows programs. Also moves items which don't fit into an overflow menu." TextWrapping="Wrap"/>
+                <TextBlock Text="The ToolBarTray displays controls in draggable ToolBars, similarly to many older Windows programs. Also moves items which don't fit into an overflow menu, via OverflowFlyoutItemsPresenter. The one on the top has its items defined in XAML, while the one on the bottom has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>
             </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="Customization">
                 <StackPanel Orientation="Vertical">
-                    <CheckBox Content="IsLocked" IsChecked="{Binding IsLocked, ElementName=ToolBarTray}"/>
+                    <CheckBox x:Name="IsLockedCheckBox" Content="IsLocked"/>
                 </StackPanel>
             </HeaderedContentControl>
         </StackPanel>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

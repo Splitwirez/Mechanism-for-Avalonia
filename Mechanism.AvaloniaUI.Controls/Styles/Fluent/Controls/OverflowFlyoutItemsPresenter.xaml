@@ -9,23 +9,12 @@
              xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
   <Style Selector="mectrl|OverflowFlyoutItemsPresenter">
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    <!--Setter Property="FlyoutDataTemplates">
-      <DataTemplates>
-        <DataTemplate>
-          <TextBlock Text="{Binding Title}" Foreground="Red"/>
-        </DataTemplate>
-      </DataTemplates>
-    </Setter-->
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
-          <!-- Height="{Binding Path=Bounds.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Mode=OneWay}"-->
-          <!--mectrl:OverflowFlyoutItemsPresenterSplitPanel Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Mode=OneWay}"-->
           <DockPanel HorizontalAlignment="Stretch">
-          <!-- MaxWidth="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"-->
-          <!--Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"-->
             <Panel Width="45" DockPanel.Dock="Right" ZIndex="2">
-              <ToggleButton x:Name="FlyoutToggleButton" Margin="4,0,0,0" IsVisible="{TemplateBinding HasFlyoutItems}" HorizontalAlignment="Stretch" IsChecked="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+              <ToggleButton x:Name="FlyoutToggleButton" Margin="4,0,0,0" IsVisible="{TemplateBinding HasFlyoutItems}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                   <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
                     <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
@@ -33,17 +22,14 @@
                   </StackPanel>
               </ToggleButton>
             </Panel>
-            <StackPanel x:Name="PART_MainItemsPanel" Orientation="Horizontal"/>
+            <mectrl:AlignableStackPanel x:Name="PART_MainItemsPanel" Orientation="Horizontal" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}"/>
           </DockPanel>
           <Popup PlacementTarget="{Binding #FlyoutToggleButton}" PlacementMode="Left" StaysOpen="False"
                  IsOpen="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                  HorizontalOffset="{Binding #FlyoutToggleButton.Bounds.Width}"
                  VerticalOffset="{Binding #FlyoutToggleButton.Bounds.Height}">
-            <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource DynamicResource MenuFlyoutPresenterThemePadding}">
-              <!--i:Interaction.Behaviors>
-                <mectrl:OverflowFlyoutItemsPresenterFlyoutDataTemplatesBehavior FlyoutDataTemplates="{Binding FlyoutDataTemplates, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-              </i:Interaction.Behaviors-->
-              <WrapPanel x:Name="PART_FlyoutItemsPanel"/>
+            <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource MenuFlyoutPresenterThemePadding}">
+              <StackPanel x:Name="PART_FlyoutItemsPanel" Orientation="Vertical"/>
             </Border>
           </Popup>
         </Panel>
