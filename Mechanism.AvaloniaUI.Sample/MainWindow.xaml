@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         x:Class="Mechanism.AvaloniaUI.Sample.MainWindow"
         Icon="/Assets/mechanism-for-avalonia-logo.ico"
-        Width="722" Height="437"
+        Width="750" Height="550"
         Title="Mechanism for Avalonia Sample">
+    <!--Width="722" Height="437"-->
     <v:MainView/>
 </Window>

@@ -41,6 +41,22 @@ namespace Mechanism.AvaloniaUI.Extras
         }
 
 
+        // <summary>
+        /// Defines the <see cref="Orientation"/> property.
+        /// </summary>
+        public static readonly StyledProperty<Orientation> OrientationProperty =
+            StackLayout.OrientationProperty.AddOwner<ExpandToFillView>();
+        
+        /// <summary>
+        /// Gets or sets the orientation in which child controls will be layed out.
+        /// </summary>
+        public Orientation Orientation
+        {
+            get => GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
+        }
+
+
 
         static ExpandToFillView()
         {

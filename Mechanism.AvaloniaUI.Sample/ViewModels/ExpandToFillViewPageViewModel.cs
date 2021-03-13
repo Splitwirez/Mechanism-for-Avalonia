@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Mechanism.AvaloniaUI.Sample.Views;
 
@@ -30,6 +31,57 @@ namespace Mechanism.AvaloniaUI.Sample.ViewModels
             {
                 _items = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        
+        Dock _xamlDock = Dock.Left;
+        public Dock XamlDock
+        {
+            get => _xamlDock;
+            set
+            {
+                _xamlDock = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        Dock _boundDock = Dock.Right;
+        public Dock BoundDock
+        {
+            get => _boundDock;
+            set
+            {
+                _boundDock = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        Orientation _orientation = Orientation.Vertical;
+        public Orientation Orientation
+        {
+            get => _orientation;
+            set
+            {
+                _orientation = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public void ToggleOrientation(object parameter)
+        {
+            if (Orientation == Orientation.Vertical)
+            {
+                Orientation = Orientation.Horizontal;
+                XamlDock = Dock.Top;
+                BoundDock = Dock.Bottom;
+            }
+            else
+            {
+                Orientation = Orientation.Vertical;
+                XamlDock = Dock.Left;
+                BoundDock = Dock.Right;
             }
         }
     }

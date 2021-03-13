@@ -43,8 +43,8 @@
             </Border>
         </ControlTemplate>
     </UserControl.Resources-->
-    <Grid ColumnDefinitions="*,*,*">
-        <meec:ExpandToFillView x:Name="ExpandToFillView" Grid.Column="0" mecore:BorderPresence.BorderPresence="False,False,True,False">
+    <DockPanel>
+        <meec:ExpandToFillView x:Name="ExpandToFillView" DockPanel.Dock="{Binding XamlDock}" Orientation="{Binding Orientation}" mecore:BorderPresence.BorderPresence="False">
             <meec:ExpandToFillViewItem Header="Base">
                 <mecore:AttachedIcon.Icon>
                     <ControlTemplate>
@@ -58,20 +58,7 @@
                         </Border>
                     </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
-                <UniformGrid Columns="3">
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                    <Rectangle Fill="DarkRed" Margin="10"/>
-                </UniformGrid>
+                <Rectangle Fill="DarkRed" Margin="10" MinWidth="50" MinHeight="10"/>
             </meec:ExpandToFillViewItem>
             <meec:ExpandToFillViewItem Header="Coat">
                 <mecore:AttachedIcon.Icon>
@@ -86,20 +73,7 @@
                         </Border>
                     </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
-                <UniformGrid Columns="3">
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                    <Rectangle Fill="DarkGreen" Margin="10"/>
-                </UniformGrid>
+                <Rectangle Fill="DarkGreen" Margin="10" MinWidth="50" MinHeight="10"/>
             </meec:ExpandToFillViewItem>
             <meec:ExpandToFillViewItem Header="Detail">
                 <mecore:AttachedIcon.Icon>
@@ -114,23 +88,10 @@
                         </Border>
                     </ControlTemplate>
                 </mecore:AttachedIcon.Icon>
-                <UniformGrid Columns="3">
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                    <Rectangle Fill="DarkBlue" Margin="10"/>
-                </UniformGrid>
+                <Rectangle Fill="DarkBlue" Margin="10" MinWidth="50" MinHeight="10"/>
             </meec:ExpandToFillViewItem>
         </meec:ExpandToFillView>
-        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" Grid.Column="2" mecore:BorderPresence.BorderPresence="True,False,False,False">
+        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" DockPanel.Dock="{Binding BoundDock}" Orientation="{Binding Orientation}" mecore:BorderPresence.BorderPresence="False">
             <!--meec:ExpandToFillView.Styles>
                 <Style Selector="meec|ExpandToFillView#BoundExpandToFillView meec|ExpandToFillViewItem">
                     <Setter Property="mecore:AttachedIcon.Icon" Value="{DynamicResource ResourceKey={Binding Path=DataContext.IconKey, RelativeSource={RelativeSource Mode=Self}}}}"/>
@@ -143,27 +104,17 @@
             </meec:ExpandToFillView.ItemHeaderTemplate>
             <meec:ExpandToFillView.ItemTemplate>
                 <DataTemplate>
-                    <UniformGrid Columns="3">
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                        <Ellipse Fill="{Binding Brush}" Margin="10"/>
-                    </UniformGrid>
+                    <Ellipse Fill="{Binding Brush}" Margin="10" MinWidth="50" MinHeight="10"/>
                 </DataTemplate>
             </meec:ExpandToFillView.ItemTemplate>
         </meec:ExpandToFillView>
-        <StackPanel Orientation="Vertical" Margin="5" Spacing="5" Grid.Column="1" VerticalAlignment="Top">
+        <UniformGrid Columns="2" Margin="5" VerticalAlignment="Center">
             <HeaderedContentControl Classes="groupBox" Header="About">
-                <TextBlock Text="The ExpandToFillView displays multiple items in frames, only displaying the contents of one item at a time, and allowing the user to switch between them freely. The one on the left has its items defined in XAML, while the one on the right has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>
+                <TextBlock Text="The ExpandToFillView displays multiple items in frames, only displaying the contents of one item at a time, and allowing the user to switch between them freely. The one on the left/above has its items defined in XAML, while the one on the right/below has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>
             </HeaderedContentControl>
-        </StackPanel>
-    </Grid>
+            <HeaderedContentControl Classes="groupBox" Header="Customization" Margin="5,0,0,0">
+                <Button Content="Switch Orientation" Command="{Binding ToggleOrientation}" CommandParameter="{x:Null}"/>
+            </HeaderedContentControl>
+        </UniformGrid>
+    </DockPanel>
 </UserControl>

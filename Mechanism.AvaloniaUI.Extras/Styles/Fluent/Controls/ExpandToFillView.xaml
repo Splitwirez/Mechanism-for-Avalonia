@@ -12,6 +12,7 @@
     <Thickness x:Key="ExpandToFillViewItemBorderThickness">1</Thickness>
     
     <Thickness x:Key="ExpandToFillViewItemDropdownDownBorderThickness">1,0,1,1</Thickness>
+    <Thickness x:Key="ExpandToFillViewItemDropdownRightBorderThickness">0,1,1,1</Thickness>
 
     <SolidColorBrush x:Key="ExpandToFillViewItemBackground" Color="{DynamicResource SystemAltMediumHighColor}"/>
     <SolidColorBrush x:Key="ExpandToFillViewItemBorderBrush" Color="{DynamicResource SystemBaseLowColor}"/>
@@ -45,7 +46,7 @@
           <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}">
             <ItemsPresenter.ItemsPanel>
               <ItemsPanelTemplate>
-                <meec:ExpandToFillPanel Spacing="3"/>
+                <meec:ExpandToFillPanel Spacing="3" Orientation="{TemplateBinding Orientation}"/>
               </ItemsPanelTemplate>
             </ItemsPresenter.ItemsPanel>
           </ItemsPresenter>
@@ -67,23 +68,22 @@
     <Setter Property="Template">
       <ControlTemplate>
         <DockPanel>
-            <ToggleButton x:Name="PART_Header"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          IsEnabled="{TemplateBinding IsEnabled}"
-                          Padding="{TemplateBinding Padding}"
-                          Content="{TemplateBinding Header}"
-                          ContentTemplate="{TemplateBinding HeaderTemplate}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          IsChecked="{Binding Path=IsSelected, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                          mecore:AttachedIcon.Icon="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                          mecore:AttachedIcon.IconGap="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource TemplatedParent}}"/>
+          <ToggleButton x:Name="PART_Header"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        IsEnabled="{TemplateBinding IsEnabled}"
+                        Padding="{TemplateBinding Padding}"
+                        Content="{TemplateBinding Header}"
+                        ContentTemplate="{TemplateBinding HeaderTemplate}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        IsChecked="{Binding Path=IsSelected, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                        mecore:AttachedIcon.Icon="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                        mecore:AttachedIcon.IconGap="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource TemplatedParent}}"/>
             <Border x:Name="Content"
                     IsVisible="{Binding Path=IsSelected, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                     Background="{DynamicResource ExpandToFillViewItemDropDownBackground}"
                     BorderBrush="{DynamicResource ExpandToFillViewItemDropDownBorderBrush}"
-                    CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type meec:ExpandToFillViewItem}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='0,0,3,3;0'}"
                     Padding="{DynamicResource ExpandToFillViewItemContentPadding}">
                 <ContentPresenter x:Name="PART_ContentPresenter"
                                   Content="{TemplateBinding Content}"
@@ -95,25 +95,19 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ Border#Content">
+    <Setter Property="CornerRadius" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type meec:ExpandToFillViewItem}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='0,0,3,3;0'}"/>
+  </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ Border#Content">
+    <Setter Property="CornerRadius" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type meec:ExpandToFillViewItem}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='0,3,3,0;0'}"/>
+  </Style>
 
   <Style Selector="meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header">
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border x:Name="ToggleButtonBackground">
-          <Grid ColumnDefinitions="*,Auto">
-            <StackPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}" Orientation="Horizontal" Spacing="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource TemplatedParent}}">
-              <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
-              <ContentPresenter x:Name="PART_ContentPresenter"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalContentAlignment="Center"
-                                TextBlock.Foreground="{DynamicResource ExpandToFillViewItemForeground}"
-                                Background="Transparent"
-                                BorderBrush="Transparent"
-                                BorderThickness="0"/>
-            </StackPanel>
+          <DockPanel>
             <Border x:Name="ExpandCollapseChevronBorder"
                     Grid.Column="1"
                     Width="32"
@@ -127,16 +121,95 @@
                     StrokeThickness="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    RenderTransformOrigin="50%,50%"/>
-              <Border.RenderTransform>
+                    RenderTransformOrigin="50%,50%">
+                <Path.RenderTransform>
                   <RotateTransform/>
+                </Path.RenderTransform>
+              </Path>
+              <Border.RenderTransform>
+                <RotateTransform/>
               </Border.RenderTransform>
             </Border>
-          </Grid>
+            <LayoutTransformControl x:Name="ContentTransform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}" Orientation="Horizontal" Spacing="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource TemplatedParent}}">
+                  <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
+                  <ContentPresenter x:Name="PART_ContentPresenter"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="Center"
+                                    TextBlock.Foreground="{DynamicResource ExpandToFillViewItemForeground}"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"/>
+                </StackPanel>
+              </Panel>
+            </LayoutTransformControl>
+          </DockPanel>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ LayoutTransformControl#ContentTransform">
+    <!--Style.Animations>
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="270"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations-->
+    <Setter Property="LayoutTransform" Value="rotate(270deg)"/>
+    <!--Setter Property="RenderTransform" Value="translateY(-16px)"/-->
+  </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ LayoutTransformControl#ContentTransform">
+    <Setter Property="LayoutTransform" Value="rotate(0deg)"/>
+    <!--Setter Property="RenderTransform" Value="translateY(0px)"/-->
+    <!--Style.Animations>
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="0"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations-->
+  </Style>
+
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Path#ExpandCollapseChevron">
+    <Style.Animations>
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="270"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Path#ExpandCollapseChevron">
+    <Style.Animations>
+      <Animation FillMode="Both" Duration="0:0:0.001">
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="0"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Border#ExpandCollapseChevronBorder">
+    <Setter Property="DockPanel.Dock" Value="Right"/>
+  </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Border#ExpandCollapseChevronBorder">
+    <Setter Property="DockPanel.Dock" Value="Top"/>
+  </Style>
+  
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header">
+    <Setter Property="DockPanel.Dock" Value="Top"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+  </Style>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header">
+    <Setter Property="DockPanel.Dock" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+  </Style>
+
+  
   <Style Selector="meec|ExpandToFillViewItem[IsSelected=True] /template/ ToggleButton#PART_Header:pressed">
     <Setter Property="RenderTransform" Value="{x:Null}"/>
   </Style>
@@ -160,13 +233,11 @@
   <Style Selector="meec|ExpandToFillViewItem[IsSelected=False] /template/ ToggleButton#PART_Header /template/ Border#ToggleButtonBackground">
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
   </Style>
-  <Style Selector="meec|ExpandToFillViewItem[IsSelected=True] /template/ ToggleButton#PART_Header /template/ Border#ToggleButtonBackground">
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem[IsSelected=True] /template/ ToggleButton#PART_Header /template/ Border#ToggleButtonBackground">
     <Setter Property="CornerRadius" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type meec:ExpandToFillViewItem}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3,3,0,0;0'}"/>
   </Style>
-
-
-  <Style Selector="meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header">
-    <Setter Property="DockPanel.Dock" Value="Top"/>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem[IsSelected=True] /template/ ToggleButton#PART_Header /template/ Border#ToggleButtonBackground">
+    <Setter Property="CornerRadius" Value="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type meec:ExpandToFillViewItem}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3,0,0,3;0'}"/>
   </Style>
 
 
@@ -192,12 +263,16 @@
     </Style.Animations>
   </Style>
 
-  <Style Selector="meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Path#ExpandCollapseChevron">
+  <!--Style Selector="meec|ExpandToFillViewItem /template/ ToggleButton#PART_Header /template/ Path#ExpandCollapseChevron">
     <Setter Property="Data" Value=""/>
+  </Style-->
+
+
+  <Style Selector="meec|ExpandToFillView[Orientation=Vertical] > meec|ExpandToFillViewItem /template/ Border#Content">
+    <Setter Property="BorderThickness" Value="{DynamicResource ExpandToFillViewItemDropdownDownBorderThickness}"/>
   </Style>
 
-
-  <Style Selector="meec|ExpandToFillViewItem /template/ Border#Content">
-    <Setter Property="BorderThickness" Value="{DynamicResource ExpandToFillViewItemDropdownDownBorderThickness}"/>
+  <Style Selector="meec|ExpandToFillView[Orientation=Horizontal] > meec|ExpandToFillViewItem /template/ Border#Content">
+    <Setter Property="BorderThickness" Value="{DynamicResource ExpandToFillViewItemDropdownRightBorderThickness}"/>
   </Style>
 </Styles>
