@@ -88,25 +88,8 @@ namespace Mechanism.AvaloniaUI.Core
                 Thickness ctrlMargin = ctrl.Margin;
                 double ctrlWidth = ctrl.DesiredSize.Width + ctrlMargin.Left + ctrlMargin.Right;
                 double ctrlHeight = ctrl.DesiredSize.Height + ctrlMargin.Top + ctrlMargin.Bottom;
-
-                /*var contentCtrl = new ContentPresenter()
-                {
-                    Content = ctrl,
-                    Width = ctrlWidth,
-                    Height = ctrlHeight /*new Rectangle()
-                    {
-                        Width = ctrlWidth,
-                        Height = ctrlHeight,
-                        Margin = ctrlMargin
-                    }*
-                };
-                //tCtrl.Measure(Size.Infinity);
-                contentCtrl.Measure(Size.Infinity);*/
                 
-                /*double ctrlWidth = contentCtrl.Width;
-                double ctrlHeight = contentCtrl.Height;*/
-                
-                VisualBrush visBrush = new VisualBrush(/*contentCtrl*/ctrl);
+                VisualBrush visBrush = new VisualBrush(ctrl);
                 return new FuncControlTemplate((tctrl, namescope) => new Rectangle()
                 {
                     Width = ctrlWidth,
@@ -128,11 +111,19 @@ namespace Mechanism.AvaloniaUI.Core
             }
             else if (value is Drawing draw)
             {
-                DrawingGroup e = null;
+                DrawingImage drImage = new DrawingImage()
+                {
+                    Drawing = draw
+                };
+                return new FuncControlTemplate((tctrl, namescope) => new Image()
+                {
+                    Source = drImage,
+                    Width = drImage.Size.Width,
+                    Height = drImage.Size.Height
+                });
             }
             else if (value is string str)
             {
-                Debug.WriteLine("CONVERTING STRING: " + str);
                 string inStr = str;
                 bool explicitSize = inStr.StartsWith(EXPLICIT_SIZE_PREFIX);
                 double explicitWidth = 0;
@@ -144,7 +135,6 @@ namespace Mechanism.AvaloniaUI.Core
                     string before = inStr.Substring(0, splitIndex).Replace(" ", string.Empty);
                     inStr = inStr.Substring(splitIndex + EXPLICIT_SIZE_SUFFIX.Length);
 
-                    Debug.WriteLine("before: " + before);
                     if (before.Contains(EXPLICIT_SIZE_SEPARATOR.ToString()))
                     {
                         string[] b4 = before.Split(EXPLICIT_SIZE_SEPARATOR);
@@ -159,7 +149,6 @@ namespace Mechanism.AvaloniaUI.Core
 
                     while (inStr.StartsWith(" "))
                         inStr = inStr.Substring(1);
-                    Debug.WriteLine("inStr: " + inStr);
                 }
 
 
@@ -186,9 +175,8 @@ namespace Mechanism.AvaloniaUI.Core
                         Height = explicitHeight
                     });
                 }
-                catch (Exception e1)
+                catch
                 {
-                    Debug.WriteLine(e1);
                     try
                     {
                         var geome = PathGeometry.Parse(inStr);
@@ -208,9 +196,7 @@ namespace Mechanism.AvaloniaUI.Core
                             return path;
                         });
                     }
-                    catch (Exception e2) {
-                        Debug.WriteLine(e2);
-                    }
+                    catch { }
                 }
             }
             else if (value is IImage img)

@@ -46,6 +46,14 @@
                             <RectangleGeometry Rect="0,0,16,16"/>
                         </mecore:AttachedIcon.Icon>
                     </Button>
+                    <Button x:Name="DrawingIconButton" Content="Drawing icon">
+                        <mecore:AttachedIcon.Icon>
+                            <DrawingGroup>
+                                <GeometryDrawing Geometry="M 4 4 L 16 4 L 16 16 L 4 16 Z" Brush="#FFFF00FF"/>
+                                <GeometryDrawing Geometry="M 0 0 L 12 0 L 12 12 L 0 12 Z" Brush="#FF00FF00"/>
+                            </DrawingGroup>
+                        </mecore:AttachedIcon.Icon>
+                    </Button>
                     <Button x:Name="UriIcoIconButton" Content="avares:// *.ico icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
                     <Button x:Name="ResizedUriIcoIconButton" Content="Resized avares:// *.ico icon" mecore:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
                     <Button x:Name="UriPngIconButton" Content="avares:// *.png icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
@@ -60,6 +68,7 @@
                     <Button mecore:AttachedIcon.Icon="{Binding #TemplateIconButton.(mecore:AttachedIcon.Icon)}"/>
                     <Button mecore:AttachedIcon.Icon="{Binding #ControlIconButton.(mecore:AttachedIcon.Icon)}"/>
                     <Button mecore:AttachedIcon.Icon="{Binding #GeometryIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #DrawingIconButton.(mecore:AttachedIcon.Icon)}"/>
                     <Button mecore:AttachedIcon.Icon="{Binding #UriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
                     <Button mecore:AttachedIcon.Icon="{Binding #ResizedUriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
                     <Button mecore:AttachedIcon.Icon="{Binding #UriPngIconButton.(mecore:AttachedIcon.Icon)}"/>
