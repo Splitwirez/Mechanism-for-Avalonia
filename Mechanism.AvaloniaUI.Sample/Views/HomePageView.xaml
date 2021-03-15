@@ -5,11 +5,17 @@
              xmlns:v="clr-namespace:Mechanism.AvaloniaUI.Sample.Views;assembly=Mechanism.AvaloniaUI.Sample"
              xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.HomePageView">
     <UserControl.Resources>
         <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
         <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
+
+        <sys:String x:Key="WipText">Under construction</sys:String>
+        <sys:String x:Key="WipToolTip">This feature is still undergoing active development, and may presently have severe bugs or change drastically and without warning later on.</sys:String>
+        <sys:String x:Key="SuspText">Suspended</sys:String>
+        <sys:String x:Key="SuspToolTip">Development on this feature is not complete, and has been suspended for the time being.</sys:String>
     </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="HeaderedContentControl.groupBox Button">
@@ -79,14 +85,22 @@
             <Setter Property="Margin" Value="10" />
         </Style>
 
-        <Style Selector="TextBlock.wip">
+        <Style Selector="TextBlock.wip,
+                         TextBlock.susp">
             <Setter Property="Margin" Value="0,-12,0,12"/>
             <Setter Property="FontSize" Value="{DynamicResource ToolTipContentThemeFontSize}"/>
             <Setter Property="Foreground" Value="{DynamicResource SystemControlErrorTextForegroundBrush}"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <!--Setter Property="Text" Value="under construction"/-->
+        </Style>
+        <Style Selector="TextBlock.wip">
+            <Setter Property="Text" Value="{DynamicResource WipText}"/>
+            <Setter Property="ToolTip.Tip" Value="{DynamicResource WipToolTip}"/>
+        </Style>
+        <Style Selector="TextBlock.susp">
+            <Setter Property="Text" Value="{DynamicResource SuspText}"/>
+            <Setter Property="ToolTip.Tip" Value="{DynamicResource SuspToolTip}"/>
         </Style>
     </UserControl.Styles>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -159,7 +173,7 @@
                                 <v:ToolStripPageView/>
                             </Button.CommandParameter>
                         </Button>
-                        <TextBlock Classes="wip" Text="under construction"/>
+                        <TextBlock Classes="susp"/>
                     </Panel>
                     <Panel>
                         <Button Command="{Binding GoToView}" Content="SwipeSheet">
@@ -203,7 +217,7 @@
                                 <v:SwipeSheetPageView/>
                             </Button.CommandParameter>
                         </Button>
-                        <TextBlock Classes="wip" Text="under construction"/>
+                        <TextBlock Classes="susp"/>
                     </Panel>
                     <Button Command="{Binding GoToView}" Content="FlyoutButton" IsVisible="False">
                         <mecore:AttachedIcon.Icon>
@@ -272,7 +286,7 @@
                                 <v:BlenderBarPageView/>
                             </Button.CommandParameter>
                         </Button>
-                        <TextBlock Classes="wip" Text="under construction"/>
+                        <TextBlock Classes="susp"/>
                     </Panel>
                     <Button Command="{Binding GoToView}" Content="ExpandToFillView">
                         <mecore:AttachedIcon.Icon>
