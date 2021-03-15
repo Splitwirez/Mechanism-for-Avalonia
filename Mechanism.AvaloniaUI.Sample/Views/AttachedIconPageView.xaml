@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
+             xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Mechanism.AvaloniaUI.Sample.Views.AttachedIconPageView">
+    <UserControl.DataContext>
+        <mes:AttachedIconPageViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Styles>
+        <StyleInclude Source="avares://Mechanism.AvaloniaUI.Sample/SampleIconButtonStyles.xaml"/>
+        <Style Selector="Button">
+            <Setter Property="mecore:AttachedIcon.IconGap" Value="{Binding #IconGapSlider.Value}" />
+        </Style>
+        <Style Selector="Button /template/ StackPanel#ContentPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+    </UserControl.Styles>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" Margin="5" Spacing="5">
+            <HeaderedContentControl Classes="groupBox" Header="Sample buttons">
+                <UniformGrid Columns="3">
+                    <!--MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}"-->
+                    <Button x:Name="NoIconButton" Content="No icon"/>
+                    <Button x:Name="TemplateIconButton" Content="Template icon">
+                        <mecore:AttachedIcon.Icon>
+                            <ControlTemplate>
+                                <Border Width="32" Height="32" Margin="4" BoxShadow="2 2 2 #FFFF00FF" Background="#FF00FF00"/>
+                            </ControlTemplate>
+                        </mecore:AttachedIcon.Icon>
+                    </Button>
+                    <Button x:Name="ControlIconButton" Content="Control icon">
+                        <mecore:AttachedIcon.Icon>
+                            <Border>
+                                <Border Width="32" Height="32" Margin="4" BoxShadow="-2 -2 2 #FFFF00FF" Background="#FF00FF00"/>
+                            </Border>
+                        </mecore:AttachedIcon.Icon>
+                    </Button>
+                    <Button x:Name="GeometryIconButton" Content="Geometry icon">
+                        <mecore:AttachedIcon.Icon>
+                            <RectangleGeometry Rect="0,0,16,16"/>
+                        </mecore:AttachedIcon.Icon>
+                    </Button>
+                    <Button x:Name="UriIcoIconButton" Content="avares:// *.ico icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
+                    <Button x:Name="ResizedUriIcoIconButton" Content="Resized avares:// *.ico icon" mecore:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
+                    <Button x:Name="UriPngIconButton" Content="avares:// *.png icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
+                    <Button x:Name="ResizedUriPngIconButton" Content="Resized avares:// *.png icon" mecore:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
+                    <Button x:Name="PathDataIconButton" Content="Path data icon" mecore:AttachedIcon.Icon="M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
+                    <Button x:Name="ResizedPathDataIconButton" Content="Resized path data icon" mecore:AttachedIcon.Icon="Size(32, 32); M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
+                </UniformGrid>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Reduntant buttons which share the same icons as the above set, but lack content">
+                <UniformGrid Columns="3">
+                    <Button mecore:AttachedIcon.Icon="{Binding #NoIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #TemplateIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #ControlIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #GeometryIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #UriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedUriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #UriPngIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedUriPngIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #PathDataIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedPathDataIconButton.(mecore:AttachedIcon.Icon)}"/>
+                </UniformGrid>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="About">
+                <StackPanel Orientation="Vertical" Spacing="15">
+                    <TextBlock Text="The AttachedIcon property allows icons to be added to applicable controls without having to resort to panels as Content." TextWrapping="Wrap"/>
+                    <TextBlock Text="NOTE: Avalonia controls which do not originate from or explicitly support Mechanism will have to be re-templated to support Icon and IconGap. This includes the sample buttons shown above. Some Mechanism controls come with modified styles/templates for non-Mechanism controls when used within themselves, which do support Icon and IconGap out of the box." TextWrapping="Wrap"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Control">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="The size of the gap between the icon and content can be adjusted using the IconGap property. The slider below will adjust this property for all the buttons on this page." TextWrapping="Wrap"/>
+                    <Slider x:Name="IconGapSlider" Minimum="0" Maximum="100" Value="4"/>
+                </StackPanel>
+            </HeaderedContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

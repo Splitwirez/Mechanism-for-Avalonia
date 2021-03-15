@@ -18,54 +18,12 @@
         <sys:String x:Key="SuspToolTip">Development on this feature is not complete, and has been suspended for the time being.</sys:String>
     </UserControl.Resources>
     <UserControl.Styles>
-        <Style Selector="HeaderedContentControl.groupBox Button">
-        <!--Style Selector="Button"-->
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow" />
-            <Setter Property="Margin" Value="10" />
+        <StyleInclude Source="avares://Mechanism.AvaloniaUI.Sample/SampleIconButtonStyles.xaml"/>
+
+        <Style Selector="Button">
             <Setter Property="Width" Value="128" />
             <Setter Property="Height" Value="128" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="mecore:AttachedIcon.IconGap" Value="0" />
-            <!--Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}"/-->
-            <!--Setter Property="Background">
-                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
-                    <GradientStop Offset="0" Color="{DynamicResource SystemChromeMediumLowColor}"/>
-                    <GradientStop Offset="1" Color="{DynamicResource SystemChromeMediumColor}"/>
-                </LinearGradientBrush>
-            </Setter-->
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}" BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='1;0'}">
-                        <StackPanel Orientation="Vertical" Spacing="{Binding (mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                            <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                        </StackPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter>
         </Style>
-        <Style Selector="HeaderedContentControl.groupBox Button /template/ Border#BackgroundBorder">
-            <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-        </Style>
-        <Style Selector="HeaderedContentControl.groupBox Button:pointerover /template/ Border#BackgroundBorder">
-            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
-        </Style>
-        <Style Selector="HeaderedContentControl.groupBox Button:pressed /template/ Border#BackgroundBorder">
-            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
-        </Style>
-        <Style Selector="HeaderedContentControl.groupBox Button:disabled /template/ Border#BackgroundBorder">
-            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
-        </Style>
-        <!--Style Selector="Button:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
-        </Style-->
 
         <Style Selector="Button TextBlock">
             <Setter Property="Foreground" Value="{Binding $parent[Button].Foreground}"/>
@@ -105,7 +63,6 @@
     </UserControl.Styles>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical" Spacing="5" Margin="5">
-            <!--TextBlock Text="Controls in Mechanism.AvaloniaUI.Controls" Classes="groupHeader"/-->
             <HeaderedContentControl Classes="groupBox" Header="Mechanism.AvaloniaUI.Controls">
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
                     <Button Command="{Binding GoToView}" Content="ToolBarTray">
@@ -255,7 +212,6 @@
                     </Button>
                 </WrapPanel>
             </HeaderedContentControl>
-            <!--TextBlock Text="Controls in Mechanism.AvaloniaUI.Extras" Classes="groupHeader"/-->
             <HeaderedContentControl Classes="groupBox" Header="Mechanism.AvaloniaUI.Extras">
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
                     <Panel>
@@ -304,6 +260,27 @@
                         </mecore:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:ExpandToFillViewPageView/>
+                        </Button.CommandParameter>
+                    </Button>
+                </WrapPanel>
+            </HeaderedContentControl>
+            <HeaderedContentControl Classes="groupBox" Header="Mechanism.AvaloniaUI.Core">
+                <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
+                    <Button Command="{Binding GoToView}" Content="Icon and IconGap">
+                        <mecore:AttachedIcon.Icon>
+                            <ControlTemplate>
+                                <Border Classes="iconRoot">
+                                    <Border Margin="4,0" VerticalAlignment="Center" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3">
+                                        <DockPanel Margin="4">
+                                            <Rectangle Width="8" Height="8" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" Margin="0,0,4,0" DockPanel.Dock="Left"/>
+                                            <Rectangle Height="2" Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                        </DockPanel>
+                                    </Border>
+                                </Border>
+                            </ControlTemplate>
+                        </mecore:AttachedIcon.Icon>
+                        <Button.CommandParameter>
+                            <v:AttachedIconPageView/>
                         </Button.CommandParameter>
                     </Button>
                 </WrapPanel>

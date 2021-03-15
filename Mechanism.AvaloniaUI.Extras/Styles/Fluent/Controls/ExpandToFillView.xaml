@@ -6,6 +6,7 @@
              xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Extras.Converters;assembly=Mechanism.AvaloniaUI.Extras"
              xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras">
   <Styles.Resources>
+    <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
     <Thickness x:Key="ExpandToFillViewItemHeaderPadding">8</Thickness>
     <Thickness x:Key="ExpandToFillViewItemContentPadding">8</Thickness>
 
@@ -133,7 +134,7 @@
             <LayoutTransformControl x:Name="ContentTransform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <StackPanel x:Name="ContentPanel" Margin="{TemplateBinding Padding}" Orientation="Horizontal" Spacing="{Binding Path=(mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource TemplatedParent}}">
-                  <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
+                  <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
                   <ContentPresenter x:Name="PART_ContentPresenter"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"

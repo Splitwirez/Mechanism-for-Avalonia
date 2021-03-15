@@ -9,6 +9,7 @@
     <meconv:ItemCountToHasItemsBooleanConverter x:Key="ItemCountToHasItemsBooleanConverter"/>
     <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
     <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
+    <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
   </Styles.Resources>
   <Style Selector="meec|BlenderBar">
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
@@ -70,7 +71,7 @@
           <!--BorderThickness="{Binding Path=(mecore:BorderPresence.BorderPresence), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BorderPresenceToThicknessesConverter}, ConverterParameter='5;0'}"-->
             <Panel Background="#01000000">
               <DockPanel x:Name="ContentIconPanel" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}">
-                <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
                 <Rectangle x:Name="IconGapRect" DockPanel.Dock="Left" Width="{Binding (mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                   <Rectangle.IsVisible>
                     <MultiBinding ConverterParameter="All">
@@ -87,7 +88,7 @@
                 <ContentPresenter x:Name="PART_HeaderPresenter" TextBlock.TextAlignment="{Binding Path=(TextBlock.TextAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}" Focusable="False" Content="{TemplateBinding Header}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
               </DockPanel>
               <DockPanel x:Name="SelectedContentIconPanel" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}" IsVisible="{Binding !#ContentIconPanel.IsVisible}">
-                <TemplatedControl Template="{Binding Path=LastSelectedItem.(mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <TemplatedControl Template="{Binding Path=LastSelectedItem.(mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
                 <Rectangle DockPanel.Dock="Left" Width="{Binding Width, ElementName=IconGapRect}">
                   <Rectangle.IsVisible>
                     <MultiBinding ConverterParameter="All">

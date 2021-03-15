@@ -8,6 +8,7 @@
              xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity">
   <Styles.Resources>
+    <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
     <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
     <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
       <Panel x:Name="PART_ButtonArea">
@@ -214,7 +215,7 @@
             <mets:ButtonCommandBehavior TargetItem="{Binding DataContext, ElementName=ToolStripButton}"/>
             <!-Command="{Binding DataContext.Command, ElementName=ToolStripButton}" CommandParameter="{Binding DataContext.CommandParameter, ElementName=ToolStripButton}"->
           </i:Interaction.Behaviors-->
-          <TemplatedControl Template="{Binding Path=(mecore:AttachedIcon.Icon)}"/>
+          <TemplatedControl Template="{Binding Path=(mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}}"/>
         </Button>
       </ControlTemplate>
     </Setter>
@@ -277,7 +278,7 @@
                                     CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:SegmentedControlToolStripItemSegmentPresenter}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}"/>
                 </ControlTemplate>
               </Button.Template>
-              <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent"/>
+              <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent"/>
           </Button>
         </DockPanel>
       </ControlTemplate>
