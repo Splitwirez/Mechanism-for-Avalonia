@@ -9,7 +9,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity">
   <Styles.Resources>
     <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
-    <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
     <ControlTemplate x:Key="EmbeddedFlyoutButtonTemplate">
       <Panel x:Name="PART_ButtonArea">
         <Border x:Name="BackgroundBorder" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -35,19 +34,10 @@
   <Style Selector="mets|ToolStrip">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/>
-    <Setter Property="mecore:BorderPresence.BorderPresence" Value="False" />
-    <Setter Property="mecore:CornerCurves.CornerCurves" Value="False" />
     <Setter Property="MinHeight" Value="40"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}">
-          <Border.BorderThickness>
-            <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
-              <Binding.Converter>
-                <mecore:BorderPresenceToThicknessesConverter/>
-              </Binding.Converter>
-            </Binding>
-          </Border.BorderThickness>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
           <Panel>
             <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" IsVisible="False"/>
             <ItemsControl x:Name="PART_CurrentItemsItemsControl" Items="{TemplateBinding CurrentItems}" Background="#01000000">
@@ -246,7 +236,7 @@
           <!-ContentTemplate="{TemplateBinding ContentTemplate}" 
           <!- IsVisible="{Binding ShowLabels, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:ToolStrip}}}"->
         </StackPanel-->
-        <mets:SegmentedControlToolStripItemSegmentPresenter mecore:CornerCurves.CornerCurves="{Binding $parent[ContentPresenter].(mecore:CornerCurves.CornerCurves)}"/>
+        <mets:SegmentedControlToolStripItemSegmentPresenter/>
       </DataTemplate>
     </Setter>
   </Style>
@@ -274,8 +264,7 @@
                                     Content="{TemplateBinding Content}"
                                     Padding="{TemplateBinding Padding}"
                                     HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mets:SegmentedControlToolStripItemSegmentPresenter}}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='3;0'}"/>
+                                    VerticalContentAlignment="Center"/>
                 </ControlTemplate>
               </Button.Template>
               <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" Background="Transparent"/>

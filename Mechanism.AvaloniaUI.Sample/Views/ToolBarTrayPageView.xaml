@@ -13,7 +13,7 @@
         <mes:ToolBarTrayPageViewModel/>
     </UserControl.DataContext>
     <DockPanel>
-        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False" IsLocked="{Binding #IsLockedCheckBox.IsChecked}">
+        <metb:ToolBarTray x:Name="ToolBarTray" DockPanel.Dock="Top" IsLocked="{Binding #IsLockedCheckBox.IsChecked}">
             <!--ItemsControl>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -114,7 +114,7 @@
                 <Button>help im running out of silly button labels</Button>
             </ItemsControl>
         </metb:ToolBarTray>
-        <metb:ToolBarTray x:Name="BoundToolBarTray" DockPanel.Dock="Bottom" mecore:BorderPresence.BorderPresence="False,True,False,False" mecore:CornerCurves.CornerCurves="False" IsLocked="{Binding #IsLockedCheckBox.IsChecked}" Items="{Binding Items}">
+        <metb:ToolBarTray x:Name="BoundToolBarTray" DockPanel.Dock="Bottom" IsLocked="{Binding #IsLockedCheckBox.IsChecked}" Items="{Binding Items}">
             <metb:ToolBarTray.ItemTemplate>
                 <DataTemplate>
                     <ItemsControl Items="{Binding}">

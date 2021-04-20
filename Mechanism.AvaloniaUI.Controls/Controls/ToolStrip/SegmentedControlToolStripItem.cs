@@ -7,7 +7,6 @@ using Avalonia.Styling;
 using System;
 using Avalonia.Xaml.Interactivity;
 using Avalonia.Layout;
-using Mechanism.AvaloniaUI.Behaviors;
 using Avalonia.Controls.Generators;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -27,7 +26,6 @@ namespace Mechanism.AvaloniaUI.Controls.ToolStrip
                 {
                     Orientation = Orientation.Horizontal
                 };
-                Interaction.GetBehaviors(stacc).Add(new StackPanelCornerCurvesBehavior());
                 return stacc;
             });
         

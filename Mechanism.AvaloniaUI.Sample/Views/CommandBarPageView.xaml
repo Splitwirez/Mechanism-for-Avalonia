@@ -16,7 +16,7 @@
         <mes:CommandBarPageViewModel/>
     </UserControl.DataContext>
     <DockPanel>
-        <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" HorizontalItemsAlignment="{Binding ItemsAlignment}" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
+        <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" HorizontalItemsAlignment="{Binding ItemsAlignment}">
             <mecb:CommandBar.Layers>
                 <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
                 <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
@@ -358,7 +358,7 @@
                 </UniformGrid>
             </HeaderedContentControl>
         </StackPanel>
-        <mecb:CommandBar x:Name="BoundCommandBar" Items="{Binding Items}" DockPanel.Dock="Bottom" HorizontalItemsAlignment="{Binding ItemsAlignment}" mecore:BorderPresence.BorderPresence="False,True,False,False" mecore:CornerCurves.CornerCurves="False">
+        <mecb:CommandBar x:Name="BoundCommandBar" Items="{Binding Items}" DockPanel.Dock="Bottom" HorizontalItemsAlignment="{Binding ItemsAlignment}">
             <!--mecb:CommandBar.Styles>
                 <Style Selector="ContentPresenter">
                     <Setter Property="mecb:CommandBar.VisibleOnLayers" Value="{Binding Layers, Converter={StaticResource LayerDictionaryToLayerStringConverter}}"/>

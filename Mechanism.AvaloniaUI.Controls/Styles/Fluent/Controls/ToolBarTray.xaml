@@ -10,92 +10,14 @@
   <Styles.Resources>
     <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
   </Styles.Resources>
-  <!--Style Selector="metb|ToolBar">
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
-    <Setter Property="MinWidth" Value="75"/>
-    <Setter Property="BaseWidth" Value="16"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}" Margin="2">
-          <DockPanel>
-            <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left">
-              <Thumb.Template>
-                <ControlTemplate>
-                  <Panel Background="#01000000">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4" Margin="5,3,3,3">
-                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
-                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
-                      <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
-                    </StackPanel>
-                  </Panel>
-                </ControlTemplate>
-              </Thumb.Template>
-            </Thumb>
-            <Panel>
-              <mectrl:OverflowFlyoutItemsControl x:Name="PART_OverflowItemsControl" IsVisible="{TemplateBinding UseOverflow}" ItemsPanel="{TemplateBinding ItemsPanel}" IsFlyoutOpen="{Binding $parent[metb:ToolBar].IsFlyoutOpen, Mode=TwoWay}" ForceDesiredSize="True">
-                <mectrl:OverflowFlyoutItemsControl.Template>
-                  <ControlTemplate>
-                    <Panel Name="RootPanel">
-                      <DockPanel Margin="{TemplateBinding Padding}">
-                        <ToggleButton x:Name="PART_FlyoutToggleButton" Padding="8,0" Margin="4" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" Background="Transparent" DockPanel.Dock="Right">
-                          <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
-                            <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
-                            <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
-                          </StackPanel>
-                        </ToggleButton>
-                        <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
-                          <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                              <mectrl:AlignableStackPanel Spacing="3" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="Left" />
-                            </ItemsPanelTemplate>
-                          </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                      </DockPanel>
-                      <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
-                        <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3" Padding="-8,0,0,0">
-                          <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
-                        </Border>
-                      </Popup>
-                    </Panel>
-                  </ControlTemplate>
-                </mectrl:OverflowFlyoutItemsControl.Template>
-              </mectrl:OverflowFlyoutItemsControl>
-              <ItemsPresenter x:Name="RegularItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" IsVisible="{Binding !UseOverflow, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
-            </Panel>
-          </DockPanel>
-        </Border>
-      </ControlTemplate>
-    </Setter>
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <StackPanel Orientation="Horizontal"/>
-      </ItemsPanelTemplate>
-    </Setter>
-  </Style>
-  <Style Selector="metb|ToolBar[UseOverflow=True] /template/ mectrl|OverflowFlyoutItemsControl#PART_OverflowItemsControl">
-    <Setter Property="Items" Value="{Binding Items, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="metb|ToolBar[UseOverflow=False] /template/ ItemsPresenter#RegularItemsPresenter">
-    <Setter Property="Items" Value="{Binding Items, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style-->
 
   <Style Selector="metb|ToolBarTray">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
-    <Setter Property="mecore:BorderPresence.BorderPresence" Value="False" />
-    <Setter Property="mecore:CornerCurves.CornerCurves" Value="False" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}">
-            <Border.BorderThickness>
-              <Binding Path="(mecore:BorderPresence.BorderPresence)" RelativeSource="{RelativeSource Mode=TemplatedParent}" ConverterParameter="1;0">
-                <Binding.Converter>
-                  <mecore:BorderPresenceToThicknessesConverter/>
-                </Binding.Converter>
-              </Binding>
-            </Border.BorderThickness>
+          <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
             <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" HorizontalAlignment="Stretch">
               <ItemsPresenter.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -117,7 +39,7 @@
     <Setter Property="Padding" Value="4"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(mecore:CornerCurves.CornerCurves), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CornerCurvesToCornerRadiiConverter}, ConverterParameter='5;0'}" Margin="2">
+        <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="2">
           <DockPanel Margin="{TemplateBinding Padding}">
             <Thumb x:Name="PART_GripThumb" VerticalAlignment="Stretch" IsVisible="{Binding !$parent[metb:ToolBarTray].IsLocked}" Cursor="SizeAll" DockPanel.Dock="Left"/>
             <ContentPresenter x:Name="PART_ContentPresenter"
@@ -131,6 +53,9 @@
         </Border>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="metb|ToolBar /template/ Border#BackgroundBorder">
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
   </Style>
 
   <Style Selector="metb|ToolBar /template/ Thumb#PART_GripThumb">

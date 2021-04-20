@@ -12,15 +12,7 @@
         <mes:BlenderBarPageViewModel/>
     </UserControl.DataContext>
     <DockPanel>
-        <!--ExperimentalAcrylicBorder DockPanel.Dock="Left">
-        <ExperimentalAcrylicBorder.Material>
-            <ExperimentalAcrylicMaterial
-            TintColor="{DynamicResource SystemChromeMediumLowColor}"
-            TintOpacity="0.625"
-            MaterialOpacity="0.625"
-            BackgroundSource="Digger" />
-        </ExperimentalAcrylicBorder.Material-->
-        <meec:BlenderBar x:Name="BlenderBar" mecore:BorderPresence.BorderPresence="False,False,True,False" mecore:CornerCurves.CornerCurves="False" DockPanel.Dock="Left">
+        <meec:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left">
             <meec:BlenderBarItem Header="With Sub-items" GroupIndex="0">
                 <mecore:AttachedIcon.Icon>
                 <ControlTemplate>

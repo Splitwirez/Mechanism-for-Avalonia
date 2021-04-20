@@ -115,14 +115,14 @@ namespace Mechanism.AvaloniaUI.Extras
                     }
 
 
-                    var borderPresence = new BorderPresence(true);
+                    /*var borderPresence = new BorderPresence(true);
                     var cornerCurves = new CornerCurves(false);
-                    borderPresence.Left = !isRightColumn;
+                    borderPresence.Left = !isRightColumn;*/
                     
                     int indexInGroup = i - children.IndexOf(children.First(x => x.GroupIndex == child.GroupIndex));
                     int groupMatchCount = children.Where(x => x.GroupIndex == child.GroupIndex).Count();
 
-                    if (indexInGroup >= 2)
+                    /*if (indexInGroup >= 2)
                         borderPresence.Top = false;
                     else
                         borderPresence.Top = true;
@@ -166,8 +166,9 @@ namespace Mechanism.AvaloniaUI.Extras
                     }
 
                     CornerCurves.SetCornerCurves(child, cornerCurves);
-                    BorderPresence.SetBorderPresence(child, borderPresence);
+                    BorderPresence.SetBorderPresence(child, borderPresence);*/
 
+                    //TODO: Use PositionInGroup property
                     
                     if (isRightColumn)
                     {
@@ -178,7 +179,6 @@ namespace Mechanism.AvaloniaUI.Extras
                         child.Arrange(new Rect(0, yTotal, IconsOnlyItemWidth, itemHeight));
 
                     isRightColumn = !isRightColumn;
-
                     
                     _prevGroupIndex = child.GroupIndex;
                 }
@@ -207,7 +207,7 @@ namespace Mechanism.AvaloniaUI.Extras
                     if (groupChanged)
                         yTotal += 5;
                     
-                    if (groupChanged || (i == 0))
+                    /*if (groupChanged || (i == 0))
                         BorderPresence.SetBorderPresence(child, new BorderPresence()
                         {
                             Left = true,
@@ -236,7 +236,9 @@ namespace Mechanism.AvaloniaUI.Extras
                     else if (children.First(x => x.GroupIndex == child.GroupIndex) == child) //first element in its group
                         CornerCurves.SetCornerCurves(child, new CornerCurves(true, true, false, false));
                     else //middle element in its group
-                        CornerCurves.SetCornerCurves(child, new CornerCurves(false));
+                        CornerCurves.SetCornerCurves(child, new CornerCurves(false));*/
+                    
+                    //TODO: Use PositionInGroup property
                     
 
                     child.Arrange(new Rect(0, yTotal, childWidth, itemHeight));

@@ -44,7 +44,7 @@
         </ControlTemplate>
     </UserControl.Resources-->
     <DockPanel>
-        <meec:ExpandToFillView x:Name="ExpandToFillView" DockPanel.Dock="{Binding XamlDock}" Orientation="{Binding Orientation}" mecore:BorderPresence.BorderPresence="False">
+        <meec:ExpandToFillView x:Name="ExpandToFillView" DockPanel.Dock="{Binding XamlDock}" Orientation="{Binding Orientation}">
             <meec:ExpandToFillViewItem Header="Base">
                 <mecore:AttachedIcon.Icon>
                     <ControlTemplate>
@@ -91,7 +91,7 @@
                 <Rectangle Fill="DarkBlue" Margin="10" MinWidth="50" MinHeight="10"/>
             </meec:ExpandToFillViewItem>
         </meec:ExpandToFillView>
-        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" DockPanel.Dock="{Binding BoundDock}" Orientation="{Binding Orientation}" mecore:BorderPresence.BorderPresence="False">
+        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" DockPanel.Dock="{Binding BoundDock}" Orientation="{Binding Orientation}">
             <!--meec:ExpandToFillView.Styles>
                 <Style Selector="meec|ExpandToFillView#BoundExpandToFillView meec|ExpandToFillViewItem">
                     <Setter Property="mecore:AttachedIcon.Icon" Value="{DynamicResource ResourceKey={Binding Path=DataContext.IconKey, RelativeSource={RelativeSource Mode=Self}}}}"/>

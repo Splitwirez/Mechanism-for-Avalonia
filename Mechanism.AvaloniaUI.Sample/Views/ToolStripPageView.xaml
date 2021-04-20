@@ -16,7 +16,7 @@
         <vm:DemoPageViewModel/>
     </UserControl.DataContext-->
     <StackPanel Orientation="Vertical">
-        <mets:ToolStrip x:Name="ToolStrip" mecore:BorderPresence.BorderPresence="False,False,False,True" mecore:CornerCurves.CornerCurves="False">
+        <mets:ToolStrip x:Name="ToolStrip">
             <mets:ToolStrip.Items>
                 <mets:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                     <mecore:AttachedIcon.Icon>

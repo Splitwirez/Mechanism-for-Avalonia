@@ -9,8 +9,6 @@
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.HomePageView">
     <UserControl.Resources>
-        <mecore:BorderPresenceToThicknessesConverter x:Key="BorderPresenceToThicknessesConverter"/>
-        <mecore:CornerCurvesToCornerRadiiConverter x:Key="CornerCurvesToCornerRadiiConverter"/>
 
         <sys:String x:Key="WipText">Under construction</sys:String>
         <sys:String x:Key="WipToolTip">This feature is still undergoing active development, and may presently have severe bugs or change drastically and without warning later on.</sys:String>

@@ -26,6 +26,25 @@ using Avalonia.LogicalTree;
 
 namespace Mechanism.AvaloniaUI.Extras
 {
+    public enum ItemGroupPosition
+    {
+        Lone,
+        Center,
+        TopEnd,
+        BottomEnd,
+        LeftEnd,
+        RightEnd,
+        TopEdge,
+        BottomEdge,
+        LeftEdge,
+        RightEdge,
+        TopLeftCorner,
+        TopRightCorner,
+        BottomRightCorner,
+        BottomLeftCorner
+    }
+
+
     public class BlenderBarItem : TreeViewItem, IStyleable
     {
         public static readonly StyledProperty<int> GroupIndexProperty =
@@ -46,6 +65,16 @@ namespace Mechanism.AvaloniaUI.Extras
         {
             get => GetValue(IsPressedProperty);
             private set => SetValue(IsPressedProperty, value);
+        }
+
+
+        public static readonly StyledProperty<ItemGroupPosition> PositionInGroupProperty =
+        AvaloniaProperty.Register<BlenderBarItem, ItemGroupPosition>(nameof(PositionInGroup), ItemGroupPosition.Center);
+
+        public ItemGroupPosition PositionInGroup
+        {
+            get => GetValue(PositionInGroupProperty);
+            private set => SetValue(PositionInGroupProperty, value);
         }
 
         public static readonly StyledProperty<bool> AnyChildSelectedProperty =

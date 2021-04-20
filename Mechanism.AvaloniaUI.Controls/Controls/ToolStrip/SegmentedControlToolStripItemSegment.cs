@@ -7,7 +7,6 @@ using Avalonia.Styling;
 using System;
 using Avalonia.Xaml.Interactivity;
 using Avalonia.Layout;
-using Mechanism.AvaloniaUI.Behaviors;
 using Avalonia.Controls.Generators;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
