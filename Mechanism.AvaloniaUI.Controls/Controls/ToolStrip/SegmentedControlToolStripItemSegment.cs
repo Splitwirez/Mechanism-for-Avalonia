@@ -12,7 +12,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class SegmentedControlToolStripItemSegment : AvaloniaObject, IToolStripItem//, INotifyPropertyChanged
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public interface IToolStripItem
     {

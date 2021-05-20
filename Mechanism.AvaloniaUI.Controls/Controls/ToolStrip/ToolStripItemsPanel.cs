@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class ToolStripItemsPanel : StackPanel
     {

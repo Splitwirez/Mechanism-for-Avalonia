@@ -16,7 +16,7 @@ using System.Diagnostics;
 using Avalonia.Media;
 using Avalonia.Input;
 
-namespace Mechanism.AvaloniaUI.Controls.SwipeSheet
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class SwipeSheet : HeaderedContentControl
     {

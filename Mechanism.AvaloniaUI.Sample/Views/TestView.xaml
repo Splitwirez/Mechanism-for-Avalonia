@@ -2,16 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.TestView">
+             <!--xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"-->
     <UserControl.DataContext>
         <mes:TestViewModel/>
     </UserControl.DataContext>
-    <StackPanel Orientation="Vertical">
+    <!--StackPanel Orientation="Vertical">
         <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Top" Items="{Binding Items}">
             <ItemsControl.DataTemplates>
                 <DataTemplate>
@@ -25,5 +25,5 @@
             </ItemsControl.Template>
         </ItemsControl>
         <Button Command="{Binding AddItemCommand}" CommandParameter="E" Content="Click to add an item"/>
-    </StackPanel>
+    </StackPanel-->
 </UserControl>

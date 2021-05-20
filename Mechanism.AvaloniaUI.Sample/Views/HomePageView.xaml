@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:Mechanism.AvaloniaUI.Sample.Views;assembly=Mechanism.AvaloniaUI.Sample"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
@@ -64,7 +64,7 @@
             <HeaderedContentControl Classes="groupBox" Header="Mechanism.AvaloniaUI.Controls">
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
                     <Button Command="{Binding GoToView}" Content="ToolBarTray">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <Border Classes="iconRoot">
                                     <StackPanel Orientation="Vertical">
@@ -86,13 +86,13 @@
                                     </StackPanel>
                                 </Border>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:ToolBarTrayPageView/>
                         </Button.CommandParameter>
                     </Button>
                     <Button Command="{Binding GoToView}" Content="CommandBar">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <Border Classes="iconRoot">
                                     <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3,3,0,0">
@@ -104,14 +104,14 @@
                                     </Border>
                                 </Border>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:CommandBarPageView/>
                         </Button.CommandParameter>
                     </Button>
                     <Panel>
                         <Button Command="{Binding GoToView}" Content="ToolStrip">
-                            <mecore:AttachedIcon.Icon>
+                            <mech:AttachedIcon.Icon>
                                 <ControlTemplate>
                                     <Border Classes="iconRoot">
                                         <Border VerticalAlignment="Top" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3,3,0,0">
@@ -123,7 +123,7 @@
                                         </Border>
                                     </Border>
                                 </ControlTemplate>
-                            </mecore:AttachedIcon.Icon>
+                            </mech:AttachedIcon.Icon>
                             <Button.CommandParameter>
                                 <v:ToolStripPageView/>
                             </Button.CommandParameter>
@@ -132,7 +132,7 @@
                     </Panel>
                     <Panel>
                         <Button Command="{Binding GoToView}" Content="SwipeSheet">
-                            <mecore:AttachedIcon.Icon>
+                            <mech:AttachedIcon.Icon>
                                 <ControlTemplate>
                                     <Border Classes="iconRoot">
                                         <Panel>
@@ -167,7 +167,7 @@
                                         </Panel>
                                     </Border>
                                 </ControlTemplate>
-                            </mecore:AttachedIcon.Icon>
+                            </mech:AttachedIcon.Icon>
                             <Button.CommandParameter>
                                 <v:SwipeSheetPageView/>
                             </Button.CommandParameter>
@@ -175,7 +175,7 @@
                         <TextBlock Classes="susp"/>
                     </Panel>
                     <Button Command="{Binding GoToView}" Content="FlyoutButton" IsVisible="False">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <DockPanel Width="64" Height="64">
                                     <Border Height="16" CornerRadius="3" BoxShadow="0 2 8 #5F000000" DockPanel.Dock="Top">
@@ -203,7 +203,7 @@
                                     </Border>
                                 </DockPanel>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:ToolBarTrayPageView/>
                         </Button.CommandParameter>
@@ -214,7 +214,7 @@
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
                     <Panel>
                         <Button Command="{Binding GoToView}" Content="BlenderBar">
-                            <mecore:AttachedIcon.Icon>
+                            <mech:AttachedIcon.Icon>
                                 <ControlTemplate>
                                     <Border Classes="iconRoot">
                                         <Border HorizontalAlignment="Left" Width="24" Background="{DynamicResource SystemControlDisabledChromeHighBrush}"  CornerRadius="3,0,0,3">
@@ -235,7 +235,7 @@
                                         </Border>
                                     </Border>
                                 </ControlTemplate>
-                            </mecore:AttachedIcon.Icon>
+                            </mech:AttachedIcon.Icon>
                             <Button.CommandParameter>
                                 <v:BlenderBarPageView/>
                             </Button.CommandParameter>
@@ -243,7 +243,7 @@
                         <TextBlock Classes="susp"/>
                     </Panel>
                     <Button Command="{Binding GoToView}" Content="ExpandToFillView">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <Border Classes="iconRoot">
                                     <Border HorizontalAlignment="Right" Width="24" Background="{DynamicResource SystemControlDisabledChromeHighBrush}"  CornerRadius="0,3,3,0">
@@ -255,7 +255,7 @@
                                     </Border>
                                 </Border>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:ExpandToFillViewPageView/>
                         </Button.CommandParameter>
@@ -265,7 +265,7 @@
             <HeaderedContentControl Classes="groupBox" Header="Mechanism.AvaloniaUI.Core">
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}">
                     <Button Command="{Binding GoToView}" Content="Icon and IconGap">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <Border Classes="iconRoot">
                                     <Border Margin="4,0" VerticalAlignment="Center" Background="{DynamicResource SystemControlDisabledChromeHighBrush}" CornerRadius="3">
@@ -276,7 +276,7 @@
                                     </Border>
                                 </Border>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                         <Button.CommandParameter>
                             <v:AttachedIconPageView/>
                         </Button.CommandParameter>

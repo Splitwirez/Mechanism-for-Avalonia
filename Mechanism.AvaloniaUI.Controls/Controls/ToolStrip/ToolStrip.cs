@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     /// <summary>
     /// A control which mimicks the customizable Toolbars found in many native macOS apps.

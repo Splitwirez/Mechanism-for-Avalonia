@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mechanism.AvaloniaUI.Controls.CommandBar
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class CommandBarLayer : Control
     {

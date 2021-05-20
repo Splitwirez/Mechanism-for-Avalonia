@@ -12,7 +12,7 @@ using System.IO;
 using Avalonia.Layout;
 using Avalonia.Controls;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class MoveOrRemoveFromToolStripBehavior : Behavior<Thumb>
     {

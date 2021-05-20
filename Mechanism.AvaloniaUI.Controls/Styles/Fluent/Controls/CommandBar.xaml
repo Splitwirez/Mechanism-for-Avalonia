@@ -2,15 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia">
   <Styles.Resources>
-    <mecore:ValueToIsNullBoolConverter x:Key="ValueToIsNullBoolConverter"/>
-    <mecore:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
+    <mech:ValueToIsNullBoolConverter x:Key="ValueToIsNullBoolConverter"/>
+    <mech:ObjectToTemplateConverter x:Key="ObjectToTemplateConverter"/>
   </Styles.Resources>
-  <Style Selector="mecb|CommandBar">
+  <Style Selector="mech|CommandBar">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/>
     <Setter Property="Padding" Value="4"/>
@@ -21,7 +18,7 @@
           <!--Panel Name="RootPanel">
             <DockPanel Margin="{TemplateBinding Padding}">
               <ItemsPresenter x:Name="PART_CommandBarEndItemsPresenter" Items="{TemplateBinding EndItems}" ItemTemplate="{TemplateBinding EndItemTemplate}" ItemsPanel="{TemplateBinding EndItemsPanel}" Margin="4,0,0,0" DockPanel.Dock="Right"/>
-              <ToggleButton x:Name="PART_FlyoutToggleButton" Margin="0" BorderThickness="0" VerticalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" DockPanel.Dock="Right">
+              <ToggleButton x:Name="PART_FlyoutToggleButton" Margin="0" BorderThickness="0" VerticalAlignment="Stretch" IsVisible="{TemplateBinding HasFlyoutItems}" IsChecked="{Binding $parent[mech:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" DockPanel.Dock="Right">
                   <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
                     <Ellipse Width="3" Height="3" Fill="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="0"/>
@@ -31,12 +28,12 @@
               <ItemsControl x:Name="PART_VisibleItemsPresenter" Items="{TemplateBinding VisibleItems}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <mectrl:AlignableStackPanel Spacing="2" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}" />
+                    <mech:AlignableStackPanel Spacing="2" Orientation="Horizontal" ClipToBounds="True" HorizontalChildrenAlignment="{Binding $parent[mech:CommandBar].HorizontalItemsAlignment}" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
             </DockPanel>
-            <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mectrl:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
+            <Popup x:Name="PART_Flyout" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=PART_FlyoutToggleButton}" IsOpen="{Binding $parent[mech:OverflowFlyoutItemsControl].IsFlyoutOpen, Mode=TwoWay}" MinHeight="{TemplateBinding MinHeight}" StaysOpen="False">
               <Border Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" CornerRadius="3" Padding="-8,0,0,0">
                 <ItemsControl x:Name="PART_FlyoutItemsPresenter" Items="{TemplateBinding FlyoutItems}" ItemsPanel="{TemplateBinding FlyoutItemsPanel}"/>
               </Border>
@@ -45,24 +42,24 @@
           <DockPanel Margin="{TemplateBinding Padding}">
             <!--ItemsPresenter x:Name="EndItemsPresenter" Items="{TemplateBinding EndItems}" ItemTemplate="{TemplateBinding EndItemTemplate}" ItemsPanel="{TemplateBinding EndItemsPanel}" Margin="4,2,2,2" DockPanel.Dock="Right"/-->
             <ContentPresenter x:Name="PART_HeaderPresenter" Content="{TemplateBinding Header}" Margin="2,0,0,0" DockPanel.Dock="Right"/>
-            <mectrl:OverflowFlyoutItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
+            <mech:OverflowFlyoutItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
           </DockPanel>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-  <!--Style Selector="mecb|CommandBar[HorizontalItemsAlignment=Left] /template/ mectrl|OverflowFlyoutItemsPresenter#PART_ItemsPresenter /template/ DockPanel#RootPanel">
+  <!--Style Selector="mech|CommandBar[HorizontalItemsAlignment=Left] /template/ mectrl|OverflowFlyoutItemsPresenter#PART_ItemsPresenter /template/ DockPanel#RootPanel">
     <Setter Property="HorizontalAlignment" Value="Left"/>
   </Style>
-  <Style Selector="mecb|CommandBar[HorizontalItemsAlignment=Right] /template/ mectrl|OverflowFlyoutItemsPresenter#PART_ItemsPresenter /template/ DockPanel#RootPanel">
+  <Style Selector="mech|CommandBar[HorizontalItemsAlignment=Right] /template/ mectrl|OverflowFlyoutItemsPresenter#PART_ItemsPresenter /template/ DockPanel#RootPanel">
     <Setter Property="HorizontalAlignment" Value="Right"/>
   </Style-->
-  <!--Style Selector="mecb|CommandBar /template/ ToggleButton#PART_FlyoutToggleButton:not(:pointerover):not(:pressed):not(:checked),
+  <!--Style Selector="mech|CommandBar /template/ ToggleButton#PART_FlyoutToggleButton:not(:pointerover):not(:pressed):not(:checked),
   ItemsPresenter#PART_CommandBarEndItemsPresenter > :is(Panel) > :is(Button):not(:pointerover):not(:pressed):not(:checked)">
     <Setter Property="Background" Value="Transparent"/>
   </Style-->
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton)">
-    <Setter Property="mecore:AttachedIcon.IconGap" Value="4" />
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton)">
+    <Setter Property="mech:AttachedIcon.IconGap" Value="4" />
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -71,55 +68,55 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
-          <StackPanel Orientation="Horizontal" Spacing="{Binding (mecore:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
+          <StackPanel Orientation="Horizontal" Spacing="{Binding (mech:AttachedIcon.IconGap), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mech:AttachedIcon.Icon), Converter={StaticResource ObjectToTemplateConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{Binding (mech:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
             <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" IsVisible="{TemplateBinding Content, Converter={StaticResource ValueToIsNullBoolConverter}}"/>
           </StackPanel>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton) /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton) /template/ Border#BackgroundBorder">
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
   </Style>
-  <!--Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton) /template/ Border#BackgroundBorder">
+  <!--Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton) /template/ Border#BackgroundBorder">
     <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style-->
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):not(:pointerover):not(:pressed)">
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):not(:pointerover):not(:pressed)">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):pointerover /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):pointerover /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
   </Style>
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):pressed /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):pressed /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
   </Style>
-  <Style Selector="mecb|CommandBar > ToggleButton:checked /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar > ToggleButton:checked /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundChecked}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushChecked}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundChecked}" />
   </Style>
-  <Style Selector="mecb|CommandBar > ToggleButton:checked:pointerover /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar > ToggleButton:checked:pointerover /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedPointerOver}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedPointerOver}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedPointerOver}" />
   </Style>
-  <Style Selector="mecb|CommandBar > ToggleButton:checked:pressed /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar > ToggleButton:checked:pressed /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedPressed}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedPressed}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedPressed}" />
   </Style>
-  <Style Selector="mecb|CommandBar > ToggleButton:checked:disabled /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar > ToggleButton:checked:disabled /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundCheckedDisabled}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushCheckedDisabled}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundCheckedDisabled}" />
   </Style>
-  <Style Selector="mecb|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):disabled /template/ Border#BackgroundBorder">
+  <Style Selector="mech|CommandBar :is(Button):not(ToggleButton#FlyoutToggleButton):disabled /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
     <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
@@ -137,7 +134,7 @@
       <ControlTemplate>
         <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
           <StackPanel Orientation="Horizontal" Spacing="4">
-            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mecore:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+            <TemplatedControl x:Name="PART_IconPresenter" Template="{Binding (mech:AttachedIcon.Icon), RelativeSource={RelativeSource Mode=TemplatedParent}}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
             <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
           </StackPanel>
         </Border>

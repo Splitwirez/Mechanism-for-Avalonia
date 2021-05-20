@@ -2,12 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
+             mc:Ignorable="d"
              xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
-             mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.AttachedIconPageView">
     <UserControl.DataContext>
         <mes:AttachedIconPageViewModel/>
@@ -15,7 +13,7 @@
     <UserControl.Styles>
         <StyleInclude Source="avares://Mechanism.AvaloniaUI.Sample/SampleIconButtonStyles.xaml"/>
         <Style Selector="Button">
-            <Setter Property="mecore:AttachedIcon.IconGap" Value="{Binding #IconGapSlider.Value}" />
+            <Setter Property="mech:AttachedIcon.IconGap" Value="{Binding #IconGapSlider.Value}" />
         </Style>
         <Style Selector="Button /template/ StackPanel#ContentPanel">
             <Setter Property="Orientation" Value="Horizontal" />
@@ -28,53 +26,53 @@
                     <!--MaxWidth="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}"-->
                     <Button x:Name="NoIconButton" Content="No icon"/>
                     <Button x:Name="TemplateIconButton" Content="Template icon">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <Border Width="32" Height="32" Margin="4" BoxShadow="2 2 2 #FFFF00FF" Background="#FF00FF00"/>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                     </Button>
                     <Button x:Name="ControlIconButton" Content="Control icon">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <Border>
                                 <Border Width="32" Height="32" Margin="4" BoxShadow="-2 -2 2 #FFFF00FF" Background="#FF00FF00"/>
                             </Border>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                     </Button>
                     <Button x:Name="GeometryIconButton" Content="Geometry icon">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <RectangleGeometry Rect="0,0,16,16"/>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                     </Button>
                     <Button x:Name="DrawingIconButton" Content="Drawing icon">
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <DrawingGroup>
                                 <GeometryDrawing Geometry="M 4 4 L 16 4 L 16 16 L 4 16 Z" Brush="#FFFF00FF"/>
                                 <GeometryDrawing Geometry="M 0 0 L 12 0 L 12 12 L 0 12 Z" Brush="#FF00FF00"/>
                             </DrawingGroup>
-                        </mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
                     </Button>
-                    <Button x:Name="UriIcoIconButton" Content="avares:// *.ico icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
-                    <Button x:Name="ResizedUriIcoIconButton" Content="Resized avares:// *.ico icon" mecore:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
-                    <Button x:Name="UriPngIconButton" Content="avares:// *.png icon" mecore:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
-                    <Button x:Name="ResizedUriPngIconButton" Content="Resized avares:// *.png icon" mecore:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
-                    <Button x:Name="PathDataIconButton" Content="Path data icon" mecore:AttachedIcon.Icon="M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
-                    <Button x:Name="ResizedPathDataIconButton" Content="Resized path data icon" mecore:AttachedIcon.Icon="Size(32, 32); M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
+                    <Button x:Name="UriIcoIconButton" Content="avares:// *.ico icon" mech:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
+                    <Button x:Name="ResizedUriIcoIconButton" Content="Resized avares:// *.ico icon" mech:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/ico-image.ico"/>
+                    <Button x:Name="UriPngIconButton" Content="avares:// *.png icon" mech:AttachedIcon.Icon="avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
+                    <Button x:Name="ResizedUriPngIconButton" Content="Resized avares:// *.png icon" mech:AttachedIcon.Icon="Size(24, 24); avares://Mechanism.AvaloniaUI.Sample/Assets/png-image.png"/>
+                    <Button x:Name="PathDataIconButton" Content="Path data icon" mech:AttachedIcon.Icon="M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
+                    <Button x:Name="ResizedPathDataIconButton" Content="Resized path data icon" mech:AttachedIcon.Icon="Size(32, 32); M 0 0 L 3 13 L 16 16 L 0 16 Z"/>
                 </UniformGrid>
             </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="Reduntant buttons which share the same icons as the above set, but lack content">
                 <UniformGrid Columns="3">
-                    <Button mecore:AttachedIcon.Icon="{Binding #NoIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #TemplateIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #ControlIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #GeometryIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #DrawingIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #UriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedUriIcoIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #UriPngIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedUriPngIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #PathDataIconButton.(mecore:AttachedIcon.Icon)}"/>
-                    <Button mecore:AttachedIcon.Icon="{Binding #ResizedPathDataIconButton.(mecore:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #NoIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #TemplateIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #ControlIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #GeometryIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #DrawingIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #UriIcoIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #ResizedUriIcoIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #UriPngIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #ResizedUriPngIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #PathDataIconButton.(mech:AttachedIcon.Icon)}"/>
+                    <Button mech:AttachedIcon.Icon="{Binding #ResizedPathDataIconButton.(mech:AttachedIcon.Icon)}"/>
                 </UniformGrid>
             </HeaderedContentControl>
             <HeaderedContentControl Classes="groupBox" Header="About">

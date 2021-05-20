@@ -2,9 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              xmlns:local="clr-namespace:Mechanism.AvaloniaUI.Sample"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
@@ -16,13 +14,13 @@
         <mes:CommandBarPageViewModel/>
     </UserControl.DataContext>
     <DockPanel>
-        <mecb:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" HorizontalItemsAlignment="{Binding ItemsAlignment}">
-            <mecb:CommandBar.Layers>
-                <mecb:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
-                <mecb:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
-            </mecb:CommandBar.Layers>
+        <mech:CommandBar x:Name="CommandBar" DockPanel.Dock="Top" HorizontalItemsAlignment="{Binding ItemsAlignment}">
+            <mech:CommandBar.Layers>
+                <mech:CommandBarLayer x:Name="Layer1" Identifier="LayerOne"/>
+                <mech:CommandBarLayer x:Name="Layer2" Identifier="LayerTwo"/>
+            </mech:CommandBar.Layers>
             <Button Content="Always visible">
-                <mecore:AttachedIcon.Icon>
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
                         <Border Width="28" Height="28" RenderTransformOrigin="50%,50%">
@@ -80,10 +78,10 @@
                             </Border>
                         </Border>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
-                <mecore:AttachedIcon.Icon>
+            <Button mech:CommandBar.VisibleOnLayers="LayerOne,LayerTwo" Content="Visible on all layers">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
                         <!--Border Width="22" Height="24" BoxShadow="0 2 6 #9F000000" CornerRadius="12" BorderBrush="#40000000" BorderThickness="1"-->
@@ -181,10 +179,10 @@
                             </Border>
                         </Border>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
-                <mecore:AttachedIcon.Icon>
+            <Button mech:CommandBar.VisibleOnLayers="LayerOne" Content="Visible on LayerOne only">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Canvas Width="24" Height="24">
                             <Border Canvas.Left="7" Canvas.Top="0" Width="10" Height="24" CornerRadius="2.5" Background="#0A000000"/>
@@ -219,10 +217,10 @@
                             </Border>
                         </Panel>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </Button>
-            <Button mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
-                <mecore:AttachedIcon.Icon>
+            <Button mech:CommandBar.VisibleOnLayers="LayerTwo" Content="Visible on LayerTwo only">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
                         <Panel Width="24" Height="24">
@@ -237,10 +235,10 @@
                             </Border>
                         </Panel>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </Button>
-            <ToggleButton mecb:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton">
-                <mecore:AttachedIcon.Icon>
+            <ToggleButton mech:CommandBar.VisibleOnLayers="LayerOne" Content="ToggleButton">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
                         <Panel Width="24" Height="24">
@@ -296,10 +294,10 @@
                             </Border-->
                         </Panel>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </ToggleButton>
-            <RepeatButton mecb:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton">
-                <mecore:AttachedIcon.Icon>
+            <RepeatButton mech:CommandBar.VisibleOnLayers="LayerTwo" Content="RepeatButton">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <!--Path Data="M 0 8 L 16 0 L 16 16 Z" Width="16" Height="16" Fill="{Binding $parent[Button].Foreground}"/-->
                         <Canvas Width="24" Height="24">
@@ -327,11 +325,11 @@
                             </Path>
                         </Canvas>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
             </RepeatButton>
-            <mecb:CommandBar.Header>
+            <mech:CommandBar.Header>
                 <Button>
-                    <mecore:AttachedIcon.Icon>
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <Panel Width="24" Height="24">
                                 <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9">
@@ -346,10 +344,10 @@
                                 <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
                 </Button>
-            </mecb:CommandBar.Header>
-        </mecb:CommandBar>
+            </mech:CommandBar.Header>
+        </mech:CommandBar>
         <StackPanel Margin="5" Spacing="5" DockPanel.Dock="Top">
             <HeaderedContentControl Classes="groupBox" Header="Layers for CommandBar with XAML-defined items (top)">
                 <UniformGrid Rows="1">
@@ -358,26 +356,26 @@
                 </UniformGrid>
             </HeaderedContentControl>
         </StackPanel>
-        <mecb:CommandBar x:Name="BoundCommandBar" Items="{Binding Items}" DockPanel.Dock="Bottom" HorizontalItemsAlignment="{Binding ItemsAlignment}">
-            <!--mecb:CommandBar.Styles>
+        <mech:CommandBar x:Name="BoundCommandBar" Items="{Binding Items}" DockPanel.Dock="Bottom" HorizontalItemsAlignment="{Binding ItemsAlignment}">
+            <!--mech:CommandBar.Styles>
                 <Style Selector="ContentPresenter">
-                    <Setter Property="mecb:CommandBar.VisibleOnLayers" Value="{Binding Layers, Converter={StaticResource LayerDictionaryToLayerStringConverter}}"/>
+                    <Setter Property="mech:CommandBar.VisibleOnLayers" Value="{Binding Layers, Converter={StaticResource LayerDictionaryToLayerStringConverter}}"/>
                 </Style>
-            </mecb:CommandBar.Styles-->
-            <mecb:CommandBar.Layers>
-                <mecb:CommandBarLayer x:Name="LayerA" Identifier="LayerA"/>
-                <mecb:CommandBarLayer x:Name="LayerB" Identifier="LayerB"/>
-            </mecb:CommandBar.Layers>
-            <mecb:CommandBar.ItemTemplate>
+            </mech:CommandBar.Styles-->
+            <mech:CommandBar.Layers>
+                <mech:CommandBarLayer x:Name="LayerA" Identifier="LayerA"/>
+                <mech:CommandBarLayer x:Name="LayerB" Identifier="LayerB"/>
+            </mech:CommandBar.Layers>
+            <mech:CommandBar.ItemTemplate>
                 <DataTemplate>
-                    <Button mecb:CommandBar.VisibleOnLayers="{Binding Layers, Converter={StaticResource LayerDictionaryToLayerStringConverter}}">
-                        <TextBlock Text="{Binding Title}" Margin="0,0,100,0"/>
-                    </Button>
+                  <Button mech:CommandBar.VisibleOnLayers="{Binding Layers, Converter={StaticResource LayerDictionaryToLayerStringConverter}}">
+                    <TextBlock Text="{Binding Title}" Margin="0,0,100,0"/>
+                  </Button>
                 </DataTemplate>
-            </mecb:CommandBar.ItemTemplate>
-            <mecb:CommandBar.Header>
+            </mech:CommandBar.ItemTemplate>
+            <mech:CommandBar.Header>
                 <Button>
-                    <mecore:AttachedIcon.Icon>
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <Panel Width="24" Height="24">
                                 <Border Width="18" Height="18" BoxShadow="0 2 6 #9F000000" CornerRadius="9">
@@ -392,10 +390,10 @@
                                 <TextBlock Text="?" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="12"/>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
                 </Button>
-            </mecb:CommandBar.Header>
-        </mecb:CommandBar>
+            </mech:CommandBar.Header>
+        </mech:CommandBar>
         <StackPanel Margin="5" Spacing="5" DockPanel.Dock="Bottom">
             <HeaderedContentControl Classes="groupBox" Header="Layers for CommandBar with bound items (bottom)">
                 <UniformGrid Rows="1">

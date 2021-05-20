@@ -14,7 +14,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Presenters;
 using System.Diagnostics;
 
-namespace Mechanism.AvaloniaUI.Controls.CommandBar
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class CommandBar : HeaderedItemsControl //OverflowFlyoutItemsControl
     {

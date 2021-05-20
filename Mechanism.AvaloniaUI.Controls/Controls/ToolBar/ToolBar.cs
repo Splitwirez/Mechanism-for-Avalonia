@@ -17,7 +17,7 @@ using Avalonia.Input;
 using System.Timers;
 using Avalonia.Threading;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolBar
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class ToolBar : ContentControl
     {

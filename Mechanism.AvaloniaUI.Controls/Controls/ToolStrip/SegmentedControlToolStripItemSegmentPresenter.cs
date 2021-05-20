@@ -14,7 +14,7 @@ using Avalonia.LogicalTree;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class SegmentedControlToolStripItemSegmentPresenter : TemplatedControl, IStyleable
     {

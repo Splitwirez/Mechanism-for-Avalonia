@@ -2,9 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.BlenderBarPageView">
@@ -12,103 +10,103 @@
         <mes:BlenderBarPageViewModel/>
     </UserControl.DataContext>
     <DockPanel>
-        <meec:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left">
-            <meec:BlenderBarItem Header="With Sub-items" GroupIndex="0">
-                <mecore:AttachedIcon.Icon>
+        <mech:BlenderBar x:Name="BlenderBar" DockPanel.Dock="Left">
+            <mech:BlenderBarItem Header="With Sub-items" GroupIndex="0">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
                     <Ellipse Width="24" Height="24" Fill="Cyan"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                <meec:BlenderBarItem Header="Yellow" GroupIndex="1">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+                <mech:BlenderBarItem Header="Yellow" GroupIndex="1">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Yellow"/>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </meec:BlenderBarItem>
-                <meec:BlenderBarItem Header="Cyan" GroupIndex="1">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+                </mech:BlenderBarItem>
+                <mech:BlenderBarItem Header="Cyan" GroupIndex="1">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Cyan"/>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </meec:BlenderBarItem>
-                <meec:BlenderBarItem Header="Pink" GroupIndex="1">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+                </mech:BlenderBarItem>
+                <mech:BlenderBarItem Header="Pink" GroupIndex="1">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Pink"/>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-                </meec:BlenderBarItem>
-            </meec:BlenderBarItem>
+                </mech:AttachedIcon.Icon>
+                </mech:BlenderBarItem>
+            </mech:BlenderBarItem>
 
-            <meec:BlenderBarItem Header="On" GroupIndex="1">
-                <mecore:AttachedIcon.Icon>
+            <mech:BlenderBarItem Header="On" GroupIndex="1">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Rectangle Width="4" Margin="10,0" Height="24" Fill="{Binding $parent[meec:BlenderBarItem].Foreground}"/>
+                    <Rectangle Width="4" Margin="10,0" Height="24" Fill="{Binding $parent[mech:BlenderBarItem].Foreground}"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Off" GroupIndex="1">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Off" GroupIndex="1">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Ellipse Width="24" Height="24" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="4"/>
+                    <Ellipse Width="24" Height="24" Stroke="{Binding $parent[mech:BlenderBarItem].Foreground}" StrokeThickness="4"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
             
 
-            <meec:BlenderBarItem Header="Red" GroupIndex="2">
-                <mecore:AttachedIcon.Icon>
+            <mech:BlenderBarItem Header="Red" GroupIndex="2">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Red"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Green" GroupIndex="2">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Green" GroupIndex="2">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Green"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Blue" GroupIndex="2">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Blue" GroupIndex="2">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
                     <Rectangle Width="24" Height="24" Fill="Blue"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
 
-            <meec:BlenderBarItem Header="Square" GroupIndex="3">
-                <mecore:AttachedIcon.Icon>
+            <mech:BlenderBarItem Header="Square" GroupIndex="3">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mech:BlenderBarItem].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Circle" GroupIndex="3">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Circle" GroupIndex="3">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                    <Ellipse Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mech:BlenderBarItem].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Triangle" GroupIndex="3">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Triangle" GroupIndex="3">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 24 L 12 0 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mech:BlenderBarItem].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-            <meec:BlenderBarItem Header="Hourglass" GroupIndex="3">
-                <mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+            <mech:BlenderBarItem Header="Hourglass" GroupIndex="3">
+                <mech:AttachedIcon.Icon>
                 <ControlTemplate>
-                    <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[meec:BlenderBarItem].Foreground}" StrokeThickness="1"/>
+                    <Path Data="M 0 0 L 24 0 L 0 24 L 24 24 Z" Width="24" Height="24" Fill="{DynamicResource ThemeBackgroundBrush}" Stroke="{Binding $parent[mech:BlenderBarItem].Foreground}" StrokeThickness="1"/>
                 </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
-            </meec:BlenderBarItem>
-        </meec:BlenderBar>
+                </mech:AttachedIcon.Icon>
+            </mech:BlenderBarItem>
+        </mech:BlenderBar>
         <!--/ExperimentalAcrylicBorder-->
         <StackPanel Margin="5" Spacing="5">
             <HeaderedContentControl Classes="groupBox" Header="About">

@@ -2,9 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.ExpandToFillViewPageView">
@@ -44,9 +42,9 @@
         </ControlTemplate>
     </UserControl.Resources-->
     <DockPanel>
-        <meec:ExpandToFillView x:Name="ExpandToFillView" DockPanel.Dock="{Binding XamlDock}" Orientation="{Binding Orientation}">
-            <meec:ExpandToFillViewItem Header="Base">
-                <mecore:AttachedIcon.Icon>
+        <mech:ExpandToFillView x:Name="ExpandToFillView" DockPanel.Dock="{Binding XamlDock}" Orientation="{Binding Orientation}">
+            <mech:ExpandToFillViewItem Header="Base">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
                             <Border.Background>
@@ -57,11 +55,11 @@
                             </Border.Background>
                         </Border>
                     </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                </mech:AttachedIcon.Icon>
                 <Rectangle Fill="DarkRed" Margin="10" MinWidth="50" MinHeight="10"/>
-            </meec:ExpandToFillViewItem>
-            <meec:ExpandToFillViewItem Header="Coat">
-                <mecore:AttachedIcon.Icon>
+            </mech:ExpandToFillViewItem>
+            <mech:ExpandToFillViewItem Header="Coat">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
                             <Border.Background>
@@ -71,12 +69,12 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                   </ControlTemplate>
+                </mech:AttachedIcon.Icon>
                 <Rectangle Fill="DarkGreen" Margin="10" MinWidth="50" MinHeight="10"/>
-            </meec:ExpandToFillViewItem>
-            <meec:ExpandToFillViewItem Header="Detail">
-                <mecore:AttachedIcon.Icon>
+            </mech:ExpandToFillViewItem>
+            <mech:ExpandToFillViewItem Header="Detail">
+                <mech:AttachedIcon.Icon>
                     <ControlTemplate>
                         <Border Width="16" Height="16" BoxShadow="0 2 6 #9F000000" CornerRadius="2" Margin="4">
                             <Border.Background>
@@ -86,28 +84,28 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
-                    </ControlTemplate>
-                </mecore:AttachedIcon.Icon>
+                   </ControlTemplate>
+                </mech:AttachedIcon.Icon>
                 <Rectangle Fill="DarkBlue" Margin="10" MinWidth="50" MinHeight="10"/>
-            </meec:ExpandToFillViewItem>
-        </meec:ExpandToFillView>
-        <meec:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" DockPanel.Dock="{Binding BoundDock}" Orientation="{Binding Orientation}">
-            <!--meec:ExpandToFillView.Styles>
-                <Style Selector="meec|ExpandToFillView#BoundExpandToFillView meec|ExpandToFillViewItem">
-                    <Setter Property="mecore:AttachedIcon.Icon" Value="{DynamicResource ResourceKey={Binding Path=DataContext.IconKey, RelativeSource={RelativeSource Mode=Self}}}}"/>
+            </mech:ExpandToFillViewItem>
+        </mech:ExpandToFillView>
+        <mech:ExpandToFillView x:Name="BoundExpandToFillView" Items="{Binding Items}" DockPanel.Dock="{Binding BoundDock}" Orientation="{Binding Orientation}">
+            <!--mech:ExpandToFillView.Styles>
+                <Style Selector="mech|ExpandToFillView#BoundExpandToFillView mech|ExpandToFillViewItem">
+                    <Setter Property="mech:AttachedIcon.Icon" Value="{DynamicResource ResourceKey={Binding Path=DataContext.IconKey, RelativeSource={RelativeSource Mode=Self}}}}"/>
                 </Style>
-            </meec:ExpandToFillView.Styles-->
-            <meec:ExpandToFillView.ItemHeaderTemplate>
+            </mech:ExpandToFillView.Styles-->
+            <mech:ExpandToFillView.ItemHeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}"/>
                 </DataTemplate>
-            </meec:ExpandToFillView.ItemHeaderTemplate>
-            <meec:ExpandToFillView.ItemTemplate>
+            </mech:ExpandToFillView.ItemHeaderTemplate>
+            <mech:ExpandToFillView.ItemTemplate>
                 <DataTemplate>
                     <Ellipse Fill="{Binding Brush}" Margin="10" MinWidth="50" MinHeight="10"/>
                 </DataTemplate>
-            </meec:ExpandToFillView.ItemTemplate>
-        </meec:ExpandToFillView>
+            </mech:ExpandToFillView.ItemTemplate>
+        </mech:ExpandToFillView>
         <UniformGrid Columns="2" Margin="5" VerticalAlignment="Center">
             <HeaderedContentControl Classes="groupBox" Header="About">
                 <TextBlock Text="The ExpandToFillView displays multiple items in frames, only displaying the contents of one item at a time, and allowing the user to switch between them freely. The one on the left/above has its items defined in XAML, while the one on the right/below has them bound to a collection property in the DataContext." TextWrapping="Wrap"/>

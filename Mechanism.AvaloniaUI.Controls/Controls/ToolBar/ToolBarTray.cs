@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolBar
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class ToolBarTray : ItemsControl
     {

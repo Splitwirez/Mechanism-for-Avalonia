@@ -2,11 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mess="clr-namespace:Mechanism.AvaloniaUI.Controls.SwipeSheet;assembly=Mechanism.AvaloniaUI.Controls">
-  <Style Selector="mess|SwipeSheet">
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia">
+  <Style Selector="mech|SwipeSheet">
     <Setter Property="Background" Value="{DynamicResource SystemControlPageBackgroundChromeLowBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}"/> 
     <Setter Property="BorderThickness" Value="1"/>
@@ -16,7 +13,7 @@
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
   </Style>
-  <Style Selector="mess|SwipeSheet[SwipeFromEdge=Bottom]">
+  <Style Selector="mech|SwipeSheet[SwipeFromEdge=Bottom]">
     <Setter Property="Template">
       <ControlTemplate>
         <Panel x:Name="rootPanel" ClipToBounds="True">
@@ -44,7 +41,7 @@
     </Setter>
   </Style>
 
-  <Style Selector="mess|SwipeSheet /template/ Thumb">
+  <Style Selector="mech|SwipeSheet /template/ Thumb">
     <Setter Property="Template">
       <ControlTemplate>
         <Rectangle Fill="#01000000"/>

@@ -13,7 +13,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Media.Imaging;
 using System.IO;
 
-namespace Mechanism.AvaloniaUI.Controls.ToolStrip
+namespace Mechanism.AvaloniaUI.Controls
 {
     public class AddToToolStripBehavior : Behavior<Thumb>
     {

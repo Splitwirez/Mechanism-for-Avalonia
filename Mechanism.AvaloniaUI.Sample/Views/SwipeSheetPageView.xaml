@@ -2,11 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:meec="clr-namespace:Mechanism.AvaloniaUI.Extras;assembly=Mechanism.AvaloniaUI.Extras"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
-             xmlns:mess="clr-namespace:Mechanism.AvaloniaUI.Controls.SwipeSheet;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              mc:Ignorable="d"
              x:Class="Mechanism.AvaloniaUI.Sample.Views.SwipeSheetPageView">
     <UserControl.DataContext>
@@ -18,7 +15,7 @@
             <TextBlock Foreground="#FF400000" Text="(Yes, I'm working on trying to fix this. You'll know it's fixed when this warning isn't present anymore)" TextWrapping="Wrap"/>
             <TextBlock Text="Swipe from below!" Margin="0,15,0,0"/>
         </StackPanel>
-        <mess:SwipeSheet Header="SwipeSheet">
+        <mech:SwipeSheet Header="SwipeSheet">
             <ListBox>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -32,6 +29,6 @@
                 <ListBoxItem Content="Rename"/>
                 <ListBoxItem Content="Details"/>
             </ListBox>
-        </mess:SwipeSheet>
+        </mech:SwipeSheet>
     </Panel>
 </UserControl>

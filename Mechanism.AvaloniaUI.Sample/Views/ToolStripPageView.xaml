@@ -2,9 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mets="clr-namespace:Mechanism.AvaloniaUI.Controls.ToolStrip;assembly=Mechanism.AvaloniaUI.Controls"
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia"
              xmlns:vm="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels;assembly=Mechanism.AvaloniaUI.Sample"
              xmlns:mes="clr-namespace:Mechanism.AvaloniaUI.Sample.ViewModels"
              mc:Ignorable="d"
@@ -16,10 +14,10 @@
         <vm:DemoPageViewModel/>
     </UserControl.DataContext-->
     <StackPanel Orientation="Vertical">
-        <mets:ToolStrip x:Name="ToolStrip">
-            <mets:ToolStrip.Items>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+        <mech:ToolStrip x:Name="ToolStrip">
+            <mech:ToolStrip.Items>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem1" DisplayName="Button 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Red"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -33,10 +31,10 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Button 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem2" DisplayName="Button 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Green"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -50,10 +48,10 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Button 3" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem3" DisplayName="Button 3" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Blue"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -67,10 +65,10 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Button 4" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem4" DisplayName="Button 4" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Yellow"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -84,10 +82,10 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Button 5" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem5" DisplayName="Button 5" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Orange"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -101,10 +99,10 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Button 6 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                    <mecore:AttachedIcon.Icon>
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:ButtonToolStripItem x:Name="TestToolStripItem6" DisplayName="Button 6 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    <mech:AttachedIcon.Icon>
                         <ControlTemplate>
                             <!--Rectangle Width="16" Height="16" Fill="Purple"/-->
                             <Panel Width="20" Height="20" Margin="-2">
@@ -118,12 +116,12 @@
                                 </Border>
                             </Panel>
                         </ControlTemplate>
-                    </mecore:AttachedIcon.Icon>
-                </mets:ButtonToolStripItem>
-                <mets:SegmentedControlToolStripItem x:Name="TestSegmentedControlToolStripItem" SelectionChanged="TestSegmentedControlToolStripItem_SelectionChanged">
-                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                    </mech:AttachedIcon.Icon>
+                </mech:ButtonToolStripItem>
+                <mech:SegmentedControlToolStripItem x:Name="TestSegmentedControlToolStripItem" SelectionChanged="TestSegmentedControlToolStripItem_SelectionChanged">
+                    <mech:SegmentedControlToolStripItemSegment DisplayName="Segment 1" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
                     <!-- Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}"-->
-                        <mecore:AttachedIcon.Icon>
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <!--Ellipse Width="16" Height="16" Fill="Pink"/-->
                                 <Panel Width="20" Height="20" Margin="-2">
@@ -137,10 +135,10 @@
                                     </Border>
                                 </Panel>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
-                    </mets:SegmentedControlToolStripItemSegment>
-                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                        <mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
+                    </mech:SegmentedControlToolStripItemSegment>
+                    <mech:SegmentedControlToolStripItemSegment DisplayName="Segment 2" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <!--Ellipse Width="16" Height="16" Fill="Maroon"/-->
                                 <Panel Width="20" Height="20" Margin="-2">
@@ -154,10 +152,10 @@
                                     </Border>
                                 </Panel>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
-                    </mets:SegmentedControlToolStripItemSegment>
-                    <mets:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
-                        <mecore:AttachedIcon.Icon>
+                        </mech:AttachedIcon.Icon>
+                    </mech:SegmentedControlToolStripItemSegment>
+                    <mech:SegmentedControlToolStripItemSegment DisplayName="Segment 3 with a very long name" Command="{Binding WriteToConsoleCommand}" CommandParameter="{Binding DisplayName, RelativeSource={RelativeSource Mode=Self}}">
+                        <mech:AttachedIcon.Icon>
                             <ControlTemplate>
                                 <!--Ellipse Width="16" Height="16" Fill="Aquamarine"/-->
                                 <Panel Width="20" Height="20" Margin="-2">
@@ -171,18 +169,18 @@
                                     </Border>
                                 </Panel>
                             </ControlTemplate>
-                        </mecore:AttachedIcon.Icon>
-                    </mets:SegmentedControlToolStripItemSegment>
-                </mets:SegmentedControlToolStripItem>
-            </mets:ToolStrip.Items>
-            <mets:ToolStrip.DefaultItems>
-                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem1}"/>
-                <mets:ToolStripFlexibleSpaceReference/>
-                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
-                <mets:ToolStripFlexibleSpaceReference/>
-                <mets:ToolStripItemReference TargetItem="{Binding ElementName=TestSegmentedControlToolStripItem}"/>
-            </mets:ToolStrip.DefaultItems>
-        </mets:ToolStrip>
+                        </mech:AttachedIcon.Icon>
+                    </mech:SegmentedControlToolStripItemSegment>
+                </mech:SegmentedControlToolStripItem>
+            </mech:ToolStrip.Items>
+            <mech:ToolStrip.DefaultItems>
+                <mech:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem1}"/>
+                <mech:ToolStripFlexibleSpaceReference/>
+                <mech:ToolStripItemReference TargetItem="{Binding ElementName=TestToolStripItem2}"/>
+                <mech:ToolStripFlexibleSpaceReference/>
+                <mech:ToolStripItemReference TargetItem="{Binding ElementName=TestSegmentedControlToolStripItem}"/>
+            </mech:ToolStrip.DefaultItems>
+        </mech:ToolStrip>
         <StackPanel Margin="5" Spacing="5">
             <HeaderedContentControl Classes="groupBox" Header="About">
                 <TextBlock Text="The ToolStrip exposes commands and manages rearranging them in a manner similar to macOS Toolbars." TextWrapping="Wrap"/>

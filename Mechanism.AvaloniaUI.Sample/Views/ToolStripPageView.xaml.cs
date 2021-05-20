@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Mechanism.AvaloniaUI.Controls.ToolStrip;
+using Mechanism.AvaloniaUI.Controls;
 
 namespace Mechanism.AvaloniaUI.Sample.Views
 {

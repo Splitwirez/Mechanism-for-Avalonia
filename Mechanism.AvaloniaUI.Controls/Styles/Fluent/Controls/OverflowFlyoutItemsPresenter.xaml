@@ -2,12 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mecore="clr-namespace:Mechanism.AvaloniaUI.Core;assembly=Mechanism.AvaloniaUI.Core"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:meconv="clr-namespace:Mechanism.AvaloniaUI.Converters;assembly=Mechanism.AvaloniaUI.Core"
-             xmlns:mectrl="clr-namespace:Mechanism.AvaloniaUI.Controls;assembly=Mechanism.AvaloniaUI.Controls"
-             xmlns:mecb="clr-namespace:Mechanism.AvaloniaUI.Controls.CommandBar;assembly=Mechanism.AvaloniaUI.Controls">
-  <Style Selector="mectrl|OverflowFlyoutItemsPresenter">
+             xmlns:mech="https://github.com/Splitwirez/Mechanism-for-Avalonia">
+  <Style Selector="mech|OverflowFlyoutItemsPresenter">
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="Template">
       <ControlTemplate>
@@ -22,7 +19,7 @@
                   </StackPanel>
               </ToggleButton>
             </Panel>
-            <mectrl:AlignableStackPanel x:Name="PART_MainItemsPanel" Orientation="Horizontal" HorizontalChildrenAlignment="{Binding $parent[mecb:CommandBar].HorizontalItemsAlignment}"/>
+            <mech:AlignableStackPanel x:Name="PART_MainItemsPanel" Orientation="Horizontal" HorizontalChildrenAlignment="{Binding $parent[mech:CommandBar].HorizontalItemsAlignment}"/>
           </DockPanel>
           <Popup PlacementTarget="{Binding #FlyoutToggleButton}" PlacementMode="Left" StaysOpen="False"
                  IsOpen="{Binding IsFlyoutOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
@@ -36,11 +33,11 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="mectrl|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:not(:pointerover):not(:pressed) /template/ ContentPresenter#PART_ContentPresenter">
+  <Style Selector="mech|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:not(:pointerover):not(:pressed) /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
   </Style>
-  <Style Selector="mectrl|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+  <Style Selector="mech|OverflowFlyoutItemsPresenter /template/ ToggleButton#FlyoutToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
   </Style>
