@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -26,6 +27,9 @@ namespace Mechanism.AvaloniaUI.Sample.Views
         Uri _baseUri = new Uri("avares://Mechanism.AvaloniaUI.Sample/Styles");
         void RefreshLights(FluentThemeMode mode)
         {
+            App.Current.Styles.OfType<FluentTheme>().First().Mode = mode;
+            return;
+
             /*App.Current.Styles.RemoveAt(0);
             App.Current.Styles.Insert(0, new FluentTheme(_baseUri)
             {

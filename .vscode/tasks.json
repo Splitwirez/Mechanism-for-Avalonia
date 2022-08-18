@@ -9,7 +9,9 @@
                 "build",
                 "${workspaceFolder}/Mechanism.AvaloniaUI.Sample/Mechanism.AvaloniaUI.Sample.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "--framework",
+                "net5.0",
             ],
             "problemMatcher": "$msCompile"
         },
@@ -21,7 +23,9 @@
                 "publish",
                 "${workspaceFolder}/Mechanism.AvaloniaUI.Sample/Mechanism.AvaloniaUI.Sample.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "--framework",
+                "net5.0",
             ],
             "problemMatcher": "$msCompile"
         },
@@ -34,7 +38,9 @@
                 "run",
                 "${workspaceFolder}/Mechanism.AvaloniaUI.Sample/Mechanism.AvaloniaUI.Sample.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "--framework",
+                "net5.0",
             ],
             "problemMatcher": "$msCompile"
         }

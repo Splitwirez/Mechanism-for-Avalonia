@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+  <Import Project="../build/Sample.targets" />
+  <Import Project="../build/Avalonia.props" />
+  
+  <PropertyGroup Condition="( '$(Configuration)' == 'Debug' ) and Exists('../build/cfg/SHOW_TESTING_GROUNDS')">
+    <DefineConstants>$(DefineConstants);SHOW_TESTING_GROUNDS</DefineConstants>
   </PropertyGroup>
+  
   <ItemGroup>
     <Folder Include="Models\" />
     <Compile Update="**\*.xaml.cs">
@@ -15,13 +18,12 @@
     <None Remove="Assets\mechanism-for-avalonia-logo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Core\Mechanism.AvaloniaUI.Core.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Controls\Mechanism.AvaloniaUI.Controls.csproj" />
     <ProjectReference Include="..\Mechanism.AvaloniaUI.Extras\Mechanism.AvaloniaUI.Extras.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVer)" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVer)" />
   </ItemGroup>
 </Project>

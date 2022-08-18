@@ -59,9 +59,9 @@
       <ControlTemplate>
         <Panel Background="#01000000">
           <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4" Margin="3,0">
-            <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
-            <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
-            <Ellipse Width="3" Height="3" Fill="{DynamicResource ListBoxDisabledForegroundThemeBrush}" StrokeThickness="0"/>
+            <Ellipse Width="3" Height="3" Fill="{DynamicResource SystemControlDisabledChromeDisabledHighBrush}" StrokeThickness="0"/>
+            <Ellipse Width="3" Height="3" Fill="{DynamicResource SystemControlDisabledChromeDisabledHighBrush}" StrokeThickness="0"/>
+            <Ellipse Width="3" Height="3" Fill="{DynamicResource SystemControlDisabledChromeDisabledHighBrush}" StrokeThickness="0"/>
           </StackPanel>
         </Panel>
       </ControlTemplate>
